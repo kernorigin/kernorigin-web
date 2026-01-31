@@ -11,6 +11,7 @@
             <a href="index.html" class="logo">Kernorigin</a>
             <nav>
                 <ul>
+                    <li><a href="index.html">Home</a></li>
                     <li><a href="how-we-think.html">How We Think</a></li>
                     <li><a href="how-we-work.html">How We Work</a></li>
                     <li><a href="impact.html">Impact</a></li>
@@ -26,18 +27,18 @@
         <span class="eyebrow">Intelligence</span>
         <h1>Root Cause Thinking in Practice</h1>
         <p>Why symptoms lie and how to find what's actually broken.</p>
-        
-        <div id="loading" style="margin-top: 60px; color: var(--text-muted);">Accessing Intelligence Database...</div>
-        
-        <div id="blog-grid" class="grid-2" style="margin-top: 60px;">
-            </div>
+
+        <div id="loading" style="margin-top: 40px; color: #999;">Accessing Intelligence Database...</div>
+        <div id="blog-grid" style="margin-top: 40px;"></div>
     </main>
 
     <script src="config.js"></script>
     <script>
         window.onload = async function() {
             try {
-                // Calls your EXISTING Blog Logic
+                if (!API_CONFIG || API_CONFIG.URL.includes("YOUR_ID")) throw new Error("Config not set");
+                
+                // Fetch Recent Posts
                 const res = await fetch(`${API_CONFIG.URL}?action=recent&limit=10`);
                 const posts = await res.json();
                 
@@ -47,24 +48,18 @@
                 posts.forEach(post => {
                     const date = new Date(post.publish_date).toLocaleDateString();
                     container.innerHTML += `
-                        <div style="border-top: 1px solid var(--border-light); padding-top: 32px;">
+                        <div style="border-top: 1px solid #eee; padding: 40px 0;">
                             <h3>${post.title}</h3>
-                            <span class="eyebrow" style="color:var(--text-muted); margin-bottom:16px;">${date}</span>
-                            <p>${post.summary || "Click to read full analysis."}</p>
-                            <button class="btn-outline" style="padding: 12px 24px;" onclick="readPost('${post.slug}')">Read Analysis</button>
+                            <span class="eyebrow" style="color:#777; margin-bottom: 10px;">${date}</span>
+                            <p>${post.summary}</p>
+                            <button class="btn-outline" style="margin-top: 10px;">Read Analysis</button>
                         </div>
                     `;
                 });
             } catch(e) {
-                document.getElementById('loading').innerText = "System Offline.";
+                document.getElementById('loading').innerText = "System Offline. Verify Backend Connection.";
             }
         };
-
-        function readPost(slug) {
-            // Simple Alert for MVP, can be expanded to a Modal or dedicated page
-            alert("Fetching full PDF analysis for: " + slug);
-            window.location.href = `${API_CONFIG.URL}?action=pdf&slug=${slug}`;
-        }
     </script>
 </body>
 </html>
