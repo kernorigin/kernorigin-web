@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact | Kernorigin</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="container">
+        <a href="index.html" class="logo">Kernorigin</a>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="insights.html">Insights</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container" style="padding-top: 60px; max-width: 800px;">
+        <span style="color: var(--accent-gold); text-transform: uppercase; letter-spacing: 0.15em; font-weight: 700;">Start a Conversation</span>
+        <h1>What's Stuck?</h1>
+        <p>No pitch. No pressure. We listen to understand if we can find the root cause.</p>
+
+        <form onsubmit="sendContact(event)" style="margin-top: 40px;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div>
+                    <label>Name</label>
+                    <input type="text" name="name" required>
+                </div>
+                <div>
+                    <label>Email</label>
+                    <input type="email" name="email" required>
+                </div>
+            </div>
+            
+            <label>Organization</label>
+            <input type="text" name="org">
+
+            <label>What's stuck? (The Symptom)</label>
+            <textarea name="message" rows="5" style="width:100%; padding:15px; border:1px solid #ccc;" required></textarea>
+
+            <button type="submit" class="cta-btn" id="sendBtn" style="margin-top: 20px;">Start Conversation</button>
+        </form>
+    </main>
+
+    <script>
+        const API_URL = "https://script.google.com/macros/s/AKfycbx55y-N_lsJV7mgA8w9naFkNGo0R9TS1ee3l_z--o3PGAvSn8xMNwQ9VVmB8vTzNKj5/exec"; 
+
+        async function sendContact(e) {
+            e.preventDefault();
+            const btn = document.getElementById('sendBtn');
+            btn.innerText = "Sending...";
+            btn.disabled = true;
+
+            const formData = new FormData(e.target);
+            const payload = {
+                action: 'contact',
+                apiKey: 'YOUR_PUBLIC_KEY', // Check your script properties for this
+                payload: {
+                    name: formData.get('name'),
+                    email: formData.get('email'),
+                    phone: formData.get('org'), // Mapping Org to phone field for now or add org to backend
+                    message: formData.get('message')
+                }
+            };
+
+            try {
+                await fetch(API_URL, {
+                    method: 'POST',
+                    body: JSON.stringify(payload)
+                });
+                alert("Message received. We will be in touch shortly.");
+                e.target.reset();
+            } catch (err) {
+                alert("Error sending message.");
+            } finally {
+                btn.innerText = "Start Conversation";
+                btn.disabled = false;
+            }
+        }
+    </script>
+</body>
+</html>

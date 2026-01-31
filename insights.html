@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Insights | Kernorigin</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="container">
+        <a href="index.html" class="logo">Kernorigin</a>
+        <nav>
+            <ul>
+                <li><a href="how-we-think.html">How We Think</a></li>
+                <li><a href="how-we-work.html">How We Work</a></li>
+                <li><a href="impact.html">Impact</a></li>
+                <li><a href="team.html">Team</a></li>
+                <li><a href="insights.html" style="color:var(--accent-gold);">Insights</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container" style="padding-top: 60px;">
+        <h1>Root Cause Thinking in Practice</h1>
+        <p style="max-width: 600px;">Why symptoms lie and how to find what's actually broken.</p>
+        
+        <div id="blog-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 40px;">
+            <p>Loading Intelligence...</p>
+        </div>
+    </main>
+
+    <footer class="container">
+        <p>&copy; 2026 Kernorigin. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // PASTE YOUR DEPLOY URL HERE
+        const API_URL = "https://script.google.com/macros/s/AKfycbx55y-N_lsJV7mgA8w9naFkNGo0R9TS1ee3l_z--o3PGAvSn8xMNwQ9VVmB8vTzNKj5/exec"; 
+
+        async function loadPosts() {
+            try {
+                // Calls your doGet function with action=recent
+                const res = await fetch(`${API_URL}?action=recent&limit=10`);
+                const posts = await res.json();
+                
+                const container = document.getElementById('blog-grid');
+                container.innerHTML = ''; // Clear loading message
+
+                posts.forEach(post => {
+                    // Create Date String
+                    const date = new Date(post.publish_date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+                    
+                    const html = `
+                        <article style="border-top: 1px solid #eee; padding-top: 20px;">
+                            <h3 style="font-size: 1.5rem; margin-bottom: 10px;">${post.title}</h3>
+                            <div style="font-size: 0.8rem; color: #999; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 0.05em;">${date}</div>
+                            <p>${post.summary || "Click to read full analysis."}</p>
+                            <a href="#" class="cta-btn" style="padding: 10px 20px; font-size: 0.8rem;">Read Analysis</a>
+                        </article>
+                    `;
+                    container.innerHTML += html;
+                });
+            } catch (e) {
+                console.error(e);
+                document.getElementById('blog-grid').innerHTML = "<p>System offline. Unable to fetch insights.</p>";
+            }
+        }
+        window.onload = loadPosts;
+    </script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+/* style.css - The Institutional Theme */
+:root {
+    --bg-color: #ffffff;
+    --text-main: #111111;
+    --text-muted: #555555;
+    --accent-gold: #D4AF37;
+    --accent-navy: #002244;
+    --font-serif: "Georgia", "Times New Roman", serif;
+    --font-sans: "Inter", "Helvetica Neue", sans-serif;
+}
+
+body { font-family: var(--font-sans); background: var(--bg-color); color: var(--text-main); margin: 0; line-height: 1.6; }
+.container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+a { text-decoration: none; color: inherit; transition: 0.2s; }
+a:hover { color: var(--accent-gold); }
+
+/* Typography */
+h1, h2, h3 { font-family: var(--font-serif); font-weight: 400; margin: 0; letter-spacing: -0.02em; }
+h1 { font-size: 3rem; line-height: 1.1; margin-bottom: 1.5rem; }
+h2 { font-size: 2rem; margin-bottom: 1rem; color: var(--accent-navy); }
+p { margin-bottom: 1.5rem; color: var(--text-muted); }
+
+/* Navigation */
+header { padding: 30px 0; border-bottom: 1px solid #eaeaea; display: flex; justify-content: space-between; align-items: center; }
+.logo { font-family: var(--font-serif); font-size: 1.5rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
+nav ul { list-style: none; display: flex; gap: 25px; margin: 0; padding: 0; }
+nav a { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 500; }
+
+/* Buttons & Forms */
+.cta-btn { background-color: var(--accent-navy); color: white; border: none; padding: 15px 30px; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em; cursor: pointer; font-weight: 600; display: inline-block; }
+.cta-btn:hover { background-color: #001122; color: #fff; }
+input, textarea, select { width: 100%; padding: 15px; border: 1px solid #ccc; border-radius: 2px; margin-bottom: 20px; font-family: var(--font-sans); box-sizing: border-box;}
+
+/* Footer */
+footer { border-top: 1px solid #eaeaea; padding: 60px 0; margin-top: 80px; font-size: 0.9rem; color: var(--text-muted); }
+.footer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }

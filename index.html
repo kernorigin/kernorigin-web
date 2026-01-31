@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kernorigin | Global Intelligence Firm</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* --- HOME PAGE SPECIFIC STYLES --- */
+        
+        /* The Hero Section */
+        .hero { padding: 100px 0; }
+        .hero-tag { 
+            color: var(--accent-gold); 
+            text-transform: uppercase; 
+            font-size: 0.85rem; 
+            letter-spacing: 0.15em; 
+            font-weight: 700; 
+            display: block; 
+            margin-bottom: 20px; 
+        }
+
+        /* The Engine Card (The "App" Container) */
+        .engine-card { 
+            background: #f9f9f9; 
+            border: 1px solid #e0e0e0; 
+            padding: 40px; 
+            margin-top: 60px; 
+            border-radius: 4px; 
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05); 
+        }
+        
+        .form-grid { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 20px; 
+            margin-bottom: 30px; 
+        }
+
+        /* Price Display */
+        .price-display { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding-top: 20px; 
+            border-top: 1px solid #e0e0e0; 
+        }
+        .price-tag { 
+            font-family: var(--font-serif); 
+            font-size: 2rem; 
+            color: var(--accent-navy); 
+            transition: color 0.3s;
+        }
+
+        /* --- THE MODAL (Popup) --- */
+        .modal-overlay {
+            display: none; /* Hidden by default */
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8); z-index: 1000;
+            backdrop-filter: blur(5px);
+            overflow-y: auto; /* Allow scrolling if modal is tall */
+        }
+        
+        .modal-content {
+            background: white; 
+            width: 90%; max-width: 600px;
+            margin: 50px auto; 
+            padding: 40px; 
+            border-radius: 4px;
+            position: relative;
+        }
+        
+        .close-btn { 
+            position: absolute; 
+            top: 20px; right: 20px; 
+            cursor: pointer; 
+            font-size: 1.5rem; 
+            color: #999;
+        }
+
+        /* Question Cards inside Modal */
+        .q-card { 
+            margin-bottom: 25px; 
+            padding-bottom: 25px; 
+            border-bottom: 1px solid #eee; 
+        }
+        .q-text { 
+            font-weight: 600; 
+            display: block; 
+            margin-bottom: 10px; 
+            font-family: var(--font-serif); 
+            font-size: 1.1rem; 
+        }
+        .q-meta {
+            font-size: 0.75rem;
+            color: #999;
+            text-transform: uppercase;
+            margin-top: 5px;
+            display: block;
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            .form-grid { grid-template-columns: 1fr; }
+            h1 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="container">
+        <a href="index.html" class="logo">Kernorigin</a>
+        <nav>
+            <ul>
+                <li><a href="how-we-think.html">How We Think</a></li>
+                <li><a href="impact.html">Impact</a></li>
+                <li><a href="insights.html">Insights</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <span class="hero-tag">Automated Intelligence Firm</span>
+            <h1>The Wisdom of a Senior Partner.<br>The Speed of AI.</h1>
+            <p>Digitizing 24 years of institutional consulting. Identify cash leakage, benchmark against local peers, and validate your strategy in 3 minutes.</p>
+
+            <div class="engine-card">
+                <h3>Configure Strategic Audit</h3>
+                <br>
+                <form id="initForm" onsubmit="openDiagnostic(event)">
+                    <div class="form-grid">
+                        <div>
+                            <label>Industry Vertical</label>
+                            <select id="industrySelect" required>
+                                <option>Loading Taxonomy...</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label>Jurisdiction</label>
+                            <select id="locationSelect" onchange="updatePrice()">
+                                <option value="IN">India (Tier 1/2/3)</option>
+                                <option value="ROW">Global / Rest of World</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-grid">
+                        <div>
+                            <label>Partner Access Code</label>
+                            <input type="text" id="partnerCode" placeholder="Enter VIP Code" oninput="checkCoupon()">
+                            <small id="codeStatus" style="display:block; margin-top:5px; font-size:0.8em;"></small>
+                        </div>
+                    </div>
+
+                    <div class="price-display">
+                        <div>
+                            <div class="price-tag" id="priceTag">₹2,997</div>
+                            <small id="priceSub">Audit Fee • Razorpay Secure</small>
+                        </div>
+                        <div style="width: 50%;">
+                            <button type="submit" class="cta-btn" id="initBtn" disabled>Connecting to Brain...</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <div id="diagnosticModal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h2 style="margin-bottom: 10px;">Strategic Inputs</h2>
+            <p style="font-size: 0.9rem; margin-bottom: 30px;">Please provide accurate ratios for a valid diagnosis. All data is anonymized.</p>
+            
+            <form id="diagnosticForm" onsubmit="submitFinal(event)">
+                <div id="questionContainer"></div>
+                
+                <div style="margin-top: 30px; text-align: right;">
+                    <button type="submit" class="cta-btn" id="analyzeBtn">Run Intelligence Engine &rarr;</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // 🔴 CRITICAL: PASTE YOUR APPSCRIPT WEB APP URL HERE
+        const API_URL = "https://script.google.com/macros/s/AKfycbx55y-N_lsJV7mgA8w9naFkNGo0R9TS1ee3l_z--o3PGAvSn8xMNwQ9VVmB8vTzNKj5/exec"; 
+
+        // Global State
+        let SYSTEM_DATA = null;
+
+        // 1. SYSTEM BOOT: Connect to AppScript Brain on Load
+        window.onload = async function() {
+            try {
+                // Fetch Taxonomy and Questions
+                const res = await fetch(`${API_URL}?action=diagnostic_init`);
+                const data = await res.json();
+                
+                if(data.error) throw new Error(data.error);
+
+                SYSTEM_DATA = data; // Store for later use
+                
+                // Populate Industry Dropdown
+                const sel = document.getElementById('industrySelect');
+                sel.innerHTML = '<option value="" disabled selected>Select Sector...</option>';
+                
+                // Sort alphabetically for clean UI
+                data.industries.sort((a,b) => a.name.localeCompare(b.name));
+                
+                data.industries.forEach(ind => {
+                    const opt = document.createElement('option');
+                    opt.value = ind.id;
+                    opt.text = ind.name;
+                    sel.appendChild(opt);
+                });
+
+                // Enable the Interface
+                const btn = document.getElementById('initBtn');
+                btn.innerText = "Initialize Diagnostic →";
+                btn.disabled = false;
+                
+                console.log("Kernorigin Intelligence Engine: ONLINE");
+
+            } catch (e) {
+                console.error("Connection Failed:", e);
+                const btn = document.getElementById('initBtn');
+                btn.innerText = "System Offline (Check Console)";
+                btn.style.backgroundColor = "#999";
+            }
+        };
+
+        // 2. INTERFACE: Open Modal & Render Questions
+        function openDiagnostic(e) {
+            e.preventDefault();
+            const industryId = document.getElementById('industrySelect').value;
+            
+            // Logic: Get Global Questions (000) + Specific Industry Questions
+            const questions = SYSTEM_DATA.questions.filter(q => 
+                q.target === '000' || q.target === industryId
+            );
+
+            const container = document.getElementById('questionContainer');
+            container.innerHTML = '';
+            
+            // Inject Founder Info Fields (First Card)
+            container.innerHTML += `
+                <div class="q-card">
+                    <label style="font-weight:bold; display:block; margin-bottom:10px;">Confidential Report Delivery</label>
+                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px;">
+                        <input type="text" name="founderName" placeholder="Founder Name" required>
+                        <input type="email" name="founderEmail" placeholder="Email Address" required>
+                    </div>
+                </div>
+            `;
+
+            // Inject Diagnostic Questions
+            questions.forEach(q => {
+                container.innerHTML += `
+                    <div class="q-card">
+                        <span class="q-text">${q.text}</span>
+                        <input type="number" name="${q.id}" placeholder="Enter value..." required step="any">
+                        <span class="q-meta">Format: ${q.type}</span>
+                    </div>
+                `;
+            });
+
+            // Show Modal
+            document.getElementById('diagnosticModal').style.display = 'block';
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+
+        // 3. CORE: Submit Data to Gemini
+        async function submitFinal(e) {
+            e.preventDefault();
+            const btn = document.getElementById('analyzeBtn');
+            const originalText = btn.innerText;
+            
+            btn.innerText = "Analyzing Ratios (Gemini 2.5)...";
+            btn.disabled = true;
+
+            // Gather Data
+            const formData = new FormData(e.target);
+            const answers = {};
+            formData.forEach((val, key) => answers[key] = val);
+
+            // Extract Meta info
+            const name = answers.founderName;
+            const email = answers.founderEmail;
+            delete answers.founderName;
+            delete answers.founderEmail;
+
+            const payload = {
+                action: 'submit_diagnostic',
+                industryId: document.getElementById('industrySelect').value,
+                location: document.getElementById('locationSelect').value,
+                name: name,
+                email: email,
+                answers: answers
+            };
+
+            try {
+                const res = await fetch(API_URL, {
+                    method: 'POST',
+                    body: JSON.stringify(payload)
+                });
+                const result = await res.json();
+
+                // Logic: Check Confidence Score
+                if(result.status === 'blocked') {
+                    // Scenario: Data Validation Failed (<50%)
+                    alert(`⛔ DIAGNOSTIC HALTED\n\nSecurity System Flagged Inconsistencies.\nConfidence Score: ${result.confidence}%\n\nIssues Detected:\n- ${result.errors.join('\n- ')}\n\nPlease review your inputs.`);
+                } else {
+                    // Scenario: Success
+                    alert(`✅ DIAGNOSIS COMPLETE\n\nConfidence Score: ${result.confidence}%\n\nYour surgical report has been generated and sent to ${email}.`);
+                    closeModal();
+                }
+
+            } catch(err) {
+                alert("Communication Error: " + err.message);
+            } finally {
+                btn.innerText = originalText;
+                btn.disabled = false;
+            }
+        }
+
+        // 4. UTILS: Pricing & Coupon Logic
+        function updatePrice() {
+            const loc = document.getElementById('locationSelect').value;
+            const code = document.getElementById('partnerCode').value.toUpperCase();
+            const tag = document.getElementById('priceTag');
+            const sub = document.getElementById('priceSub');
+
+            // If Valid Coupon, Price is always 0
+            if(code === 'AGARWAL_VIP' || code === 'PARTNER50') {
+                return; 
+            }
+
+            if(loc === 'IN') {
+                tag.innerText = "₹2,997";
+                sub.innerText = "Audit Fee • Razorpay Secure";
+            } else {
+                tag.innerText = "$97";
+                sub.innerText = "Audit Fee • Stripe Secure";
+            }
+        }
+
+        function checkCoupon() {
+            const code = document.getElementById('partnerCode').value.toUpperCase();
+            const tag = document.getElementById('priceTag');
+            const status = document.getElementById('codeStatus');
+            const btn = document.getElementById('initBtn');
+
+            if(code === 'AGARWAL_VIP' || code === 'PARTNER50') {
+                // Success State
+                tag.innerText = "₹0";
+                tag.style.color = "#27ae60"; // Green
+                status.innerText = "✓ Partner Access Code Accepted";
+                status.style.color = "#27ae60";
+                btn.innerText = "Initialize Audit (Free)";
+            } else {
+                // Reset / Invalid State
+                tag.style.color = "var(--accent-navy)";
+                updatePrice(); // Revert to location price
+                if(code.length > 0) {
+                    status.innerText = "Checking...";
+                    status.style.color = "#999";
+                } else {
+                    status.innerText = "";
+                }
+                btn.innerText = "Initialize Diagnostic →";
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('diagnosticModal').style.display = 'none';
+            document.body.style.overflow = 'auto'; // Restore scrolling
+        }
+    </script>
+</body>
+</html>
