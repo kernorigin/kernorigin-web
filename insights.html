@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Insights | Kernorigin</title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -24,13 +25,37 @@
     </header>
 
     <main class="container section-padding">
-        <span class="eyebrow">Intelligence</span>
-        <h1>Root Cause Thinking in Practice</h1>
-        <p>Why symptoms lie and how to find what's actually broken.</p>
+        <div class="readable-column text-center">
+            <span class="eyebrow">Intelligence</span>
+            <h1>Root Cause Thinking in Practice</h1>
+            <p>Why symptoms lie and how to find what's actually broken.</p>
+        </div>
 
-        <div id="loading" style="margin-top: 40px; color: #999;">Accessing Intelligence Database...</div>
-        <div id="blog-grid" style="margin-top: 40px;"></div>
+        <div class="readable-column" style="margin-top: 40px;">
+            <div id="loading" style="text-align: center; color: #999;">Accessing Intelligence Database...</div>
+            <div id="blog-grid"></div>
+        </div>
     </main>
+
+    <footer>
+        <div class="container footer-wrapper">
+            <div>
+                <div class="logo">KERNORIGIN</div>
+                <p style="margin-top: 15px; font-size: 0.9rem;">
+                    24 years finding root causes.<br>
+                    50+ transformations that stick.
+                </p>
+            </div>
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="insights.html">Insights</a>
+                <a href="contact.html">Contact</a>
+            </div>
+        </div>
+        <div class="container" style="margin-top: 40px; font-size: 0.8rem; color: #999;">
+            &copy; 2026 Kernorigin. All rights reserved.
+        </div>
+    </footer>
 
     <script src="config.js"></script>
     <script>
@@ -38,7 +63,6 @@
             try {
                 if (!API_CONFIG || API_CONFIG.URL.includes("YOUR_ID")) throw new Error("Config not set");
                 
-                // Fetch Recent Posts
                 const res = await fetch(`${API_CONFIG.URL}?action=recent&limit=10`);
                 const posts = await res.json();
                 
