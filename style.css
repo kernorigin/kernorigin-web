@@ -1,36 +1,80 @@
-/* style.css - The Institutional Theme */
+/* style.css - KERNORIGIN VISUAL IDENTITY SYSTEM */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
+
 :root {
-    --bg-color: #ffffff;
-    --text-main: #111111;
-    --text-muted: #555555;
-    --accent-gold: #D4AF37;
-    --accent-navy: #002244;
-    --font-serif: "Georgia", "Times New Roman", serif;
-    --font-sans: "Inter", "Helvetica Neue", sans-serif;
+    /* Color Palette */
+    --bg-white: #ffffff;
+    --bg-offwhite: #f9fafb;
+    --text-main: #111827;
+    --text-muted: #4b5563;
+    --accent-navy: #0f172a;
+    --accent-gold: #d97706; /* Refined Gold */
+    --border-light: #e5e7eb;
+    
+    /* Typography */
+    --font-serif: 'Libre Baskerville', serif;
+    --font-sans: 'Inter', sans-serif;
 }
 
-body { font-family: var(--font-sans); background: var(--bg-color); color: var(--text-main); margin: 0; line-height: 1.6; }
-.container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+/* Global Reset */
+* { box-sizing: border-box; }
+body { margin: 0; font-family: var(--font-sans); color: var(--text-main); line-height: 1.6; -webkit-font-smoothing: antialiased; }
 a { text-decoration: none; color: inherit; transition: 0.2s; }
-a:hover { color: var(--accent-gold); }
+img { max-width: 100%; display: block; }
 
-/* Typography */
-h1, h2, h3 { font-family: var(--font-serif); font-weight: 400; margin: 0; letter-spacing: -0.02em; }
-h1 { font-size: 3rem; line-height: 1.1; margin-bottom: 1.5rem; }
-h2 { font-size: 2rem; margin-bottom: 1rem; color: var(--accent-navy); }
-p { margin-bottom: 1.5rem; color: var(--text-muted); }
+/* Layout Utilities */
+.container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+.section-padding { padding: 100px 0; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+
+/* Typography System */
+h1, h2, h3, h4 { font-family: var(--font-serif); font-weight: 700; margin: 0 0 1rem 0; color: var(--accent-navy); }
+h1 { font-size: 3.5rem; line-height: 1.1; letter-spacing: -0.02em; }
+h2 { font-size: 2.25rem; }
+h3 { font-size: 1.5rem; }
+p { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 1.5rem; max-width: 700px; }
+.eyebrow { color: var(--accent-gold); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.15em; font-weight: 600; display: block; margin-bottom: 16px; }
 
 /* Navigation */
-header { padding: 30px 0; border-bottom: 1px solid #eaeaea; display: flex; justify-content: space-between; align-items: center; }
-.logo { font-family: var(--font-serif); font-size: 1.5rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
-nav ul { list-style: none; display: flex; gap: 25px; margin: 0; padding: 0; }
-nav a { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 500; }
+header { padding: 32px 0; border-bottom: 1px solid var(--border-light); background: white; position: sticky; top: 0; z-index: 100; }
+.nav-wrapper { display: flex; justify-content: space-between; align-items: center; }
+.logo { font-family: var(--font-serif); font-size: 1.5rem; font-weight: 700; letter-spacing: -0.03em; color: var(--accent-navy); }
+nav ul { list-style: none; display: flex; gap: 32px; margin: 0; padding: 0; }
+nav a { font-size: 0.9rem; font-weight: 500; color: var(--text-muted); }
+nav a:hover, nav a.active { color: var(--accent-navy); }
+.mobile-menu-btn { display: none; }
 
-/* Buttons & Forms */
-.cta-btn { background-color: var(--accent-navy); color: white; border: none; padding: 15px 30px; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em; cursor: pointer; font-weight: 600; display: inline-block; }
-.cta-btn:hover { background-color: #001122; color: #fff; }
-input, textarea, select { width: 100%; padding: 15px; border: 1px solid #ccc; border-radius: 2px; margin-bottom: 20px; font-family: var(--font-sans); box-sizing: border-box;}
+/* Buttons */
+.btn { display: inline-block; padding: 16px 32px; background: var(--accent-navy); color: white; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.9rem; border: none; cursor: pointer; border-radius: 2px; }
+.btn:hover { background: #1e293b; transform: translateY(-1px); }
+.btn:disabled { background: #94a3b8; cursor: not-allowed; }
+.btn-outline { background: transparent; border: 1px solid var(--accent-navy); color: var(--accent-navy); }
+.btn-outline:hover { background: var(--bg-offwhite); }
+
+/* Components */
+.card { background: white; padding: 40px; border: 1px solid var(--border-light); border-radius: 4px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); }
+.stat-card { border-left: 4px solid var(--accent-gold); background: var(--bg-offwhite); padding: 32px; }
+.stat-num { font-family: var(--font-serif); font-size: 3rem; color: var(--accent-navy); line-height: 1; display: block; margin-bottom: 8px; }
+
+/* Forms */
+label { display: block; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; margin-bottom: 8px; color: var(--text-muted); }
+input, select, textarea { width: 100%; padding: 12px; border: 1px solid var(--border-light); border-radius: 4px; font-family: var(--font-sans); font-size: 1rem; margin-bottom: 20px; transition: border 0.2s; }
+input:focus, select:focus, textarea:focus { outline: none; border-color: var(--accent-navy); }
 
 /* Footer */
-footer { border-top: 1px solid #eaeaea; padding: 60px 0; margin-top: 80px; font-size: 0.9rem; color: var(--text-muted); }
-.footer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+footer { background: var(--bg-offwhite); padding: 80px 0; border-top: 1px solid var(--border-light); margin-top: 100px; }
+.footer-links { display: flex; gap: 24px; margin-top: 24px; }
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    h1 { font-size: 2.5rem; }
+    .grid-2, .grid-3 { grid-template-columns: 1fr; gap: 40px; }
+    nav { display: none; } /* Simplified for MVP, ideally toggle */
+    .mobile-menu-btn { display: block; }
+}
+
+/* Modal */
+.modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); z-index: 1000; overflow-y: auto; }
+.modal-content { background: white; width: 95%; max-width: 600px; margin: 60px auto; padding: 40px; border-radius: 8px; position: relative; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); }

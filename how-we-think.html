@@ -6,41 +6,55 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header class="container">
-        <a href="index.html" class="logo">Kernorigin</a>
-        <nav>
-            <ul>
-                <li><a href="how-we-think.html" style="color:var(--accent-gold);">How We Think</a></li>
-                <li><a href="how-we-work.html">How We Work</a></li>
-                <li><a href="impact.html">Impact</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </nav>
+    <header>
+        <div class="container nav-wrapper">
+            <a href="index.html" class="logo">Kernorigin</a>
+            <nav>
+                <ul>
+                    <li><a href="how-we-think.html" class="active">How We Think</a></li>
+                    <li><a href="how-we-work.html">How We Work</a></li>
+                    <li><a href="impact.html">Impact</a></li>
+                    <li><a href="team.html">Team</a></li>
+                    <li><a href="insights.html">Insights</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
-    <main class="container" style="padding-top: 60px;">
-        <span style="color: var(--accent-gold); text-transform: uppercase; letter-spacing: 0.15em; font-weight: 700;">Root Cause Thinking</span>
-        <h1>Everyone Sees the Symptom.<br>No One Finds the Root Cause.</h1>
-        
-        <div style="margin-top: 50px; padding: 40px; background: #f9f9f9; border-left: 4px solid var(--accent-navy);">
-            <h2>The Problem with Symptoms</h2>
-            <p>Symptoms are visible. Urgent. Revenue is down. Turnover is high. So consultants treat symptoms: "Do more marketing." "Pay people more." These are band-aids.</p>
-        </div>
+    <main class="container section-padding">
+        <span class="eyebrow">Root Cause Thinking</span>
+        <h1>Everyone sees the symptom.<br>No one finds the root cause.</h1>
+        <p>That's why most solutions don't last.</p>
 
-        <div style="margin-top: 50px;">
-            <h2>The Seven Cylinders</h2>
-            <p>Every organization runs on seven cylinders. When growth stalls, 1-3 are failing.</p>
-            <ul style="list-style: none; padding: 0; margin-top: 30px;">
-                <li style="margin-bottom: 20px;"><strong>01 STRATEGY:</strong> Where are you actually going?</li>
-                <li style="margin-bottom: 20px;"><strong>02 LEADERSHIP:</strong> Who's driving? Are they aligned?</li>
-                <li style="margin-bottom: 20px;"><strong>03 OPERATIONS:</strong> How does work actually get done?</li>
-                <li style="margin-bottom: 20px;"><strong>04 PEOPLE:</strong> Right people? Right roles?</li>
-                <li style="margin-bottom: 20px;"><strong>05 SYSTEMS:</strong> What enables progress? What blocks it?</li>
-            </ul>
-        </div>
-        
-        <div style="margin-top: 60px; text-align: center;">
-            <a href="index.html" class="cta-btn">Run the Diagnostic</a>
+        <div style="margin-top: 80px;" class="grid-2">
+            <div>
+                <h2>The Seven Cylinders</h2>
+                <p>Every organization runs on seven cylinders. When growth stalls, it is rarely "bad luck." It is because 1 to 3 of these cylinders are misfiring.</p>
+                <ul style="margin-top: 32px; list-style: none; padding: 0;">
+                    <li style="margin-bottom: 24px;"><strong>01 STRATEGY:</strong> Where are you actually going?</li>
+                    <li style="margin-bottom: 24px;"><strong>02 LEADERSHIP:</strong> Who's driving? Are they aligned?</li>
+                    <li style="margin-bottom: 24px;"><strong>03 OPERATIONS:</strong> How does work actually get done?</li>
+                    <li style="margin-bottom: 24px;"><strong>04 PEOPLE:</strong> Right people? Right roles?</li>
+                    <li style="margin-bottom: 24px;"><strong>05 SYSTEMS:</strong> What enables progress? What blocks it?</li>
+                    <li style="margin-bottom: 24px;"><strong>06 CULTURE:</strong> What behaviors are actually rewarded?</li>
+                    <li style="margin-bottom: 24px;"><strong>07 CUSTOMER:</strong> Who are you serving? Why do they choose you?</li>
+                </ul>
+            </div>
+            <div style="background: var(--bg-offwhite); padding: 40px; border-radius: 4px;">
+                <h3>AI + Human Intelligence</h3>
+                <p>Root causes hide in patterns AND context.</p>
+                
+                <h4 style="margin-top: 32px; font-size: 1.1rem;">AI finds patterns humans miss:</h4>
+                <p style="font-size: 0.95rem;">Financial anomalies • Operational bottlenecks • Performance drift</p>
+                
+                <h4 style="margin-top: 32px; font-size: 1.1rem;">Humans find context AI can't:</h4>
+                <p style="font-size: 0.95rem;">Why people say one thing and do another • Cultural undercurrents • Political dynamics</p>
+                
+                <div style="margin-top: 40px;">
+                    <a href="index.html#diagnostic" class="btn">Find Your Root Cause</a>
+                </div>
+            </div>
         </div>
     </main>
 </body>
