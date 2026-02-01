@@ -59,6 +59,18 @@ p { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 1.5rem; }
     margin-bottom: 16px; 
 }
 
+.blockquote-lg {
+    font-family: var(--font-serif);
+    font-size: 1.8rem;
+    line-height: 1.5;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+    color: var(--accent-navy);
+    font-style: italic;
+    padding: 40px 0;
+}
+
 /* NAVIGATION */
 header { padding: 25px 0; border-bottom: 1px solid var(--border-light); background: white; position: sticky; top: 0; z-index: 1000; }
 .nav-wrapper { display: flex; justify-content: space-between; align-items: center; }
@@ -79,6 +91,14 @@ nav a:hover, nav a.active { color: var(--accent-navy); border-bottom: 2px solid 
 .metric-card { background: var(--bg-offwhite); padding: 30px; border-top: 4px solid var(--accent-gold); text-align: center; }
 .metric-val { font-size: 2.5rem; font-family: var(--font-serif); font-weight: 700; color: var(--accent-navy); display: block; }
 
+.engine-card {
+    background: white;
+    padding: 30px;
+    border: 1px solid var(--border-light);
+    border-radius: 4px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
 /* FOOTER */
 footer { background: var(--bg-offwhite); padding: 60px 0; border-top: 1px solid var(--border-light); font-size: 0.9rem; }
 .footer-wrapper { display: flex; justify-content: space-between; align-items: flex-start; }
@@ -86,6 +106,26 @@ footer { background: var(--bg-offwhite); padding: 60px 0; border-top: 1px solid 
 
 /* FORM ELEMENTS */
 input, select, textarea { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 2px; font-family: var(--font-sans); font-size: 1rem; margin-bottom: 20px; }
+label { display: block; font-weight: 600; margin-bottom: 8px; color: var(--text-main); }
+
+/* MODAL */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 2000;
+    overflow-y: auto;
+    padding: 40px 20px;
+}
+.modal-content {
+    background: white;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 40px;
+    border-radius: 4px;
+    position: relative;
+}
 
 /* MOBILE */
 @media (max-width: 768px) {
@@ -93,4 +133,5 @@ input, select, textarea { width: 100%; padding: 12px; border: 1px solid #ccc; bo
     nav { display: none; } /* Simplified */
     h1 { font-size: 2.2rem; }
     .footer-wrapper { flex-direction: column; gap: 30px; }
+    .blockquote-lg { font-size: 1.4rem; padding: 20px 0; }
 }

@@ -34,7 +34,7 @@
                     <h1>Most fix symptoms.<br>We fix root causes.</h1>
                     <p>Your revenue is stuck. Your team is struggling. You've tried consultants. Nothing sticks.</p>
                     <p><strong>Because everyone's fixing the symptom. No one's finding the root cause.</strong></p>
-                    <a href="#impact" class="btn btn-outline" style="margin-top: 20px;">See The Impact</a>
+                    <a href="impact.html" class="btn btn-outline" style="margin-top: 20px;">See The Impact</a>
                 </div>
 
                 <div class="engine-card">
@@ -159,7 +159,7 @@
         window.onload = async function() {
             try {
                 // If API_CONFIG is not set, throw error
-                if (!API_CONFIG || API_CONFIG.URL.includes("YOUR_ID")) {
+                if (!API_CONFIG || API_CONFIG.URL.includes("YOUR_SCRIPT_ID")) {
                     throw new Error("Config not set");
                 }
 
@@ -227,7 +227,7 @@
                     body: JSON.stringify({
                         action: 'submit_diagnostic', 
                         industryId: document.getElementById('industrySelect').value, 
-                        location: 'IN', 
+                        location: document.getElementById('locationSelect').value, 
                         name, email, answers: ans 
                     })
                 });

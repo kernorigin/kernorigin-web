@@ -23,20 +23,17 @@
             </nav>
         </div>
     </header>
-
     <main class="container section-padding">
         <div class="readable-column text-center">
             <span class="eyebrow">Intelligence</span>
             <h1>Root Cause Thinking in Practice</h1>
             <p>Why symptoms lie and how to find what's actually broken.</p>
         </div>
-
         <div class="readable-column" style="margin-top: 40px;">
             <div id="loading" style="text-align: center; color: #999;">Accessing Intelligence Database...</div>
             <div id="blog-grid"></div>
         </div>
     </main>
-
     <footer>
         <div class="container footer-wrapper">
             <div>
@@ -56,18 +53,22 @@
             &copy; 2026 Kernorigin. All rights reserved.
         </div>
     </footer>
-
     <script src="config.js"></script>
     <script>
         window.onload = async function() {
             try {
-                if (!API_CONFIG || API_CONFIG.URL.includes("YOUR_ID")) throw new Error("Config not set");
+                if (!API_CONFIG || API_CONFIG.URL.includes("YOUR_SCRIPT_ID")) throw new Error("Config not set");
                 
                 const res = await fetch(`${API_CONFIG.URL}?action=recent&limit=10`);
                 const posts = await res.json();
                 
                 document.getElementById('loading').style.display = 'none';
                 const container = document.getElementById('blog-grid');
+                
+                if (posts.error) {
+                    container.innerHTML = `<p style="color: #999; text-align: center;">Unable to load posts. Error: ${posts.error}</p>`;
+                    return;
+                }
                 
                 posts.forEach(post => {
                     const date = new Date(post.publish_date).toLocaleDateString();
@@ -76,12 +77,13 @@
                             <h3>${post.title}</h3>
                             <span class="eyebrow" style="color:#777; margin-bottom: 10px;">${date}</span>
                             <p>${post.summary}</p>
-                            <button class="btn-outline" style="margin-top: 10px;">Read Analysis</button>
+                            <a href="post.html?slug=${post.slug}" class="btn-outline" style="margin-top: 10px; display: inline-block;">Read Analysis</a>
                         </div>
                     `;
                 });
             } catch(e) {
-                document.getElementById('loading').innerText = "System Offline. Verify Backend Connection.";
+                console.error('Insights page error:', e);
+                document.getElementById('loading').innerText = "System Offline. Verify config.js is configured with your Google Apps Script URL.";
             }
         };
     </script>

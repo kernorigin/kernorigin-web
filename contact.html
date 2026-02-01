@@ -23,7 +23,6 @@
             </nav>
         </div>
     </header>
-
     <main class="container section-padding">
         <div class="readable-column text-center">
             <span class="eyebrow">Start a Conversation</span>
@@ -33,14 +32,23 @@
         
         <div class="readable-column" style="margin-top: 60px;">
             <div class="card" style="box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
-                <form onsubmit="sendContact(event)">
-                    <label>Name</label><input type="text" name="name" required>
-                    <label>Email</label><input type="email" name="email" required>
-                    <label>Organization / Phone</label><input type="text" name="phone">
-                    <label>What's stuck? (The Symptom)</label><textarea name="message" rows="5" required></textarea>
+                <form id="contactForm" onsubmit="sendContact(event)">
+                    <label>Name</label>
+                    <input type="text" name="name" required>
+                    
+                    <label>Email</label>
+                    <input type="email" name="email" required>
+                    
+                    <label>Organization / Phone</label>
+                    <input type="text" name="phone" placeholder="Optional">
+                    
+                    <label>What's stuck? (The Symptom)</label>
+                    <textarea name="message" rows="5" required placeholder="Tell us what's not working..."></textarea>
                     
                     <button type="submit" id="sendBtn" class="btn" style="width:100%;">Start Conversation</button>
                 </form>
+                
+                <div id="statusMessage" style="margin-top: 20px; padding: 15px; border-radius: 4px; display: none;"></div>
             </div>
             
             <div style="text-align: center; margin-top: 40px; font-size: 0.9rem; color: #666;">
@@ -48,7 +56,6 @@
             </div>
         </div>
     </main>
-
     <footer>
         <div class="container footer-wrapper">
             <div>
@@ -68,17 +75,71 @@
             &copy; 2026 Kernorigin. All rights reserved.
         </div>
     </footer>
-
     <script src="config.js"></script>
     <script>
         async function sendContact(e) {
             e.preventDefault();
             const btn = document.getElementById('sendBtn');
-            btn.innerText = "Sending..."; btn.disabled = true;
+            const statusDiv = document.getElementById('statusMessage');
+            const form = document.getElementById('contactForm');
             
-            // Logic to send to backend...
-            alert("Message received. We will be in touch.");
-            btn.innerText = "Start Conversation"; btn.disabled = false;
+            btn.innerText = "Sending..."; 
+            btn.disabled = true;
+            statusDiv.style.display = 'none';
+            
+            try {
+                // Check if config is set
+                if (!API_CONFIG || API_CONFIG.URL.includes("YOUR_SCRIPT_ID")) {
+                    throw new Error("API not configured. Please set up config.js with your Google Apps Script URL.");
+                }
+                
+                const formData = new FormData(form);
+                const payload = {
+                    action: 'contact',
+                    apiKey: 'public_key_placeholder', // This would be replaced with actual public key
+                    payload: {
+                        name: formData.get('name'),
+                        email: formData.get('email'),
+                        phone: formData.get('phone') || 'N/A',
+                        message: formData.get('message')
+                    }
+                };
+                
+                const response = await fetch(API_CONFIG.URL, {
+                    method: 'POST',
+                    body: JSON.stringify(payload)
+                });
+                
+                const result = await response.json();
+                
+                if (result.error) {
+                    throw new Error(result.error);
+                }
+                
+                // Success
+                statusDiv.innerHTML = `
+                    <div style="background: #d4edda; color: #155724; border: 1px solid #c3e6cb;">
+                        <strong>Message Received!</strong><br>
+                        We'll be in touch within 24 hours.
+                    </div>
+                `;
+                statusDiv.style.display = 'block';
+                form.reset();
+                
+            } catch (error) {
+                console.error('Contact form error:', error);
+                statusDiv.innerHTML = `
+                    <div style="background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb;">
+                        <strong>Unable to send.</strong><br>
+                        ${error.message}<br>
+                        <small>Please verify your config.js is set up correctly or email directly.</small>
+                    </div>
+                `;
+                statusDiv.style.display = 'block';
+            } finally {
+                btn.innerText = "Start Conversation"; 
+                btn.disabled = false;
+            }
         }
     </script>
 </body>
