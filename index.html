@@ -51,8 +51,13 @@
                             <div>
                                 <label>Jurisdiction</label>
                                 <select id="locationSelect" onchange="updatePrice()">
-                                    <option value="IN">India</option>
-                                    <option value="ROW">Global</option>
+                                    <option value="Bangalore">Bangalore</option>
+                                    <option value="Mumbai">Mumbai</option>
+                                    <option value="Delhi">Delhi</option>
+                                    <option value="Chennai">Chennai</option>
+                                    <option value="Hyderabad">Hyderabad</option>
+                                    <option value="Pune">Pune</option>
+                                    <option value="DEFAULT">Other</option>
                                 </select>
                             </div>
                             <div>
@@ -158,7 +163,6 @@
         // 1. INIT
         window.onload = async function() {
             try {
-                // If API_CONFIG is not set, throw error
                 if (!API_CONFIG || API_CONFIG.URL.includes("YOUR_SCRIPT_ID")) {
                     throw new Error("Config not set");
                 }
@@ -170,7 +174,6 @@
 
                 SYSTEM_DATA = data;
                 
-                // Populate Industries
                 const sel = document.getElementById('industrySelect');
                 sel.innerHTML = '<option value="" disabled selected>Select Sector...</option>';
                 data.industries.sort((a,b)=>a.name.localeCompare(b.name)).forEach(ind => {
@@ -184,7 +187,7 @@
             } catch(e) { 
                 console.error("System Offline:", e);
                 document.getElementById('initBtn').innerText = "System Offline";
-                document.getElementById('initBtn').title = "Check Console for Errors. Verify config.js URL.";
+                document.getElementById('initBtn').title = "Check Console. Verify config.js has URL and PUBLIC_KEY set.";
             }
         };
 
@@ -194,23 +197,21 @@
             const ind = document.getElementById('industrySelect').value;
             const container = document.getElementById('questionContainer');
             
-            // Layout for Inputs
             container.innerHTML = `
                 <div style="background: #f9f9f9; padding: 20px; border-radius: 4px; margin-bottom: 30px;">
-                    <label>Founder Name</label><input type="text" name="founderName" required>
-                    <label>Confidential Email</label><input type="email" name="founderEmail" required>
+                    <label>Your Name</label><input type="text" name="founderName" required>
+                    <label>Email (for report delivery)</label><input type="email" name="founderEmail" required>
                 </div>`;
             
-            // Filter Questions
             const qs = SYSTEM_DATA.questions.filter(q => q.target === '000' || q.target === ind);
             qs.forEach(q => {
-                container.innerHTML += `<div style="margin-bottom:15px;"><label>${q.text}</label><input type="number" name="${q.id}" placeholder="Enter Ratio" required step="any"></div>`;
+                container.innerHTML += `<div style="margin-bottom:15px;"><label>${q.text}</label><input type="number" name="${q.id}" placeholder="Enter value" required step="any"></div>`;
             });
             
             document.getElementById('diagnosticModal').style.display = 'block';
         }
 
-        // 3. SUBMIT
+        // 3. SUBMIT - FIXED: Added apiKey parameter
         async function submitFinal(e) {
             e.preventDefault();
             const btn = document.getElementById('analyzeBtn');
@@ -222,29 +223,42 @@
             delete ans.founderName; delete ans.founderEmail;
 
             try {
+                // FIXED: Added apiKey parameter here
                 const res = await fetch(API_CONFIG.URL, {
                     method: 'POST',
                     body: JSON.stringify({
-                        action: 'submit_diagnostic', 
+                        action: 'submit_diagnostic',
+                        apiKey: API_CONFIG.PUBLIC_KEY,  // ← CRITICAL FIX
                         industryId: document.getElementById('industrySelect').value, 
                         location: document.getElementById('locationSelect').value, 
-                        name, email, answers: ans 
+                        name, 
+                        email, 
+                        answers: ans 
                     })
                 });
                 const r = await res.json();
                 
-                if(r.status === 'blocked') alert(`Data Flagged: Confidence ${r.confidence}%\n\nErrors:\n${r.errors.join('\n')}`);
-                else { alert(`Success! Report sent to ${email}`); closeModal(); }
-            } catch(e) { alert("Error: " + e.message); }
-            btn.innerText = "Run Engine"; btn.disabled = false;
+                if(r.error) {
+                    alert(`❌ Submission Failed\n\nError: ${r.error}\n\nTroubleshooting:\n- Verify config.js has PUBLIC_KEY set\n- Check browser console (F12) for details\n- Confirm Apps Script is deployed`);
+                } else if(r.status === 'blocked') {
+                    alert(`⚠️ Data Quality Issues Detected\n\nConfidence Score: ${r.confidence}%\n\nIssues Found:\n${r.errors.join('\n')}\n\nPlease review and correct your inputs.`);
+                } else {
+                    alert(`✅ Diagnostic Complete!\n\nYour institutional audit has been processed (Confidence: ${r.confidence}%).\n\nThe full report has been emailed to:\n${email}\n\nCheck your spam folder if you don't see it within 5 minutes.`);
+                    closeModal();
+                }
+            } catch(e) {
+                console.error('Diagnostic submission error:', e);
+                alert(`❌ Error: ${e.message}\n\nCheck browser console for details.`);
+            }
+            btn.innerText = "Run Intelligence Engine →"; btn.disabled = false;
         }
 
         function checkCoupon() {
             const code = document.getElementById('partnerCode').value.toUpperCase();
             if(code === 'AGARWAL_VIP') {
                 document.getElementById('priceTag').innerText = "₹0";
-                document.getElementById('codeStatus').innerText = "Partner Code Applied";
-                document.getElementById('initBtn').innerText = "Begin (Free)";
+                document.getElementById('codeStatus').innerText = "✓ Partner Code Applied";
+                document.getElementById('initBtn').innerText = "Begin Audit (Free)";
             } else {
                 updatePrice();
                 document.getElementById('codeStatus').innerText = "";
@@ -252,10 +266,12 @@
         }
         
         function updatePrice() {
-            const loc = document.getElementById('locationSelect').value;
-            document.getElementById('priceTag').innerText = loc === 'IN' ? "₹2,997" : "$97";
+            document.getElementById('priceTag').innerText = "₹2,997";
         }
-        function closeModal() { document.getElementById('diagnosticModal').style.display = 'none'; }
+        
+        function closeModal() { 
+            document.getElementById('diagnosticModal').style.display = 'none'; 
+        }
     </script>
 </body>
 </html>
