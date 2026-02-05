@@ -5,6 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kernorigin | Strategy & Innovation</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        .help-icon {
+            color: #4a90e2;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            transition: color 0.2s;
+        }
+
+        .help-icon:hover {
+            color: #2c5aa0;
+        }
+
+        .help-tooltip {
+            animation: slideDown 0.2s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .question-wrapper input:focus {
+            border-color: #4a90e2;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+        }
+    </style>
 </head>
 <body>
 
@@ -191,7 +225,7 @@
             }
         };
 
-        // 2. OPEN MODAL
+        // 2. OPEN MODAL - ENHANCED WITH HELP TOOLTIPS
         function openDiagnostic(e) {
             e.preventDefault();
             const ind = document.getElementById('industrySelect').value;
@@ -204,11 +238,70 @@
                 </div>`;
             
             const qs = SYSTEM_DATA.questions.filter(q => q.target === '000' || q.target === ind);
+            
             qs.forEach(q => {
-                container.innerHTML += `<div style="margin-bottom:15px;"><label>${q.text}</label><input type="number" name="${q.id}" placeholder="Enter value" required step="any"></div>`;
+                const helpIcon = q.definition ? `
+                    <span class="help-icon" onclick="showHelp(event, '${q.id}')" title="Click for help">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M8 0a8 8 0 100 16A8 8 0 008 0zm.93 12.5h-1.8V11h1.8v1.5zm1.35-5.9c-.28.3-.6.5-.96.65v.5H6.68v-.9c0-.4.1-.75.3-1.05.2-.3.55-.6 1.05-.9.35-.2.6-.4.75-.6.15-.2.22-.45.22-.75 0-.35-.1-.6-.3-.8-.2-.2-.5-.3-.85-.3-.4 0-.7.1-.9.35-.2.25-.3.55-.3.9H5c0-.75.25-1.35.7-1.8.45-.45 1.05-.65 1.8-.65.8 0 1.4.2 1.85.6.45.4.65.95.65 1.6 0 .4-.1.75-.3 1.05-.2.3-.5.6-.92.9z"/>
+                        </svg>
+                    </span>
+                ` : '';
+                
+                const inputType = q.type === 'numeric' ? 'number' : 'text';
+                const inputMode = q.type === 'numeric' ? 'inputmode="decimal"' : '';
+                const step = q.type === 'numeric' ? 'step="0.01"' : '';
+                const placeholder = q.helpText || 'Enter value';
+                
+                container.innerHTML += `
+                    <div class="question-wrapper" style="margin-bottom: 20px; position: relative;">
+                        <label style="display: flex; align-items: center; gap: 8px; margin-bottom: 5px;">
+                            ${q.text}
+                            ${helpIcon}
+                        </label>
+                        <input 
+                            type="${inputType}" 
+                            name="${q.id}" 
+                            ${inputMode}
+                            ${step}
+                            placeholder="${placeholder}" 
+                            required
+                            data-qid="${q.id}"
+                        >
+                        <div id="help-${q.id}" class="help-tooltip" style="display:none;"></div>
+                    </div>`;
             });
             
             document.getElementById('diagnosticModal').style.display = 'block';
+        }
+
+        function showHelp(event, qid) {
+            event.preventDefault();
+            event.stopPropagation();
+            
+            // Hide all other help tooltips
+            document.querySelectorAll('.help-tooltip').forEach(el => el.style.display = 'none');
+            
+            const question = SYSTEM_DATA.questions.find(q => q.id === qid);
+            const helpDiv = document.getElementById(`help-${qid}`);
+            
+            if (!question.definition) return;
+            
+            helpDiv.innerHTML = `
+                <div style="background: #f0f8ff; border: 1px solid #4a90e2; border-radius: 4px; padding: 15px; margin-top: 10px; font-size: 0.9rem;">
+                    <button onclick="closeHelp('${qid}')" style="float: right; border: none; background: none; font-size: 1.2rem; cursor: pointer;">&times;</button>
+                    <h4 style="margin: 0 0 10px 0; color: #2c5aa0;">${question.text}</h4>
+                    ${question.definition ? `<p><strong>What this means:</strong> ${question.definition}</p>` : ''}
+                    ${question.calculation ? `<p><strong>How to calculate:</strong> ${question.calculation}</p>` : ''}
+                    ${question.example ? `<p><strong>Example:</strong> ${question.example}</p>` : ''}
+                    ${question.dataSource ? `<p><strong>Where to find:</strong> ${question.dataSource}</p>` : ''}
+                </div>`;
+            
+            helpDiv.style.display = 'block';
+        }
+
+        function closeHelp(qid) {
+            document.getElementById(`help-${qid}`).style.display = 'none';
         }
 
         // 3. SUBMIT - FIXED: Added apiKey parameter
@@ -228,7 +321,7 @@
                     method: 'POST',
                     body: JSON.stringify({
                         action: 'submit_diagnostic',
-                        apiKey: API_CONFIG.PUBLIC_KEY,  // ← CRITICAL FIX
+                        apiKey: API_CONFIG.PUBLIC_KEY,
                         industryId: document.getElementById('industrySelect').value, 
                         location: document.getElementById('locationSelect').value, 
                         name, 
