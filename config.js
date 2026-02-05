@@ -9,7 +9,7 @@
 
 const API_CONFIG = {
     // Your Google Apps Script Web App URL (WORKING - FROM USER)
-    URL: 'https://script.google.com/macros/s/AKfycbzoYb6iEoj5PR-FOpuvrj44RwfzSL_vtIvaH_fa-7smXNKVXwgJtafn7XU_enmCULTx/exec',
+    URL: 'https://script.google.com/macros/s/AKfycbw-ZVx9nGmcJV8bJMwH0CFmFN0wNn2D7Bsgi3Ptkodeos4rdt-TyTcmHY67VXZPmm1G/exec',
     
     // Your PUBLIC_API_KEY from Script Properties
     // ⚠️ REPLACE THIS with your actual PUBLIC_API_KEY from Apps Script → Script Properties
@@ -17,17 +17,34 @@ const API_CONFIG = {
 };
 
 // ============================================
-// HOW TO FIND YOUR SCRIPT_ID:
+// CONFIGURATION STATUS CHECK
 // ============================================
-// 1. Open your Google Apps Script project
-// 2. Click "Deploy" → "Manage deployments"
-// 3. Copy the "Web app" URL
-// 4. Extract the ID between /s/ and /exec
+// This config.js is ready to use!
+// 
+// ✓ URL is configured (your deployment URL is set)
+// ⚠ PUBLIC_KEY needs to be verified
 //
-// Example URL:
-// https://script.google.com/macros/s/AKfycbxXXXXXXXXXXXXXXXXXXXXXX/exec
-//                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-//                                    This is your SCRIPT_ID
+// To verify PUBLIC_KEY:
+// 1. Open your AppScript project
+// 2. Go to Project Settings → Script Properties
+// 3. Find PUBLIC_API_KEY
+// 4. Make sure it matches the value above
 //
-// Replace YOUR_SCRIPT_ID above with this ID
+// If you need to update PUBLIC_KEY, just replace
+// 'Kernorigin-Public-2024-XYZ123' with your actual key
 // ============================================
+
+// Validation on load
+(function validateConfig() {
+    if (API_CONFIG.URL.includes('YOUR_SCRIPT_ID')) {
+        console.warn('⚠️ API_CONFIG.URL not configured - update config.js with your deployment URL');
+    } else {
+        console.log('✓ API URL configured');
+    }
+    
+    if (API_CONFIG.PUBLIC_KEY === 'YOUR_PUBLIC_API_KEY') {
+        console.warn('⚠️ API_CONFIG.PUBLIC_KEY not configured - update config.js with your public key');
+    } else {
+        console.log('✓ PUBLIC_KEY set (verify it matches Script Properties)');
+    }
+})();
