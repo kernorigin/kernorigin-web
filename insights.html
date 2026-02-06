@@ -34,7 +34,8 @@
             <div id="blog-grid"></div>
         </div>
     </main>
-        <footer>
+    
+    <footer>
         <div class="container footer-wrapper">
             <div>
                 <div class="logo">KERNORIGIN</div>
@@ -55,6 +56,53 @@
         </div>
     </footer>
     
+    <script src="config.js"></script>
+    <script>
+        // Load and display blog posts from API
+        window.onload = async function() {
+            try {
+                if (!API_CONFIG || API_CONFIG.URL.includes("YOUR_SCRIPT_ID")) {
+                    throw new Error("Config not set");
+                }
+                
+                const res = await fetch(`${API_CONFIG.URL}?action=recent&limit=10`);
+                const posts = await res.json();
+                
+                document.getElementById('loading').style.display = 'none';
+                const container = document.getElementById('blog-grid');
+                
+                if (posts.error) {
+                    container.innerHTML = `<p style="color: #999; text-align: center;">Unable to load posts. Error: ${posts.error}</p>`;
+                    return;
+                }
+                
+                if (!Array.isArray(posts) || posts.length === 0) {
+                    container.innerHTML = `<p style="color: #999; text-align: center;">No published insights yet. Check back soon.</p>`;
+                    return;
+                }
+                
+                posts.forEach(post => {
+                    const date = new Date(post.publish_date).toLocaleDateString('en-US', {
+                        month: 'long',
+                        day: 'numeric', 
+                        year: 'numeric'
+                    });
+                    
+                    container.innerHTML += `
+                        <div style="border-top: 1px solid #eee; padding: 40px 0;">
+                            <h3>${post.title}</h3>
+                            <span class="eyebrow" style="color:#777; margin-bottom: 10px;">${date}</span>
+                            <p>${post.summary}</p>
+                            <a href="post.html?slug=${post.slug}" class="btn-outline" style="margin-top: 10px; display: inline-block;">Read Analysis</a>
+                        </div>
+                    `;
+                });
+            } catch(e) {
+                console.error('Insights page error:', e);
+                document.getElementById('loading').innerText = "System Offline. Verify config.js is configured with your Google Apps Script URL.";
+            }
+        };
+    </script>
     <script src="mobile-menu.js"></script>
 </body>
 </html>

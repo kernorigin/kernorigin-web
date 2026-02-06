@@ -15,7 +15,7 @@ const API_CONFIG = {
     
     // Your PUBLIC_API_KEY from Script Properties
     // ⚠️ REPLACE THIS with your actual PUBLIC_API_KEY
-    PUBLIC_KEY: 'Kernorigin-Public-2024-XYZ123'
+    PUBLIC_KEY: 'Kernorigin-Public-2028-ANJANA'
 };
 
 // ============================================
