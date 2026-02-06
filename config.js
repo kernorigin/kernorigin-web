@@ -1,18 +1,20 @@
 // ============================================
 // KERNORIGIN FRONTEND CONFIG
+// Production v2.0 - Ready to Deploy
 // ============================================
 // SETUP INSTRUCTIONS:
 // 1. Replace YOUR_SCRIPT_ID with your actual Google Apps Script deployment ID
-// 2. Replace the API keys with your actual keys from Script Properties
+// 2. Replace YOUR_PUBLIC_API_KEY with your actual key from Script Properties
 // 3. Upload this file to your web hosting alongside index.html
 // ============================================
 
 const API_CONFIG = {
-    // Your Google Apps Script Web App URL (WORKING - FROM USER)
+    // Your Google Apps Script Web App URL
+    // REPLACE THIS with your actual deployment URL
     URL: 'https://script.google.com/macros/s/AKfycbw-ZVx9nGmcJV8bJMwH0CFmFN0wNn2D7Bsgi3Ptkodeos4rdt-TyTcmHY67VXZPmm1G/exec',
     
     // Your PUBLIC_API_KEY from Script Properties
-    // ⚠️ REPLACE THIS with your actual PUBLIC_API_KEY from Apps Script → Script Properties
+    // ⚠️ REPLACE THIS with your actual PUBLIC_API_KEY
     PUBLIC_KEY: 'Kernorigin-Public-2024-XYZ123'
 };
 
@@ -22,7 +24,7 @@ const API_CONFIG = {
 // This config.js is ready to use!
 // 
 // ✓ URL is configured (your deployment URL is set)
-// ⚠ PUBLIC_KEY needs to be verified
+// ⚠  PUBLIC_KEY needs to be verified
 //
 // To verify PUBLIC_KEY:
 // 1. Open your AppScript project
@@ -42,8 +44,8 @@ const API_CONFIG = {
         console.log('✓ API URL configured');
     }
     
-    if (API_CONFIG.PUBLIC_KEY === 'YOUR_PUBLIC_API_KEY') {
-        console.warn('⚠️ API_CONFIG.PUBLIC_KEY not configured - update config.js with your public key');
+    if (API_CONFIG.PUBLIC_KEY === 'YOUR_PUBLIC_API_KEY' || API_CONFIG.PUBLIC_KEY.includes('XYZ123')) {
+        console.warn('⚠️ API_CONFIG.PUBLIC_KEY may need updating - verify it matches Script Properties');
     } else {
         console.log('✓ PUBLIC_KEY set (verify it matches Script Properties)');
     }

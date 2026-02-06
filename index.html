@@ -196,12 +196,70 @@
         </section>
     </main>
 
+    
+    <!-- INSIGHTS PREVIEW (McKinsey-style) - FIX #5 -->
+    <section class="section-padding">
+        <div class="container readable-column">
+            <div style="text-align: center; margin-bottom: 50px;">
+                <span class="eyebrow">Thought Leadership</span>
+                <h2>Latest Insights</h2>
+                <p>Root cause thinking in practice. What we're learning, teaching, and challenging.</p>
+            </div>
+            
+            <div id="insightsPreview"></div>
+            
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="insights.html" class="btn-outline">View All Insights →</a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+    // Load latest 3 insights for homepage preview
+    (function loadInsightsPreview() {
+        window.addEventListener('load', async function() {
+            try {
+                if (!API_CONFIG || API_CONFIG.URL.includes("YOUR_SCRIPT_ID")) return;
+                
+                const res = await fetch(`${API_CONFIG.URL}?action=recent&limit=3`);
+                const posts = await res.json();
+                
+                if (posts.error || !Array.isArray(posts)) return;
+                
+                const container = document.getElementById('insightsPreview');
+                if (!container) return;
+                
+                posts.forEach((post, idx) => {
+                    const date = new Date(post.publish_date).toLocaleDateString('en-US', {
+                        month: 'long', day: 'numeric', year: 'numeric'
+                    });
+                    
+                    const excerpt = post.summary || post.title;
+                    const borderStyle = idx === 0 ? '' : 'border-top: 1px solid var(--border-light);';
+                    
+                    container.innerHTML += `
+                        <div class="insight-card" style="${borderStyle}">
+                            <div class="insight-meta">${date}</div>
+                            <h3><a href="post.html?slug=${post.slug}" style="color: inherit;">${post.title}</a></h3>
+                            <p class="insight-excerpt">${excerpt}</p>
+                            <a href="post.html?slug=${post.slug}" class="btn-outline" style="font-size: 0.75rem; padding: 10px 20px;">Read Analysis →</a>
+                        </div>
+                    `;
+                });
+            } catch(e) {
+                console.log('Insights preview not available:', e);
+            }
+        });
+    })();
+    </script>
+
     <footer>
         <div class="container footer-wrapper">
             <div>
                 <div class="logo">KERNORIGIN</div>
-                <p style="margin-top: 15px; font-size: 0.9rem;">
-                    24 years finding root causes.<br>
+                <p style="margin-top: 15px; font-size: 0.9rem; color: var(--text-muted);">
+                    Since 2001 (formerly Value Drive Consulting)<br>
+                    25 years finding root causes globally.<br>
                     50+ transformations that stick.
                 </p>
             </div>
@@ -364,5 +422,6 @@
             document.getElementById('institutionalModal').style.display = 'none'; 
         }
     </script>
+    <script src="mobile-menu.js"></script>
 </body>
 </html>

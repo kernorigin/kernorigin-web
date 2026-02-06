@@ -343,8 +343,9 @@
         <div class="container footer-wrapper">
             <div>
                 <div class="logo">KERNORIGIN</div>
-                <p style="margin-top: 15px; font-size: 0.9rem;">
-                    24 years finding root causes.<br>
+                <p style="margin-top: 15px; font-size: 0.9rem; color: var(--text-muted);">
+                    Since 2001 (formerly Value Drive Consulting)<br>
+                    25 years finding root causes globally.<br>
                     50+ transformations that stick.
                 </p>
             </div>
@@ -433,8 +434,9 @@
                 defaultOpt.selected = true;
                 input.appendChild(defaultOpt);
                 
-                if (q.options && q.options !== 'NULL') {
-                    q.options.split('/').forEach(opt => {
+                if (q.options && q.options !== 'NULL' && q.options !== '') {
+                    const optionsArray = String(q.options).split('/');
+                    optionsArray.forEach(opt => {
                         const option = document.createElement('option');
                         option.value = opt.trim();
                         option.textContent = opt.trim();
@@ -448,8 +450,9 @@
                 input.name = q.id;
                 input.style.height = '100px';
                 
-                if (q.options && q.options !== 'NULL') {
-                    q.options.split('/').forEach(opt => {
+                if (q.options && q.options !== 'NULL' && q.options !== '') {
+                    const optionsArray = String(q.options).split('/');
+                    optionsArray.forEach(opt => {
                         const option = document.createElement('option');
                         option.value = opt.trim();
                         option.textContent = opt.trim();
@@ -557,5 +560,6 @@
             });
         });
     </script>
+    <script src="mobile-menu.js"></script>
 </body>
 </html>

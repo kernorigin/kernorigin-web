@@ -85,12 +85,13 @@
         </div>
     </main>
 
-    <footer>
+        <footer>
         <div class="container footer-wrapper">
             <div>
                 <div class="logo">KERNORIGIN</div>
-                <p style="margin-top: 15px; font-size: 0.9rem;">
-                    24 years finding root causes.<br>
+                <p style="margin-top: 15px; font-size: 0.9rem; color: var(--text-muted);">
+                    Since 2001 (formerly Value Drive Consulting)<br>
+                    25 years finding root causes globally.<br>
                     50+ transformations that stick.
                 </p>
             </div>
@@ -100,74 +101,11 @@
                 <a href="contact.html">Contact</a>
             </div>
         </div>
-        <div class="container" style="margin-top: 40px; font-size: 0.8rem; color: #999;">
+        <div class="container" style="padding-top: 20px; border-top: 1px solid var(--border-light); font-size: 0.8rem; color: #999;">
             &copy; 2026 Kernorigin. All rights reserved.
         </div>
     </footer>
-
-    <script src="config.js"></script>
-    <script>
-        // Get slug from URL parameters
-        function getSlugFromURL() {
-            const params = new URLSearchParams(window.location.search);
-            return params.get('slug');
-        }
-
-        async function loadPost() {
-            const slug = getSlugFromURL();
-            
-            if (!slug) {
-                showError();
-                return;
-            }
-
-            try {
-                // Check if config is set
-                if (!API_CONFIG || API_CONFIG.URL.includes("YOUR_SCRIPT_ID")) {
-                    throw new Error("API not configured");
-                }
-
-                const response = await fetch(`${API_CONFIG.URL}?action=post&slug=${slug}`);
-                const post = await response.json();
-                
-                if (post.error) {
-                    throw new Error(post.error);
-                }
-
-                // Populate post content
-                document.getElementById('postTitle').textContent = post.title;
-                document.getElementById('postSummary').textContent = post.summary;
-                document.getElementById('postBody').innerHTML = post.body_html;
-                document.getElementById('postAuthor').textContent = post.author || 'Kernorigin';
-                
-                // Format date
-                const date = new Date(post.publish_date);
-                document.getElementById('postDate').textContent = date.toLocaleDateString('en-US', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
-                });
-
-                // Set page title
-                document.getElementById('pageTitle').textContent = `${post.title} | Kernorigin`;
-
-                // Show content
-                document.getElementById('loadingIndicator').style.display = 'none';
-                document.getElementById('postContent').style.display = 'block';
-
-            } catch (error) {
-                console.error('Error loading post:', error);
-                showError();
-            }
-        }
-
-        function showError() {
-            document.getElementById('loadingIndicator').style.display = 'none';
-            document.getElementById('errorMessage').style.display = 'block';
-        }
-
-        // Load post on page load
-        window.onload = loadPost;
-    </script>
+    
+    <script src="mobile-menu.js"></script>
 </body>
 </html>
