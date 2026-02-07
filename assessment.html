@@ -4,23 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Free Business Assessment | Kernorigin</title>
-    <meta name="description" content="10-minute assessment reveals where your business is stuck. Get personalized recommendations based on 25 years of diagnostic experience.">
-    <link rel="stylesheet" href="style.css">
+    <meta name="description" content="10-minute AI-powered assessment reveals where your business is stuck. Get personalized recommendations based on 25 years of diagnostic experience.">
+    <link rel="stylesheet" href="../style.css">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZDL25WXPVP"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-ZDL25WXPVP');
+    </script>
 </head>
 <body>
     <header>
         <div class="container nav-wrapper">
-            <a href="index.html" class="logo">Kernorigin</a>
+            <a href="../index.html" class="logo">Kernorigin</a>
             <nav>
                 <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="how-we-think.html">How We Think</a></li>
-                    <li><a href="how-we-work.html">How We Work</a></li>
-                    <li><a href="services.html">Services</a></li>
-                    <li><a href="impact.html">Impact</a></li>
-                    <li><a href="team.html">Team</a></li>
-                    <li><a href="insights.html">Insights</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../how-we-think.html">How We Think</a></li>
+                    <li><a href="../how-we-work.html">How We Work</a></li>
+                    <li><a href="../services.html">Services</a></li>
+                    <li><a href="../impact.html">Impact</a></li>
+                    <li><a href="../team.html">Team</a></li>
+                    <li><a href="../insights.html">Insights</a></li>
+                    <li><a href="../contact.html">Contact</a></li>
                 </ul>
             </nav>
         </div>
@@ -31,18 +40,18 @@
             <div class="container">
                 <div class="readable-column">
                     <div class="text-center" style="margin-bottom: 50px;">
-                        <span class="eyebrow">Free Diagnostic Tool</span>
+                        <span class="eyebrow">AI-Powered Diagnostic Tool</span>
                         <h1>Where Is Your Business Stuck?</h1>
                         <p style="font-size: 1.1rem; max-width: 650px; margin: 20px auto 0 auto;">
-                            Answer 10 questions. Get instant insights based on our Seven Cylinders Framework™. Takes 5 minutes.
+                            Answer 10 questions. Get personalized AI analysis based on our Seven Cylinders Framework™. Takes 5 minutes.
                         </p>
                     </div>
 
                     <div id="assessment-container">
-                        <!-- Introduction -->
+                        <!-- Introduction Screen -->
                         <div id="intro-screen" class="card" style="background: white;">
-                            <h3 style="margin-top: 0;">How This Works</h3>
-                            <p>This assessment evaluates your organization across seven critical dimensions:</p>
+                            <h3 style="margin-top: 0;">How This AI Assessment Works</h3>
+                            <p>This assessment uses AI to evaluate your organization across seven critical dimensions:</p>
                             <div class="grid-2" style="gap: 15px; margin: 25px 0;">
                                 <div style="padding: 15px; background: var(--bg-offwhite); border-radius: 4px;">
                                     <p style="margin: 0; font-weight: 600;">1. Strategic Clarity</p>
@@ -68,25 +77,30 @@
                             </div>
                             
                             <div style="background: #fef9e7; border-left: 4px solid var(--accent-gold); padding: 20px; margin-bottom: 30px;">
-                                <p style="margin: 0;"><strong>Your results will show:</strong></p>
+                                <p style="margin: 0;"><strong>Your AI-powered analysis will reveal:</strong></p>
                                 <ul style="margin: 10px 0 0 0; padding-left: 20px;">
-                                    <li>Which cylinder is your primary bottleneck</li>
-                                    <li>What symptoms you're experiencing vs. root cause</li>
-                                    <li>Recommended next steps</li>
+                                    <li>Your primary bottleneck (what's actually stuck)</li>
+                                    <li>Root cause vs. symptoms (why fixes haven't worked)</li>
+                                    <li>Matched case studies (similar transformations)</li>
+                                    <li>Specific next steps (diagnostic, workshop, or strategy)</li>
                                 </ul>
                             </div>
 
-                            <button onclick="startAssessment()" class="btn" style="width: 100%; padding: 18px;">Begin Assessment →</button>
+                            <button onclick="startAssessment()" class="btn" style="width: 100%; padding: 18px;">Begin AI Assessment →</button>
+                            
+                            <p style="text-align: center; margin-top: 20px; font-size: 0.9rem; color: var(--text-muted);">
+                                No signup required. Results delivered instantly + via email.
+                            </p>
                         </div>
 
-                        <!-- Questions (will be shown one at a time) -->
+                        <!-- Questions Screen -->
                         <div id="question-screen" class="card" style="background: white; display: none;">
                             <div style="background: var(--bg-offwhite); padding: 15px; border-radius: 4px; margin-bottom: 30px;">
                                 <p style="margin: 0; font-size: 0.9rem; color: var(--text-muted);">
                                     Question <span id="current-q">1</span> of 10
                                 </p>
-                                <div style="background: var(--accent-gold); height: 6px; border-radius: 3px; margin-top: 10px;">
-                                    <div id="progress-bar" style="background: var(--accent-navy); height: 100%; width: 10%; transition: width 0.3s;"></div>
+                                <div style="background: #e5e7eb; height: 6px; border-radius: 3px; margin-top: 10px;">
+                                    <div id="progress-bar" style="background: var(--accent-navy); height: 100%; width: 10%; transition: width 0.3s; border-radius: 3px;"></div>
                                 </div>
                             </div>
 
@@ -100,28 +114,79 @@
                             </div>
                         </div>
 
-                        <!-- Results -->
+                        <!-- Email Capture Screen (NEW) -->
+                        <div id="email-capture-screen" class="card" style="background: white; display: none;">
+                            <h3 style="margin-top: 0;">Almost There! Get Your AI Analysis</h3>
+                            <p>Our AI is analyzing your responses against 25 years of case data. Enter your email to receive your personalized diagnostic report.</p>
+                            
+                            <form id="email-capture-form" onsubmit="submitForAnalysis(event)">
+                                <label>Your Name</label>
+                                <input type="text" id="user-name" required placeholder="Full Name">
+                                
+                                <label>Email Address</label>
+                                <input type="email" id="user-email" required placeholder="name@company.com">
+                                
+                                <label>Company/Organization (Optional)</label>
+                                <input type="text" id="user-company" placeholder="Your Company">
+                                
+                                <div style="background: #f0f9ff; padding: 15px; border-radius: 4px; margin-bottom: 20px;">
+                                    <p style="margin: 0; font-size: 0.9rem;"><strong>What you'll get:</strong></p>
+                                    <ul style="margin: 5px 0 0 0; padding-left: 20px; font-size: 0.9rem;">
+                                        <li>Personalized AI diagnostic report (PDF)</li>
+                                        <li>Primary bottleneck identified</li>
+                                        <li>Root cause analysis</li>
+                                        <li>Recommended next steps</li>
+                                        <li>Matched case studies</li>
+                                    </ul>
+                                </div>
+                                
+                                <button type="submit" class="btn" style="width: 100%;">Get My AI Analysis →</button>
+                            </form>
+                            
+                            <p style="text-align: center; margin-top: 15px; font-size: 0.85rem; color: var(--text-muted);">
+                                We respect your privacy. No spam. Unsubscribe anytime.
+                            </p>
+                        </div>
+
+                        <!-- Loading Screen (NEW) -->
+                        <div id="loading-screen" class="card" style="background: white; display: none; text-align: center; padding: 60px 30px;">
+                            <div style="margin-bottom: 30px;">
+                                <div style="width: 60px; height: 60px; border: 4px solid var(--bg-offwhite); border-top: 4px solid var(--accent-navy); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto;"></div>
+                            </div>
+                            <h3 style="margin: 0 0 15px 0;">AI Analysis in Progress...</h3>
+                            <p style="margin: 0; color: var(--text-muted);" id="loading-message">Analyzing your responses against 25 years of case patterns...</p>
+                        </div>
+
+                        <!-- Results Screen (Enhanced with AI) -->
                         <div id="results-screen" class="card" style="background: white; display: none;">
                             <div style="text-align: center; margin-bottom: 40px;">
-                                <h2 style="color: var(--accent-navy); margin-bottom: 15px;">Your Assessment Results</h2>
-                                <p style="font-size: 1.05rem; color: var(--text-muted);">Based on the Seven Cylinders Framework™</p>
+                                <h2 style="margin: 0 0 10px 0; color: var(--accent-navy);">Your Personalized Diagnostic Report</h2>
+                                <p style="margin: 0; color: var(--text-muted);">AI-powered analysis delivered to your inbox</p>
                             </div>
-
+                            
                             <div id="results-content"></div>
-
+                            
                             <div style="background: var(--accent-navy); color: white; padding: 30px; border-radius: 8px; margin-top: 40px; text-align: center;">
-                                <h3 style="color: white; margin-top: 0;">Want Detailed Analysis?</h3>
+                                <h3 style="color: white; margin-top: 0;">Ready to Fix What's Broken?</h3>
                                 <p style="color: rgba(255,255,255,0.9); margin-bottom: 25px;">
-                                    This was a quick snapshot. For comprehensive diagnosis with specific action steps, consider our paid diagnostics.
+                                    Book a 30-minute debrief call. We'll walk through your results and recommend the best path forward.
                                 </p>
-                                <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-                                    <a href="services.html#diagnostic" class="btn" style="background: white; color: var(--accent-navy);">See Diagnostic Services</a>
-                                    <a href="contact.html" class="btn-outline" style="border-color: white; color: white;">Book Discovery Call</a>
-                                </div>
+                                <a href="https://calendly.com/periafmalayappa" target="_blank" class="btn" style="background: var(--accent-gold); color: white;">Book Free Debrief Call →</a>
                             </div>
+                        </div>
 
-                            <div style="text-align: center; margin-top: 30px;">
-                                <button onclick="location.reload()" class="btn-outline">Take Assessment Again</button>
+                        <!-- Error Screen (NEW) -->
+                        <div id="error-screen" class="card" style="background: white; display: none;">
+                            <h3 style="margin-top: 0; color: #dc2626;">Oops! Something Went Wrong</h3>
+                            <p>We couldn't process your assessment right now. Don't worry—your answers are saved.</p>
+                            <p><strong>What you can do:</strong></p>
+                            <ul>
+                                <li>Try again in a few minutes</li>
+                                <li>Or book a call directly and we'll review your assessment together</li>
+                            </ul>
+                            <div style="display: flex; gap: 15px; margin-top: 30px;">
+                                <button onclick="retryAnalysis()" class="btn-outline" style="flex: 1;">Try Again</button>
+                                <a href="https://calendly.com/periafmalayappa" target="_blank" class="btn" style="flex: 1; text-align: center;">Book Call Instead →</a>
                             </div>
                         </div>
                     </div>
@@ -141,61 +206,51 @@
                 </p>
             </div>
             <div class="footer-links">
-                <a href="index.html">Home</a>
-                <a href="services.html">Services</a>
-                <a href="insights.html">Insights</a>
-                <a href="contact.html">Contact</a>
+                <a href="../index.html">Home</a>
+                <a href="../services.html">Services</a>
+                <a href="../insights.html">Insights</a>
+                <a href="../contact.html">Contact</a>
             </div>
         </div>
         <div class="container" style="padding-top: 20px; border-top: 1px solid var(--border-light); font-size: 0.8rem; color: #999;">
-            &copy; 2026 Kernorigin. All rights reserved.
+            © 2026 Kernorigin. All rights reserved.
         </div>
     </footer>
 
+    <style>
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+
+    <script src="../config.js"></script>
     <script>
+        // ASSESSMENT ENGINE - AI-POWERED VERSION
+        
         const questions = [
             {
-                text: "How clear is your organization's strategic direction?",
+                text: "How clear is your strategic direction?",
                 cylinder: "strategy",
                 options: [
-                    { text: "Crystal clear - everyone knows where we're going", score: 4 },
-                    { text: "Mostly clear - some alignment issues", score: 3 },
-                    { text: "Somewhat unclear - different interpretations exist", score: 2 },
-                    { text: "Very unclear - we're reactive, not strategic", score: 1 }
+                    { text: "Crystal clear - everyone aligned on goals", score: 4 },
+                    { text: "Mostly clear - some confusion on priorities", score: 3 },
+                    { text: "Unclear - different people, different visions", score: 2 },
+                    { text: "No clarity - just reacting to problems", score: 1 }
                 ]
             },
             {
-                text: "How would you describe your operational efficiency?",
+                text: "How effective are your core operations?",
                 cylinder: "operations",
                 options: [
-                    { text: "Smooth - processes work well, minimal friction", score: 4 },
-                    { text: "Adequate - some bottlenecks but manageable", score: 3 },
-                    { text: "Struggling - constant firefighting", score: 2 },
-                    { text: "Chaotic - processes break regularly", score: 1 }
+                    { text: "Smooth - repeatable processes, consistent quality", score: 4 },
+                    { text: "Functional - works but needs improvement", score: 3 },
+                    { text: "Chaotic - lots of firefighting", score: 2 },
+                    { text: "Broken - constant crises and failures", score: 1 }
                 ]
             },
             {
-                text: "What's your revenue growth trajectory?",
-                cylinder: "market",
-                options: [
-                    { text: "Growing consistently (15%+ year-over-year)", score: 4 },
-                    { text: "Growing slowly (5-15% year-over-year)", score: 3 },
-                    { text: "Flat (0-5% for 2+ years)", score: 2 },
-                    { text: "Declining", score: 1 }
-                ]
-            },
-            {
-                text: "How capable is your leadership team?",
-                cylinder: "leadership",
-                options: [
-                    { text: "Highly capable - can handle 2-3X scale", score: 4 },
-                    { text: "Adequate - handling current scale well", score: 3 },
-                    { text: "Stretched - struggling with current demands", score: 2 },
-                    { text: "Overwhelmed - founder doing everything", score: 1 }
-                ]
-            },
-            {
-                text: "How effective are your systems and technology?",
+                text: "How would you describe your technology systems?",
                 cylinder: "systems",
                 options: [
                     { text: "Modern, integrated, scalable", score: 4 },
@@ -245,6 +300,26 @@
                 ]
             },
             {
+                text: "What's your revenue growth pattern over the last 2 years?",
+                cylinder: "financial",
+                options: [
+                    { text: "Strong growth - 20%+ annually", score: 4 },
+                    { text: "Steady growth - 10-20% annually", score: 3 },
+                    { text: "Flat or slow - under 10%", score: 2 },
+                    { text: "Declining - losing revenue", score: 1 }
+                ]
+            },
+            {
+                text: "How do you handle customer feedback and complaints?",
+                cylinder: "operations",
+                options: [
+                    { text: "Systematic - tracked, analyzed, acted upon", score: 4 },
+                    { text: "Reactive - we respond but don't track patterns", score: 3 },
+                    { text: "Inconsistent - depends who handles it", score: 2 },
+                    { text: "Broken - complaints fall through cracks", score: 1 }
+                ]
+            },
+            {
                 text: "What's your biggest challenge right now?",
                 cylinder: "general",
                 options: [
@@ -258,11 +333,20 @@
 
         let currentQuestion = 0;
         let answers = [];
+        let userProfile = {};
+
+        // FIXED: Scroll to top on page load and assessment start
+        window.addEventListener('load', () => {
+            window.scrollTo(0, 0);
+            gtag('event', 'page_view', { 'page_title': 'Assessment' });
+        });
 
         function startAssessment() {
+            window.scrollTo({top: 0, behavior: 'instant'}); // CRITICAL FIX
             document.getElementById('intro-screen').style.display = 'none';
             document.getElementById('question-screen').style.display = 'block';
             showQuestion(0);
+            gtag('event', 'assessment_start', { 'event_category': 'engagement' });
         }
 
         function showQuestion(index) {
@@ -295,7 +379,7 @@
             
             document.getElementById('prev-btn').style.display = index > 0 ? 'block' : 'none';
             document.getElementById('next-btn').disabled = answers[index] === undefined;
-            document.getElementById('next-btn').textContent = index === questions.length - 1 ? 'See Results →' : 'Next Question →';
+            document.getElementById('next-btn').textContent = index === questions.length - 1 ? 'Continue to Results →' : 'Next Question →';
         }
 
         function selectAnswer(optionIndex) {
@@ -313,78 +397,190 @@
             if (currentQuestion < questions.length - 1) {
                 showQuestion(currentQuestion + 1);
             } else {
-                showResults();
+                showEmailCapture();
             }
         }
 
-        function showResults() {
+        function showEmailCapture() {
             document.getElementById('question-screen').style.display = 'none';
-            document.getElementById('results-screen').style.display = 'block';
+            document.getElementById('email-capture-screen').style.display = 'block';
+            window.scrollTo({top: 0, behavior: 'smooth'});
+            gtag('event', 'assessment_complete', { 'event_category': 'engagement' });
+        }
+
+        async function submitForAnalysis(event) {
+            event.preventDefault();
             
+            userProfile = {
+                name: document.getElementById('user-name').value,
+                email: document.getElementById('user-email').value,
+                company: document.getElementById('user-company').value || 'Not specified'
+            };
+            
+            // Show loading
+            document.getElementById('email-capture-screen').style.display = 'none';
+            document.getElementById('loading-screen').style.display = 'block';
+            window.scrollTo({top: 0, behavior: 'smooth'});
+            
+            // Animate loading messages
+            const messages = [
+                "Analyzing your responses...",
+                "Matching against case patterns...",
+                "Identifying bottlenecks...",
+                "Generating personalized report...",
+                "Almost ready..."
+            ];
+            
+            let msgIndex = 0;
+            const msgInterval = setInterval(() => {
+                if (msgIndex < messages.length) {
+                    document.getElementById('loading-message').textContent = messages[msgIndex];
+                    msgIndex++;
+                }
+            }, 2000);
+            
+            try {
+                // Prepare assessment data
+                const assessmentData = prepareAssessmentData();
+                
+                // Call backend AI analysis
+                const response = await fetch(API_CONFIG.URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        action: 'analyze_assessment',
+                        apiKey: API_CONFIG.PUBLIC_KEY,
+                        payload: assessmentData
+                    })
+                });
+                
+                clearInterval(msgInterval);
+                
+                if (!response.ok) {
+                    throw new Error('Analysis request failed');
+                }
+                
+                const result = await response.json();
+                
+                if (result.status === 'error') {
+                    throw new Error(result.error || 'Analysis failed');
+                }
+                
+                // Display results
+                displayResults(result);
+                
+                gtag('event', 'assessment_submitted', { 
+                    'event_category': 'conversion',
+                    'event_label': userProfile.email
+                });
+                
+            } catch (error) {
+                clearInterval(msgInterval);
+                console.error('Assessment error:', error);
+                showError();
+                
+                gtag('event', 'assessment_error', { 
+                    'event_category': 'error',
+                    'event_label': error.toString()
+                });
+            }
+        }
+
+        function prepareAssessmentData() {
+            const formattedAnswers = {};
             const scores = {
-                strategy: 0,
-                operations: 0,
-                market: 0,
-                leadership: 0,
-                systems: 0,
-                people: 0,
-                financial: 0
+                strategy: 0, operations: 0, systems: 0, people: 0,
+                financial: 0, market: 0, leadership: 0
             };
             
             answers.forEach((answerIndex, questionIndex) => {
                 const q = questions[questionIndex];
                 const option = q.options[answerIndex];
+                
+                if (!formattedAnswers[q.cylinder]) {
+                    formattedAnswers[q.cylinder] = [];
+                }
+                
+                formattedAnswers[q.cylinder].push({
+                    question: q.text,
+                    answer: option.text,
+                    score: option.score || 0,
+                    tag: option.tag || null
+                });
+                
                 if (q.cylinder !== 'general' && option.score) {
                     scores[q.cylinder] += option.score;
                 }
             });
             
-            // Find weakest cylinder
-            let weakest = { name: '', score: 10 };
-            for (let cyl in scores) {
-                if (scores[cyl] < weakest.score) {
-                    weakest = { name: cyl, score: scores[cyl] };
-                }
-            }
+            return {
+                name: userProfile.name,
+                email: userProfile.email,
+                company: userProfile.company,
+                answers: formattedAnswers,
+                scores: scores,
+                timestamp: new Date().toISOString()
+            };
+        }
+
+        function displayResults(result) {
+            document.getElementById('loading-screen').style.display = 'none';
+            document.getElementById('results-screen').style.display = 'block';
+            window.scrollTo({top: 0, behavior: 'smooth'});
             
-            const avgScore = Object.values(scores).reduce((a, b) => a + b, 0) / 7;
+            const resultsDiv = document.getElementById('results-content');
             
-            let resultsHTML = `
-                <div style="background: var(--bg-offwhite); padding: 30px; border-radius: 8px; margin-bottom: 30px; text-align: center;">
-                    <h3 style="margin-top: 0; color: var(--accent-navy);">Overall Health Score</h3>
-                    <div style="font-size: 3rem; font-weight: 700; color: var(--accent-gold);">${Math.round((avgScore / 4) * 100)}%</div>
-                    <p style="margin: 10px 0 0 0; color: var(--text-muted);">${avgScore >= 3 ? 'Healthy' : avgScore >= 2 ? 'Moderate Concerns' : 'Significant Issues'}</p>
-                </div>
-                
-                <h4>Primary Bottleneck: ${weakest.name.charAt(0).toUpperCase() + weakest.name.slice(1)}</h4>
-                <p>This appears to be your weakest cylinder. Fixing this could unlock improvement across other areas.</p>
-                
-                <div style="background: white; border-left: 4px solid var(--accent-gold); padding: 25px; margin: 30px 0;">
-                    <h4 style="margin-top: 0;">Recommended Next Step:</h4>
-            `;
-            
-            if (avgScore < 2) {
-                resultsHTML += `
-                    <p><strong>Full Institutional Diagnostic</strong> - You have multiple systemic issues. A comprehensive diagnostic will help prioritize what to fix first.</p>
-                    <a href="services.html#diagnostic" class="btn-outline" style="margin-top: 15px; display: inline-block;">Learn About Diagnostics →</a>
-                `;
-            } else if (avgScore < 3) {
-                resultsHTML += `
-                    <p><strong>Focused Workshop or Diagnostic</strong> - Address your primary bottleneck with targeted intervention.</p>
-                    <a href="services.html#immediate" class="btn-outline" style="margin-top: 15px; display: inline-block;">Explore Workshops →</a>
+            // If AI analysis is available, use it
+            if (result.analysis) {
+                resultsDiv.innerHTML = `
+                    <div style="background: #f0f9ff; padding: 25px; border-left: 4px solid var(--accent-navy); margin-bottom: 30px;">
+                        <p style="margin: 0; font-size: 0.9rem; font-weight: 600; color: var(--accent-navy);">
+                            ✓ Analysis complete! Full report emailed to ${userProfile.email}
+                        </p>
+                    </div>
+                    
+                    ${result.analysis}
+                    
+                    <div style="background: #fef9e7; border-left: 4px solid var(--accent-gold); padding: 25px; margin-top: 40px;">
+                        <h4 style="margin-top: 0;">Want Deeper Analysis?</h4>
+                        <p style="margin-bottom: 20px;">This free assessment gives directional insights. For root cause diagnosis with specific action plans:</p>
+                        <div style="display: grid; gap: 15px;">
+                            <a href="../services.html#diagnostic" class="btn-outline">Institutional Diagnostic (₹25K) - Full 7-Cylinder Analysis →</a>
+                            <a href="../systems-diagnostic.html" class="btn-outline">Systems Diagnostic (₹35K) - Ops & Process Deep Dive →</a>
+                        </div>
+                    </div>
                 `;
             } else {
-                resultsHTML += `
-                    <p><strong>Strategic Advisory</strong> - You're doing well. Consider ongoing strategic partnership to maintain momentum.</p>
-                    <a href="services.html#transformation" class="btn-outline" style="margin-top: 15px; display: inline-block;">See Advisory Services →</a>
+                // Fallback if AI analysis isn't available yet
+                resultsDiv.innerHTML = `
+                    <div style="background: var(--accent-gold); color: white; padding: 25px; border-radius: 8px; margin-bottom: 30px; text-align: center;">
+                        <h3 style="color: white; margin: 0;">Report Sent!</h3>
+                        <p style="margin: 10px 0 0 0; color: rgba(255,255,255,0.9);">
+                            Check your email: <strong>${userProfile.email}</strong>
+                        </p>
+                    </div>
+                    <p>Your detailed analysis is on its way. If you don't see it within 5 minutes, check your spam folder.</p>
+                    <p><strong>In the meantime:</strong></p>
+                    <ul>
+                        <li>Book a free 30-min debrief call to discuss your results</li>
+                        <li>Explore our services for deeper diagnostic support</li>
+                        <li>Read case studies of similar transformations</li>
+                    </ul>
                 `;
             }
-            
-            resultsHTML += '</div>';
-            
-            document.getElementById('results-content').innerHTML = resultsHTML;
+        }
+
+        function showError() {
+            document.getElementById('loading-screen').style.display = 'none';
+            document.getElementById('error-screen').style.display = 'block';
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        function retryAnalysis() {
+            document.getElementById('error-screen').style.display = 'none';
+            document.getElementById('email-capture-screen').style.display = 'block';
         }
     </script>
-    <script src="mobile-menu.js"></script>
+    <script src="../mobile-menu.js"></script>
 </body>
 </html>
