@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insights | Kernorigin</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container nav-wrapper">
+            <a href="index.html" class="logo">Kernorigin</a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="how-we-think.html">How We Think</a></li>
+                    <li><a href="how-we-work.html">How We Work</a></li>
+                    <li><a href="impact.html">Impact</a></li>
+                    <li><a href="team.html">Team</a></li>
+                    <li><a href="insights.html" class="active">Insights</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main class="container section-padding">
+        <div class="readable-column text-center">
+            <span class="eyebrow">Intelligence</span>
+            <h1>Root Cause Thinking in Practice</h1>
+            <p>Why symptoms lie and how to find what's actually broken.</p>
+        </div>
+        <div class="readable-column" style="margin-top: 40px;">
+            <div id="loading" style="text-align: center; color: #999;">Accessing Intelligence Database...</div>
+            <div id="blog-grid"></div>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container footer-wrapper">
+            <div>
+                <div class="logo">KERNORIGIN</div>
+                <p style="margin-top: 15px; font-size: 0.9rem; color: var(--text-muted);">
+                    Since 2001 (formerly Value Drive Consulting)<br>
+                    25 years finding root causes globally.<br>
+                    50+ transformations that stick.
+                </p>
+            </div>
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="insights.html">Insights</a>
+                <a href="contact.html">Contact</a>
+            </div>
+        </div>
+        <div class="container" style="padding-top: 20px; border-top: 1px solid var(--border-light); font-size: 0.8rem; color: #999;">
+            &copy; 2026 Kernorigin. All rights reserved.
+        </div>
+    </footer>
+    
+    <script src="config.js"></script>
+    <script>
+        // Load and display blog posts from API
+        window.onload = async function() {
+            try {
+                if (!API_CONFIG || API_CONFIG.URL.includes("YOUR_SCRIPT_ID")) {
+                    throw new Error("Config not set");
+                }
+                
+                const res = await fetch(`${API_CONFIG.URL}?action=recent&limit=10`);
+                const posts = await res.json();
+                
+                document.getElementById('loading').style.display = 'none';
+                const container = document.getElementById('blog-grid');
+                
+                if (posts.error) {
+                    container.innerHTML = `<p style="color: #999; text-align: center;">Unable to load posts. Error: ${posts.error}</p>`;
+                    return;
+                }
+                
+                if (!Array.isArray(posts) || posts.length === 0) {
+                    container.innerHTML = `<p style="color: #999; text-align: center;">No published insights yet. Check back soon.</p>`;
+                    return;
+                }
+                
+                posts.forEach(post => {
+                    const date = new Date(post.publish_date).toLocaleDateString('en-US', {
+                        month: 'long',
+                        day: 'numeric', 
+                        year: 'numeric'
+                    });
+                    
+                    container.innerHTML += `
+                        <div style="border-top: 1px solid #eee; padding: 40px 0;">
+                            <h3>${post.title}</h3>
+                            <span class="eyebrow" style="color:#777; margin-bottom: 10px;">${date}</span>
+                            <p>${post.summary}</p>
+                            <a href="post.html?slug=${post.slug}" class="btn-outline" style="margin-top: 10px; display: inline-block;">Read Analysis</a>
+                        </div>
+                    `;
+                });
+            } catch(e) {
+                console.error('Insights page error:', e);
+                document.getElementById('loading').innerText = "System Offline. Verify config.js is configured with your Google Apps Script URL.";
+            }
+        };
+    </script>
+    <script src="mobile-menu.js"></script>
+</body>
+</html>

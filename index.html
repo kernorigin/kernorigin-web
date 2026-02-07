@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kernorigin | Strategy & Innovation</title>
+    <title>Kernorigin | Finding What's Actually Broken Since 2001</title>
+    <meta name="description" content="Root cause diagnostics for companies stuck at growth plateaus. From ₹5 Crore to ₹500 Crore. Workshops, diagnostics, strategic partnerships. 25 years of experience.">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
     <header>
         <div class="container nav-wrapper">
             <a href="index.html" class="logo">Kernorigin</a>
@@ -16,6 +16,7 @@
                     <li><a href="index.html" class="active">Home</a></li>
                     <li><a href="how-we-think.html">How We Think</a></li>
                     <li><a href="how-we-work.html">How We Work</a></li>
+                    <li><a href="services.html">Services</a></li>
                     <li><a href="impact.html">Impact</a></li>
                     <li><a href="team.html">Team</a></li>
                     <li><a href="insights.html">Insights</a></li>
@@ -26,232 +27,287 @@
     </header>
 
     <main>
-        <!-- HERO SECTION WITH INSTITUTIONAL DIAGNOSTIC -->
-        <section class="section-padding">
-            <div class="container grid-2" style="align-items: center;">
-                
-                <div>
-                    <span class="eyebrow">24 Years | 50+ Transformations | IIM Bangalore</span>
-                    <h1>Most fix symptoms.<br>We fix root causes.</h1>
-                    <p>Your revenue is stuck. Your team is struggling. You've tried consultants. Nothing sticks.</p>
-                    <p><strong>Because everyone's fixing the symptom. No one's finding the root cause.</strong></p>
-                    <a href="impact.html" class="btn btn-outline" style="margin-top: 20px;">See The Impact</a>
-                </div>
-
-                <div class="engine-card">
-                    <h3 style="margin-bottom: 10px;">Institutional Diagnostic</h3>
-                    <p style="font-size: 0.9rem; margin-bottom: 20px;">Identify cash leakage and benchmark against 24 years of data.</p>
-                    
-                    <form id="initForm" onsubmit="openInstitutionalDiagnostic(event)">
-                        <label>Industry Vertical</label>
-                        <select id="industrySelect" required>
-                            <option>Loading...</option>
-                        </select>
-                        
-                        <div class="grid-2" style="gap: 15px; margin-bottom: 0;">
-                            <div>
-                                <label>Jurisdiction</label>
-                                <select id="locationSelect" onchange="updatePrice()">
-                                    <option value="Bangalore">Bangalore</option>
-                                    <option value="Mumbai">Mumbai</option>
-                                    <option value="Delhi">Delhi</option>
-                                    <option value="Chennai">Chennai</option>
-                                    <option value="Hyderabad">Hyderabad</option>
-                                    <option value="Pune">Pune</option>
-                                    <option value="DEFAULT">Other</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label>Partner Code</label>
-                                <input type="text" id="partnerCode" placeholder="VIP Code" oninput="checkCoupon()">
-                            </div>
-                        </div>
-                        <small id="codeStatus" style="display:block; height: 20px; margin-top: -10px; margin-bottom: 15px; color: green; font-weight: 600; font-size: 0.8rem;"></small>
-
-                        <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #eee; padding-top: 20px;">
-                            <span id="priceTag" style="font-family: var(--font-serif); font-size: 1.4rem; font-weight: 700; color: var(--accent-navy);">₹2,997</span>
-                            <button type="submit" id="initBtn" class="btn" disabled>System Offline</button>
-                        </div>
-                    </form>
+        <!-- HERO SECTION - Universal Problem Statement -->
+        <section class="section-padding" style="background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);">
+            <div class="container text-center">
+                <span class="eyebrow">Root Cause Diagnostics Since 2001</span>
+                <h1 style="max-width: 900px; margin: 0 auto 30px auto;">Your Business Is Stuck.<br>We Find What's Actually Broken.</h1>
+                <p style="font-size: 1.2rem; max-width: 750px; margin: 0 auto 40px auto; line-height: 1.8;">
+                    You're working harder. Revenue isn't growing. You've tried fixes—they didn't stick. You know something's broken. You don't know what.
+                </p>
+                <p style="font-size: 1.3rem; font-weight: 600; color: var(--accent-navy); margin-bottom: 40px;">
+                    We find the root cause. You move forward.
+                </p>
+                <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+                    <a href="assessment.html" class="btn">Take Free Assessment</a>
+                    <a href="contact.html" class="btn-outline">Book Discovery Call</a>
                 </div>
             </div>
         </section>
 
-        <!-- NEW: SYSTEMS DIAGNOSTIC SECTION -->
-        <section class="section-padding" style="background: var(--bg-offwhite);">
-            <div class="container">
-                <div style="text-align: center; max-width: 800px; margin: 0 auto 50px;">
-                    <span class="eyebrow">Strategic Systems Development</span>
-                    <h2>Need technology? We make sure it solves the right problem.</h2>
-                    <p>Most businesses automate broken processes. We diagnose the root cause first, then build solutions that actually work.</p>
-                </div>
-
-                <div class="grid-2">
-                    <!-- CARD 1: Systems Diagnostic -->
-                    <div class="card" style="cursor: pointer; transition: all 0.3s;" onclick="location.href='systems-diagnostic.html'">
-                        <span class="eyebrow" style="background: var(--accent-gold); color: white; padding: 4px 12px; border-radius: 3px; display: inline-block; margin-bottom: 15px;">For Technology Needs</span>
-                        <h3>Systems Diagnostic</h3>
-                        <p style="margin-bottom: 20px;">Before we build anything, we diagnose what's actually broken.</p>
-                        <ul style="list-style: none; padding: 0; margin: 20px 0; font-size: 0.95rem;">
-                            <li style="margin-bottom: 12px; padding-left: 20px; position: relative;">
-                                <span style="position: absolute; left: 0; color: var(--accent-gold); font-weight: bold;">→</span>
-                                Process & technology assessment
-                            </li>
-                            <li style="margin-bottom: 12px; padding-left: 20px; position: relative;">
-                                <span style="position: absolute; left: 0; color: var(--accent-gold); font-weight: bold;">→</span>
-                                Root cause bottleneck analysis
-                            </li>
-                            <li style="margin-bottom: 12px; padding-left: 20px; position: relative;">
-                                <span style="position: absolute; left: 0; color: var(--accent-gold); font-weight: bold;">→</span>
-                                Strategic recommendation: Build, Consult, or Hybrid
-                            </li>
-                            <li style="margin-bottom: 12px; padding-left: 20px; position: relative;">
-                                <span style="position: absolute; left: 0; color: var(--accent-gold); font-weight: bold;">→</span>
-                                Investment: $3-5K diagnostic + implementation
-                            </li>
-                        </ul>
-                        <a href="systems-diagnostic.html" class="btn" style="width: 100%; text-align: center; margin-top: 20px;">Start Systems Assessment →</a>
+        <!-- PROBLEM SECTION - Why Most Fixes Fail -->
+        <section class="section-padding" style="background: white;">
+            <div class="container readable-column">
+                <h2 style="text-align: center; margin-bottom: 50px;">Most Companies Fix Symptoms, Not Causes</h2>
+                
+                <div style="display: grid; gap: 30px; margin-bottom: 50px;">
+                    <div style="padding: 25px; background: #fef2f2; border-left: 4px solid #dc2626; border-radius: 4px;">
+                        <p style="margin: 0; font-size: 1.05rem;">
+                            <strong>"We need more leads"</strong> → Bought CRM, leads still convert poorly
+                        </p>
                     </div>
-
-                    <!-- CARD 2: What We Build -->
-                    <div class="card">
-                        <span class="eyebrow" style="background: #4a90e2; color: white; padding: 4px 12px; border-radius: 3px; display: inline-block; margin-bottom: 15px;">Solutions We Build</span>
-                        <h3>Custom Technology</h3>
-                        <p style="margin-bottom: 20px;">Built on proven stack. Focused on root causes, not features.</p>
-                        <ul style="list-style: none; padding: 0; margin: 20px 0; font-size: 0.95rem;">
-                            <li style="margin-bottom: 12px; padding-left: 20px; position: relative;">
-                                <span style="position: absolute; left: 0; color: var(--accent-gold); font-weight: bold;">→</span>
-                                Lead Management & CRM systems
-                            </li>
-                            <li style="margin-bottom: 12px; padding-left: 20px; position: relative;">
-                                <span style="position: absolute; left: 0; color: var(--accent-gold); font-weight: bold;">→</span>
-                                Client onboarding automation
-                            </li>
-                            <li style="margin-bottom: 12px; padding-left: 20px; position: relative;">
-                                <span style="position: absolute; left: 0; color: var(--accent-gold); font-weight: bold;">→</span>
-                                Workflow & approval systems
-                            </li>
-                            <li style="margin-bottom: 12px; padding-left: 20px; position: relative;">
-                                <span style="position: absolute; left: 0; color: var(--accent-gold); font-weight: bold;">→</span>
-                                Custom analytics dashboards
-                            </li>
-                        </ul>
-                        <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border-light); margin-bottom: 0;">
-                            <strong>Tech Stack:</strong> PWA • Google AppScript • React • Sheets Backend • Cloudflare Pages
+                    <div style="padding: 25px; background: #fef2f2; border-left: 4px solid #dc2626; border-radius: 4px;">
+                        <p style="margin: 0; font-size: 1.05rem;">
+                            <strong>"Sales team is weak"</strong> → Hired new reps, conversions still low
+                        </p>
+                    </div>
+                    <div style="padding: 25px; background: #fef2f2; border-left: 4px solid #dc2626; border-radius: 4px;">
+                        <p style="margin: 0; font-size: 1.05rem;">
+                            <strong>"We need better systems"</strong> → Bought software, chaos continued
                         </p>
                     </div>
                 </div>
 
-                <div style="text-align: center; margin-top: 40px; padding: 30px; background: white; border-radius: 4px; border-left: 4px solid var(--accent-navy);">
-                    <p style="font-size: 1.1rem; margin: 0;">
-                        <strong>We say no more than yes.</strong> We only build solutions that solve root problems.
+                <div style="text-align: center; padding: 40px; background: var(--accent-navy); color: white; border-radius: 8px;">
+                    <h3 style="color: white; margin-top: 0;">Why? Because they never diagnosed the REAL problem.</h3>
+                    <p style="color: rgba(255,255,255,0.9); font-size: 1.2rem; margin-bottom: 0;">
+                        We don't guess. We diagnose.
                     </p>
                 </div>
             </div>
         </section>
 
-        <!-- SYMPTOM VS ROOT CAUSE -->
-        <section class="section-padding">
-            <div class="container grid-2">
-                <div>
-                    <span class="eyebrow" style="color: #666;">The Symptom</span>
-                    <h2>Visible. Urgent. Painful.</h2>
-                    <ul style="list-style: none; padding: 0;">
-                        <li style="margin-bottom: 15px;">• Your revenue is stuck.</li>
-                        <li style="margin-bottom: 15px;">• Your team is struggling.</li>
-                        <li style="margin-bottom: 15px;">• Your growth has stalled.</li>
-                    </ul>
-                    <p style="margin-top: 30px;"><em>"Everyone sees what's broken."</em></p>
-                </div>
-                <div>
-                    <span class="eyebrow" style="color: var(--accent-gold);">The Root Cause</span>
-                    <h2>The problem isn't where you're looking.</h2>
-                    <ul style="list-style: none; padding: 0;">
-                        <li style="margin-bottom: 15px;">• Marketing problems are usually <strong>Operations</strong> problems.</li>
-                        <li style="margin-bottom: 15px;">• Turnover is usually <strong>Leadership</strong> problems.</li>
-                        <li style="margin-bottom: 15px;">• Poor placements are usually <strong>Student Readiness</strong>.</li>
-                        <li style="margin-bottom: 15px;">• Stalled revenue is usually <strong>Strategy + Systems</strong>.</li>
-                    </ul>
-                    <p style="margin-top: 30px; font-weight: 600;"><em>"No one sees why it broke. That's the difference."</em></p>
-                </div>
-            </div>
-        </section>
-
-        <!-- BLOCKQUOTE -->
+        <!-- SELF-SEGMENTATION - Three Paths -->
         <section class="section-padding" style="background: var(--bg-offwhite);">
             <div class="container">
-                <blockquote class="blockquote-lg">
-                    "Most consultants tell you what to do. Kernorigin shows you why you're stuck. Once you understand the root cause, everything changes."
-                </blockquote>
+                <div class="text-center" style="margin-bottom: 60px;">
+                    <h2>How Can We Help You?</h2>
+                    <p style="font-size: 1.1rem; max-width: 700px; margin: 15px auto 0 auto;">
+                        Choose the support level that matches where you are right now.
+                    </p>
+                </div>
+
+                <div class="grid-3">
+                    <!-- PATH 1: Immediate Support -->
+                    <div class="card" style="border-top: 4px solid var(--accent-gold);">
+                        <h3 style="margin-top: 0;">Need Help Now</h3>
+                        <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 25px;">
+                            Team stuck on a problem • Process breaking down • Need expert support quickly
+                        </p>
+                        
+                        <div style="margin-bottom: 25px;">
+                            <p style="font-weight: 600; margin-bottom: 10px;">Solutions:</p>
+                            <ul style="list-style: none; padding: 0; margin: 0;">
+                                <li style="padding: 8px 0; border-bottom: 1px solid #eee;">→ Workshops (1-2 days)</li>
+                                <li style="padding: 8px 0; border-bottom: 1px solid #eee;">→ Fractional Executive</li>
+                                <li style="padding: 8px 0;">→ Rapid Problem-Solving</li>
+                            </ul>
+                        </div>
+
+                        <div style="background: #f8f9fa; padding: 15px; border-radius: 4px; margin-bottom: 25px;">
+                            <p style="margin: 0; font-size: 0.9rem;"><strong>Timeline:</strong> 15-45 days</p>
+                            <p style="margin: 8px 0 0 0; font-size: 0.9rem;"><strong>Investment:</strong> ₹1.5-5 Lakhs</p>
+                        </div>
+
+                        <a href="services.html#immediate" class="btn-outline" style="width: 100%; text-align: center;">Explore Immediate Support →</a>
+                    </div>
+
+                    <!-- PATH 2: Diagnostic -->
+                    <div class="card" style="border-top: 4px solid var(--accent-navy); box-shadow: 0 8px 24px rgba(0,0,0,0.12);">
+                        <div style="background: var(--accent-navy); color: white; margin: -30px -30px 20px -30px; padding: 15px 30px; border-radius: 4px 4px 0 0;">
+                            <p style="margin: 0; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;">Most Popular</p>
+                        </div>
+                        <h3 style="margin-top: 0;">Something's Broken</h3>
+                        <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 25px;">
+                            Growth plateau'd • Not sure what the real issue is • Need clarity before investing
+                        </p>
+                        
+                        <div style="margin-bottom: 25px;">
+                            <p style="font-weight: 600; margin-bottom: 10px;">Solutions:</p>
+                            <ul style="list-style: none; padding: 0; margin: 0;">
+                                <li style="padding: 8px 0; border-bottom: 1px solid #eee;">→ Institutional Diagnostic</li>
+                                <li style="padding: 8px 0; border-bottom: 1px solid #eee;">→ Systems Diagnostic</li>
+                                <li style="padding: 8px 0;">→ Revenue Unstuck Assessment</li>
+                            </ul>
+                        </div>
+
+                        <div style="background: #f8f9fa; padding: 15px; border-radius: 4px; margin-bottom: 25px;">
+                            <p style="margin: 0; font-size: 0.9rem;"><strong>Timeline:</strong> 2-4 weeks</p>
+                            <p style="margin: 8px 0 0 0; font-size: 0.9rem;"><strong>Investment:</strong> ₹25K-75K</p>
+                        </div>
+
+                        <a href="services.html#diagnostic" class="btn" style="width: 100%; text-align: center;">Learn About Diagnostics →</a>
+                    </div>
+
+                    <!-- PATH 3: Transformation -->
+                    <div class="card" style="border-top: 4px solid var(--accent-gold);">
+                        <h3 style="margin-top: 0;">Ready for Transformation</h3>
+                        <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 25px;">
+                            Tried fixes, they didn't stick • Need comprehensive overhaul • Big decision requires proof
+                        </p>
+                        
+                        <div style="margin-bottom: 25px;">
+                            <p style="font-weight: 600; margin-bottom: 10px;">Solutions:</p>
+                            <ul style="list-style: none; padding: 0; margin: 0;">
+                                <li style="padding: 8px 0; border-bottom: 1px solid #eee;">→ Strategic Partnerships</li>
+                                <li style="padding: 8px 0; border-bottom: 1px solid #eee;">→ Full Transformation</li>
+                                <li style="padding: 8px 0;">→ Retained Advisory</li>
+                            </ul>
+                        </div>
+
+                        <div style="background: #f8f9fa; padding: 15px; border-radius: 4px; margin-bottom: 25px;">
+                            <p style="margin: 0; font-size: 0.9rem;"><strong>Timeline:</strong> Custom</p>
+                            <p style="margin: 8px 0 0 0; font-size: 0.9rem;"><strong>Investment:</strong> ₹15L-2Cr</p>
+                        </div>
+
+                        <a href="services.html#transformation" class="btn-outline" style="width: 100%; text-align: center;">See Our Approach →</a>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <!-- FINAL CTA -->
-        <section class="section-padding" style="text-align: center; border-top: 1px solid var(--border-light);">
-            <div class="container">
-                <h2>Ready to get unstuck?</h2>
-                <p style="margin: 0 auto 30px auto; max-width: 600px;">If you're tired of band-aid solutions, let's talk.<br>Every conversation starts with one question: What's stuck?</p>
-                <a href="contact.html" class="btn">Start a Conversation</a>
+        <!-- CREDIBILITY SECTION -->
+        <section class="section-padding" style="background: white;">
+            <div class="container text-center">
+                <h2 style="margin-bottom: 20px;">25 Years. 50+ Transformations. One Methodology.</h2>
+                <p style="font-size: 1.2rem; max-width: 800px; margin: 0 auto 40px auto; color: var(--text-muted);">
+                    The Seven Cylinders Framework™ — Our proprietary diagnostic system finds what others miss.
+                </p>
+
+                <div class="grid-3" style="margin-bottom: 50px;">
+                    <div class="metric-card">
+                        <span class="metric-val">25</span>
+                        <p style="margin: 15px 0 0 0; font-size: 0.95rem; color: var(--text-muted);">Years of Experience</p>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-val">50+</span>
+                        <p style="margin: 15px 0 0 0; font-size: 0.95rem; color: var(--text-muted);">Transformations Delivered</p>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-val">₹5Cr-₹500Cr</span>
+                        <p style="margin: 15px 0 0 0; font-size: 0.95rem; color: var(--text-muted);">Company Size Range</p>
+                    </div>
+                </div>
+
+                <div style="max-width: 800px; margin: 0 auto;">
+                    <p style="font-size: 1.05rem; margin-bottom: 25px;">
+                        <strong>Industries We Serve:</strong>
+                    </p>
+                    <div class="grid-2" style="gap: 20px; text-align: left;">
+                        <div>
+                            <p style="margin: 8px 0;">✓ Manufacturing</p>
+                            <p style="margin: 8px 0;">✓ Professional Services</p>
+                            <p style="margin: 8px 0;">✓ Education</p>
+                        </div>
+                        <div>
+                            <p style="margin: 8px 0;">✓ Technology</p>
+                            <p style="margin: 8px 0;">✓ Healthcare</p>
+                            <p style="margin: 8px 0;">✓ Industrial Engineering</p>
+                        </div>
+                    </div>
+                </div>
+
+                <p style="font-size: 1.1rem; margin-top: 40px; font-weight: 600; color: var(--accent-navy);">
+                    Based in Karnataka. Serving India.
+                </p>
+
+                <a href="how-we-think.html" class="btn-outline" style="margin-top: 30px;">See How We Think →</a>
+            </div>
+        </section>
+
+        <!-- SOCIAL PROOF SECTION -->
+        <section class="section-padding" style="background: var(--bg-offwhite);">
+            <div class="container readable-column">
+                <h2 style="text-align: center; margin-bottom: 60px;">Recent Results</h2>
+
+                <div style="display: grid; gap: 40px;">
+                    <div style="background: white; padding: 35px; border-left: 5px solid var(--accent-gold); border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.06);">
+                        <p style="font-size: 1.15rem; line-height: 1.8; font-style: italic; margin-bottom: 20px; color: var(--text-main);">
+                            "Revenue stuck at ₹42 Crore for 3 years. Hit ₹78 Crore in 18 months. Same team."
+                        </p>
+                        <p style="margin: 0; font-size: 0.9rem; color: var(--text-muted); font-weight: 600;">
+                            — Manufacturing CEO, Bangalore
+                        </p>
+                    </div>
+
+                    <div style="background: white; padding: 35px; border-left: 5px solid var(--accent-gold); border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.06);">
+                        <p style="font-size: 1.15rem; line-height: 1.8; font-style: italic; margin-bottom: 20px; color: var(--text-main);">
+                            "Stopped a ₹25 Lakh CRM investment. Fixed sales process for ₹8 Lakhs. Conversion doubled."
+                        </p>
+                        <p style="margin: 0; font-size: 0.9rem; color: var(--text-muted); font-weight: 600;">
+                            — Professional Services Founder, Chennai
+                        </p>
+                    </div>
+
+                    <div style="background: white; padding: 35px; border-left: 5px solid var(--accent-gold); border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.06);">
+                        <p style="font-size: 1.15rem; line-height: 1.8; font-style: italic; margin-bottom: 20px; color: var(--text-main);">
+                            "Placement rate: 40% → 72% in one year. No new staff."
+                        </p>
+                        <p style="margin: 0; font-size: 0.9rem; color: var(--text-muted); font-weight: 600;">
+                            — Engineering College, Karnataka
+                        </p>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 50px;">
+                    <a href="impact.html" class="btn-outline">See All Case Studies →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- INSIGHTS PREVIEW -->
+        <section class="section-padding" style="background: white;">
+            <div class="container readable-column">
+                <div style="text-align: center; margin-bottom: 50px;">
+                    <span class="eyebrow">Thought Leadership</span>
+                    <h2>Latest Insights</h2>
+                    <p>Root cause thinking in practice. What we're learning, teaching, and challenging.</p>
+                </div>
+                
+                <div id="insightsPreview"></div>
+                
+                <div style="text-align: center; margin-top: 40px;">
+                    <a href="insights.html" class="btn-outline">View All Insights →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- FINAL CTA SECTION -->
+        <section class="section-padding" style="background: linear-gradient(135deg, var(--accent-navy) 0%, #001a33 100%); color: white;">
+            <div class="container text-center">
+                <h2 style="color: white; margin-bottom: 25px;">Ready to Find What's Actually Broken?</h2>
+                <p style="font-size: 1.15rem; max-width: 700px; margin: 0 auto 50px auto; color: rgba(255,255,255,0.9);">
+                    Choose your starting point. We'll guide you from there.
+                </p>
+
+                <div class="grid-3" style="gap: 30px;">
+                    <div style="background: rgba(255,255,255,0.1); padding: 30px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2);">
+                        <h4 style="color: white; margin-top: 0;">Start with a Free Assessment</h4>
+                        <p style="color: rgba(255,255,255,0.85); margin-bottom: 25px;">
+                            10-minute quiz reveals your stuck points.
+                        </p>
+                        <a href="assessment.html" class="btn" style="background: white; color: var(--accent-navy); width: 100%; text-align: center;">Take Assessment →</a>
+                    </div>
+
+                    <div style="background: rgba(255,255,255,0.15); padding: 30px; border-radius: 8px; border: 2px solid rgba(197,160,89,0.5);">
+                        <h4 style="color: white; margin-top: 0;">Book a Discovery Call</h4>
+                        <p style="color: rgba(255,255,255,0.85); margin-bottom: 25px;">
+                            30 minutes. No obligation. No sales pitch.
+                        </p>
+                        <a href="contact.html" class="btn" style="background: var(--accent-gold); color: white; width: 100%; text-align: center;">Book Call →</a>
+                    </div>
+
+                    <div style="background: rgba(255,255,255,0.1); padding: 30px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2);">
+                        <h4 style="color: white; margin-top: 0;">Explore Our Services</h4>
+                        <p style="color: rgba(255,255,255,0.85); margin-bottom: 25px;">
+                            See how we help at every level.
+                        </p>
+                        <a href="services.html" class="btn-outline" style="border-color: white; color: white; width: 100%; text-align: center;">See Services →</a>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
-
-    
-    <!-- INSIGHTS PREVIEW (McKinsey-style) - FIX #5 -->
-    <section class="section-padding">
-        <div class="container readable-column">
-            <div style="text-align: center; margin-bottom: 50px;">
-                <span class="eyebrow">Thought Leadership</span>
-                <h2>Latest Insights</h2>
-                <p>Root cause thinking in practice. What we're learning, teaching, and challenging.</p>
-            </div>
-            
-            <div id="insightsPreview"></div>
-            
-            <div style="text-align: center; margin-top: 40px;">
-                <a href="insights.html" class="btn-outline">View All Insights →</a>
-            </div>
-        </div>
-    </section>
-
-    <script>
-    // Load latest 3 insights for homepage preview
-    (function loadInsightsPreview() {
-        window.addEventListener('load', async function() {
-            try {
-                if (!API_CONFIG || API_CONFIG.URL.includes("YOUR_SCRIPT_ID")) return;
-                
-                const res = await fetch(`${API_CONFIG.URL}?action=recent&limit=3`);
-                const posts = await res.json();
-                
-                if (posts.error || !Array.isArray(posts)) return;
-                
-                const container = document.getElementById('insightsPreview');
-                if (!container) return;
-                
-                posts.forEach((post, idx) => {
-                    const date = new Date(post.publish_date).toLocaleDateString('en-US', {
-                        month: 'long', day: 'numeric', year: 'numeric'
-                    });
-                    
-                    const excerpt = post.summary || post.title;
-                    const borderStyle = idx === 0 ? '' : 'border-top: 1px solid var(--border-light);';
-                    
-                    container.innerHTML += `
-                        <div class="insight-card" style="${borderStyle}">
-                            <div class="insight-meta">${date}</div>
-                            <h3><a href="post.html?slug=${post.slug}" style="color: inherit;">${post.title}</a></h3>
-                            <p class="insight-excerpt">${excerpt}</p>
-                            <a href="post.html?slug=${post.slug}" class="btn-outline" style="font-size: 0.75rem; padding: 10px 20px;">Read Analysis →</a>
-                        </div>
-                    `;
-                });
-            } catch(e) {
-                console.log('Insights preview not available:', e);
-            }
-        });
-    })();
-    </script>
 
     <footer>
         <div class="container footer-wrapper">
@@ -265,162 +321,54 @@
             </div>
             <div class="footer-links">
                 <a href="index.html">Home</a>
+                <a href="services.html">Services</a>
                 <a href="insights.html">Insights</a>
                 <a href="contact.html">Contact</a>
             </div>
         </div>
-        <div class="container" style="margin-top: 40px; font-size: 0.8rem; color: #999;">
+        <div class="container" style="padding-top: 20px; border-top: 1px solid var(--border-light); font-size: 0.8rem; color: #999;">
             &copy; 2026 Kernorigin. All rights reserved.
         </div>
     </footer>
 
-    <!-- INSTITUTIONAL DIAGNOSTIC MODAL -->
-    <div id="institutionalModal" class="modal-overlay">
-        <div class="modal-content">
-            <div style="display:flex; justify-content:space-between; margin-bottom: 20px;">
-                <h2>Institutional Diagnostic</h2>
-                <button onclick="closeInstitutionalModal()" style="border:none; background:none; font-size:1.5rem; cursor:pointer;">&times;</button>
-            </div>
-            <form id="institutionalForm" onsubmit="submitInstitutionalDiagnostic(event)">
-                <div id="institutionalQuestionContainer"></div>
-                <div style="margin-top: 30px; text-align: right;">
-                    <button type="submit" class="btn" id="institutionalAnalyzeBtn">Run Intelligence Engine &rarr;</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
     <script src="config.js"></script>
     <script>
-        let INSTITUTIONAL_DATA = null;
-
-        // INIT INSTITUTIONAL DIAGNOSTIC
-        window.onload = async function() {
-            try {
-                if (!API_CONFIG || API_CONFIG.URL.includes("YOUR_SCRIPT_ID")) {
-                    throw new Error("Config not set");
+        // Load latest 3 insights for homepage preview
+        (function loadInsightsPreview() {
+            window.addEventListener('load', async function() {
+                try {
+                    if (!API_CONFIG || API_CONFIG.URL.includes("YOUR_SCRIPT_ID")) return;
+                    
+                    const res = await fetch(`${API_CONFIG.URL}?action=recent&limit=3`);
+                    const posts = await res.json();
+                    
+                    if (posts.error || !Array.isArray(posts)) return;
+                    
+                    const container = document.getElementById('insightsPreview');
+                    if (!container) return;
+                    
+                    posts.forEach((post, idx) => {
+                        const date = new Date(post.publish_date).toLocaleDateString('en-US', {
+                            month: 'long', day: 'numeric', year: 'numeric'
+                        });
+                        
+                        const excerpt = post.summary || post.title;
+                        const borderStyle = idx === 0 ? '' : 'border-top: 1px solid var(--border-light);';
+                        
+                        container.innerHTML += `
+                            <div class="insight-card" style="${borderStyle}">
+                                <div class="insight-meta">${date}</div>
+                                <h3><a href="post.html?slug=${post.slug}" style="color: inherit;">${post.title}</a></h3>
+                                <p class="insight-excerpt">${excerpt}</p>
+                                <a href="post.html?slug=${post.slug}" class="btn-outline" style="font-size: 0.75rem; padding: 10px 20px;">Read Analysis →</a>
+                            </div>
+                        `;
+                    });
+                } catch(e) {
+                    console.log('Insights preview not available:', e);
                 }
-
-                const res = await fetch(`${API_CONFIG.URL}?action=diagnostic_init`);
-                const data = await res.json();
-                
-                if (data.error) throw new Error(data.error);
-
-                INSTITUTIONAL_DATA = data;
-                
-                const sel = document.getElementById('industrySelect');
-                sel.innerHTML = '<option value="" disabled selected>Select Sector...</option>';
-                data.industries.sort((a,b)=>a.name.localeCompare(b.name)).forEach(ind => {
-                    const opt = document.createElement('option');
-                    opt.value = ind.id; opt.text = ind.name; sel.appendChild(opt);
-                });
-
-                document.getElementById('initBtn').innerText = "Begin Audit";
-                document.getElementById('initBtn').disabled = false;
-
-            } catch(e) { 
-                console.error("System Offline:", e);
-                document.getElementById('initBtn').innerText = "System Offline";
-                document.getElementById('initBtn').title = "Check Console. Verify config.js has URL and PUBLIC_KEY set.";
-            }
-        };
-
-        // OPEN INSTITUTIONAL DIAGNOSTIC
-        function openInstitutionalDiagnostic(e) {
-            e.preventDefault();
-            const ind = document.getElementById('industrySelect').value;
-            const container = document.getElementById('institutionalQuestionContainer');
-            
-            container.innerHTML = `
-                <div style="background: #f9f9f9; padding: 20px; border-radius: 4px; margin-bottom: 30px;">
-                    <label>Your Name</label><input type="text" name="founderName" required>
-                    <label>Email (for report delivery)</label><input type="email" name="founderEmail" required>
-                </div>`;
-            
-            const qs = INSTITUTIONAL_DATA.questions.filter(q => q.target === '000' || q.target === ind);
-            
-            qs.forEach(q => {
-                const inputType = q.type === 'numeric' ? 'number' : 'text';
-                const inputMode = q.type === 'numeric' ? 'inputmode="decimal"' : '';
-                const step = q.type === 'numeric' ? 'step="0.01"' : '';
-                const placeholder = q.helpText || 'Enter value';
-                
-                container.innerHTML += `
-                    <div style="margin-bottom: 20px;">
-                        <label>${q.text}</label>
-                        <input 
-                            type="${inputType}" 
-                            name="${q.id}" 
-                            ${inputMode}
-                            ${step}
-                            placeholder="${placeholder}" 
-                            required>
-                    </div>`;
             });
-            
-            document.getElementById('institutionalModal').style.display = 'block';
-        }
-
-        // SUBMIT INSTITUTIONAL DIAGNOSTIC
-        async function submitInstitutionalDiagnostic(e) {
-            e.preventDefault();
-            const btn = document.getElementById('institutionalAnalyzeBtn');
-            btn.innerText = "Processing..."; btn.disabled = true;
-            
-            const fd = new FormData(e.target);
-            const ans = {}; fd.forEach((v,k) => ans[k] = v);
-            const name = ans.founderName; const email = ans.founderEmail;
-            delete ans.founderName; delete ans.founderEmail;
-
-            try {
-                const res = await fetch(API_CONFIG.URL, {
-                    method: 'POST',
-                    body: JSON.stringify({
-                        action: 'submit_diagnostic',
-                        apiKey: API_CONFIG.PUBLIC_KEY,
-                        industryId: document.getElementById('industrySelect').value, 
-                        location: document.getElementById('locationSelect').value, 
-                        name, 
-                        email, 
-                        answers: ans 
-                    })
-                });
-                const r = await res.json();
-                
-                if(r.error) {
-                    alert(`❌ Submission Failed\n\nError: ${r.error}\n\nTroubleshooting:\n- Verify config.js has PUBLIC_KEY set\n- Check browser console (F12) for details`);
-                } else if(r.status === 'blocked') {
-                    alert(`⚠️ Data Quality Issues Detected\n\nConfidence Score: ${r.confidence}%\n\nIssues Found:\n${r.errors.map(e => e.message).join('\n')}\n\nPlease review your inputs.`);
-                } else {
-                    alert(`✅ Diagnostic Complete!\n\nYour institutional audit has been processed (Confidence: ${r.confidence}%).\n\nThe full report has been emailed to:\n${email}\n\nCheck your spam folder if you don't see it within 5 minutes.`);
-                    closeInstitutionalModal();
-                }
-            } catch(e) {
-                console.error('Diagnostic submission error:', e);
-                alert(`❌ Error: ${e.message}\n\nCheck browser console for details.`);
-            }
-            btn.innerText = "Run Intelligence Engine →"; btn.disabled = false;
-        }
-
-        function checkCoupon() {
-            const code = document.getElementById('partnerCode').value.toUpperCase();
-            if(code === 'AGARWAL_VIP') {
-                document.getElementById('priceTag').innerText = "₹0";
-                document.getElementById('codeStatus').innerText = "✓ Partner Code Applied";
-                document.getElementById('initBtn').innerText = "Begin Audit (Free)";
-            } else {
-                updatePrice();
-                document.getElementById('codeStatus').innerText = "";
-            }
-        }
-        
-        function updatePrice() {
-            document.getElementById('priceTag').innerText = "₹2,997";
-        }
-        
-        function closeInstitutionalModal() { 
-            document.getElementById('institutionalModal').style.display = 'none'; 
-        }
+        })();
     </script>
     <script src="mobile-menu.js"></script>
 </body>
