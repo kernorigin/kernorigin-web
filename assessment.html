@@ -408,49 +408,86 @@
             gtag('event', 'assessment_complete', { 'event_category': 'engagement' });
         }
 
-        async function submitForAnalysis() {
-            const submitBtn = document.getElementById('submit-btn');
-            const loader = document.getElementById('loader');
-            const resultsDiv = document.getElementById('results');
+        async function submitForAnalysis(event) {
+            event.preventDefault();
+            
+            userProfile = {
+                name: document.getElementById('user-name').value,
+                email: document.getElementById('user-email').value,
+                company: document.getElementById('user-company').value || 'Not specified'
+            };
+            
+            // Show loading
+            document.getElementById('email-capture-screen').style.display = 'none';
+            document.getElementById('loading-screen').style.display = 'block';
+            window.scrollTo({top: 0, behavior: 'smooth'});
+            
+            // Animate loading messages
+            const messages = [
+                "Analyzing your responses...",
+                "Matching against case patterns...",
+                "Identifying bottlenecks...",
+                "Generating personalized report...",
+                "Almost ready..."
+            ];
+            
+            let msgIndex = 0;
+            const msgInterval = setInterval(() => {
+                if (msgIndex < messages.length) {
+                    document.getElementById('loading-message').textContent = messages[msgIndex];
+                    msgIndex++;
+                }
+            }, 2000);
             
             try {
-                submitBtn.disabled = true;
-                loader.classList.remove('hidden');
-                resultsDiv.classList.add('hidden');
-
-                // Use FormData instead of JSON to avoid CORS preflight
-                const formData = new FormData();
-                formData.append('action', 'analyze_assessment');
-                formData.append('apiKey', API_CONFIG.PUBLIC_KEY);
-                formData.append('name', assessmentState.name);
-                formData.append('email', assessmentState.email);
-                formData.append('company', assessmentState.company || '');
-                formData.append('answers', JSON.stringify(assessmentState.fullAnswers));
-                formData.append('scores', JSON.stringify(assessmentState.cylinderScores));
-
+                // Prepare assessment data
+                const assessmentData = prepareAssessmentData();
+                
+                // Use FormData to avoid CORS preflight
+                const submitFormData = new FormData();
+                submitFormData.append('action', 'analyze_assessment');
+                submitFormData.append('apiKey', API_CONFIG.PUBLIC_KEY);
+                submitFormData.append('name', assessmentData.name);
+                submitFormData.append('email', assessmentData.email);
+                submitFormData.append('company', assessmentData.company);
+                submitFormData.append('answers', JSON.stringify(assessmentData.answers));
+                submitFormData.append('scores', JSON.stringify(assessmentData.scores));
+                
+                // Call backend AI analysis
                 const response = await fetch(API_CONFIG.URL, {
                     method: 'POST',
-                    body: formData  // Send as FormData, NOT JSON
+                    body: submitFormData  // Send as FormData, NOT JSON
                 });
-
+                
+                clearInterval(msgInterval);
+                
                 if (!response.ok) {
                     throw new Error(`HTTP ${response.status}: ${response.statusText}`);
                 }
-
+                
                 const result = await response.json();
-
-                if (result.status === 'success') {
-                    displayResults(result);
-                } else {
+                
+                if (result.status === 'error') {
                     throw new Error(result.error || result.message || 'Analysis failed');
                 }
-
+                
+                // Display results
+                displayResults(result);
+                
+                gtag('event', 'assessment_submitted', { 
+                    'event_category': 'conversion',
+                    'event_label': userProfile.email
+                });
+                
             } catch (error) {
+                clearInterval(msgInterval);
                 console.error('Assessment error:', error);
-                alert('Failed to submit assessment. Please try again or contact support.\n\nError: ' + error.message);
-            } finally {
-                submitBtn.disabled = false;
-                loader.classList.add('hidden');
+                showError();
+                
+                gtag('event', 'assessment_error', { 
+                    'event_category': 'error',
+                    'event_label': error.toString()
+                });
             }
         }
 
