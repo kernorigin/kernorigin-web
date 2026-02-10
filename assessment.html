@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Free Business Assessment | Kernorigin</title>
     <meta name="description" content="10-minute AI-powered assessment reveals where your business is stuck. Get personalized recommendations based on 25 years of diagnostic experience.">
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Razorpay Integration -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZDL25WXPVP"></script>
@@ -19,17 +22,17 @@
 <body>
     <header>
         <div class="container nav-wrapper">
-            <a href="../index.html" class="logo">Kernorigin</a>
+            <a href="index.html" class="logo" id="header-logo">Kernorigin</a>
             <nav>
                 <ul>
-                    <li><a href="../index.html">Home</a></li>
-                    <li><a href="../how-we-think.html">How We Think</a></li>
-                    <li><a href="../how-we-work.html">How We Work</a></li>
-                    <li><a href="../services.html">Services</a></li>
-                    <li><a href="../impact.html">Impact</a></li>
-                    <li><a href="../team.html">Team</a></li>
-                    <li><a href="../insights.html">Insights</a></li>
-                    <li><a href="../contact.html">Contact</a></li>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="how-we-think.html">How We Think</a></li>
+                    <li><a href="how-we-work.html">How We Work</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="impact.html">Impact</a></li>
+                    <li><a href="team.html">Team</a></li>
+                    <li><a href="insights.html">Insights</a></li>
+                    <li><a href="contact.html">Contact</a></li>
                 </ul>
             </nav>
         </div>
@@ -40,7 +43,7 @@
             <div class="container">
                 <div class="readable-column">
                     <div class="text-center" style="margin-bottom: 50px;">
-                        <span class="eyebrow">AI-Powered Diagnostic Tool</span>
+                        <span class="eyebrow" id="header-eyebrow">AI-Powered Diagnostic Tool</span>
                         <h1>Where Is Your Business Stuck?</h1>
                         <p style="font-size: 1.1rem; max-width: 650px; margin: 20px auto 0 auto;">
                             Answer 10 questions. Get personalized AI analysis based on our Seven Cylinders Framework™. Takes 5 minutes.
@@ -76,13 +79,17 @@
                                 <p style="margin: 0; font-weight: 600; text-align: center;">7. Leadership Capacity</p>
                             </div>
                             
+                            <div id="partner-banner" style="background: #f0f9ff; border-left: 4px solid var(--accent-navy); padding: 20px; margin-bottom: 30px; display: none;">
+                                <p style="margin: 0; font-weight: 600; color: var(--accent-navy);" id="partner-message"></p>
+                            </div>
+                            
                             <div style="background: #fef9e7; border-left: 4px solid var(--accent-gold); padding: 20px; margin-bottom: 30px;">
                                 <p style="margin: 0;"><strong>Your AI-powered analysis will reveal:</strong></p>
                                 <ul style="margin: 10px 0 0 0; padding-left: 20px;">
                                     <li>Your primary bottleneck (what's actually stuck)</li>
                                     <li>Root cause vs. symptoms (why fixes haven't worked)</li>
                                     <li>Matched case studies (similar transformations)</li>
-                                    <li>Specific next steps (diagnostic, workshop, or strategy)</li>
+                                    <li id="intro-benefit">Specific next steps (diagnostic, workshop, or strategy)</li>
                                 </ul>
                             </div>
 
@@ -114,10 +121,10 @@
                             </div>
                         </div>
 
-                        <!-- Email Capture Screen (NEW) -->
+                        <!-- Email Capture Screen -->
                         <div id="email-capture-screen" class="card" style="background: white; display: none;">
-                            <h3 style="margin-top: 0;">Almost There! Get Your AI Analysis</h3>
-                            <p>Our AI is analyzing your responses against 25 years of case data. Enter your email to receive your personalized diagnostic report.</p>
+                            <h3 style="margin-top: 0;">Almost There! Get Your Analysis</h3>
+                            <p id="email-capture-desc">Our AI is analyzing your responses. Enter your details to receive your personalized report.</p>
                             
                             <form id="email-capture-form" onsubmit="submitForAnalysis(event)">
                                 <label>Your Name</label>
@@ -129,18 +136,25 @@
                                 <label>Company/Organization (Optional)</label>
                                 <input type="text" id="user-company" placeholder="Your Company">
                                 
-                                <div style="background: #f0f9ff; padding: 15px; border-radius: 4px; margin-bottom: 20px;">
+                                <div id="coupon-section" style="display: none; margin-top: 20px;">
+                                    <label>Partner Coupon Code</label>
+                                    <input type="text" id="coupon-code" placeholder="Enter your coupon code" style="text-transform: uppercase;" readonly>
+                                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 5px;" id="coupon-message">
+                                        ✓ Coupon applied - Full diagnostic included (₹24,997 value)
+                                    </p>
+                                </div>
+                                
+                                <div style="background: #f0f9ff; padding: 15px; border-radius: 4px; margin: 20px 0;">
                                     <p style="margin: 0; font-size: 0.9rem;"><strong>What you'll get:</strong></p>
-                                    <ul style="margin: 5px 0 0 0; padding-left: 20px; font-size: 0.9rem;">
-                                        <li>Personalized AI diagnostic report (PDF)</li>
+                                    <ul style="margin: 5px 0 0 0; padding-left: 20px; font-size: 0.9rem;" id="benefits-list">
+                                        <li>Free 2-page summary report (instant)</li>
                                         <li>Primary bottleneck identified</li>
-                                        <li>Root cause analysis</li>
-                                        <li>Recommended next steps</li>
-                                        <li>Matched case studies</li>
+                                        <li>Root cause analysis overview</li>
+                                        <li>Option to upgrade to full 35-page diagnostic</li>
                                     </ul>
                                 </div>
                                 
-                                <button type="submit" class="btn" style="width: 100%;">Get My AI Analysis →</button>
+                                <button type="submit" class="btn" style="width: 100%;" id="submit-btn">Get My Free Analysis →</button>
                             </form>
                             
                             <p style="text-align: center; margin-top: 15px; font-size: 0.85rem; color: var(--text-muted);">
@@ -148,20 +162,20 @@
                             </p>
                         </div>
 
-                        <!-- Loading Screen (NEW) -->
+                        <!-- Loading Screen -->
                         <div id="loading-screen" class="card" style="background: white; display: none; text-align: center; padding: 60px 30px;">
                             <div style="margin-bottom: 30px;">
                                 <div style="width: 60px; height: 60px; border: 4px solid var(--bg-offwhite); border-top: 4px solid var(--accent-navy); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto;"></div>
                             </div>
                             <h3 style="margin: 0 0 15px 0;">AI Analysis in Progress...</h3>
-                            <p style="margin: 0; color: var(--text-muted);" id="loading-message">Analyzing your responses against 25 years of case patterns...</p>
+                            <p style="margin: 0; color: var(--text-muted);" id="loading-message">Analyzing your responses...</p>
                         </div>
 
-                        <!-- Results Screen (Enhanced with AI) -->
+                        <!-- Results Screen -->
                         <div id="results-screen" class="card" style="background: white; display: none;">
                             <div style="text-align: center; margin-bottom: 40px;">
-                                <h2 style="margin: 0 0 10px 0; color: var(--accent-navy);">Your Personalized Diagnostic Report</h2>
-                                <p style="margin: 0; color: var(--text-muted);">AI-powered analysis delivered to your inbox</p>
+                                <h2 style="margin: 0 0 10px 0; color: var(--accent-navy);">Your Personalized Analysis</h2>
+                                <p style="margin: 0; color: var(--text-muted);" id="results-subtitle">AI-powered insights delivered</p>
                             </div>
                             
                             <div id="results-content"></div>
@@ -175,7 +189,7 @@
                             </div>
                         </div>
 
-                        <!-- Error Screen (NEW) -->
+                        <!-- Error Screen -->
                         <div id="error-screen" class="card" style="background: white; display: none;">
                             <h3 style="margin-top: 0; color: #dc2626;">Oops! Something Went Wrong</h3>
                             <p>We couldn't process your assessment right now. Don't worry—your answers are saved.</p>
@@ -198,22 +212,25 @@
     <footer>
         <div class="container footer-wrapper">
             <div>
-                <div class="logo">KERNORIGIN</div>
+                <div class="logo" id="footer-logo">KERNORIGIN</div>
                 <p style="margin-top: 15px; font-size: 0.9rem; color: var(--text-muted);">
                     Since 2001 (formerly Value Drive Consulting)<br>
                     25 years finding root causes globally.<br>
                     50+ transformations that stick.
                 </p>
             </div>
-            <div class="footer-links">
-                <a href="../index.html">Home</a>
-                <a href="../services.html">Services</a>
-                <a href="../insights.html">Insights</a>
-                <a href="../contact.html">Contact</a>
+            <div>
+                <h4>Quick Links</h4>
+                <ul style="list-style: none; padding: 0;">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="insights.html">Insights</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
             </div>
         </div>
-        <div class="container" style="padding-top: 20px; border-top: 1px solid var(--border-light); font-size: 0.8rem; color: #999;">
-            © 2026 Kernorigin. All rights reserved.
+        <div class="container" style="margin-top: 40px; padding-top: 30px; border-top: 1px solid var(--border-light); text-align: center;">
+            <p style="margin: 0; font-size: 0.85rem; color: var(--text-muted);">© 2026 Kernorigin. All rights reserved.</p>
         </div>
     </footer>
 
@@ -224,9 +241,87 @@
         }
     </style>
 
-    <script src="../config.js"></script>
+    <script src="config.js"></script>
     <script>
-        // ASSESSMENT ENGINE - AI-POWERED VERSION
+        // ============================================
+        // ULTIMATE UNIFIED ASSESSMENT SYSTEM
+        // Handles: Free, Paid, Partner Coupon flows
+        // ============================================
+        
+        // ============================================
+        // 1. SMART DETECTION & INITIALIZATION
+        // ============================================
+        
+        const urlParams = new URLSearchParams(window.location.search);
+        const partnerId = urlParams.get('partner') || '';
+        const prefillCoupon = urlParams.get('coupon') || '';
+        const utmSource = urlParams.get('utm_source') || '';
+        
+        let partnerBranding = null;
+        let assessmentState = {
+            mode: 'free', // 'free', 'coupon', or 'paid'
+            partnerId: partnerId,
+            couponCode: prefillCoupon,
+            name: '',
+            email: '',
+            company: '',
+            fullAnswers: {},
+            cylinderScores: {}
+        };
+        
+        // Load partner branding if partner ID provided
+        if (partnerId) {
+            loadPartnerBranding(partnerId);
+        }
+        
+        if (prefillCoupon) {
+            assessmentState.mode = 'coupon';
+            assessmentState.couponCode = prefillCoupon;
+        }
+        
+        async function loadPartnerBranding(partnerId) {
+            try {
+                const response = await fetch(`${API_CONFIG.URL}?action=get_partner_branding&partnerId=${partnerId}`);
+                const result = await response.json();
+                
+                if (result.status === 'success' && result.partner) {
+                    partnerBranding = result.partner;
+                    assessmentState.mode = 'coupon'; // Partner link = coupon mode
+                    applyPartnerBranding(result.partner);
+                }
+            } catch (error) {
+                console.error('Failed to load partner branding:', error);
+            }
+        }
+        
+        function applyPartnerBranding(partner) {
+            // Update page branding
+            document.title = `Free Business Assessment | ${partner.branding.displayName}`;
+            
+            // Update logos
+            document.getElementById('header-logo').textContent = partner.branding.displayName;
+            document.getElementById('footer-logo').textContent = `${partner.branding.displayName} × KERNORIGIN`;
+            
+            // Apply brand colors
+            document.documentElement.style.setProperty('--accent-navy', partner.branding.primaryColor);
+            document.documentElement.style.setProperty('--accent-gold', partner.branding.secondaryColor);
+            
+            // Update eyebrow
+            document.getElementById('header-eyebrow').textContent = `Complimentary Diagnostic via ${partner.name}`;
+            
+            // Show partner banner
+            const banner = document.getElementById('partner-banner');
+            const message = document.getElementById('partner-message');
+            banner.style.display = 'block';
+            message.textContent = `✓ You're receiving a complimentary full diagnostic courtesy of ${partner.name} (₹24,997 value)`;
+            
+            // Update intro benefit
+            document.getElementById('intro-benefit').innerHTML = `<strong>FREE 35-page comprehensive report</strong> (normally ₹24,997)`;
+        }
+        
+        // ============================================
+        // 2. ASSESSMENT QUESTIONS
+        // ============================================
         
         const questions = [
             {
@@ -253,80 +348,80 @@
                 text: "How would you describe your technology systems?",
                 cylinder: "systems",
                 options: [
-                    { text: "Modern, integrated, scalable", score: 4 },
-                    { text: "Functional but dated - needs upgrading", score: 3 },
-                    { text: "Fragmented - multiple disconnected tools", score: 2 },
-                    { text: "Manual/broken - major tech debt", score: 1 }
+                    { text: "Modern, integrated, reliable", score: 4 },
+                    { text: "Adequate but aging or disconnected", score: 3 },
+                    { text: "Outdated or manual workarounds common", score: 2 },
+                    { text: "Broken or non-existent systems", score: 1 }
                 ]
             },
             {
-                text: "What's your team engagement level?",
+                text: "How would you rate your team's capability?",
                 cylinder: "people",
                 options: [
-                    { text: "Highly engaged - low turnover, strong culture", score: 4 },
-                    { text: "Engaged - some retention issues", score: 3 },
-                    { text: "Disengaged - high turnover, morale issues", score: 2 },
-                    { text: "Revolving door - can't retain talent", score: 1 }
+                    { text: "High performers - skilled and engaged", score: 4 },
+                    { text: "Solid team - some skill gaps", score: 3 },
+                    { text: "Struggling - high turnover or low morale", score: 2 },
+                    { text: "Critical capability gaps holding us back", score: 1 }
                 ]
             },
             {
-                text: "How healthy are your financial metrics?",
+                text: "How healthy is your cash flow?",
                 cylinder: "financial",
                 options: [
-                    { text: "Strong - healthy margins, good cash flow", score: 4 },
-                    { text: "Adequate - profitable but tight", score: 3 },
-                    { text: "Struggling - low margins, cash concerns", score: 2 },
-                    { text: "Crisis - burning cash, survival mode", score: 1 }
+                    { text: "Strong - positive and growing", score: 4 },
+                    { text: "Stable - managing but tight", score: 3 },
+                    { text: "Stressed - frequent cash crunches", score: 2 },
+                    { text: "Critical - survival mode", score: 1 }
                 ]
             },
             {
-                text: "How differentiated are you in your market?",
+                text: "How strong is your market position?",
                 cylinder: "market",
                 options: [
-                    { text: "Strongly differentiated - clear unique value", score: 4 },
-                    { text: "Somewhat differentiated - known for something", score: 3 },
-                    { text: "Commoditized - competing mainly on price", score: 2 },
-                    { text: "Unknown - struggling for market share", score: 1 }
+                    { text: "Market leader - clear differentiation", score: 4 },
+                    { text: "Competitive - holding our own", score: 3 },
+                    { text: "Struggling - losing ground", score: 2 },
+                    { text: "Unclear positioning or commoditized", score: 1 }
                 ]
             },
             {
-                text: "How would you describe your decision-making speed?",
+                text: "How effective is your leadership team?",
                 cylinder: "leadership",
                 options: [
-                    { text: "Fast - clear accountability, quick execution", score: 4 },
-                    { text: "Moderate - some delays but acceptable", score: 3 },
-                    { text: "Slow - analysis paralysis common", score: 2 },
-                    { text: "Glacial - decisions take months", score: 1 }
+                    { text: "Strong - clear vision, good decisions", score: 4 },
+                    { text: "Functional - gets things done", score: 3 },
+                    { text: "Weak - inconsistent or unclear", score: 2 },
+                    { text: "Dysfunctional - major leadership gaps", score: 1 }
                 ]
             },
             {
-                text: "What's your revenue growth pattern over the last 2 years?",
-                cylinder: "financial",
-                options: [
-                    { text: "Strong growth - 20%+ annually", score: 4 },
-                    { text: "Steady growth - 10-20% annually", score: 3 },
-                    { text: "Flat or slow - under 10%", score: 2 },
-                    { text: "Declining - losing revenue", score: 1 }
-                ]
-            },
-            {
-                text: "How do you handle customer feedback and complaints?",
+                text: "How scalable are your current processes?",
                 cylinder: "operations",
                 options: [
-                    { text: "Systematic - tracked, analyzed, acted upon", score: 4 },
-                    { text: "Reactive - we respond but don't track patterns", score: 3 },
-                    { text: "Inconsistent - depends who handles it", score: 2 },
-                    { text: "Broken - complaints fall through cracks", score: 1 }
+                    { text: "Highly scalable - documented and automated", score: 4 },
+                    { text: "Can scale with some effort", score: 3 },
+                    { text: "Barely keeping up with current volume", score: 2 },
+                    { text: "Breaking under current load", score: 1 }
                 ]
             },
             {
-                text: "What's your biggest challenge right now?",
-                cylinder: "general",
+                text: "How well do you understand your customer needs?",
+                cylinder: "market",
                 options: [
-                    { text: "Scaling - systems breaking under growth", score: 0, tag: "growth" },
-                    { text: "Stagnation - can't break through plateau", score: 0, tag: "plateau" },
-                    { text: "Chaos - too many problems to prioritize", score: 0, tag: "chaos" },
-                    { text: "Competition - losing market share", score: 0, tag: "market" }
+                    { text: "Deep understanding - backed by data", score: 4 },
+                    { text: "Good understanding - some gaps", score: 3 },
+                    { text: "Surface level - mostly assumptions", score: 2 },
+                    { text: "Unclear - guessing or outdated info", score: 1 }
+                ]
+            },
+            {
+                text: "How predictable is your revenue?",
+                cylinder: "financial",
+                options: [
+                    { text: "Very predictable - strong pipelines", score: 4 },
+                    { text: "Somewhat predictable - some volatility", score: 3 },
+                    { text: "Unpredictable - month to month uncertainty", score: 2 },
+                    { text: "Highly volatile - survival mode", score: 1 }
                 ]
             }
         ];
@@ -335,18 +430,20 @@
         let answers = [];
         let userProfile = {};
 
-        // FIXED: Scroll to top on page load and assessment start
-        window.addEventListener('load', () => {
-            window.scrollTo(0, 0);
-            gtag('event', 'page_view', { 'page_title': 'Assessment' });
-        });
+        // ============================================
+        // 3. ASSESSMENT FLOW
+        // ============================================
 
         function startAssessment() {
-            window.scrollTo({top: 0, behavior: 'instant'}); // CRITICAL FIX
             document.getElementById('intro-screen').style.display = 'none';
             document.getElementById('question-screen').style.display = 'block';
+            window.scrollTo({top: 0, behavior: 'smooth'});
             showQuestion(0);
-            gtag('event', 'assessment_start', { 'event_category': 'engagement' });
+            
+            gtag('event', 'assessment_started', { 
+                'event_category': 'engagement',
+                'event_label': assessmentState.mode
+            });
         }
 
         function showQuestion(index) {
@@ -361,30 +458,32 @@
             optionsDiv.innerHTML = '';
             
             q.options.forEach((option, i) => {
-                const selected = answers[index] === i;
-                const optionDiv = document.createElement('div');
-                optionDiv.className = 'card';
-                optionDiv.style.cssText = `
-                    padding: 20px; 
-                    margin-bottom: 15px; 
-                    cursor: pointer; 
-                    transition: all 0.2s;
-                    border: 2px solid ${selected ? 'var(--accent-navy)' : 'var(--border-light)'};
-                    background: ${selected ? '#f0f4ff' : 'white'};
-                `;
-                optionDiv.onclick = () => selectAnswer(i);
-                optionDiv.innerHTML = `<p style="margin: 0; font-weight: ${selected ? '600' : '400'};">${option.text}</p>`;
-                optionsDiv.appendChild(optionDiv);
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.textContent = option.text;
+                btn.onclick = () => selectAnswer(i);
+                
+                if (answers[index] === i) {
+                    btn.classList.add('selected');
+                }
+                
+                optionsDiv.appendChild(btn);
             });
             
             document.getElementById('prev-btn').style.display = index > 0 ? 'block' : 'none';
             document.getElementById('next-btn').disabled = answers[index] === undefined;
-            document.getElementById('next-btn').textContent = index === questions.length - 1 ? 'Continue to Results →' : 'Next Question →';
+            document.getElementById('next-btn').textContent = index === questions.length - 1 ? 'See My Results →' : 'Next Question →';
         }
 
         function selectAnswer(optionIndex) {
             answers[currentQuestion] = optionIndex;
-            showQuestion(currentQuestion);
+            
+            const buttons = document.querySelectorAll('.option-btn');
+            buttons.forEach((btn, i) => {
+                btn.classList.toggle('selected', i === optionIndex);
+            });
+            
+            document.getElementById('next-btn').disabled = false;
         }
 
         function previousQuestion() {
@@ -397,16 +496,57 @@
             if (currentQuestion < questions.length - 1) {
                 showQuestion(currentQuestion + 1);
             } else {
-                showEmailCapture();
+                finishAssessment();
             }
         }
 
-        function showEmailCapture() {
+        function finishAssessment() {
+            // Prepare email capture screen based on mode
+            if (assessmentState.mode === 'coupon') {
+                // Coupon mode - show pre-filled coupon
+                document.getElementById('email-capture-desc').textContent = 
+                    `Your complimentary full diagnostic is ready${partnerBranding ? ' (courtesy of ' + partnerBranding.name + ')' : ''}. Enter your details to receive it.`;
+                
+                document.getElementById('coupon-section').style.display = 'block';
+                document.getElementById('coupon-code').value = assessmentState.couponCode;
+                
+                document.getElementById('benefits-list').innerHTML = `
+                    <li><strong>FREE 35-page comprehensive diagnostic</strong></li>
+                    <li>Complete root cause analysis</li>
+                    <li>Industry benchmarking</li>
+                    <li>90-day action roadmap</li>
+                    <li>Matched case studies</li>
+                    <li>30-min debrief call included</li>
+                `;
+                
+                document.getElementById('submit-btn').textContent = 'Get My Free Full Diagnostic →';
+            } else {
+                // Free mode - normal flow
+                document.getElementById('email-capture-desc').textContent = 
+                    'Our AI is analyzing your responses. Enter your details to receive your free summary report.';
+                
+                document.getElementById('coupon-section').style.display = 'none';
+                
+                document.getElementById('benefits-list').innerHTML = `
+                    <li>Free 2-page summary report (instant)</li>
+                    <li>Primary bottleneck identified</li>
+                    <li>Root cause analysis overview</li>
+                    <li>Option to upgrade to full 35-page diagnostic</li>
+                `;
+                
+                document.getElementById('submit-btn').textContent = 'Get My Free Analysis →';
+            }
+            
             document.getElementById('question-screen').style.display = 'none';
             document.getElementById('email-capture-screen').style.display = 'block';
             window.scrollTo({top: 0, behavior: 'smooth'});
+            
             gtag('event', 'assessment_complete', { 'event_category': 'engagement' });
         }
+
+        // ============================================
+        // 4. SUBMISSION LOGIC (SMART ROUTING)
+        // ============================================
 
         async function submitForAnalysis(event) {
             event.preventDefault();
@@ -416,6 +556,11 @@
                 email: document.getElementById('user-email').value,
                 company: document.getElementById('user-company').value || 'Not specified'
             };
+            
+            // Update state
+            assessmentState.name = userProfile.name;
+            assessmentState.email = userProfile.email;
+            assessmentState.company = userProfile.company;
             
             // Show loading
             document.getElementById('email-capture-screen').style.display = 'none';
@@ -445,7 +590,17 @@
                 
                 // Use FormData to avoid CORS preflight
                 const submitFormData = new FormData();
-                submitFormData.append('action', 'analyze_assessment');
+                
+                // SMART ROUTING: Choose endpoint based on mode
+                if (assessmentState.mode === 'coupon' && assessmentState.couponCode) {
+                    // COUPON FLOW → Partner diagnostic (full, free)
+                    submitFormData.append('action', 'analyze_assessment_partner');
+                    submitFormData.append('couponCode', assessmentState.couponCode);
+                } else {
+                    // FREE FLOW → Basic diagnostic (2-page summary)
+                    submitFormData.append('action', 'analyze_assessment');
+                }
+                
                 submitFormData.append('apiKey', API_CONFIG.PUBLIC_KEY);
                 submitFormData.append('name', assessmentData.name);
                 submitFormData.append('email', assessmentData.email);
@@ -453,10 +608,10 @@
                 submitFormData.append('answers', JSON.stringify(assessmentData.answers));
                 submitFormData.append('scores', JSON.stringify(assessmentData.scores));
                 
-                // Call backend AI analysis
+                // Call backend
                 const response = await fetch(API_CONFIG.URL, {
                     method: 'POST',
-                    body: submitFormData  // Send as FormData, NOT JSON
+                    body: submitFormData
                 });
                 
                 clearInterval(msgInterval);
@@ -476,7 +631,8 @@
                 
                 gtag('event', 'assessment_submitted', { 
                     'event_category': 'conversion',
-                    'event_label': userProfile.email
+                    'event_label': assessmentState.mode,
+                    'value': assessmentState.mode === 'coupon' ? 25000 : 0
                 });
                 
             } catch (error) {
@@ -518,6 +674,10 @@
                 }
             });
             
+            // Store in state
+            assessmentState.fullAnswers = formattedAnswers;
+            assessmentState.cylinderScores = scores;
+            
             return {
                 name: userProfile.name,
                 email: userProfile.email,
@@ -528,6 +688,10 @@
             };
         }
 
+        // ============================================
+        // 5. RESULTS DISPLAY (MODE-AWARE)
+        // ============================================
+
         function displayResults(result) {
             document.getElementById('loading-screen').style.display = 'none';
             document.getElementById('results-screen').style.display = 'block';
@@ -535,44 +699,129 @@
             
             const resultsDiv = document.getElementById('results-content');
             
-            // If AI analysis is available, use it
-            if (result.analysis) {
-                resultsDiv.innerHTML = `
-                    <div style="background: #f0f9ff; padding: 25px; border-left: 4px solid var(--accent-navy); margin-bottom: 30px;">
-                        <p style="margin: 0; font-size: 0.9rem; font-weight: 600; color: var(--accent-navy);">
-                            ✓ Analysis complete! Full report emailed to ${userProfile.email}
-                        </p>
-                    </div>
-                    
-                    ${result.analysis}
-                    
-                    <div style="background: #fef9e7; border-left: 4px solid var(--accent-gold); padding: 25px; margin-top: 40px;">
-                        <h4 style="margin-top: 0;">Want Deeper Analysis?</h4>
-                        <p style="margin-bottom: 20px;">This free assessment gives directional insights. For root cause diagnosis with specific action plans:</p>
-                        <div style="display: grid; gap: 15px;">
-                            <a href="../services.html#diagnostic" class="btn-outline">Institutional Diagnostic (₹25K) - Full 7-Cylinder Analysis →</a>
-                            <a href="../systems-diagnostic.html" class="btn-outline">Systems Diagnostic (₹35K) - Ops & Process Deep Dive →</a>
-                        </div>
-                    </div>
-                `;
+            if (assessmentState.mode === 'coupon') {
+                // COUPON MODE → Full diagnostic delivered
+                displayCouponResults(result, resultsDiv);
             } else {
-                // Fallback if AI analysis isn't available yet
-                resultsDiv.innerHTML = `
-                    <div style="background: var(--accent-gold); color: white; padding: 25px; border-radius: 8px; margin-bottom: 30px; text-align: center;">
-                        <h3 style="color: white; margin: 0;">Report Sent!</h3>
-                        <p style="margin: 10px 0 0 0; color: rgba(255,255,255,0.9);">
-                            Check your email: <strong>${userProfile.email}</strong>
+                // FREE MODE → Summary + upgrade options
+                displayFreeResults(result, resultsDiv);
+            }
+        }
+
+        function displayCouponResults(result, container) {
+            const partnerName = result.partner || 'our partner';
+            
+            container.innerHTML = `
+                <div style="background: #10b981; color: white; padding: 25px; border-left: 4px solid #059669; margin-bottom: 30px; border-radius: 8px;">
+                    <p style="margin: 0; font-size: 0.9rem; font-weight: 600;">
+                        ✓ Congratulations! Full diagnostic delivered (courtesy of ${partnerName})
+                    </p>
+                    <p style="margin: 10px 0 0 0; font-size: 0.85rem; opacity: 0.9;">
+                        Check your email: ${userProfile.email}
+                    </p>
+                </div>
+                
+                ${result.analysis || '<p>Your comprehensive 35-page diagnostic report has been emailed to you.</p>'}
+                
+                <div style="background: #f0f9ff; padding: 25px; border-radius: 8px; margin-top: 40px;">
+                    <h3 style="margin: 0 0 15px 0;">Next Steps:</h3>
+                    <ol style="margin: 0; padding-left: 20px;">
+                        <li style="margin-bottom: 10px;">Download and review your full diagnostic report (check email)</li>
+                        <li style="margin-bottom: 10px;">Discuss findings with ${partnerName}</li>
+                        <li style="margin-bottom: 10px;">For implementation support, book a consultation with Kernorigin</li>
+                    </ol>
+                    <a href="https://calendly.com/periafmalayappa" target="_blank" class="btn" style="margin-top: 20px; display: inline-block;">Book Implementation Consultation →</a>
+                </div>
+            `;
+        }
+
+        function displayFreeResults(result, container) {
+            container.innerHTML = `
+                <div style="background: #f0f9ff; padding: 25px; border-left: 4px solid var(--accent-navy); margin-bottom: 30px;">
+                    <p style="margin: 0; font-size: 0.9rem; font-weight: 600; color: var(--accent-navy);">
+                        ✓ Analysis complete! Summary emailed to ${userProfile.email}
+                    </p>
+                </div>
+                
+                ${result.analysis || '<p>Your 2-page summary report has been generated.</p>'}
+                
+                <!-- TIERED UPGRADE OPTIONS -->
+                <div style="background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); color: white; padding: 40px 30px; margin-top: 50px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+                    <div style="text-align: center; margin-bottom: 30px;">
+                        <h3 style="color: white; margin: 0 0 10px 0; font-size: 1.8rem;">Want More Depth?</h3>
+                        <p style="color: rgba(255,255,255,0.9); margin: 0; font-size: 1.1rem;">
+                            You just got the <strong>summary</strong>. Here's what else is available:
                         </p>
                     </div>
-                    <p>Your detailed analysis is on its way. If you don't see it within 5 minutes, check your spam folder.</p>
-                    <p><strong>In the meantime:</strong></p>
-                    <ul>
-                        <li>Book a free 30-min debrief call to discuss your results</li>
-                        <li>Explore our services for deeper diagnostic support</li>
-                        <li>Read case studies of similar transformations</li>
-                    </ul>
-                `;
-            }
+                    
+                    <!-- TIER 1: Full Diagnostic -->
+                    <div style="background: white; color: #1e293b; padding: 30px; border-radius: 8px; margin-bottom: 20px;">
+                        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 15px;">
+                            <div>
+                                <h4 style="margin: 0 0 5px 0; color: #1e3a8a;">Full 35-Page Diagnostic</h4>
+                                <p style="margin: 0; font-size: 0.9rem; color: #64748b;">Deep-dive root cause analysis</p>
+                            </div>
+                            <div style="text-align: right;">
+                                <p style="margin: 0; font-size: 0.85rem; color: #64748b; text-decoration: line-through;">₹29,997</p>
+                                <p style="margin: 0; font-size: 1.5rem; font-weight: 700; color: #1e3a8a;">₹24,997</p>
+                            </div>
+                        </div>
+                        <ul style="margin: 0 0 20px 0; padding-left: 20px; font-size: 0.9rem;">
+                            <li>Complete 7-cylinder analysis (35 pages)</li>
+                            <li>Industry benchmarking & competitive analysis</li>
+                            <li>90-day action roadmap with priorities</li>
+                            <li>3+ matched case studies</li>
+                            <li>30-min debrief call with founder</li>
+                        </ul>
+                        <button onclick="showPaymentOptions('institutional')" class="btn" style="width: 100%; background: #1e3a8a; color: white;">
+                            Upgrade to Full Diagnostic →
+                        </button>
+                    </div>
+                    
+                    <!-- TIER 2: Diagnostic + DIY Toolkit -->
+                    <div style="background: rgba(251, 191, 36, 0.15); border: 2px solid #fbbf24; color: #1e293b; padding: 30px; border-radius: 8px; margin-bottom: 20px; position: relative;">
+                        <div style="position: absolute; top: -12px; right: 20px; background: #fbbf24; color: #1e293b; padding: 4px 12px; border-radius: 4px; font-size: 0.75rem; font-weight: 700;">
+                            BEST VALUE
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 15px;">
+                            <div>
+                                <h4 style="margin: 0 0 5px 0; color: #1e3a8a;">Diagnostic + DIY Implementation Toolkit</h4>
+                                <p style="margin: 0; font-size: 0.9rem; color: #64748b;">Everything you need to fix it yourself</p>
+                            </div>
+                            <div style="text-align: right;">
+                                <p style="margin: 0; font-size: 0.85rem; color: #64748b; text-decoration: line-through;">₹99,997</p>
+                                <p style="margin: 0; font-size: 1.5rem; font-weight: 700; color: #1e3a8a;">₹74,997</p>
+                            </div>
+                        </div>
+                        <ul style="margin: 0 0 20px 0; padding-left: 20px; font-size: 0.9rem;">
+                            <li><strong>Everything in Full Diagnostic +</strong></li>
+                            <li>Implementation playbooks & templates</li>
+                            <li>Process optimization worksheets</li>
+                            <li>Financial modeling spreadsheets</li>
+                            <li>90-day implementation tracker</li>
+                            <li>60-min implementation kick-off call</li>
+                        </ul>
+                        <button onclick="alert('DIY Toolkit: Contact us at contact@kernorigin.com')" class="btn" style="width: 100%; background: #fbbf24; color: #1e293b;">
+                            Get Diagnostic + Toolkit →
+                        </button>
+                    </div>
+                    
+                    <!-- TIER 3: Guided Implementation -->
+                    <div style="background: rgba(255,255,255,0.1); color: white; padding: 25px; border-radius: 8px; border: 2px solid rgba(255,255,255,0.3);">
+                        <h4 style="margin: 0 0 10px 0; color: white;">Want Us to Implement for You?</h4>
+                        <p style="margin: 0 0 15px 0; font-size: 0.9rem; opacity: 0.9;">
+                            From ₹3-50 Lakh based on scope. Includes diagnostic + hands-on transformation.
+                        </p>
+                        <a href="https://calendly.com/periafmalayappa" target="_blank" class="btn-outline" style="display: inline-block; border-color: white; color: white;">
+                            Book Implementation Consultation →
+                        </a>
+                    </div>
+                    
+                    <p style="text-align: center; margin: 25px 0 0 0; font-size: 0.85rem; opacity: 0.8;">
+                        💰 All diagnostic fees 100% credited toward implementation if you engage us within 90 days
+                    </p>
+                </div>
+            `;
         }
 
         function showError() {
@@ -585,7 +834,123 @@
             document.getElementById('error-screen').style.display = 'none';
             document.getElementById('email-capture-screen').style.display = 'block';
         }
+
+        // ============================================
+        // 6. PAYMENT SYSTEM (for upgrades)
+        // ============================================
+
+        function showPaymentOptions(diagnosticType) {
+            const options = {
+                institutional: {
+                    name: 'Full Institutional Diagnostic',
+                    price: 2499700,
+                    displayPrice: '₹24,997',
+                    regularPrice: '₹29,997'
+                }
+            };
+            
+            const option = options[diagnosticType];
+            
+            // Simple payment flow - opens Razorpay
+            const rzp = new Razorpay({
+                key: 'rzp_test_k45YYLs0J4Qq0i', // ⚠️ REPLACE with actual key
+                amount: option.price,
+                currency: 'INR',
+                name: 'Kernorigin',
+                description: option.name,
+                prefill: {
+                    name: userProfile.name,
+                    email: userProfile.email
+                },
+                theme: {
+                    color: '#1e3a8a'
+                },
+                handler: function(response) {
+                    handlePaymentSuccess(response, diagnosticType);
+                }
+            });
+            
+            rzp.open();
+            
+            gtag('event', 'payment_initiated', { 
+                'event_category': 'conversion',
+                'event_label': diagnosticType,
+                'value': option.price / 100
+            });
+        }
+
+        async function handlePaymentSuccess(paymentResponse, diagnosticType) {
+            // Show processing
+            document.getElementById('results-screen').style.display = 'none';
+            document.getElementById('loading-screen').style.display = 'block';
+            document.getElementById('loading-message').textContent = 'Processing payment and generating full diagnostic...';
+            
+            try {
+                const assessmentData = prepareAssessmentData();
+                
+                const submitFormData = new FormData();
+                submitFormData.append('action', 'analyze_assessment_paid');
+                submitFormData.append('apiKey', API_CONFIG.PUBLIC_KEY);
+                submitFormData.append('name', assessmentData.name);
+                submitFormData.append('email', assessmentData.email);
+                submitFormData.append('company', assessmentData.company);
+                submitFormData.append('answers', JSON.stringify(assessmentData.answers));
+                submitFormData.append('scores', JSON.stringify(assessmentData.scores));
+                submitFormData.append('diagnosticType', diagnosticType);
+                submitFormData.append('paymentId', paymentResponse.razorpay_payment_id);
+                
+                const response = await fetch(API_CONFIG.URL, {
+                    method: 'POST',
+                    body: submitFormData
+                });
+                
+                const result = await response.json();
+                
+                if (result.status === 'success') {
+                    showPaymentSuccessScreen(diagnosticType);
+                    
+                    gtag('event', 'purchase', { 
+                        'transaction_id': paymentResponse.razorpay_payment_id,
+                        'value': 24997,
+                        'currency': 'INR'
+                    });
+                }
+            } catch (error) {
+                console.error('Payment processing error:', error);
+                alert('Payment successful! Your report will be emailed within 24 hours. Check your email for confirmation.');
+            }
+        }
+
+        function showPaymentSuccessScreen(diagnosticType) {
+            document.getElementById('loading-screen').style.display = 'none';
+            
+            const successHTML = `
+                <div style="text-align: center; padding: 60px 30px;">
+                    <div style="width: 80px; height: 80px; background: #10b981; border-radius: 50%; margin: 0 auto 30px auto; display: flex; align-items: center; justify-content: center;">
+                        <span style="color: white; font-size: 3rem;">✓</span>
+                    </div>
+                    <h2 style="margin: 0 0 15px 0;">Payment Successful!</h2>
+                    <p style="font-size: 1.1rem; margin: 0 0 30px 0;">Your full diagnostic report is being generated.</p>
+                    
+                    <div style="background: #f0f9ff; padding: 25px; border-radius: 8px; text-align: left; max-width: 600px; margin: 0 auto 30px auto;">
+                        <h3 style="margin: 0 0 15px 0;">What Happens Next:</h3>
+                        <ol style="margin: 0; padding-left: 20px;">
+                            <li style="margin-bottom: 10px;">Payment confirmation email (within 5 minutes)</li>
+                            <li style="margin-bottom: 10px;">Full 35-page diagnostic report (within 72 hours)</li>
+                            <li style="margin-bottom: 10px;">Calendar link for your 30-min debrief call</li>
+                            <li>100% credit toward implementation if you engage us within 90 days</li>
+                        </ol>
+                    </div>
+                    
+                    <p style="margin-bottom: 20px;">Check your inbox: <strong>${userProfile.email}</strong></p>
+                    <a href="index.html" class="btn-outline">Return to Homepage →</a>
+                </div>
+            `;
+            
+            document.getElementById('results-screen').innerHTML = successHTML;
+            document.getElementById('results-screen').style.display = 'block';
+        }
     </script>
-    <script src="../mobile-menu.js"></script>
+    <script src="mobile-menu.js"></script>
 </body>
 </html>
