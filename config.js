@@ -11,7 +11,7 @@
 const API_CONFIG = {
     // Your Google Apps Script Web App URL
     // REPLACE THIS with your actual deployment URL
-    URL: 'https://script.google.com/macros/s/AKfycbzmmnsq6ZSvKTuqFrr32G4170laH1PJSuGaTmeTWH7iaFGn1S4ovYJNiKMOyUQoXN8/exec',
+    URL: 'https://script.google.com/macros/s/AKfycbyOvZgpa0_FAAdyw11utNxefmO37RNftBa50hT2zHD_CUaWTm2k1dOAKoxB_3yuhNE/exec',
     
     // Your PUBLIC_API_KEY from Script Properties
     // ⚠️ REPLACE THIS with your actual PUBLIC_API_KEY
