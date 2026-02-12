@@ -671,13 +671,34 @@
         let userProfile = {};
 
         // ============================================
-        // 3. ASSESSMENT FLOW
+        // 3. IMPROVED SCROLL LOGIC (Keeps focus on questions)
+        // ============================================
+        
+        function scrollToAssessment() {
+            const container = document.getElementById('assessment-container');
+            if (!container) return;
+            
+            // Scroll to container minus 100px for sticky header
+            const offset = 100;
+            const bodyRect = document.body.getBoundingClientRect().top;
+            const elementRect = container.getBoundingClientRect().top;
+            const elementPosition = elementRect - bodyRect;
+            const offsetPosition = elementPosition - offset;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: "smooth"
+            });
+        }
+
+        // ============================================
+        // 4. ASSESSMENT FLOW
         // ============================================
 
         function startAssessment() {
             document.getElementById('intro-screen').style.display = 'none';
             document.getElementById('question-screen').style.display = 'block';
-            window.scrollTo({top: 0, behavior: 'smooth'});
+            scrollToAssessment(); // FIXED: Scroll to question, not top
             showQuestion(0);
             
             gtag('event', 'assessment_started', { 
@@ -714,8 +735,8 @@
             document.getElementById('next-btn').disabled = answers[index] === undefined;
             document.getElementById('next-btn').textContent = index === questions.length - 1 ? 'See My Results →' : 'Next Question →';
             
-            // Smooth scroll to top of question
-            window.scrollTo({top: 0, behavior: 'smooth'});
+            // FIXED: Scroll to question container, not top
+            scrollToAssessment();
         }
 
         function selectAnswer(optionIndex) {
@@ -782,7 +803,7 @@
             
             document.getElementById('question-screen').style.display = 'none';
             document.getElementById('email-capture-screen').style.display = 'block';
-            window.scrollTo({top: 0, behavior: 'smooth'});
+            scrollToAssessment(); // FIXED: Scroll to container, not top
             
             gtag('event', 'assessment_complete', { 'event_category': 'engagement' });
         }
@@ -808,7 +829,7 @@
             // Show loading
             document.getElementById('email-capture-screen').style.display = 'none';
             document.getElementById('loading-screen').style.display = 'block';
-            window.scrollTo({top: 0, behavior: 'smooth'});
+            scrollToAssessment(); // FIXED: Scroll to container, not top
             
             // Animate loading messages
             const messages = [
@@ -938,7 +959,7 @@
         function displayResults(result) {
             document.getElementById('loading-screen').style.display = 'none';
             document.getElementById('results-screen').style.display = 'block';
-            window.scrollTo({top: 0, behavior: 'smooth'});
+            scrollToAssessment(); // FIXED: Scroll to container, not top
             
             const resultsDiv = document.getElementById('results-content');
             
@@ -1022,21 +1043,21 @@
                     </div>
                     
                     <!-- TIER 2: Diagnostic + DIY Toolkit -->
-                    <div style="background: rgba(251, 191, 36, 0.15); border: 2px solid #fbbf24; color: #1e293b; padding: 30px; border-radius: 8px; margin-bottom: 20px; position: relative;">
-                        <div style="position: absolute; top: -12px; right: 20px; background: #fbbf24; color: #1e293b; padding: 4px 12px; border-radius: 4px; font-size: 0.75rem; font-weight: 700;">
+                    <div style="background: rgba(251, 191, 36, 0.15); border: 2px solid #fbbf24; color: #000000; padding: 30px; border-radius: 8px; margin-bottom: 20px; position: relative;">
+                        <div style="position: absolute; top: -12px; right: 20px; background: #fbbf24; color: #000000; padding: 4px 12px; border-radius: 4px; font-size: 0.75rem; font-weight: 800;">
                             BEST VALUE
                         </div>
                         <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 15px;">
                             <div>
-                                <h4 style="margin: 0 0 5px 0; color: #1e3a8a;">Diagnostic + DIY Implementation Toolkit</h4>
-                                <p style="margin: 0; font-size: 0.9rem; color: #64748b;">Everything you need to fix it yourself</p>
+                                <h4 style="margin: 0 0 5px 0; color: #000000; font-weight: 800;">Diagnostic + DIY Implementation Toolkit</h4>
+                                <p style="margin: 0; font-size: 0.9rem; color: #000000;">Everything you need to fix it yourself</p>
                             </div>
                             <div style="text-align: right;">
-                                <p style="margin: 0; font-size: 0.85rem; color: #64748b; text-decoration: line-through;">₹99,997</p>
-                                <p style="margin: 0; font-size: 1.5rem; font-weight: 700; color: #1e3a8a;">₹74,997</p>
+                                <p style="margin: 0; font-size: 0.85rem; color: #444444; text-decoration: line-through;">₹99,997</p>
+                                <p style="margin: 0; font-size: 1.5rem; font-weight: 700; color: #000000;">₹74,997</p>
                             </div>
                         </div>
-                        <ul style="margin: 0 0 20px 0; padding-left: 20px; font-size: 0.9rem;">
+                        <ul style="margin: 0 0 20px 0; padding-left: 20px; font-size: 0.9rem; color: #000000;">
                             <li><strong>Everything in Full Diagnostic +</strong></li>
                             <li>Implementation playbooks & templates</li>
                             <li>Process optimization worksheets</li>
@@ -1044,7 +1065,7 @@
                             <li>90-day implementation tracker</li>
                             <li>60-min implementation kick-off call</li>
                         </ul>
-                        <button onclick="alert('DIY Toolkit: Contact us at contact@kernorigin.com')" class="btn" style="width: 100%; background: #fbbf24; color: #1e293b;">
+                        <button onclick="alert('DIY Toolkit: Contact us at contact@kernorigin.com')" class="btn" style="width: 100%; background: #fbbf24; color: #000000; font-weight: 700;">
                             Get Diagnostic + Toolkit →
                         </button>
                     </div>
@@ -1070,7 +1091,7 @@
         function showError() {
             document.getElementById('loading-screen').style.display = 'none';
             document.getElementById('error-screen').style.display = 'block';
-            window.scrollTo({top: 0, behavior: 'smooth'});
+            scrollToAssessment(); // FIXED: Scroll to container, not top
         }
 
         function retryAnalysis() {

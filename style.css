@@ -670,7 +670,7 @@ label {
 }
 
 /* =========================================
-   PRODUCTION PATCH v1.0 - DO NOT REMOVE
+   PRODUCTION PATCH v2.0 - FIXED & VERIFIED
    ========================================= */
 
 /* 1. Mobile Edge & Spacing Fixes */
@@ -707,14 +707,17 @@ label {
     }
 }
 
-/* 2. High Contrast Utility (Dark Backgrounds) */
-.hero-systems, .bg-navy, footer, [style*="background: var(--accent-navy)"], [style*="background: #002244"] {
+/* 2. High Contrast Utility (Dark Backgrounds ONLY) */
+/* REMOVED 'footer' from this list to fix invisible text bug */
+.hero-systems, .bg-navy, [style*="background: var(--accent-navy)"], [style*="background: #002244"] {
     color: #FFFFFF !important;
 }
-.hero-systems p, .bg-navy p, footer p, [style*="background: var(--accent-navy)"] p {
+
+.hero-systems p, .bg-navy p, [style*="background: var(--accent-navy)"] p {
     color: rgba(255, 255, 255, 0.9) !important;
 }
-.hero-systems h1, .hero-systems h2, .hero-systems h3, footer h4 {
+
+.hero-systems h1, .hero-systems h2, .hero-systems h3 {
     color: #FFFFFF !important;
 }
 
