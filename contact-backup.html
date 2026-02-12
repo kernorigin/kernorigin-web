@@ -56,8 +56,7 @@
             </div>
         </div>
     </main>
-    
-    <footer>
+        <footer>
         <div class="container footer-wrapper">
             <div>
                 <div class="logo">KERNORIGIN</div>
@@ -78,82 +77,6 @@
         </div>
     </footer>
     
-    <script src="config.js"></script>
-    <script>
-        async function sendContact(e) {
-            e.preventDefault();
-            
-            const btn = document.getElementById('sendBtn');
-            const statusMsg = document.getElementById('statusMessage');
-            const originalText = btn.textContent;
-            
-            // Disable button and show loading state
-            btn.textContent = 'Sending...';
-            btn.disabled = true;
-            statusMsg.style.display = 'none';
-
-            try {
-                // Check if API_CONFIG is properly configured
-                if (!API_CONFIG || API_CONFIG.URL.includes("YOUR_SCRIPT_ID")) {
-                    throw new Error("API configuration not set. Please check config.js");
-                }
-
-                const formData = new FormData(e.target);
-                
-                const payload = {
-                    action: 'submit_contact',
-                    name: formData.get('name'),
-                    email: formData.get('email'),
-                    phone: formData.get('phone') || '',
-                    message: formData.get('message')
-                };
-
-                const response = await fetch(API_CONFIG.URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-
-                const result = await response.json();
-
-                if (result.error) {
-                    throw new Error(result.error);
-                }
-
-                if (result.status === 'success') {
-                    // Show success message
-                    statusMsg.style.display = 'block';
-                    statusMsg.style.background = '#d4edda';
-                    statusMsg.style.color = '#155724';
-                    statusMsg.style.border = '1px solid #c3e6cb';
-                    statusMsg.innerHTML = '✅ <strong>Message Sent!</strong><br>We\'ll get back to you within 24 hours.';
-                    
-                    // Reset form
-                    e.target.reset();
-                    
-                    // Scroll to success message
-                    statusMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                } else {
-                    throw new Error(result.message || 'Unknown error occurred');
-                }
-
-            } catch(error) {
-                console.error('Contact form error:', error);
-                
-                // Show error message
-                statusMsg.style.display = 'block';
-                statusMsg.style.background = '#f8d7da';
-                statusMsg.style.color = '#721c24';
-                statusMsg.style.border = '1px solid #f5c6cb';
-                statusMsg.innerHTML = `❌ <strong>Error:</strong> ${error.message}<br><small>Please try again or email us directly.</small>`;
-                
-            } finally {
-                // Re-enable button
-                btn.textContent = originalText;
-                btn.disabled = false;
-            }
-        }
-    </script>
     <script src="mobile-menu.js"></script>
 </body>
 </html>

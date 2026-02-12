@@ -309,7 +309,7 @@
 
                 <div class="card" style="margin-bottom: 20px;">
                     <h4 style="margin-bottom: 10px;">Why should I pay for a diagnostic?</h4>
-                    <p style="margin-bottom: 0;">Because 90% of software projects fail not because of bad code, but because they solve the wrong problem. The diagnostic ensures you invest in the RIGHT solution. It's ₹2.5L of insurance on a ₹20L+ decision.</p>
+                    <p style="margin-bottom: 0;">Because 90% of software projects fail not because of bad code, but because they solve the wrong problem. The diagnostic ensures you invest in the RIGHT solution. It's ₹2.5L of insurance on a ₹15L+ decision.</p>
                 </div>
 
                 <div class="card" style="margin-bottom: 20px;">
@@ -390,11 +390,7 @@
 
             } catch(e) { 
                 console.error("Failed to load:", e);
-                document.querySelector('.diagnostic-form-wrapper').innerHTML = 
-                    `<div class="card" style="text-align:center; padding:50px;">
-                        <h3>Diagnostic System Offline</h3>
-                        <p>We are currently updating our systems. Please try again in a few minutes or contact us directly.</p>
-                    </div>`;
+                alert("System offline. Check config.js.\n\n" + e.message);
             }
         };
 
@@ -408,11 +404,9 @@
 
             Object.keys(grouped).forEach(sectionId => {
                 const container = document.getElementById(sectionId);
-                if(container) {
-                    grouped[sectionId].forEach(q => {
-                        container.appendChild(createQuestionElement(q));
-                    });
-                }
+                grouped[sectionId].forEach(q => {
+                    container.appendChild(createQuestionElement(q));
+                });
             });
         }
 
@@ -427,16 +421,11 @@
 
             let input;
             
-            if (q.type === 'select' || q.type === 'multiselect') {
+            if (q.type === 'select') {
                 input = document.createElement('select');
                 input.required = true;
                 input.id = q.id;
                 input.name = q.id;
-                
-                if (q.type === 'multiselect') {
-                    input.multiple = true;
-                    input.style.height = '100px';
-                }
                 
                 const defaultOpt = document.createElement('option');
                 defaultOpt.value = '';
@@ -454,15 +443,30 @@
                         input.appendChild(option);
                     });
                 }
+            } else if (q.type === 'multiselect') {
+                input = document.createElement('select');
+                input.multiple = true;
+                input.id = q.id;
+                input.name = q.id;
+                input.style.height = '100px';
                 
-                wrapper.appendChild(input);
-                
-                if (q.type === 'multiselect') {
-                    const help = document.createElement('div');
-                    help.className = 'question-help';
-                    help.textContent = 'Hold Ctrl/Cmd (or tap on mobile) to select multiple';
-                    wrapper.appendChild(help);
+                if (q.options && q.options !== 'NULL' && q.options !== '') {
+                    const optionsArray = String(q.options).split('/');
+                    optionsArray.forEach(opt => {
+                        const option = document.createElement('option');
+                        option.value = opt.trim();
+                        option.textContent = opt.trim();
+                        input.appendChild(option);
+                    });
                 }
+                
+                const help = document.createElement('div');
+                help.className = 'question-help';
+                help.textContent = 'Hold Ctrl/Cmd to select multiple';
+                wrapper.appendChild(label);
+                wrapper.appendChild(input);
+                wrapper.appendChild(help);
+                return wrapper;
                 
             } else if (q.type === 'number') {
                 input = document.createElement('input');
@@ -472,7 +476,6 @@
                 input.id = q.id;
                 input.name = q.id;
                 input.placeholder = 'Enter number';
-                wrapper.appendChild(input);
                 
             } else {
                 input = document.createElement('textarea');
@@ -481,9 +484,9 @@
                 input.name = q.id;
                 input.placeholder = 'Describe...';
                 input.rows = 3;
-                wrapper.appendChild(input);
             }
 
+            wrapper.appendChild(input);
             return wrapper;
         }
 
@@ -492,7 +495,7 @@
             
             const btn = document.getElementById('submitBtn');
             const originalText = btn.textContent;
-            btn.textContent = 'Analyzing Data...';
+            btn.textContent = 'Processing...';
             btn.disabled = true;
 
             try {
@@ -500,22 +503,14 @@
                 const answers = {};
                 
                 SYSTEMS_QUESTIONS.forEach(q => {
-                    // Handle multiselect values
-                    if (q.type === 'multiselect') {
-                        const selectElement = e.target.elements[q.id];
-                        const values = Array.from(selectElement.selectedOptions).map(opt => opt.value);
-                        answers[q.id] = values.join(', ');
-                    } else {
-                        const value = formData.get(q.id);
-                        if (value !== null && value !== '') {
-                            answers[q.id] = value;
-                        }
+                    const value = formData.get(q.id);
+                    if (value !== null && value !== '') {
+                        answers[q.id] = value;
                     }
                 });
 
                 const payload = {
                     action: 'submit_systems_diagnostic',
-                    apiKey: API_CONFIG.PUBLIC_KEY, // Security verification
                     name: formData.get('clientName'),
                     email: formData.get('clientEmail'),
                     business: formData.get('businessType'),
