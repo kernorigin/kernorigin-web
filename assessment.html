@@ -1094,9 +1094,15 @@
             
             const option = options[diagnosticType];
             
-            // Simple payment flow - opens Razorpay
+            // ⚠️ CRITICAL: RAZORPAY KEY CONFIGURATION
+            // -----------------------------------------
+            // TESTING: Use 'rzp_test_k45YYLs0J4Qq0i' for development
+            // PRODUCTION: MUST replace with 'rzp_live_XXXXXXXX' before going live
+            // Real payments will NOT process with test keys!
+            // Get your live key from: https://dashboard.razorpay.com/app/keys
+            
             const rzp = new Razorpay({
-                key: 'rzp_test_k45YYLs0J4Qq0i', // ⚠️ REPLACE with actual key
+                key: 'rzp_test_k45YYLs0J4Qq0i', // ⚠️ REPLACE WITH LIVE KEY FOR PRODUCTION
                 amount: option.price,
                 currency: 'INR',
                 name: 'Kernorigin',
