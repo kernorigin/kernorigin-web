@@ -668,3 +668,74 @@ label {
         text-decoration: underline;
     }
 }
+
+/* =========================================
+   PRODUCTION PATCH v1.0 - DO NOT REMOVE
+   ========================================= */
+
+/* 1. Mobile Edge & Spacing Fixes */
+@media (max-width: 768px) {
+    .container {
+        padding-left: 24px !important;
+        padding-right: 24px !important;
+        width: 100% !important;
+    }
+    .readable-column {
+        padding: 0 !important;
+        width: 100% !important;
+    }
+    h1 {
+        font-size: 2.2rem !important;
+        text-align: left;
+    }
+    .grid-2, .grid-3 {
+        grid-template-columns: 1fr !important;
+        gap: 30px;
+    }
+    /* Mobile Nav Contrast */
+    nav ul {
+        background: var(--accent-navy);
+        padding: 80px 40px !important;
+    }
+    nav ul li a {
+        color: #FFFFFF !important;
+        font-size: 1.5rem !important;
+    }
+    nav ul li a.active {
+        color: var(--accent-gold) !important;
+        border-bottom: 2px solid var(--accent-gold);
+    }
+}
+
+/* 2. High Contrast Utility (Dark Backgrounds) */
+.hero-systems, .bg-navy, footer, [style*="background: var(--accent-navy)"], [style*="background: #002244"] {
+    color: #FFFFFF !important;
+}
+.hero-systems p, .bg-navy p, footer p, [style*="background: var(--accent-navy)"] p {
+    color: rgba(255, 255, 255, 0.9) !important;
+}
+.hero-systems h1, .hero-systems h2, .hero-systems h3, footer h4 {
+    color: #FFFFFF !important;
+}
+
+/* 3. Component Readability */
+.progress-count {
+    background: var(--accent-navy);
+    color: white !important;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+}
+.metric-card {
+    background: #ffffff !important;
+    color: #111111 !important;
+    border: 1px solid #e5e7eb;
+}
+.metric-card p {
+    color: #4b5563 !important;
+}
+.section-number {
+    background: var(--accent-gold) !important;
+    color: #000000 !important;
+    font-weight: 800;
+}

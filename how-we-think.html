@@ -5,6 +5,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>How We Think | Kernorigin</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Page-Specific Styles */
+        .cylinder-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-align: left;
+        }
+        .cylinder-num {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent-gold);
+            line-height: 1;
+            margin-bottom: 15px;
+            opacity: 0.8;
+        }
+        .comparison-box {
+            background: var(--bg-offwhite);
+            padding: 40px;
+            border-radius: 8px;
+        }
+        .comparison-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            padding: 20px 0;
+            border-bottom: 1px solid #ddd;
+            align-items: start;
+        }
+        .symptom { color: #dc2626; line-height: 1.5; }
+        .root-cause { color: #059669; font-weight: 600; line-height: 1.5; }
+        .table-header {
+            font-weight: 700; 
+            color: var(--text-muted); 
+            text-transform: uppercase; 
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+        /* Mobile Alignment */
+        @media (max-width: 768px) {
+            .comparison-box { padding: 20px; }
+            .comparison-row { grid-template-columns: 1fr; gap: 10px; padding: 15px 0; }
+            .table-header-row { display: none; }
+            .mobile-label {
+                display: block;
+                font-size: 0.75rem;
+                text-transform: uppercase;
+                font-weight: 700;
+                margin-bottom: 4px;
+                color: #999;
+            }
+            .symptom { margin-bottom: 15px; }
+            .text-center-mobile { text-align: left !important; }
+        }
+        @media (min-width: 769px) { .mobile-label { display: none; } }
+    </style>
 </head>
 <body>
     <header>
@@ -15,6 +76,7 @@
                     <li><a href="index.html">Home</a></li>
                     <li><a href="how-we-think.html" class="active">How We Think</a></li>
                     <li><a href="how-we-work.html">How We Work</a></li>
+                    <li><a href="services.html">Services</a></li>
                     <li><a href="impact.html">Impact</a></li>
                     <li><a href="team.html">Team</a></li>
                     <li><a href="insights.html">Insights</a></li>
@@ -24,63 +86,116 @@
         </div>
     </header>
 
-    <main class="container section-padding">
-        <div class="readable-column text-center">
-            <span class="eyebrow">Philosophy</span>
-            <h1>Symptoms lie.<br>Root causes don't.</h1>
-            <p>Every problem you see is just the surface. The real problem is always deeper.</p>
-        </div>
-
-        <div class="readable-column" style="margin-top: 80px;">
-            
-            <div style="margin-bottom: 60px;">
-                <h3>The Seven Cylinders Framework</h3>
-                <p>Every organization runs on seven cylinders. When something breaks, most people fix the cylinder that's making noise. We find the cylinder that's actually broken.</p>
-                
-                <div style="margin-top: 30px; background: var(--bg-offwhite); padding: 30px; border-left: 4px solid var(--accent-gold);">
-                    <ol style="line-height: 2;">
-                        <li><strong>Strategy</strong> — Where are we actually going?</li>
-                        <li><strong>Leadership</strong> — Who's driving, and are they aligned?</li>
-                        <li><strong>Operations</strong> — How does work actually get done?</li>
-                        <li><strong>People</strong> — Right people, right roles?</li>
-                        <li><strong>Systems</strong> — What enables progress? What blocks it?</li>
-                        <li><strong>Culture</strong> — What behaviors are actually rewarded?</li>
-                        <li><strong>Customer</strong> — Who are we serving, and why do they choose us?</li>
-                    </ol>
+    <main>
+        <section class="section-padding">
+            <div class="container readable-column">
+                <div class="text-center text-center-mobile">
+                    <span class="eyebrow">The Philosophy</span>
+                    <h1>Symptoms lie.<br>Root causes don't.</h1>
+                    <p style="font-size: 1.2rem; margin-top: 20px; color: var(--text-muted); line-height: 1.6;">
+                        Most businesses spend years and millions fighting fires. We find the arsonist.
+                    </p>
                 </div>
             </div>
+        </section>
 
-            <div style="margin-bottom: 60px;">
-                <h3>The Diagnosis-First Principle</h3>
-                <p>Most consultants start with solutions. We start with diagnosis.</p>
-                <p>Why? Because solutions without diagnosis are just guesses. And guesses waste time and money.</p>
-                <p>Our methodology:</p>
-                <ul style="line-height: 2;">
-                    <li>Listen to what's stuck (the symptom)</li>
-                    <li>Assess all seven cylinders (the system)</li>
-                    <li>Identify the root cause (what's actually broken)</li>
-                    <li>Design targeted interventions (what will actually fix it)</li>
-                    <li>Implement and measure (until it sticks)</li>
-                </ul>
-            </div>
+        <section class="section-padding" style="background: var(--accent-navy); color: white;">
+            <div class="container">
+                <div class="readable-column text-center text-center-mobile" style="margin-bottom: 60px;">
+                    <h2 style="color: white;">The Seven Cylinders™</h2>
+                    <p style="color: rgba(255,255,255,0.8);">
+                        A business is an engine. If one cylinder misfires, the whole engine shakes. 
+                        We don't fix the shake. We fix the cylinder.
+                    </p>
+                </div>
 
-            <div style="margin-bottom: 60px;">
-                <h3>Why This Works</h3>
-                <p>Over 24 years and 50+ transformations, we've learned one thing: <strong>symptoms always lie</strong>.</p>
-                <p>Marketing problems are usually operations problems. Turnover is usually leadership problems. Poor placements are usually student readiness. Stalled revenue is usually strategy + systems.</p>
-                <p>The symptom tells you something is broken. The root cause tells you what.</p>
+                <div class="grid-3">
+                    <div class="cylinder-card">
+                        <span class="cylinder-num">01</span>
+                        <h3 style="color: white; margin-top: 0;">Strategy</h3>
+                        <p style="color: rgba(255,255,255,0.7); font-size: 0.95rem; margin: 0;">Are we playing the right game? Do we have a right to win?</p>
+                    </div>
+                    <div class="cylinder-card">
+                        <span class="cylinder-num">02</span>
+                        <h3 style="color: white; margin-top: 0;">Operations</h3>
+                        <p style="color: rgba(255,255,255,0.7); font-size: 0.95rem; margin: 0;">Can we deliver our promise repeatedly without chaos?</p>
+                    </div>
+                    <div class="cylinder-card">
+                        <span class="cylinder-num">03</span>
+                        <h3 style="color: white; margin-top: 0;">Systems</h3>
+                        <p style="color: rgba(255,255,255,0.7); font-size: 0.95rem; margin: 0;">Does technology enable speed or create friction?</p>
+                    </div>
+                    <div class="cylinder-card">
+                        <span class="cylinder-num">04</span>
+                        <h3 style="color: white; margin-top: 0;">People</h3>
+                        <p style="color: rgba(255,255,255,0.7); font-size: 0.95rem; margin: 0;">Do we have the capability and culture to execute?</p>
+                    </div>
+                    <div class="cylinder-card">
+                        <span class="cylinder-num">05</span>
+                        <h3 style="color: white; margin-top: 0;">Financial</h3>
+                        <p style="color: rgba(255,255,255,0.7); font-size: 0.95rem; margin: 0;">Is the unit economics sound? Is cash flow sustainable?</p>
+                    </div>
+                    <div class="cylinder-card">
+                        <span class="cylinder-num">06</span>
+                        <h3 style="color: white; margin-top: 0;">Market</h3>
+                        <p style="color: rgba(255,255,255,0.7); font-size: 0.95rem; margin: 0;">Does the customer value us over the competition?</p>
+                    </div>
+                    <div class="cylinder-card" style="border: 1px solid var(--accent-gold);">
+                        <span class="cylinder-num" style="color: #fff; opacity: 1;">07</span>
+                        <h3 style="color: white; margin-top: 0;">Leadership</h3>
+                        <p style="color: rgba(255,255,255,0.7); font-size: 0.95rem; margin: 0;">Is the direction clear, decisive, and aligned?</p>
+                    </div>
+                </div>
             </div>
+        </section>
 
-            <div style="border-top: 1px solid var(--border-light); padding-top: 60px; text-align: center;">
-                <h3>The Uncomfortable Truth</h3>
-                <p style="font-size: 1.2rem; color: var(--text-main); max-width: 600px; margin: 0 auto 30px auto;">Root cause diagnosis is uncomfortable. It exposes misalignment, dysfunction, and problems people have been avoiding.</p>
-                <p style="color: var(--text-muted);">That's exactly why most organizations skip it.<br>And exactly why nothing changes.</p>
-                <a href="contact.html" class="btn" style="margin-top: 30px;">Ready to Face the Truth?</a>
+        <section class="section-padding">
+            <div class="container readable-column">
+                <div class="text-center text-center-mobile">
+                    <h2 style="margin-bottom: 40px;">The Trap of "Symptom Fixing"</h2>
+                </div>
+                
+                <div class="comparison-box">
+                    <div class="comparison-row table-header-row" style="border-bottom: 2px solid #ddd; padding-bottom: 15px;">
+                        <div class="table-header">What You See (Symptom)</div>
+                        <div class="table-header">What's Actually Broken (Root Cause)</div>
+                    </div>
+
+                    <div class="comparison-row">
+                        <div><span class="mobile-label">Symptom</span><div class="symptom">"Sales are down."</div></div>
+                        <div><span class="mobile-label">Root Cause</span><div class="root-cause">Your product no longer fits the market needs (Strategy).</div></div>
+                    </div>
+
+                    <div class="comparison-row">
+                        <div><span class="mobile-label">Symptom</span><div class="symptom">"We can't find good people."</div></div>
+                        <div><span class="mobile-label">Root Cause</span><div class="root-cause">Your culture repels talent, or your process is undefined (People/Ops).</div></div>
+                    </div>
+
+                    <div class="comparison-row">
+                        <div><span class="mobile-label">Symptom</span><div class="symptom">"We have cash flow problems."</div></div>
+                        <div><span class="mobile-label">Root Cause</span><div class="root-cause">Your delivery cycle is too slow, locking up capital (Operations).</div></div>
+                    </div>
+
+                    <div class="comparison-row" style="border-bottom: none;">
+                        <div><span class="mobile-label">Symptom</span><div class="symptom">"Marketing isn't working."</div></div>
+                        <div><span class="mobile-label">Root Cause</span><div class="root-cause">You have no clear differentiation (Market/Strategy).</div></div>
+                    </div>
+                </div>
             </div>
-        </div>
+        </section>
+
+        <section class="section-padding">
+            <div class="container readable-column text-center text-center-mobile">
+                <h2>Ready to stop guessing?</h2>
+                <p style="margin-bottom: 30px; color: var(--text-muted);">
+                    Take the 5-minute assessment to find out which cylinder is misfiring.
+                </p>
+                <a href="assessment.html" class="btn">Start Diagnostic</a>
+            </div>
+        </section>
     </main>
 
-        <footer>
+    <footer>
         <div class="container footer-wrapper">
             <div>
                 <div class="logo">KERNORIGIN</div>
@@ -92,6 +207,7 @@
             </div>
             <div class="footer-links">
                 <a href="index.html">Home</a>
+                <a href="services.html">Services</a>
                 <a href="insights.html">Insights</a>
                 <a href="contact.html">Contact</a>
             </div>
@@ -100,7 +216,6 @@
             &copy; 2026 Kernorigin. All rights reserved.
         </div>
     </footer>
-    
     <script src="mobile-menu.js"></script>
 </body>
 </html>

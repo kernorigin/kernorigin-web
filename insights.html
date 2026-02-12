@@ -81,20 +81,20 @@
                     return;
                 }
                 
+                // REPLACE CURRENT LOOP WITH THIS:
                 posts.forEach(post => {
-                    const date = new Date(post.publish_date).toLocaleDateString('en-US', {
-                        month: 'long',
-                        day: 'numeric', 
-                        year: 'numeric'
+                    const date = new Date(post.publish_date).toLocaleDateString('en-IN', {
+                        month: 'long', day: 'numeric', year: 'numeric'
                     });
                     
+                    // FIX: Content wrapped in .card with specific styling
                     container.innerHTML += `
-                        <div style="border-top: 1px solid #eee; padding: 40px 0;">
-                            <h3>${post.title}</h3>
-                            <span class="eyebrow" style="color:#777; margin-bottom: 10px;">${date}</span>
-                            <p>${post.summary}</p>
-                            <a href="post.html?slug=${post.slug}" class="btn-outline" style="margin-top: 10px; display: inline-block;">Read Analysis</a>
-                        </div>
+                        <article class="card" style="margin-bottom: 30px; border-left: 4px solid var(--accent-gold);">
+                            <span class="eyebrow" style="font-size: 0.8rem; margin-bottom: 10px; display: block;">${date}</span>
+                            <h3 style="margin-bottom: 15px;">${post.title}</h3>
+                            <p style="color: var(--text-muted); line-height: 1.6;">${post.summary}</p>
+                            <a href="post.html?slug=${post.slug}" class="btn-outline" style="margin-top: 15px; display: inline-block;">Read Full Analysis →</a>
+                        </article>
                     `;
                 });
             } catch(e) {

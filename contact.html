@@ -80,79 +80,59 @@
     
     <script src="config.js"></script>
     <script>
-        async function sendContact(e) {
-            e.preventDefault();
-            
-            const btn = document.getElementById('sendBtn');
-            const statusMsg = document.getElementById('statusMessage');
-            const originalText = btn.textContent;
-            
-            // Disable button and show loading state
-            btn.textContent = 'Sending...';
-            btn.disabled = true;
-            statusMsg.style.display = 'none';
+async function sendContact(event) {
+    event.preventDefault();
+    const btn = document.getElementById('sendBtn');
+    const status = document.getElementById('statusMessage');
+    const formData = new FormData(event.target);
+    
+    btn.disabled = true;
+    const originalText = btn.textContent;
+    btn.textContent = 'Sending...';
 
-            try {
-                // Check if API_CONFIG is properly configured
-                if (!API_CONFIG || API_CONFIG.URL.includes("YOUR_SCRIPT_ID")) {
-                    throw new Error("API configuration not set. Please check config.js");
-                }
-
-                const formData = new FormData(e.target);
-                
-                const payload = {
-                    action: 'submit_contact',
-                    name: formData.get('name'),
-                    email: formData.get('email'),
-                    phone: formData.get('phone') || '',
-                    message: formData.get('message')
-                };
-
-                const response = await fetch(API_CONFIG.URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-
-                const result = await response.json();
-
-                if (result.error) {
-                    throw new Error(result.error);
-                }
-
-                if (result.status === 'success') {
-                    // Show success message
-                    statusMsg.style.display = 'block';
-                    statusMsg.style.background = '#d4edda';
-                    statusMsg.style.color = '#155724';
-                    statusMsg.style.border = '1px solid #c3e6cb';
-                    statusMsg.innerHTML = '✅ <strong>Message Sent!</strong><br>We\'ll get back to you within 24 hours.';
-                    
-                    // Reset form
-                    e.target.reset();
-                    
-                    // Scroll to success message
-                    statusMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                } else {
-                    throw new Error(result.message || 'Unknown error occurred');
-                }
-
-            } catch(error) {
-                console.error('Contact form error:', error);
-                
-                // Show error message
-                statusMsg.style.display = 'block';
-                statusMsg.style.background = '#f8d7da';
-                statusMsg.style.color = '#721c24';
-                statusMsg.style.border = '1px solid #f5c6cb';
-                statusMsg.innerHTML = `❌ <strong>Error:</strong> ${error.message}<br><small>Please try again or email us directly.</small>`;
-                
-            } finally {
-                // Re-enable button
-                btn.textContent = originalText;
-                btn.disabled = false;
-            }
+    try {
+        if (!API_CONFIG || API_CONFIG.URL.includes("YOUR_SCRIPT_ID")) {
+            throw new Error("API configuration not set.");
         }
+
+        const payload = {
+            // CRITICAL FIX: Action must be 'contact' to match code.gs
+            action: 'contact', 
+            apiKey: API_CONFIG.PUBLIC_KEY,
+            name: formData.get('name'),
+            email: formData.get('email'),
+            phone: formData.get('phone') || '',
+            message: formData.get('message')
+        };
+
+        const response = await fetch(API_CONFIG.URL, {
+            method: 'POST',
+            body: JSON.stringify(payload)
+        });
+
+        const result = await response.json();
+        
+        status.style.display = 'block';
+        if (result.success || result.status === 'success') {
+            status.style.backgroundColor = '#d1fae5';
+            status.style.color = '#065f46';
+            status.textContent = '✅ Message sent! We will be in touch shortly.';
+            event.target.reset();
+            status.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else {
+            throw new Error(result.error || result.message || 'Server error');
+        }
+    } catch (error) {
+        status.style.display = 'block';
+        status.style.backgroundColor = '#fee2e2';
+        status.style.color = '#991b1b';
+        status.textContent = '❌ Error: ' + error.message;
+        status.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } finally {
+        btn.disabled = false;
+        btn.textContent = originalText;
+    }
+}
     </script>
     <script src="mobile-menu.js"></script>
 </body>
