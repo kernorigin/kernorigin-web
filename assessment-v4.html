@@ -674,18 +674,16 @@
         // 3. IMPROVED SCROLL LOGIC (Keeps focus on questions)
         // ============================================
         
-        // REPLACEMENT SCROLL LOGIC
         function scrollToAssessment() {
             const container = document.getElementById('assessment-container');
             if (!container) return;
-
-            // Get the header height dynamically
-            const header = document.querySelector('header');
-            const headerHeight = header ? header.offsetHeight : 0;
             
-            // Calculate position
-            const elementPosition = container.getBoundingClientRect().top + window.scrollY;
-            const offsetPosition = elementPosition - headerHeight - 20; // 20px extra breathing room
+            // Scroll to container minus 100px for sticky header
+            const offset = 100;
+            const bodyRect = document.body.getBoundingClientRect().top;
+            const elementRect = container.getBoundingClientRect().top;
+            const elementPosition = elementRect - bodyRect;
+            const offsetPosition = elementPosition - offset;
 
             window.scrollTo({
                 top: offsetPosition,
@@ -737,10 +735,8 @@
             document.getElementById('next-btn').disabled = answers[index] === undefined;
             document.getElementById('next-btn').textContent = index === questions.length - 1 ? 'See My Results →' : 'Next Question →';
             
-            // FIXED: Scroll to question container with timeout to prevent jumping
-            setTimeout(() => {
-                scrollToAssessment();
-            }, 50); // 50ms delay stabilizes the jump
+            // FIXED: Scroll to question container, not top
+            scrollToAssessment();
         }
 
         function selectAnswer(optionIndex) {

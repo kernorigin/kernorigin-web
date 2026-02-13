@@ -30,7 +30,6 @@
 html { 
     height: 100%; 
     scroll-behavior: smooth;
-    scroll-padding-top: 100px; /* Prevents header from covering titles */
 }
 
 body { 
@@ -671,66 +670,45 @@ label {
 }
 
 /* =========================================
-   PRODUCTION PATCH v3.0 - UI/UX STABILIZATION
+   PRODUCTION PATCH v2.0 - FIXED & VERIFIED
    ========================================= */
 
-/* 1. MOBILE MENU SCROLL FIX (The "Inaccessible Team Page" Fix) */
+/* 1. Mobile Edge & Spacing Fixes */
 @media (max-width: 768px) {
-    nav {
-        /* Allow scrolling within the menu if phone screen is short */
-        overflow-y: auto !important; 
-        padding-bottom: 50px !important; /* Space for thumb at bottom */
-    }
-    
-    /* Fix Hero Text Alignment */
     .container {
         padding-left: 24px !important;
         padding-right: 24px !important;
+        width: 100% !important;
     }
-    
-    /* Force H1 to be readable but not huge */
+    .readable-column {
+        padding: 0 !important;
+        width: 100% !important;
+    }
     h1 {
-        font-size: 2.1rem !important;
-        text-align: left !important;
-        line-height: 1.2 !important;
-        margin-bottom: 20px !important;
+        font-size: 2.2rem !important;
+        text-align: left;
     }
-    
-    /* Fix "Floating" Left Alignment */
-    .text-center {
-        text-align: left !important;
+    .grid-2, .grid-3 {
+        grid-template-columns: 1fr !important;
+        gap: 30px;
     }
-    
-    /* Center images/buttons on mobile even if text is left */
-    .text-center img, .text-center .btn, .text-center .btn-outline {
-        margin-left: 0 !important;
-        margin-right: auto !important;
+    /* Mobile Nav Contrast */
+    nav ul {
+        background: var(--accent-navy);
+        padding: 80px 40px !important;
     }
-}
-
-/* 2. PRICING CARD FIX (The "Overlapping Numbers" Fix) */
-@media (max-width: 450px) {
-    /* Target the flex container inside pricing cards */
-    .card > div[style*="display: flex"] {
-        flex-direction: column !important;
-        gap: 15px !important;
+    nav ul li a {
+        color: #FFFFFF !important;
+        font-size: 1.5rem !important;
     }
-    
-    /* Re-align the price to the left so it doesn't float weirdly */
-    .card > div[style*="display: flex"] > div[style*="text-align: right"] {
-        text-align: left !important;
-        margin-bottom: 10px !important;
-    }
-    
-    /* Make the price numbers huge and clear */
-    .card p[style*="font-size: 1.5rem"] {
-        font-size: 2rem !important;
-        color: var(--accent-navy) !important;
+    nav ul li a.active {
+        color: var(--accent-gold) !important;
+        border-bottom: 2px solid var(--accent-gold);
     }
 }
 
-/* 3. HIGH CONTRAST & READABILITY (The "Blank Footer" Fix) */
-/* White text ONLY on Navy backgrounds */
+/* 2. High Contrast Utility (Dark Backgrounds ONLY) */
+/* REMOVED 'footer' from this list to fix invisible text bug */
 .hero-systems, .bg-navy, [style*="background: var(--accent-navy)"], [style*="background: #002244"] {
     color: #FFFFFF !important;
 }
@@ -739,26 +717,28 @@ label {
     color: rgba(255, 255, 255, 0.9) !important;
 }
 
-/* FORCE Footer to have dark text because it has a light background */
-footer, footer p, footer a {
-    color: var(--text-muted) !important;
-}
-footer h4 {
-    color: var(--accent-navy) !important;
+.hero-systems h1, .hero-systems h2, .hero-systems h3 {
+    color: #FFFFFF !important;
 }
 
-/* 4. ASSESSMENT & METRIC CARDS */
+/* 3. Component Readability */
 .progress-count {
     background: var(--accent-navy);
     color: white !important;
     padding: 4px 12px;
     border-radius: 20px;
     font-size: 0.9rem;
-    white-space: nowrap; /* Prevents breaking */
 }
-
-/* Ensure Upgrade Card Text is Readable (Black on Gold) */
-[style*="background: rgba(251, 191, 36, 0.15)"] p,
-[style*="background: rgba(251, 191, 36, 0.15)"] li {
+.metric-card {
+    background: #ffffff !important;
+    color: #111111 !important;
+    border: 1px solid #e5e7eb;
+}
+.metric-card p {
+    color: #4b5563 !important;
+}
+.section-number {
+    background: var(--accent-gold) !important;
     color: #000000 !important;
+    font-weight: 800;
 }
