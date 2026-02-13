@@ -6,6 +6,7 @@
     <title>Free Business Assessment | Kernorigin</title>
     <meta name="description" content="10-minute AI-powered assessment reveals where your business is stuck. Get personalized recommendations based on 25 years of diagnostic experience.">
     <link rel="stylesheet" href="style.css">
+    <script src="translations.js"></script>
     
     <!-- Razorpay Integration -->
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
@@ -206,6 +207,22 @@
             cursor: not-allowed;
             transform: none;
         }
+
+        /* Language Selector */
+        #language-selector {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 8px 16px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border: 2px solid var(--accent-navy);
+            border-radius: 6px;
+            background: white;
+            color: var(--accent-navy);
+            cursor: pointer;
+            z-index: 1000;
+        }
         
         /* Mobile Responsiveness */
         @media (max-width: 768px) {
@@ -243,6 +260,13 @@
             .progress-wrapper {
                 padding: 20px;
             }
+
+            #language-selector {
+                top: 14px;
+                right: 12px;
+                font-size: 0.8rem;
+                padding: 6px 10px;
+            }
         }
         
         @keyframes spin {
@@ -278,6 +302,13 @@
                 </ul>
             </nav>
         </div>
+
+        <!-- Language Selector -->
+        <select id="language-selector">
+            <option value="en">🇬🇧 English</option>
+            <option value="hi">🇮🇳 हिन्दी</option>
+            <option value="kn">🇮🇳 ಕನ್ನಡ</option>
+        </select>
     </header>
 
     <main>
@@ -487,12 +518,53 @@
         // ULTIMATE UNIFIED ASSESSMENT SYSTEM
         // Handles: Free, Paid, Partner Coupon flows
         // ============================================
-        
+
+        // ============================================
+        // MULTILINGUAL SUPPORT
+        // ============================================
+        let currentLanguage = 'en';
+        let t = (typeof TRANSLATIONS !== 'undefined' && TRANSLATIONS.en) ? TRANSLATIONS.en : {};
+
+        // Detect language from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const langParam = urlParams.get('lang');
+        if (langParam && typeof TRANSLATIONS !== 'undefined' && TRANSLATIONS[langParam]) {
+            currentLanguage = langParam;
+            t = TRANSLATIONS[langParam];
+        }
+
+        // Language switcher function
+        function switchLanguage(lang) {
+            if (typeof TRANSLATIONS === 'undefined' || !TRANSLATIONS[lang]) return;
+            currentLanguage = lang;
+            t = TRANSLATIONS[lang];
+
+            // Update URL without page reload
+            const url = new URL(window.location);
+            url.searchParams.set('lang', lang);
+            window.history.pushState({}, '', url);
+
+            // Re-render current question if on question screen
+            if (document.getElementById('question-screen').style.display !== 'none' && currentQuestion >= 0) {
+                showQuestion(currentQuestion);
+            }
+        }
+
+        // Set language selector on page load
+        window.addEventListener('DOMContentLoaded', function() {
+            const selector = document.getElementById('language-selector');
+            if (selector) {
+                selector.value = currentLanguage;
+                selector.addEventListener('change', function() {
+                    switchLanguage(this.value);
+                });
+            }
+        });
+
         // ============================================
         // 1. SMART DETECTION & INITIALIZATION
         // ============================================
-        
-        const urlParams = new URLSearchParams(window.location.search);
+
         const partnerId = urlParams.get('partner') || '';
         const prefillCoupon = urlParams.get('coupon') || '';
         const utmSource = urlParams.get('utm_source') || '';
@@ -674,18 +746,15 @@
         // 3. IMPROVED SCROLL LOGIC (Keeps focus on questions)
         // ============================================
         
-        // REPLACEMENT SCROLL LOGIC
         function scrollToAssessment() {
             const container = document.getElementById('assessment-container');
             if (!container) return;
 
-            // Get the header height dynamically
             const header = document.querySelector('header');
             const headerHeight = header ? header.offsetHeight : 0;
             
-            // Calculate position
             const elementPosition = container.getBoundingClientRect().top + window.scrollY;
-            const offsetPosition = elementPosition - headerHeight - 20; // 20px extra breathing room
+            const offsetPosition = elementPosition - headerHeight - 20;
 
             window.scrollTo({
                 top: offsetPosition,
@@ -700,7 +769,7 @@
         function startAssessment() {
             document.getElementById('intro-screen').style.display = 'none';
             document.getElementById('question-screen').style.display = 'block';
-            scrollToAssessment(); // FIXED: Scroll to question, not top
+            scrollToAssessment();
             showQuestion(0);
             
             gtag('event', 'assessment_started', { 
@@ -715,7 +784,11 @@
             
             document.getElementById('current-q').textContent = index + 1;
             document.getElementById('progress-bar').style.width = ((index + 1) / questions.length * 100) + '%';
-            document.getElementById('question-text').textContent = q.text;
+
+            // ✅ CHANGE 4A: Use translation if available, fallback to English
+            const questionKey = 'q' + (index + 1);
+            const questionText = (t && t[questionKey]) ? t[questionKey] : q.text;
+            document.getElementById('question-text').textContent = questionText;
             
             const optionsDiv = document.getElementById('answer-options');
             optionsDiv.innerHTML = '';
@@ -723,7 +796,12 @@
             q.options.forEach((option, i) => {
                 const btn = document.createElement('button');
                 btn.className = 'option-card';
-                btn.textContent = option.text;
+
+                // ✅ CHANGE 4B: Use translation if available, fallback to English
+                const optionKey = 'q' + (index + 1) + '_opt' + (i + 1);
+                const optionText = (t && t[optionKey]) ? t[optionKey] : option.text;
+                btn.textContent = optionText;
+
                 btn.onclick = () => selectAnswer(i);
                 
                 if (answers[index] === i) {
@@ -737,10 +815,9 @@
             document.getElementById('next-btn').disabled = answers[index] === undefined;
             document.getElementById('next-btn').textContent = index === questions.length - 1 ? 'See My Results →' : 'Next Question →';
             
-            // FIXED: Scroll to question container with timeout to prevent jumping
             setTimeout(() => {
                 scrollToAssessment();
-            }, 50); // 50ms delay stabilizes the jump
+            }, 50);
         }
 
         function selectAnswer(optionIndex) {
@@ -769,9 +846,7 @@
         }
 
         function finishAssessment() {
-            // Prepare email capture screen based on mode
             if (assessmentState.mode === 'coupon') {
-                // Coupon mode - show pre-filled coupon
                 document.getElementById('email-capture-desc').textContent = 
                     `Your complimentary full diagnostic is ready${partnerBranding ? ' (courtesy of ' + partnerBranding.name + ')' : ''}. Enter your details to receive it.`;
                 
@@ -789,7 +864,6 @@
                 
                 document.getElementById('submit-btn').textContent = 'Get My Free Full Diagnostic →';
             } else {
-                // Free mode - normal flow
                 document.getElementById('email-capture-desc').textContent = 
                     'Our AI is analyzing your responses. Enter your details to receive your free summary report.';
                 
@@ -807,13 +881,13 @@
             
             document.getElementById('question-screen').style.display = 'none';
             document.getElementById('email-capture-screen').style.display = 'block';
-            scrollToAssessment(); // FIXED: Scroll to container, not top
+            scrollToAssessment();
             
             gtag('event', 'assessment_complete', { 'event_category': 'engagement' });
         }
 
         // ============================================
-        // 4. SUBMISSION LOGIC (SMART ROUTING)
+        // 5. SUBMISSION LOGIC (SMART ROUTING)
         // ============================================
 
         async function submitForAnalysis(event) {
@@ -825,17 +899,14 @@
                 company: document.getElementById('user-company').value || 'Not specified'
             };
             
-            // Update state
             assessmentState.name = userProfile.name;
             assessmentState.email = userProfile.email;
             assessmentState.company = userProfile.company;
             
-            // Show loading
             document.getElementById('email-capture-screen').style.display = 'none';
             document.getElementById('loading-screen').style.display = 'block';
-            scrollToAssessment(); // FIXED: Scroll to container, not top
+            scrollToAssessment();
             
-            // Animate loading messages
             const messages = [
                 "Analyzing your responses...",
                 "Matching against case patterns...",
@@ -853,19 +924,14 @@
             }, 2000);
             
             try {
-                // Prepare assessment data
                 const assessmentData = prepareAssessmentData();
                 
-                // Use FormData to avoid CORS preflight
                 const submitFormData = new FormData();
                 
-                // SMART ROUTING: Choose endpoint based on mode
                 if (assessmentState.mode === 'coupon' && assessmentState.couponCode) {
-                    // COUPON FLOW → Partner diagnostic (full, free)
                     submitFormData.append('action', 'analyze_assessment_partner');
                     submitFormData.append('couponCode', assessmentState.couponCode);
                 } else {
-                    // FREE FLOW → Basic diagnostic (2-page summary)
                     submitFormData.append('action', 'analyze_assessment');
                 }
                 
@@ -875,8 +941,8 @@
                 submitFormData.append('company', assessmentData.company);
                 submitFormData.append('answers', JSON.stringify(assessmentData.answers));
                 submitFormData.append('scores', JSON.stringify(assessmentData.scores));
+                submitFormData.append('language', currentLanguage);  // ✅ CHANGE 5: Send language to backend
                 
-                // Call backend
                 const response = await fetch(API_CONFIG.URL, {
                     method: 'POST',
                     body: submitFormData
@@ -894,7 +960,6 @@
                     throw new Error(result.error || result.message || 'Analysis failed');
                 }
                 
-                // Display results
                 displayResults(result);
                 
                 gtag('event', 'assessment_submitted', { 
@@ -942,7 +1007,6 @@
                 }
             });
             
-            // Store in state
             assessmentState.fullAnswers = formattedAnswers;
             assessmentState.cylinderScores = scores;
             
@@ -957,21 +1021,19 @@
         }
 
         // ============================================
-        // 5. RESULTS DISPLAY (MODE-AWARE)
+        // 6. RESULTS DISPLAY (MODE-AWARE)
         // ============================================
 
         function displayResults(result) {
             document.getElementById('loading-screen').style.display = 'none';
             document.getElementById('results-screen').style.display = 'block';
-            scrollToAssessment(); // FIXED: Scroll to container, not top
+            scrollToAssessment();
             
             const resultsDiv = document.getElementById('results-content');
             
             if (assessmentState.mode === 'coupon') {
-                // COUPON MODE → Full diagnostic delivered
                 displayCouponResults(result, resultsDiv);
             } else {
-                // FREE MODE → Summary + upgrade options
                 displayFreeResults(result, resultsDiv);
             }
         }
@@ -1095,7 +1157,7 @@
         function showError() {
             document.getElementById('loading-screen').style.display = 'none';
             document.getElementById('error-screen').style.display = 'block';
-            scrollToAssessment(); // FIXED: Scroll to container, not top
+            scrollToAssessment();
         }
 
         function retryAnalysis() {
@@ -1104,7 +1166,7 @@
         }
 
         // ============================================
-        // 6. PAYMENT SYSTEM (for upgrades)
+        // 7. PAYMENT SYSTEM (for upgrades)
         // ============================================
 
         function showPaymentOptions(diagnosticType) {
@@ -1154,7 +1216,6 @@
         }
 
         async function handlePaymentSuccess(paymentResponse, diagnosticType) {
-            // Show processing
             document.getElementById('results-screen').style.display = 'none';
             document.getElementById('loading-screen').style.display = 'block';
             document.getElementById('loading-message').textContent = 'Processing payment and generating full diagnostic...';
@@ -1172,6 +1233,7 @@
                 submitFormData.append('scores', JSON.stringify(assessmentData.scores));
                 submitFormData.append('diagnosticType', diagnosticType);
                 submitFormData.append('paymentId', paymentResponse.razorpay_payment_id);
+                submitFormData.append('language', currentLanguage);  // ✅ Also send language on paid flow
                 
                 const response = await fetch(API_CONFIG.URL, {
                     method: 'POST',
