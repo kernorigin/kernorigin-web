@@ -1,6 +1,6 @@
 /* ============================================
-   KERNORIGIN REFINED THEME - PRODUCTION v2.1
-   (Fixes: Nav Layout, Selector Spacing, Card Visibility)
+   KERNORIGIN REFINED THEME - PRODUCTION v2.2
+   All Fixes Applied: Nav, Selector, Cards, Mobile
    ============================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
@@ -10,6 +10,7 @@
     --bg-offwhite: #f8f9fa;
     --text-main: #111111;
     --text-muted: #4b5563;
+    --text-primary: #1f2937;
     --accent-navy: #002244;
     --accent-gold: #C5A059;
     --border-light: #e5e7eb;
@@ -40,18 +41,28 @@ h3 { font-size: 1.5rem; }
 p { margin-bottom: 1.5rem; color: var(--text-muted); }
 .eyebrow { color: var(--accent-gold); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.15em; font-weight: 700; display: block; margin-bottom: 16px; }
 
-/* HEADER & NAV (FIXED FOR SELECTOR) */
+/* HEADER & NAV */
 header { padding: 15px 0; border-bottom: 1px solid var(--border-light); background: white; position: sticky; top: 0; z-index: 1000; }
 .nav-wrapper { display: flex; justify-content: space-between; align-items: center; }
 .logo { font-family: var(--font-serif); font-size: 1.4rem; font-weight: 700; text-transform: uppercase; color: var(--accent-navy); z-index: 1002; }
 
-/* Desktop Menu */
-nav ul { list-style: none; display: flex; align-items: center; gap: 25px; margin: 0; padding: 0; }
-nav a { font-size: 0.85rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); padding: 8px 0; }
+/* Desktop Menu - COMPACT VERSION */
+nav ul { list-style: none; display: flex; align-items: center; gap: 18px; margin: 0; padding: 0; }
+nav a { font-size: 0.75rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-muted); padding: 6px 0; }
 nav a:hover, nav a.active { color: var(--accent-navy); border-bottom: 2px solid var(--accent-gold); }
 
-/* Language Selector (Desktop) */
-.lang-select { padding: 6px 10px; border: 1px solid var(--border-light); border-radius: 4px; font-size: 0.85rem; color: var(--accent-navy); background: white; cursor: pointer; }
+/* Language Selector (Desktop) - COMPACT */
+.lang-select { 
+    padding: 6px 10px; 
+    font-size: 0.75rem; 
+    font-weight: 600; 
+    border: 2px solid var(--accent-navy); 
+    border-radius: 4px; 
+    background: white; 
+    color: var(--accent-navy); 
+    cursor: pointer; 
+    margin-left: 12px;
+}
 
 /* HAMBURGER */
 .mobile-menu-toggle { display: none; flex-direction: column; justify-content: space-around; width: 30px; height: 24px; background: transparent; border: none; z-index: 1002; }
@@ -89,15 +100,15 @@ footer a:hover { color: var(--accent-navy); }
     
     /* Navigation */
     .mobile-menu-toggle { display: flex; }
-    nav { position: fixed; top: 0; right: -100%; width: 85%; height: 100vh; background: white; padding: 80px 30px; transition: 0.3s ease; box-shadow: -5px 0 15px rgba(0,0,0,0.1); display: flex; flex-direction: column; }
+    nav { position: fixed; top: 0; right: -100%; width: 85%; height: 100vh; background: white; padding: 80px 30px; transition: 0.3s ease; box-shadow: -5px 0 15px rgba(0,0,0,0.1); display: flex; flex-direction: column; overflow-y: auto; }
     nav.mobile-menu-open { right: 0; }
     nav ul { flex-direction: column; align-items: flex-start; width: 100%; gap: 0; }
     nav ul li { width: 100%; border-bottom: 1px solid #eee; }
     nav a { display: block; padding: 15px 0; font-size: 1rem; }
     
-    /* Language Selector in Mobile Menu */
-    .lang-item { margin-top: 20px; width: 100%; }
-    .lang-select { width: 100%; padding: 12px; font-size: 1rem; border: 1px solid #ddd; }
+    /* Language Selector in Mobile Menu - FIXED */
+    .lang-item { margin-top: 20px; width: 100%; border-bottom: none !important; }
+    .lang-select { width: 100%; padding: 12px; font-size: 1rem; border: 1px solid #ddd; margin-left: 0; }
 
     /* Fix Pricing Cards */
     .card > div[style*="display: flex"] { flex-direction: column; gap: 15px; }
