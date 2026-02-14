@@ -6,7 +6,6 @@
     <title>Free Business Assessment | Kernorigin</title>
     <meta name="description" content="10-minute AI-powered assessment reveals where your business is stuck. Get personalized recommendations based on 25 years of diagnostic experience.">
     <link rel="stylesheet" href="style.css">
-    <!-- ✅ MULTILINGUAL: Load translations -->
     <script src="translations.js"></script>
     
     <!-- Razorpay Integration -->
@@ -209,12 +208,9 @@
             transform: none;
         }
 
-        /* Language Selector */
-        #language-selector {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            padding: 8px 16px;
+        /* Language Selector in Nav */
+        .lang-select {
+            padding: 6px 12px;
             font-size: 0.9rem;
             font-weight: 600;
             border: 2px solid var(--accent-navy);
@@ -222,7 +218,6 @@
             background: white;
             color: var(--accent-navy);
             cursor: pointer;
-            z-index: 1000;
         }
         
         /* Mobile Responsiveness */
@@ -261,13 +256,6 @@
             .progress-wrapper {
                 padding: 20px;
             }
-
-            #language-selector {
-                top: 14px;
-                right: 12px;
-                font-size: 0.8rem;
-                padding: 6px 10px;
-            }
         }
         
         @keyframes spin {
@@ -300,16 +288,16 @@
                     <li><a href="team.html">Team</a></li>
                     <li><a href="insights.html">Insights</a></li>
                     <li><a href="contact.html">Contact</a></li>
+                    <li class="lang-item">
+                        <select id="language-selector" class="lang-select" onchange="switchLanguage(this.value)">
+                            <option value="en">🇬🇧 English</option>
+                            <option value="hi">🇮🇳 हिन्दी</option>
+                            <option value="kn">🇮🇳 ಕನ್ನಡ</option>
+                        </select>
+                    </li>
                 </ul>
             </nav>
         </div>
-
-        <!-- ✅ MULTILINGUAL: Language Selector -->
-        <select id="language-selector" onchange="switchLanguage(this.value)">
-            <option value="en">🇬🇧 English</option>
-            <option value="hi">🇮🇳 हिन्दी</option>
-            <option value="kn">🇮🇳 ಕನ್ನಡ</option>
-        </select>
     </header>
 
     <main>
@@ -955,7 +943,7 @@
             const container = document.getElementById('results-content');
             
             if (assessmentState.mode === 'coupon') {
-                // Partner diagnostic
+                // Partner diagnostic - full report sent
                 container.innerHTML = `
                     <div style="background: #f0fdf4; border: 2px solid #10b981; padding: 25px; border-radius: 8px; margin-bottom: 30px;">
                         <p style="margin: 0; font-weight: 600; font-size: 1.1rem; color: #059669;">
@@ -968,16 +956,66 @@
                     ${result.analysis}
                 `;
             } else {
-                // Free diagnostic
+                // Free diagnostic - show upgrade cards
                 container.innerHTML = `
                     <div style="background: #eff6ff; border-left: 4px solid var(--accent-navy); padding: 20px; margin-bottom: 30px;">
                         <p style="margin: 0; font-weight: 600; color: var(--accent-navy);">
                             ✓ Summary Report Sent to ${assessmentState.email}
                         </p>
                     </div>
+                    
                     ${result.analysis}
+
+                    <div style="margin-top: 50px;">
+                        <h3 style="text-align: center; margin-bottom: 30px; color: var(--accent-navy);">Unlock Deeper Insights</h3>
+                        
+                        <div class="card" style="border: 2px solid var(--accent-navy); padding: 30px; background: white;">
+                            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px;">
+                                <div>
+                                    <h4 style="margin: 0 0 10px 0; color: var(--accent-navy);">Full 35-Page Diagnostic Report</h4>
+                                    <p style="margin: 0; color: var(--text-muted); font-size: 0.95rem;">Complete 7-cylinder breakdown with 90-day roadmap</p>
+                                </div>
+                                <div style="text-align: right; white-space: nowrap; margin-left: 20px;">
+                                    <div style="text-decoration: line-through; color: #999; font-size: 0.9rem;">₹29,997</div>
+                                    <div style="font-weight: 700; color: var(--accent-navy); font-size: 1.4rem;">₹24,997</div>
+                                </div>
+                            </div>
+                            
+                            <ul style="margin: 20px 0 30px 0; padding-left: 20px; color: var(--text-primary);">
+                                <li style="margin-bottom: 8px;">Root cause analysis (not just symptoms)</li>
+                                <li style="margin-bottom: 8px;">Industry benchmarking & comparison</li>
+                                <li style="margin-bottom: 8px;">90-day action roadmap</li>
+                                <li style="margin-bottom: 8px;">Matched case studies</li>
+                                <li>Build/buy/partner recommendations</li>
+                            </ul>
+                            
+                            <button onclick="showPayment('institutional')" class="btn" style="width: 100%; padding: 16px; font-size: 1.05rem;">
+                                Upgrade to Full Report →
+                            </button>
+                        </div>
+                    </div>
                 `;
             }
+        }
+
+        function showPayment(type) {
+            const rzp = new Razorpay({
+                key: 'rzp_live_YOUR_ACTUAL_ID_HERE', // ⚠️ REPLACE WITH YOUR RAZORPAY KEY
+                amount: 2499700,
+                currency: 'INR',
+                name: 'Kernorigin',
+                description: 'Full Institutional Diagnostic',
+                prefill: { 
+                    name: assessmentState.name,
+                    email: assessmentState.email 
+                },
+                theme: { color: '#002244' },
+                handler: function(response) {
+                    alert('Payment successful! Generating your full report...');
+                    // TODO: Send payment details to backend for full report generation
+                }
+            });
+            rzp.open();
         }
     </script>
 </body>
