@@ -485,18 +485,24 @@
             t = TRANSLATIONS[langParam];
         }
         
-        // ✅ Language Switcher Function
+        // ✅ FIXED switchLanguage — sets currentLanguage regardless of translation completeness
         function switchLanguage(lang) {
-            if (!TRANSLATIONS[lang]) {
-                console.error('Language not found:', lang);
-                return;
+            // CRITICAL: Set currentLanguage FIRST, before any guard check
+            // This ensures the correct language is sent to the backend even if
+            // translations.js doesn't have UI strings for this language
+            currentLanguage = lang;
+            
+            // Update translation object (fallback to English UI if lang not in TRANSLATIONS)
+            if (TRANSLATIONS && TRANSLATIONS[lang]) {
+                t = TRANSLATIONS[lang];
+            } else {
+                t = (TRANSLATIONS && TRANSLATIONS['en']) ? TRANSLATIONS['en'] : {};
+                console.warn('No UI translations found for:', lang, '— UI stays in English, but report will be generated in', lang);
             }
             
-            currentLanguage = lang;
-            t = TRANSLATIONS[lang];
-            
             // Update language selector
-            document.getElementById('language-selector').value = lang;
+            const selector = document.getElementById('language-selector');
+            if (selector) selector.value = lang;
             
             // Update page text
             updatePageLanguage();
@@ -510,6 +516,8 @@
             if (currentQuestion >= 0 && currentQuestion < questions.length) {
                 showQuestion(currentQuestion);
             }
+            
+            console.log('✅ Language set to:', lang);
         }
         
         // ✅ Update Page Language Function
@@ -866,6 +874,7 @@
                 leadership: 0
             };
             
+// ✅ Uses translated text when available
             answers.forEach((answerIndex, questionIndex) => {
                 const q = questions[questionIndex];
                 const selectedOption = q.options[answerIndex];
@@ -874,9 +883,15 @@
                     formattedAnswers[q.cylinder] = [];
                 }
                 
+                // Use translated question/answer text if available for better AI context
+                const questionKey = 'q' + (questionIndex + 1);
+                const optionKey = 'q' + (questionIndex + 1) + '_opt' + (answerIndex + 1);
+                const questionText = (t && t[questionKey]) ? t[questionKey] : q.text;
+                const answerText = (t && t[optionKey]) ? t[optionKey] : selectedOption.text;
+                
                 formattedAnswers[q.cylinder].push({
-                    question: q.text,
-                    answer: selectedOption.text,
+                    question: questionText,   // ✅ Translated if available
+                    answer: answerText,       // ✅ Translated if available
                     score: selectedOption.score
                 });
                 
@@ -900,7 +915,11 @@
                 formData.append('company', assessmentState.company);
                 
                 // ✅ MULTILINGUAL: Send language to backend
-                formData.append('language', currentLanguage);
+                // ✅ MULTILINGUAL: Read language from selector + global for belt-and-suspenders
+                const langSelector = document.getElementById('language-selector');
+                const submitLanguage = (langSelector && langSelector.value) ? langSelector.value : currentLanguage;
+                formData.append('language', submitLanguage);
+                console.log('📤 Submitting with language:', submitLanguage);
                 
                 formData.append('answers', JSON.stringify(formattedAnswers));
                 formData.append('scores', JSON.stringify(scores));
