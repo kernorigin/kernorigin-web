@@ -420,7 +420,20 @@
                                            style="width: 100%; padding: 10px; border: 1px solid #10b981; border-radius: 4px; background: white; font-family: monospace;">
                                     <p style="margin: 10px 0 0 0; font-size: 0.9rem; color: #059669;">Full diagnostic included (₹24,997 value)</p>
                                 </div>
-                                
+                                <div style="margin-bottom: 20px;">
+                                <label style="display: block; font-weight: 600; margin-bottom: 8px;">Industry / Sector *</label>
+                                <select id="user-industry" required
+                                        style="width: 100%; padding: 12px; border: 1px solid #e5e7eb; border-radius: 6px; font-size: 1rem; background: white; color: #1a1a1a;">
+                                    <option value="" disabled selected>Select your industry...</option>
+                                    <option value="Professional Services">Professional Services (Agency, Consulting)</option>
+                                    <option value="Manufacturing">Manufacturing / Industrial</option>
+                                    <option value="Retail">Retail / Trading / E-commerce</option>
+                                    <option value="Technology">Technology / SaaS</option>
+                                    <option value="Healthcare">Healthcare / Medical</option>
+                                    <option value="Restaurant">Restaurant / Hospitality</option>
+                                    <option value="General">Other</option>
+                                </select>
+                                </div>
                                 <button type="submit" class="btn" style="width: 100%; padding: 16px;">
                                     Get My Free Report →
                                 </button>
@@ -918,6 +931,8 @@
                 formData.append('name', assessmentState.name);
                 formData.append('email', assessmentState.email);
                 formData.append('company', assessmentState.company);
+                const industry = document.getElementById('user-industry').value;
+                formData.append('industry', industry);
                 
                 // ✅ MULTILINGUAL: Read language from selector + global (defensive)
                 const langSelector = document.getElementById('language-selector');

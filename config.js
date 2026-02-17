@@ -11,7 +11,7 @@
 const API_CONFIG = {
     // Your Google Apps Script Web App URL
     // Must end in /exec
-    URL: 'https://script.google.com/macros/s/AKfycbwU7Ut--G_o7QR-RMmqDJ1NNwZM4CYO2P5NsqUyM4r0Fp4PEkJIlP6RlWew8kbWdR0/exec',
+    URL: 'https://script.google.com/macros/s/AKfycbycvdRJGH7IaLykt0ktNNGMxH6LfUhAbg_oxZS3uHzgh8S6o-bJRc4r5n0NK_ZbO_k/exec',
     
     // Your PUBLIC_API_KEY from Script Properties
     PUBLIC_KEY: 'Kernorigin-Public-2028-ANJANA'
