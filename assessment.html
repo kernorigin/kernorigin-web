@@ -444,10 +444,10 @@
                         <div id="results-screen" class="card" style="background: white; display: none;">
                             <div style="text-align: center; margin-bottom: 40px;">
                                 <div style="display: inline-block; background: #10b981; color: white; padding: 12px 24px; border-radius: 50px; margin-bottom: 20px;">
-                                    <span style="font-size: 1.1rem; font-weight: 600;">✓ Analysis Complete</span>
+                                    <span id="analysis-complete-badge" style="font-size: 1.1rem; font-weight: 600;">✓ Analysis Complete</span>
                                 </div>
-                                <h2 style="margin: 0; color: var(--accent-navy);">Your Diagnostic Report</h2>
-                                <p style="color: var(--text-muted); margin-top: 10px;">A personalized analysis has been sent to your email</p>
+                                <h2 id="results-title" style="margin: 0; color: var(--accent-navy);">Your Diagnostic Report</h2>
+                                <p id="results-subtitle" style="color: var(--text-muted); margin-top: 10px;">A personalized analysis has been sent to your email</p>
                             </div>
                             
                             <div id="results-content"></div>
@@ -485,39 +485,44 @@
             t = TRANSLATIONS[langParam];
         }
         
-        // ✅ FIXED switchLanguage — sets currentLanguage regardless of translation completeness
+        // ✅ BULLETPROOF switchLanguage - sets currentLanguage FIRST
         function switchLanguage(lang) {
-            // CRITICAL: Set currentLanguage FIRST, before any guard check
-            // This ensures the correct language is sent to the backend even if
-            // translations.js doesn't have UI strings for this language
+            // CRITICAL: Always update currentLanguage, even if translations fail
+            // This ensures backend gets the right language for report generation
             currentLanguage = lang;
             
-            // Update translation object (fallback to English UI if lang not in TRANSLATIONS)
-            if (TRANSLATIONS && TRANSLATIONS[lang]) {
+            // Update translations object (if available)
+            if (typeof TRANSLATIONS !== 'undefined' && TRANSLATIONS[lang]) {
                 t = TRANSLATIONS[lang];
+                console.log('✅ UI translations loaded for:', lang);
             } else {
-                t = (TRANSLATIONS && TRANSLATIONS['en']) ? TRANSLATIONS['en'] : {};
-                console.warn('No UI translations found for:', lang, '— UI stays in English, but report will be generated in', lang);
+                // Fallback to English UI if translations not available
+                t = (typeof TRANSLATIONS !== 'undefined' && TRANSLATIONS['en']) ? TRANSLATIONS['en'] : {};
+                console.warn('⚠️ No UI strings for', lang, '- UI stays English, but report will be in', lang);
             }
             
-            // Update language selector
+            // Update selector
             const selector = document.getElementById('language-selector');
             if (selector) selector.value = lang;
             
             // Update page text
             updatePageLanguage();
             
-            // Update URL without reload
-            const url = new URL(window.location);
-            url.searchParams.set('lang', lang);
-            window.history.pushState({}, '', url);
+            // Update URL
+            try {
+                const url = new URL(window.location);
+                url.searchParams.set('lang', lang);
+                window.history.pushState({}, '', url);
+            } catch (e) {
+                console.warn('Could not update URL:', e);
+            }
             
-            // Re-render current question if on question screen
+            // Re-render current question
             if (currentQuestion >= 0 && currentQuestion < questions.length) {
                 showQuestion(currentQuestion);
             }
             
-            console.log('✅ Language set to:', lang);
+            console.log('📌 currentLanguage set to:', currentLanguage);
         }
         
         // ✅ Update Page Language Function
@@ -874,7 +879,7 @@
                 leadership: 0
             };
             
-// ✅ Uses translated text when available
+            // ✅ MULTILINGUAL: Send translated answer text to backend
             answers.forEach((answerIndex, questionIndex) => {
                 const q = questions[questionIndex];
                 const selectedOption = q.options[answerIndex];
@@ -914,12 +919,13 @@
                 formData.append('email', assessmentState.email);
                 formData.append('company', assessmentState.company);
                 
-                // ✅ MULTILINGUAL: Send language to backend
-                // ✅ MULTILINGUAL: Read language from selector + global for belt-and-suspenders
+                // ✅ MULTILINGUAL: Read language from selector + global (defensive)
                 const langSelector = document.getElementById('language-selector');
-                const submitLanguage = (langSelector && langSelector.value) ? langSelector.value : currentLanguage;
+                const submitLanguage = (langSelector && langSelector.value) || currentLanguage || 'en';
                 formData.append('language', submitLanguage);
-                console.log('📤 Submitting with language:', submitLanguage);
+                console.log('📤 Submitting assessment with language:', submitLanguage);
+                console.log('   currentLanguage global:', currentLanguage);
+                console.log('   Selector value:', langSelector ? langSelector.value : 'N/A');
                 
                 formData.append('answers', JSON.stringify(formattedAnswers));
                 formData.append('scores', JSON.stringify(scores));
@@ -954,44 +960,106 @@
             }
         }
 
+        // ✅ MULTILINGUAL displayResults function
         function displayResults(result) {
             document.getElementById('loading-screen').style.display = 'none';
             document.getElementById('results-screen').style.display = 'block';
             scrollToAssessment();
             
+            // ✅ Update static result screen headers with translations
+            const badge = document.getElementById('analysis-complete-badge');
+            const title = document.getElementById('results-title');
+            const subtitle = document.getElementById('results-subtitle');
+            
+            const badgeText = {
+                en: '✓ Analysis Complete',
+                hi: '✓ विश्लेषण पूर्ण',
+                kn: '✓ ವಿಶ್ಲೇಷಣೆ ಪೂರ್ಣಗೊಂಡಿದೆ'
+            };
+            const titleText = {
+                en: 'Your Diagnostic Report',
+                hi: 'आपकी निदान रिपोर्ट',
+                kn: 'ನಿಮ್ಮ ರೋಗನಿರ್ಣಯ ವರದಿ'
+            };
+            const subtitleText = {
+                en: 'A personalized analysis has been sent to your email',
+                hi: 'एक व्यक्तिगत विश्लेषण आपके ईमेल पर भेज दिया गया है',
+                kn: 'ವೈಯಕ್ತೀಕರಿಸಿದ ವಿಶ್ಲೇಷಣೆಯನ್ನು ನಿಮ್ಮ ಇಮೇಲ್‌ಗೆ ಕಳುಹಿಸಲಾಗಿದೆ'
+            };
+            
+            if (badge) badge.textContent = badgeText[currentLanguage] || badgeText.en;
+            if (title) title.textContent = titleText[currentLanguage] || titleText.en;
+            if (subtitle) subtitle.textContent = subtitleText[currentLanguage] || subtitleText.en;
+            
             const container = document.getElementById('results-content');
             
             if (assessmentState.mode === 'coupon') {
                 // Partner diagnostic - full report sent
+                const emailConfirmText = {
+                    en: `Full Diagnostic Report Sent to ${assessmentState.email}`,
+                    hi: `संपूर्ण निदान रिपोर्ट ${assessmentState.email} को भेजी गई`,
+                    kn: `ಸಂಪೂರ್ಣ ರೋಗನಿರ್ಣಯ ವರದಿ ${assessmentState.email} ಗೆ ಕಳುಹಿಸಲಾಗಿದೆ`
+                };
+                const checkEmailText = {
+                    en: `Check your email for the complete 35-page analysis (courtesy of ${partnerBranding ? partnerBranding.name : 'our partner'})`,
+                    hi: `संपूर्ण 35-पृष्ठ विश्लेषण के लिए अपना ईमेल जांचें (${partnerBranding ? partnerBranding.name : 'हमारे साझेदार'} के सौजन्य से)`,
+                    kn: `ಸಂಪೂರ್ಣ 35-ಪುಟದ ವಿಶ್ಲೇಷಣೆಗಾಗಿ ನಿಮ್ಮ ಇಮೇಲ್ ಪರಿಶೀಲಿಸಿ (${partnerBranding ? partnerBranding.name : 'ನಮ್ಮ ಪಾಲುದಾರ'}ರ ಸೌಜನ್ಯದಿಂದ)`
+                };
+                
                 container.innerHTML = `
                     <div style="background: #f0fdf4; border: 2px solid #10b981; padding: 25px; border-radius: 8px; margin-bottom: 30px;">
                         <p style="margin: 0; font-weight: 600; font-size: 1.1rem; color: #059669;">
-                            ✓ Full Diagnostic Report Sent to ${assessmentState.email}
+                            ✓ ${emailConfirmText[currentLanguage] || emailConfirmText.en}
                         </p>
                         <p style="margin: 10px 0 0 0; color: #059669;">
-                            Check your email for the complete 35-page analysis (courtesy of ${partnerBranding ? partnerBranding.name : 'our partner'})
+                            ${checkEmailText[currentLanguage] || checkEmailText.en}
                         </p>
                     </div>
                     ${result.analysis}
                 `;
             } else {
-                // Free diagnostic - show upgrade cards
+                // Free diagnostic
+                const summaryText = {
+                    en: `Summary Report Sent to ${assessmentState.email}`,
+                    hi: `सारांश रिपोर्ट ${assessmentState.email} को भेजी गई`,
+                    kn: `ಸಾರಾಂಶ ವರದಿ ${assessmentState.email} ಗೆ ಕಳುಹಿಸಲಾಗಿದೆ`
+                };
+                const upgradeTitle = {
+                    en: 'Unlock Deeper Insights',
+                    hi: 'गहरी जानकारी प्राप्त करें',
+                    kn: 'ಆಳವಾದ ಒಳನೋಟಗಳನ್ನು ಅನ್‌ಲಾಕ್ ಮಾಡಿ'
+                };
+                const fullReportTitle = {
+                    en: 'Full 35-Page Diagnostic Report',
+                    hi: 'संपूर्ण 35-पृष्ठ निदान रिपोर्ट',
+                    kn: 'ಸಂಪೂರ್ಣ 35-ಪುಟದ ರೋಗನಿರ್ಣಯ ವರದಿ'
+                };
+                const upgradeBtn = {
+                    en: 'Upgrade to Full Report →',
+                    hi: 'पूर्ण रिपोर्ट में अपग्रेड करें →',
+                    kn: 'ಸಂಪೂರ್ಣ ವರದಿಗೆ ಅಪ್‌ಗ್ರೇಡ್ ಮಾಡಿ →'
+                };
+                
                 container.innerHTML = `
                     <div style="background: #eff6ff; border-left: 4px solid var(--accent-navy); padding: 20px; margin-bottom: 30px;">
                         <p style="margin: 0; font-weight: 600; color: var(--accent-navy);">
-                            ✓ Summary Report Sent to ${assessmentState.email}
+                            ✓ ${summaryText[currentLanguage] || summaryText.en}
                         </p>
                     </div>
                     
                     ${result.analysis}
 
                     <div style="margin-top: 50px;">
-                        <h3 style="text-align: center; margin-bottom: 30px; color: var(--accent-navy);">Unlock Deeper Insights</h3>
+                        <h3 style="text-align: center; margin-bottom: 30px; color: var(--accent-navy);">
+                            ${upgradeTitle[currentLanguage] || upgradeTitle.en}
+                        </h3>
                         
                         <div class="card" style="border: 2px solid var(--accent-navy); padding: 30px; background: white;">
                             <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px;">
                                 <div>
-                                    <h4 style="margin: 0 0 10px 0; color: var(--accent-navy);">Full 35-Page Diagnostic Report</h4>
+                                    <h4 style="margin: 0 0 10px 0; color: var(--accent-navy);">
+                                        ${fullReportTitle[currentLanguage] || fullReportTitle.en}
+                                    </h4>
                                     <p style="margin: 0; color: var(--text-muted); font-size: 0.95rem;">Complete 7-cylinder breakdown with 90-day roadmap</p>
                                 </div>
                                 <div style="text-align: right; white-space: nowrap; margin-left: 20px;">
@@ -1009,7 +1077,7 @@
                             </ul>
                             
                             <button onclick="showPayment('institutional')" class="btn" style="width: 100%; padding: 16px; font-size: 1.05rem;">
-                                Upgrade to Full Report →
+                                ${upgradeBtn[currentLanguage] || upgradeBtn.en}
                             </button>
                         </div>
                     </div>
