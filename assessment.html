@@ -420,19 +420,93 @@
                                            style="width: 100%; padding: 10px; border: 1px solid #10b981; border-radius: 4px; background: white; font-family: monospace;">
                                     <p style="margin: 10px 0 0 0; font-size: 0.9rem; color: #059669;">Full diagnostic included (₹24,997 value)</p>
                                 </div>
-                                <div style="margin-bottom: 20px;">
-                                <label style="display: block; font-weight: 600; margin-bottom: 8px;">Industry / Sector *</label>
-                                <select id="user-industry" required
-                                        style="width: 100%; padding: 12px; border: 1px solid #e5e7eb; border-radius: 6px; font-size: 1rem; background: white; color: #1a1a1a;">
-                                    <option value="" disabled selected>Select your industry...</option>
-                                    <option value="Professional Services">Professional Services (Agency, Consulting)</option>
-                                    <option value="Manufacturing">Manufacturing / Industrial</option>
-                                    <option value="Retail">Retail / Trading / E-commerce</option>
-                                    <option value="Technology">Technology / SaaS</option>
-                                    <option value="Healthcare">Healthcare / Medical</option>
-                                    <option value="Restaurant">Restaurant / Hospitality</option>
-                                    <option value="General">Other</option>
-                                </select>
+                                <!-- SMART INDUSTRY SELECTOR + CONTEXT FIELD -->
+                                <div style="background: #f9fafb; padding: 18px; border-radius: 8px; border: 1px solid #e5e7eb; margin-bottom: 20px;">
+                                    
+                                    <!-- STEP 1: Select Broad Sector -->
+                                    <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #1f2937;">
+                                        1. Select Your Business Sector *
+                                    </label>
+                                    <select id="industry-level-1" onchange="updateSubIndustries()" required
+                                            style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 1rem; background: white; margin-bottom: 16px;">
+                                        <option value="" disabled selected>Choose your sector...</option>
+                                        <option value="Retail">Retail & E-commerce</option>
+                                        <option value="Manufacturing">Manufacturing & Industrial</option>
+                                        <option value="Professional Services">Professional Services</option>
+                                        <option value="Technology">Technology & SaaS</option>
+                                        <option value="Healthcare">Healthcare & Medical</option>
+                                        <option value="Real Estate">Real Estate & Construction</option>
+                                        <option value="Restaurant">Restaurant & Hospitality</option>
+                                        <option value="General">Other / General Business</option>
+                                    </select>
+
+                                    <!-- STEP 2: Select Specific Niche (appears after sector selected) -->
+                                    <div id="sub-industry-container" style="display: none; margin-bottom: 16px;">
+                                        <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #1f2937;">
+                                            2. Select Your Specific Niche *
+                                        </label>
+                                        <select id="industry-level-2"
+                                                style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 1rem; background: white;">
+                                            <!-- Options populated dynamically by JavaScript below -->
+                                        </select>
+                                    </div>
+
+                                    <!-- STEP 3: Describe Business Context -->
+                                    <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #1f2937;">
+                                        3. Describe Your Main Challenge (Optional)
+                                    </label>
+                                    <textarea id="user-context" rows="3" 
+                                            placeholder="Example: We're a dental clinic struggling with high staff turnover and inconsistent patient flow..."
+                                            style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 1rem; font-family: inherit; resize: vertical;"></textarea>
+                                    
+                                    <p style="margin: 8px 0 0 0; font-size: 0.85rem; color: #6b7280;">
+                                        💡 This helps our AI give you more specific insights
+                                    </p>
+                                </div>
+
+                                <script>
+                                // Niche options for each sector
+                                const subIndustries = {
+                                    "Retail": ["Fashion & Apparel", "Grocery & FMCG", "Electronics & Tech", "Furniture & Home", "General Retail"],
+                                    "Manufacturing": ["Automotive", "Textiles & Garments", "Chemicals & Pharma", "Food & Beverage", "General Manufacturing"],
+                                    "Professional Services": ["Marketing Agency", "IT Consulting", "Legal & Accounting", "HR Consulting", "General Services"],
+                                    "Technology": ["SaaS B2B", "Consumer App", "Hardware & IoT", "Dev Tools", "General Tech"],
+                                    "Healthcare": ["Hospital", "Clinic & Dental", "Pharma & Medical Devices", "Diagnostics", "General Healthcare"],
+                                    "Real Estate": ["Commercial Property", "Residential Sales", "Construction", "Property Management"],
+                                    "Restaurant": ["Fine Dining", "QSR & Fast Food", "Cafe & Bakery", "Cloud Kitchen"],
+                                    "General": ["Small Business", "Mid-Market", "Enterprise", "Non-Profit"]
+                                };
+
+                                // Show/hide niche selector based on sector selection
+                                function updateSubIndustries() {
+                                    const level1 = document.getElementById('industry-level-1');
+                                    const level2 = document.getElementById('industry-level-2');
+                                    const container = document.getElementById('sub-industry-container');
+                                    const selectedSector = level1.value;
+
+                                    // Clear previous options
+                                    level2.innerHTML = '<option value="" disabled selected>Choose your niche...</option>';
+
+                                    if (selectedSector && subIndustries[selectedSector]) {
+                                        // Show niche selector
+                                        container.style.display = 'block';
+                                        level2.setAttribute('required', 'true');
+                                        
+                                        // Populate niche options
+                                        subIndustries[selectedSector].forEach(function(niche) {
+                                            const option = document.createElement('option');
+                                            option.value = niche;
+                                            option.textContent = niche;
+                                            level2.appendChild(option);
+                                        });
+                                    } else {
+                                        // Hide niche selector
+                                        container.style.display = 'none';
+                                        level2.removeAttribute('required');
+                                    }
+                                }
+                                </script>
+                                <!-- END SMART SELECTOR -->                                
                                 </div>
                                 <button type="submit" class="btn" style="width: 100%; padding: 16px;">
                                     Get My Free Report →
@@ -931,8 +1005,23 @@
                 formData.append('name', assessmentState.name);
                 formData.append('email', assessmentState.email);
                 formData.append('company', assessmentState.company);
-                const industry = document.getElementById('user-industry').value;
-                formData.append('industry', industry);
+                // === PLATINUM INDUSTRY + CONTEXT CAPTURE ===
+                const level1 = document.getElementById('industry-level-1').value;
+                const level2Element = document.getElementById('industry-level-2');
+                const level2 = level2Element ? level2Element.value : '';
+                const context = document.getElementById('user-context').value.trim();
+
+                // Construct final industry string
+                // If user selected a niche, format as "Sector - Niche"
+                // Otherwise just use the sector
+                let finalIndustry = level1;
+                if (level2 && level2 !== '') {
+                    finalIndustry = level1 + ' - ' + level2;
+                }
+
+                formData.append('industry', finalIndustry);
+                formData.append('context', context);
+                // === END PLATINUM LOGIC ===
                 
                 // ✅ MULTILINGUAL: Read language from selector + global (defensive)
                 const langSelector = document.getElementById('language-selector');
