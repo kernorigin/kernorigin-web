@@ -343,6 +343,7 @@
         .calc-slider {
             width: 100%;
             -webkit-appearance: none;
+            appearance: none;
             height: 4px;
             background: var(--border-light);
             border-radius: 2px;
@@ -350,6 +351,15 @@
         }
         .calc-slider::-webkit-slider-thumb {
             -webkit-appearance: none;
+            appearance: none;
+            width: 18px; height: 18px;
+            background: var(--accent-navy);
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .calc-slider::-moz-range-thumb {
             width: 18px; height: 18px;
             background: var(--accent-navy);
             border-radius: 50%;

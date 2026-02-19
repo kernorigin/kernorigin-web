@@ -3,93 +3,572 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Systems Diagnostic | Kernorigin</title>
+    <meta name="description" content="Kernorigin Systems & Process Diagnostic — 30 questions across 6 operational domains. Receive a 50-page report with a specific Build / Consult / Hybrid recommendation before committing to any technology investment.">
+    <title>Systems & Process Diagnostic | Kernorigin</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Additional styles specific to systems diagnostic page */
-        .hero-systems {
-            background: linear-gradient(135deg, var(--accent-navy) 0%, #003366 100%);
-            color: white;
-            padding: 80px 0;
-            text-align: center;
-        }
-        .hero-systems h1 { color: white; }
-        .hero-systems p { color: rgba(255,255,255,0.9); }
-        
-        .diagnostic-form-wrapper {
-            max-width: 800px;
-            margin: -50px auto 0;
+
+        /* ── PAGE SHELL ── */
+        .sys-hero {
+            background: var(--accent-navy);
+            padding: 68px 0 60px;
             position: relative;
-            z-index: 10;
+            overflow: hidden;
         }
-        
-        .form-section {
-            margin-bottom: 40px;
-            padding-bottom: 40px;
+        .sys-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+            background-size: 48px 48px;
+        }
+        .sys-hero-inner { position: relative; max-width: 680px; }
+        .sys-eyebrow {
+            display: inline-block;
+            background: rgba(197,160,89,0.15);
+            border: 1px solid rgba(197,160,89,0.35);
+            color: var(--accent-gold);
+            font-size: 0.68rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            padding: 5px 12px;
+            border-radius: 2px;
+            margin-bottom: 22px;
+        }
+        .sys-hero h1 {
+            color: #fff;
+            font-size: 2.8rem;
+            letter-spacing: -0.02em;
+            margin-bottom: 18px;
+        }
+        .sys-hero h1 em { font-style: normal; color: var(--accent-gold); }
+        .sys-hero p {
+            color: rgba(255,255,255,0.65);
+            font-size: 1rem;
+            line-height: 1.75;
+            max-width: 540px;
+            margin: 0;
+        }
+
+        /* ── THREE OUTCOMES ── */
+        .outcomes-strip {
+            background: #fff;
+            border-bottom: 1px solid var(--border-light);
+            padding: 36px 0;
+        }
+        .outcomes-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            color: var(--text-muted);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .outcomes-row {
+            display: flex;
+            gap: 14px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .outcome-card {
+            flex: 1;
+            min-width: 200px;
+            max-width: 280px;
+            padding: 18px 20px;
+            border-radius: 4px;
+            border-top: 3px solid;
+        }
+        .outcome-card.build   { border-color: #059669; background: #f0fdf4; }
+        .outcome-card.consult { border-color: #f59e0b; background: #fffbeb; }
+        .outcome-card.hybrid  { border-color: #3b82f6; background: #eff6ff; }
+        .outcome-badge {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 6px;
+        }
+        .outcome-card.build   .outcome-badge { color: #065f46; }
+        .outcome-card.consult .outcome-badge { color: #92400e; }
+        .outcome-card.hybrid  .outcome-badge { color: #1e40af; }
+        .outcome-card p {
+            font-size: 0.8rem;
+            line-height: 1.5;
+            margin: 0;
+        }
+        .outcome-card.build   p { color: #065f46; }
+        .outcome-card.consult p { color: #92400e; }
+        .outcome-card.hybrid  p { color: #1e40af; }
+
+        /* ── HOW IT WORKS ── */
+        .how-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 0;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .how-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            padding: 0 24px;
+            flex: 1;
+            min-width: 180px;
+            max-width: 260px;
+        }
+        .how-step-num {
+            width: 32px; height: 32px;
+            background: var(--accent-navy);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--accent-gold);
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .how-step-text strong { display: block; color: var(--text-main); font-size: 0.9rem; margin-bottom: 4px; }
+        .how-step-text span { font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; }
+        .how-divider { color: var(--border-light); font-size: 1.4rem; padding-top: 6px; }
+
+        /* ── FORM SECTION ── */
+        #form-section { padding: 60px 0 80px; }
+        .form-shell {
+            max-width: 720px;
+            margin: 0 auto;
+            background: #fff;
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            box-shadow: 0 4px 24px rgba(0,34,68,0.06);
+            overflow: hidden;
+        }
+        /* progress header */
+        .form-progress-bar-wrap {
+            background: var(--bg-offwhite);
+            border-bottom: 1px solid var(--border-light);
+            padding: 16px 28px;
+        }
+        .form-progress-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .form-step-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent-navy);
+        }
+        .form-step-count {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+        .progress-track {
+            height: 4px;
+            background: var(--border-light);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: var(--accent-gold);
+            border-radius: 2px;
+            transition: width 0.4s ease;
+        }
+
+        /* form steps */
+        .form-step { display: none; padding: 36px 40px; }
+        .form-step.active { display: block; }
+
+        /* contact step */
+        .form-step h2 {
+            font-size: 1.6rem;
+            margin-bottom: 8px;
+            color: var(--accent-navy);
+        }
+        .form-step .step-sub {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            margin-bottom: 28px;
+            line-height: 1.6;
+        }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+        /* domain step */
+        .domain-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding-bottom: 20px;
+            margin-bottom: 24px;
             border-bottom: 1px solid var(--border-light);
         }
-        .form-section:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
+        .domain-icon-badge {
+            width: 44px; height: 44px;
+            background: var(--accent-navy);
+            border-radius: 6px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
         }
-        .form-section h3 {
+        .domain-header h3 { margin: 0 0 2px; font-size: 1.2rem; }
+        .domain-header p { margin: 0; font-size: 0.8rem; color: var(--text-muted); }
+        .domain-progress-dots {
+            display: flex;
+            gap: 5px;
+            margin-top: 6px;
+        }
+        .dot {
+            width: 7px; height: 7px;
+            border-radius: 50%;
+            background: var(--border-light);
+            transition: background 0.2s;
+        }
+        .dot.answered { background: var(--accent-gold); }
+
+        /* question blocks */
+        .question-block {
+            margin-bottom: 28px;
+            padding-bottom: 28px;
+            border-bottom: 1px solid var(--border-light);
+        }
+        .question-block:last-of-type { border-bottom: none; margin-bottom: 8px; padding-bottom: 0; }
+        .question-text {
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 4px;
+            line-height: 1.5;
+        }
+        .question-help {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+        .options-list { display: flex; flex-direction: column; gap: 6px; }
+        .option-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 11px 14px;
+            border: 1px solid var(--border-light);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            user-select: none;
+        }
+        .option-card:hover { border-color: var(--accent-navy); background: #f8f9fa; }
+        .option-card.selected {
+            border-color: var(--accent-navy);
+            background: rgba(0,34,68,0.04);
+        }
+        .option-card.selected .option-radio { background: var(--accent-navy); border-color: var(--accent-navy); }
+        .option-card.selected .option-radio::after { opacity: 1; }
+        .option-radio {
+            width: 16px; height: 16px;
+            border: 2px solid var(--border-light);
+            border-radius: 50%;
+            flex-shrink: 0;
+            margin-top: 2px;
+            position: relative;
+            transition: all 0.15s;
+        }
+        .option-radio::after {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: #fff;
+            opacity: 0;
+            transition: opacity 0.15s;
+        }
+        .option-label { font-size: 0.84rem; color: var(--text-muted); line-height: 1.45; }
+        .option-card.selected .option-label { color: var(--accent-navy); font-weight: 500; }
+        .option-score-badge {
+            margin-left: auto;
+            font-size: 0.68rem;
+            font-weight: 700;
+            color: var(--border-light);
+            flex-shrink: 0;
+            padding-top: 3px;
+        }
+        .option-card.selected .option-score-badge { color: var(--accent-gold); }
+
+        /* review step */
+        .review-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 28px; }
+        .review-domain-card {
+            padding: 16px;
+            border: 1px solid var(--border-light);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .review-score-circle {
+            width: 48px; height: 48px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-family: var(--font-serif);
+            font-size: 1rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        .score-high  { background: #d1fae5; color: #065f46; }
+        .score-mid   { background: #fef3c7; color: #92400e; }
+        .score-low   { background: #fee2e2; color: #991b1b; }
+        .review-domain-card h4 { font-size: 0.88rem; margin: 0 0 2px; }
+        .review-domain-card p { font-size: 0.76rem; color: var(--text-muted); margin: 0; }
+        .review-total {
+            background: var(--accent-navy);
+            border-radius: 6px;
+            padding: 20px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 24px;
+        }
+        .review-total-label { color: rgba(255,255,255,0.7); font-size: 0.85rem; }
+        .review-total-score {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-gold);
+        }
+        .review-predicted-outcome {
+            padding: 16px 20px;
+            border-radius: 4px;
+            margin-bottom: 24px;
+            border-left: 4px solid;
+        }
+        .predicted-build   { border-color: #059669; background: #f0fdf4; }
+        .predicted-consult { border-color: #f59e0b; background: #fffbeb; }
+        .predicted-hybrid  { border-color: #3b82f6; background: #eff6ff; }
+        .predicted-label {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 4px;
+        }
+        .predicted-build   .predicted-label { color: #059669; }
+        .predicted-consult .predicted-label { color: #f59e0b; }
+        .predicted-hybrid  .predicted-label { color: #3b82f6; }
+        .predicted-build   p { color: #065f46; }
+        .predicted-consult p { color: #92400e; }
+        .predicted-hybrid  p { color: #1e40af; }
+        .predicted-outcome-text { font-size: 0.85rem; line-height: 1.5; margin: 0; }
+        .review-price-note {
+            text-align: center;
+            padding: 20px;
+            background: var(--bg-offwhite);
+            border-radius: 6px;
+            margin-bottom: 8px;
+        }
+        .review-price-note .price { font-family: var(--font-serif); font-size: 1.8rem; font-weight: 700; color: var(--accent-navy); }
+        .review-price-note p { font-size: 0.82rem; color: var(--text-muted); margin: 6px 0 0; }
+        .review-includes { font-size: 0.8rem; color: var(--text-muted); display: flex; align-items: center; gap: 6px; margin-bottom: 6px; }
+        .review-includes::before { content: '✓'; color: var(--accent-gold); font-weight: 700; }
+
+        /* processing / results */
+        #processing-state, #results-section {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+        .processing-box {
+            text-align: center;
+            padding: 80px 40px;
+            background: #fff;
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+        }
+        .spinner {
+            width: 48px; height: 48px;
+            border: 3px solid var(--border-light);
+            border-top-color: var(--accent-navy);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 24px;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .processing-box h3 { font-size: 1.3rem; margin-bottom: 8px; }
+        .processing-box p { font-size: 0.88rem; color: var(--text-muted); max-width: 340px; margin: 0 auto; }
+        .processing-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            max-width: 300px;
+            margin: 24px auto 0;
+            text-align: left;
+        }
+        .proc-step {
             display: flex;
             align-items: center;
             gap: 10px;
-            margin-bottom: 25px;
-        }
-        .section-number {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 32px;
-            height: 32px;
-            background: var(--accent-gold);
-            color: white;
-            border-radius: 50%;
-            font-weight: bold;
-            font-size: 0.9rem;
-        }
-        .question-item {
-            margin-bottom: 20px;
-        }
-        .question-help {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: var(--text-muted);
-            margin-top: 5px;
-            font-style: italic;
         }
-        .process-step {
-            text-align: center;
-            padding: 30px 20px;
-        }
-        .step-badge {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 50px;
-            height: 50px;
-            background: var(--accent-navy);
-            color: white;
+        .proc-step.done { color: #059669; }
+        .proc-step.active { color: var(--accent-navy); font-weight: 600; }
+        .proc-dot {
+            width: 8px; height: 8px;
             border-radius: 50%;
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin-bottom: 20px;
+            background: var(--border-light);
+            flex-shrink: 0;
         }
-        .recommendation-card {
-            padding: 25px;
+        .proc-step.done .proc-dot { background: #059669; }
+        .proc-step.active .proc-dot { background: var(--accent-navy); }
+
+        /* Results */
+        #results-section { padding: 0 0 80px; }
+        .results-header {
+            background: var(--accent-navy);
+            border-radius: 8px 8px 0 0;
+            padding: 32px 40px;
+        }
+        .results-header .eyebrow { color: var(--accent-gold); margin-bottom: 8px; }
+        .results-header h2 { color: #fff; margin-bottom: 4px; font-size: 1.8rem; }
+        .results-header p { color: rgba(255,255,255,0.65); font-size: 0.88rem; margin: 0; }
+        .results-body { background: #fff; border: 1px solid var(--border-light); border-top: none; border-radius: 0 0 8px 8px; padding: 36px 40px; }
+        .results-overall {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            padding: 24px;
+            background: var(--bg-offwhite);
+            border-radius: 6px;
+            margin-bottom: 28px;
+        }
+        .results-score-large {
+            font-family: var(--font-serif);
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+        .results-overall h3 { margin-bottom: 4px; font-size: 1.1rem; }
+        .results-overall p { margin: 0; font-size: 0.85rem; color: var(--text-muted); }
+        .domain-results-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 28px; }
+        .domain-result-card {
+            padding: 16px;
+            border: 1px solid var(--border-light);
             border-radius: 4px;
-            border-top: 4px solid var(--accent-gold);
         }
-        .recommendation-card.build { border-top-color: #4caf50; }
-        .recommendation-card.consult { border-top-color: #ff9800; }
-        .recommendation-card.hybrid { border-top-color: #2196f3; }
-        
+        .domain-result-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+        .domain-result-name { font-size: 0.85rem; font-weight: 600; color: var(--text-main); }
+        .domain-result-score { font-size: 0.82rem; font-weight: 700; }
+        .score-bar { height: 6px; background: var(--border-light); border-radius: 3px; overflow: hidden; }
+        .score-bar-fill { height: 100%; border-radius: 3px; transition: width 0.6s ease; }
+        .fill-high   { background: #059669; }
+        .fill-mid    { background: #f59e0b; }
+        .fill-low    { background: #dc2626; }
+        .results-outcome {
+            padding: 24px;
+            border-radius: 6px;
+            margin-bottom: 24px;
+            border-left: 4px solid;
+        }
+        .results-outcome h3 { font-size: 1rem; margin-bottom: 8px; }
+        .email-note {
+            padding: 20px 24px;
+            background: #f0fdf4;
+            border-radius: 4px;
+            border-left: 3px solid #059669;
+            margin-bottom: 24px;
+        }
+        .email-note p { font-size: 0.85rem; color: #065f46; margin: 0; }
+        .results-next { display: flex; gap: 14px; flex-wrap: wrap; }
+
+        /* nav buttons */
+        .form-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            border-top: 1px solid var(--border-light);
+            background: var(--bg-offwhite);
+        }
+        .btn-back {
+            background: transparent;
+            border: 1px solid var(--border-light);
+            color: var(--text-muted);
+            padding: 11px 24px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            border-radius: 2px;
+            cursor: pointer;
+            font-family: var(--font-sans);
+            transition: all 0.2s;
+        }
+        .btn-back:hover { border-color: var(--accent-navy); color: var(--accent-navy); }
+        .btn-next {
+            background: var(--accent-navy);
+            color: #fff;
+            border: none;
+            padding: 13px 28px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            border-radius: 2px;
+            cursor: pointer;
+            font-family: var(--font-sans);
+            transition: all 0.2s;
+        }
+        .btn-next:hover:not(:disabled) { background: #003366; }
+        .btn-next:disabled { opacity: 0.4; cursor: not-allowed; }
+        .btn-pay {
+            background: var(--accent-gold);
+            color: #fff;
+        }
+        .btn-pay:hover:not(:disabled) { background: #b8913f !important; }
+        .answers-required-note {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* error */
+        .error-banner {
+            display: none;
+            background: #fee2e2;
+            border: 1px solid #fca5a5;
+            color: #991b1b;
+            padding: 12px 16px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            margin: 0 40px 20px;
+        }
+
+        /* hidden */
+        .hidden { display: none !important; }
+
+        /* ── MOBILE ── */
         @media (max-width: 768px) {
-            .diagnostic-form-wrapper {
-                margin: -30px 20px 0;
-            }
+            .sys-hero h1 { font-size: 2rem; }
+            .outcomes-row { flex-direction: column; align-items: stretch; max-width: 380px; margin: 0 auto; }
+            .outcome-card { max-width: 100%; }
+            .how-row { flex-direction: column; align-items: flex-start; max-width: 320px; margin: 0 auto; gap: 20px; }
+            .how-divider { display: none; }
+            .form-step { padding: 24px 20px; }
+            .form-nav { padding: 16px 20px; }
+            .form-row { grid-template-columns: 1fr; }
+            .review-grid { grid-template-columns: 1fr; }
+            .domain-results-grid { grid-template-columns: 1fr; }
+            .results-header { padding: 24px 20px; }
+            .results-body { padding: 24px 20px; }
+            .results-overall { flex-direction: column; text-align: center; }
+            .error-banner { margin: 0 20px 16px; }
         }
+
     </style>
 </head>
 <body>
@@ -100,439 +579,240 @@
             <nav>
                 <ul>
                     <li><a href="index.html">Home</a></li>
+                    <li><a href="diagnostics.html" class="nav-diagnostics">Diagnostics</a></li>
                     <li><a href="how-we-think.html">How We Think</a></li>
-                    <li><a href="how-we-work.html">How We Work</a></li>
                     <li><a href="impact.html">Impact</a></li>
+                    <li><a href="partners.html">Partners</a></li>
                     <li><a href="team.html">Team</a></li>
                     <li><a href="insights.html">Insights</a></li>
                     <li><a href="contact.html">Contact</a></li>
                 </ul>
             </nav>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
         </div>
     </header>
 
     <main>
-        <!-- HERO -->
-        <section class="hero-systems">
-            <div class="container readable-column">
-                <span class="eyebrow" style="color: rgba(255,255,255,0.8);">Strategic Systems Development</span>
-                <h1>Most businesses automate broken processes.<br>We fix the root cause first.</h1>
-                <p style="font-size: 1.1rem; max-width: 700px; margin: 20px auto 0;">Before we build anything, we diagnose the real problem. Then we recommend the right solution: custom software, strategy consulting, or both.</p>
-            </div>
-        </section>
 
-        <!-- DIAGNOSTIC FORM -->
-        <section class="section-padding">
+        <!-- ── HERO ── -->
+        <section class="sys-hero">
             <div class="container">
-                <div class="diagnostic-form-wrapper">
-                    <div class="card" style="box-shadow: 0 10px 40px rgba(0,0,0,0.1);">
-                        <div style="text-align: center; margin-bottom: 40px;">
-                            <h2>Systems Diagnostic</h2>
-                            <p style="color: var(--text-muted); margin-bottom: 0;">15 questions · 5-10 minutes · Immediate results via email</p>
+                <div class="sys-hero-inner">
+                    <div class="sys-eyebrow">Systems &amp; Process Diagnostic</div>
+                    <h1>Before you build,<br>diagnose what you <em>actually need</em>.</h1>
+                    <p>90% of technology projects fail not because of bad code — but because they automate a broken process. This diagnostic answers the question most organisations skip: <strong style="color:rgba(255,255,255,0.9);">should we build, consult first, or do both?</strong></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── THREE OUTCOMES ── -->
+        <div class="outcomes-strip">
+            <div class="container">
+                <p class="outcomes-label">This diagnostic delivers one of three specific recommendations</p>
+                <div class="outcomes-row">
+                    <div class="outcome-card build">
+                        <div class="outcome-badge">Build</div>
+                        <p>Your process is sound. You need technology to scale it.<br>Investment range: ₹7.5L–₹20L · Timeline: 3–6 weeks.</p>
+                    </div>
+                    <div class="outcome-card consult">
+                        <div class="outcome-badge">Consult First</div>
+                        <p>Your process needs redesign before any technology commitment.<br>Investment range: ₹25L–₹45L · Timeline: 6–10 weeks.</p>
+                    </div>
+                    <div class="outcome-card hybrid">
+                        <div class="outcome-badge">Hybrid</div>
+                        <p>Redesign the process, then build on the new foundation.<br>Investment range: ₹35L–₹60L · Timeline: 8–12 weeks.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── HOW IT WORKS ── -->
+        <section class="section-padding" style="padding: 44px 0; background: var(--bg-offwhite); border-bottom: 1px solid var(--border-light);">
+            <div class="container">
+                <div class="how-row">
+                    <div class="how-step">
+                        <div class="how-step-num">1</div>
+                        <div class="how-step-text">
+                            <strong>Answer 30 questions</strong>
+                            <span>Six operational domains, 5 questions each. Takes 15–20 minutes.</span>
                         </div>
-
-                        <form id="systemsDiagnosticForm" onsubmit="submitSystemsDiagnostic(event)">
-                            <!-- SECTION 1: Contact Info -->
-                            <div class="form-section">
-                                <h3><span class="section-number">1</span> Contact Information</h3>
-                                
-                                <div class="question-item">
-                                    <label for="clientName">Your Name *</label>
-                                    <input type="text" id="clientName" name="clientName" required placeholder="Full name">
-                                </div>
-
-                                <div class="question-item">
-                                    <label for="clientEmail">Email Address *</label>
-                                    <input type="email" id="clientEmail" name="clientEmail" required placeholder="your@email.com">
-                                    <div class="question-help">We'll send your diagnostic report here</div>
-                                </div>
-
-                                <div class="question-item">
-                                    <label for="businessType">Business Type *</label>
-                                    <input type="text" id="businessType" name="businessType" required placeholder="e.g., Professional Services, SaaS, Education">
-                                </div>
-
-                                <div class="question-item">
-                                    <label for="location">Location</label>
-                                    <select id="location" name="location">
-                                        <option value="Bangalore">Bangalore</option>
-                                        <option value="Mumbai">Mumbai</option>
-                                        <option value="Delhi">Delhi</option>
-                                        <option value="Chennai">Chennai</option>
-                                        <option value="Hyderabad">Hyderabad</option>
-                                        <option value="Pune">Pune</option>
-                                        <option value="Other">Other</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <!-- SECTION 2: Process Questions -->
-                            <div class="form-section">
-                                <h3><span class="section-number">2</span> Current Process</h3>
-                                <div id="processQuestions"></div>
-                            </div>
-
-                            <!-- SECTION 3: Technology Questions -->
-                            <div class="form-section">
-                                <h3><span class="section-number">3</span> Technology & Scale</h3>
-                                <div id="techQuestions"></div>
-                            </div>
-
-                            <!-- SECTION 4: Pain Points -->
-                            <div class="form-section">
-                                <h3><span class="section-number">4</span> Pain Points & Goals</h3>
-                                <div id="painQuestions"></div>
-                            </div>
-
-                            <!-- SUBMIT -->
-                            <div style="text-align: center; margin-top: 40px;">
-                                <button type="submit" class="btn" id="submitBtn" style="font-size: 1.1rem; padding: 15px 40px;">
-                                    Get My Systems Diagnostic →
-                                </button>
-                            </div>
-                        </form> 
-                    <div id="sysStatusMessage" style="margin-top:20px;padding:15px;border-radius:4px;display:none;">
-                </div> 
-            </div> 
-        </div> 
-    </div> 
-</section>
-
-        <!-- HOW IT WORKS -->
-        <section class="section-padding" style="background: var(--bg-offwhite);">
-            <div class="container readable-column">
-                <h2 style="text-align: center; margin-bottom: 50px;">How The Diagnostic Works</h2>
-                
-                <div class="grid-3">
-                    <div class="process-step">
-                        <div class="step-badge">1</div>
-                        <h4>You Submit</h4>
-                        <p>Answer 15 questions about your processes, technology, and pain points. Takes 5-10 minutes.</p>
                     </div>
-                    
-                    <div class="process-step">
-                        <div class="step-badge">2</div>
-                        <h4>AI + Human Analysis</h4>
-                        <p>Our system analyzes patterns, validates data quality, and generates root cause insights.</p>
+                    <div class="how-divider">→</div>
+                    <div class="how-step">
+                        <div class="how-step-num">2</div>
+                        <div class="how-step-text">
+                            <strong>One-time investment</strong>
+                            <span>₹49,997. Credited in full against any implementation engagement.</span>
+                        </div>
                     </div>
-                    
-                    <div class="process-step">
-                        <div class="step-badge">3</div>
-                        <h4>Get Your Report</h4>
-                        <p>Receive detailed PDF via email with strategic recommendation and investment range.</p>
-                    </div>
-                </div>
-
-                <div style="text-align: center; margin-top: 40px;">
-                    <p><strong>Within 24-48 hours:</strong> Strategy call to review findings and discuss next steps</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- RECOMMENDATION TYPES -->
-        <section class="section-padding">
-            <div class="container readable-column">
-                <h2 style="text-align: center; margin-bottom: 20px;">What You'll Receive</h2>
-                <p style="text-align: center; max-width: 600px; margin: 0 auto 40px; color: var(--text-muted);">
-                    Based on your answers, we'll recommend one of three paths forward:
-                </p>
-
-                <div class="grid-3">
-                    <div class="card recommendation-card build">
-                        <h4>Build</h4>
-                        <p><strong>₹7.5L - ₹20L | 3-6 weeks</strong></p>
-                        <p style="font-size: 0.95rem;">Your process is sound. You need custom technology to automate and scale.</p>
-                        <ul style="font-size: 0.9rem; padding-left: 20px; margin-top: 15px;">
-                            <li>PWA development</li>
-                            <li>Training & documentation</li>
-                            <li>3 months support</li>
-                        </ul>
-                    </div>
-
-                    <div class="card recommendation-card consult">
-                        <h4>Consult First</h4>
-                        <p><strong>₹25L - ₹45L | 6-10 weeks</strong></p>
-                        <p style="font-size: 0.95rem;">Your process needs redesign before any technology investment.</p>
-                        <ul style="font-size: 0.9rem; padding-left: 20px; margin-top: 15px;">
-                            <li>Strategy & process design</li>
-                            <li>Business model work</li>
-                            <li>Implementation roadmap</li>
-                        </ul>
-                    </div>
-
-                    <div class="card recommendation-card hybrid">
-                        <h4>Hybrid</h4>
-                        <p><strong>₹35L - ₹60L | 8-12 weeks</strong></p>
-                        <p style="font-size: 0.95rem;">You need both: strategy to redesign the process, then technology to implement it.</p>
-                        <ul style="font-size: 0.9rem; padding-left: 20px; margin-top: 15px;">
-                            <li>Phase 1: Strategy</li>
-                            <li>Phase 2: Custom build</li>
-                            <li>Integrated approach</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="card" style="margin-top: 40px; background: var(--bg-offwhite); text-align: center;">
-                    <h3 style="margin-bottom: 15px;">We Say No More Than Yes</h3>
-                    <p>Diagnostic investment: <strong>₹2.5L – ₹4.5L</strong> — credited in full against any implementation engagement.</p> <p style="margin-bottom: 0;">We only build solutions that solve root problems. The diagnostic ensures you invest in the right solution — or tells you if you don't need software at all.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- TRUST SIGNALS -->
-        <section class="section-padding" style="background: var(--bg-offwhite);">
-            <div class="container readable-column text-center">
-                <h2 style="margin-bottom: 40px;">Why Kernorigin?</h2>
-                
-                <div class="grid-3">
-                    <div class="metric-card">
-                        <span class="metric-val">24</span>
-                        <p style="margin-top: 10px; color: var(--text-muted);">Years of Experience<br>Finding Root Causes</p>
-                    </div>
-                    <div class="metric-card">
-                        <span class="metric-val">50+</span>
-                        <p style="margin-top: 10px; color: var(--text-muted);">Transformations<br>That Stick</p>
-                    </div>
-                    <div class="metric-card">
-                        <span class="metric-val">100%</span>
-                        <p style="margin-top: 10px; color: var(--text-muted);">Root Cause Focused<br>No Band-Aids</p>
+                    <div class="how-divider">→</div>
+                    <div class="how-step">
+                        <div class="how-step-num">3</div>
+                        <div class="how-step-text">
+                            <strong>50-page report + strategy call</strong>
+                            <span>PDF delivered within minutes. Strategy call within 24–48 hours.</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- FAQ -->
-        <section class="section-padding">
-            <div class="container readable-column">
-                <h2 style="text-align: center; margin-bottom: 40px;">Common Questions</h2>
+        <!-- ── MULTI-STEP FORM ── -->
+        <section id="form-section">
+            <div class="container" style="padding-top: 60px; padding-bottom: 0;">
 
-                <div class="card" style="margin-bottom: 20px;">
-                    <h4 style="margin-bottom: 10px;">Why should I pay for a diagnostic?</h4>
-                    <p style="margin-bottom: 0;">Because 90% of software projects fail not because of bad code, but because they solve the wrong problem. The diagnostic ensures you invest in the RIGHT solution. It's ₹2.5L of insurance on a ₹20L+ decision.</p>
+                <div id="form-shell" class="form-shell">
+
+                    <!-- Progress bar -->
+                    <div class="form-progress-bar-wrap">
+                        <div class="form-progress-meta">
+                            <span class="form-step-label" id="progress-label">About You</span>
+                            <span class="form-step-count" id="progress-count">Step 1 of 8</span>
+                        </div>
+                        <div class="progress-track">
+                            <div class="progress-fill" id="progress-fill" style="width: 12%;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Error banner -->
+                    <div class="error-banner" id="error-banner"></div>
+
+                    <!-- ── STEP 0: Contact ── -->
+                    <div class="form-step active" id="step-contact">
+                        <h2>Let's start with your context.</h2>
+                        <p class="step-sub">Tell us about the technology decision you're facing. The more specific you are here, the more useful the report will be.</p>
+                        <div class="form-row">
+                            <div>
+                                <label for="f-name">Your name</label>
+                                <input type="text" id="f-name" placeholder="Arun Sharma">
+                            </div>
+                            <div>
+                                <label for="f-email">Email address</label>
+                                <input type="email" id="f-email" placeholder="arun@company.com">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div>
+                                <label for="f-business">Business name</label>
+                                <input type="text" id="f-business" placeholder="Acme Technologies">
+                            </div>
+                            <div>
+                                <label for="f-location">City / Location</label>
+                                <input type="text" id="f-location" placeholder="Bengaluru, Karnataka">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="f-context">What technology decision are you trying to make?</label>
+                            <textarea id="f-context" rows="4" placeholder="e.g. We are considering building a custom ERP for our manufacturing operations. We currently use spreadsheets and WhatsApp for production planning. We are wondering whether to buy an off-the-shelf solution or build custom..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- ── STEPS 1–6: Domain questions (generated by JS) ── -->
+
+                    <!-- ── STEP 7: Review ── -->
+                    <div class="form-step" id="step-review">
+                        <h2>Review your responses.</h2>
+                        <p class="step-sub">Here is your score across the six operational domains. Complete the diagnostic to receive your full 50-page report and Build / Consult / Hybrid recommendation.</p>
+                        <div class="review-grid" id="review-domain-cards"><!-- populated by JS --></div>
+                        <div class="review-total">
+                            <div>
+                                <div class="review-total-label">Overall operational health</div>
+                                <div style="font-size:0.78rem; color:rgba(255,255,255,0.45); margin-top:2px;">Across all 30 questions</div>
+                            </div>
+                            <div class="review-total-score" id="review-total-score">—</div>
+                        </div>
+                        <div class="review-predicted-outcome" id="review-predicted"><!-- populated by JS --></div>
+                        <div class="review-price-note">
+                            <div class="price">₹49,997</div>
+                            <p>One-time · 50-page PDF report · Strategy call within 24–48 hours</p>
+                            <div style="margin-top: 14px; display: flex; flex-direction: column; gap: 4px;">
+                                <div class="review-includes">Process architecture mapped end to end</div>
+                                <div class="review-includes">Specific Build / Consult / Hybrid recommendation with rationale</div>
+                                <div class="review-includes">Investment range &amp; timeline for the recommended path</div>
+                                <div class="review-includes">Technology audit — current stack vs. what the process requires</div>
+                                <div class="review-includes">90-day systems overhaul roadmap</div>
+                                <div class="review-includes">Credited in full against any implementation engagement</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Form navigation -->
+                    <div class="form-nav" id="form-nav">
+                        <button class="btn-back hidden" id="btn-back" onclick="goBack()">← Back</button>
+                        <span class="answers-required-note" id="answers-note"></span>
+                        <button class="btn-next" id="btn-next" onclick="goNext()">Continue →</button>
+                    </div>
+
                 </div>
 
-                <div class="card" style="margin-bottom: 20px;">
-                    <h4 style="margin-bottom: 10px;">What if I disagree with your recommendation?</h4>
-                    <p style="margin-bottom: 0;">We explain our reasoning, and you decide. We're advisors, not salespeople. Some clients take the report and implement themselves. We only want clients who value our expertise.</p>
+                <!-- Processing state -->
+                <div id="processing-state" class="hidden">
+                    <div class="processing-box">
+                        <div class="spinner"></div>
+                        <h3>Analysing your responses…</h3>
+                        <p>Our diagnostic engine is mapping your process architecture and generating your report.</p>
+                        <div class="processing-steps">
+                            <div class="proc-step done" id="proc-1">
+                                <div class="proc-dot"></div>
+                                Payment confirmed
+                            </div>
+                            <div class="proc-step active" id="proc-2">
+                                <div class="proc-dot"></div>
+                                Scoring 6 operational domains
+                            </div>
+                            <div class="proc-step" id="proc-3">
+                                <div class="proc-dot"></div>
+                                Identifying process architecture gaps
+                            </div>
+                            <div class="proc-step" id="proc-4">
+                                <div class="proc-dot"></div>
+                                Generating Build / Consult / Hybrid recommendation
+                            </div>
+                            <div class="proc-step" id="proc-5">
+                                <div class="proc-dot"></div>
+                                Preparing 50-page report PDF
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="card" style="margin-bottom: 20px;">
-                    <h4 style="margin-bottom: 10px;">How long until I get results?</h4>
-                    <p style="margin-bottom: 0;">PDF report arrives via email within minutes of submission. Strategy call to review findings scheduled within 24-48 hours.</p>
+                <!-- Results -->
+                <div id="results-section" class="hidden">
+                    <div class="results-header">
+                        <span class="eyebrow">Diagnostic Complete</span>
+                        <h2 id="results-title">Your Systems Diagnostic Results</h2>
+                        <p id="results-subtitle">Full 50-page report and strategy call details sent to your email.</p>
+                    </div>
+                    <div class="results-body">
+                        <div class="results-overall">
+                            <div class="results-score-large" id="results-score-display">—</div>
+                            <div>
+                                <h3 id="results-verdict-title">Overall Systems Health</h3>
+                                <p id="results-verdict-text">—</p>
+                            </div>
+                        </div>
+                        <div class="domain-results-grid" id="domain-results-grid"><!-- populated by JS --></div>
+                        <div class="results-outcome" id="results-outcome"><!-- populated by JS --></div>
+                        <div class="email-note">
+                            <p>✓ <strong>Your 50-page report has been sent to your email.</strong> It contains your full process architecture map, the Build / Consult / Hybrid recommendation with specific rationale, investment ranges, a 90-day roadmap, and your strategy call booking link.</p>
+                        </div>
+                        <div class="results-next">
+                            <a href="contact.html" class="btn">Speak to the team</a>
+                            <a href="how-we-think.html" class="btn-outline">How we work</a>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="card">
-                    <h4 style="margin-bottom: 10px;">What if I don't move forward?</h4>
-                    <p style="margin-bottom: 0;">You own the report. Use it however you want. We've had clients implement our recommendations themselves, and we're fine with that.</p>
-                </div>
             </div>
         </section>
 
-        <!-- FINAL CTA -->
-        <section class="section-padding" style="background: var(--accent-navy); color: white; text-align: center;">
-            <div class="container readable-column">
-                <h2 style="color: white; margin-bottom: 20px;">Ready to Find Your Root Cause?</h2>
-                <p style="margin-bottom: 30px; font-size: 1.1rem; color: rgba(255,255,255,0.9);">Stop automating broken processes. Start solving real problems.</p>
-                <a href="#systemsDiagnosticForm" class="btn" style="background: white; color: var(--accent-navy);">Start Your Diagnostic</a>
-            </div>
-        </section>
     </main>
 
-    <script src="config.js"></script>
-    <script>
-        let SYSTEMS_QUESTIONS = null;
-
-        const CATEGORY_SECTIONS = {
-            'Process': 'processQuestions',
-            'Volume': 'processQuestions',
-            'Tech': 'techQuestions',
-            'Pain': 'painQuestions',
-            'Performance': 'painQuestions',
-            'Team': 'painQuestions',
-            'Strategic': 'painQuestions'
-        };
-
-        window.onload = async function() {
-            try {
-                if (!API_CONFIG || API_CONFIG.URL.includes("YOUR_SCRIPT_ID")) {
-                    throw new Error("Config not set");
-                }
-
-                const res = await fetch(`${API_CONFIG.URL}?action=systems_diagnostic_init`);
-                const data = await res.json();
-                
-                if (data.error) throw new Error(data.error);
-
-                SYSTEMS_QUESTIONS = data.questions;
-                renderQuestions(data.questions);
-
-            } catch(e) { 
-                console.error("Failed to load:", e);
-                document.querySelector('.diagnostic-form-wrapper').innerHTML = 
-                    `<div class="card" style="text-align:center; padding:50px;">
-                        <h3>Diagnostic System Offline</h3>
-                        <p>We are currently updating our systems. Please try again in a few minutes or contact us directly.</p>
-                    </div>`;
-            }
-        };
-
-        function renderQuestions(questions) {
-            const grouped = {};
-            questions.forEach(q => {
-                const section = CATEGORY_SECTIONS[q.category] || 'painQuestions';
-                if (!grouped[section]) grouped[section] = [];
-                grouped[section].push(q);
-            });
-
-            Object.keys(grouped).forEach(sectionId => {
-                const container = document.getElementById(sectionId);
-                if(container) {
-                    grouped[sectionId].forEach(q => {
-                        container.appendChild(createQuestionElement(q));
-                    });
-                }
-            });
-        }
-
-        function createQuestionElement(q) {
-            const wrapper = document.createElement('div');
-            wrapper.className = 'question-item';
-
-            const label = document.createElement('label');
-            label.htmlFor = q.id;
-            label.textContent = q.text + ' *';
-            wrapper.appendChild(label);
-
-            let input;
-            
-            if (q.type === 'select' || q.type === 'multiselect') {
-                input = document.createElement('select');
-                input.required = true;
-                input.id = q.id;
-                input.name = q.id;
-                
-                if (q.type === 'multiselect') {
-                    input.multiple = true;
-                    input.style.height = '100px';
-                }
-                
-                const defaultOpt = document.createElement('option');
-                defaultOpt.value = '';
-                defaultOpt.textContent = 'Select...';
-                defaultOpt.disabled = true;
-                defaultOpt.selected = true;
-                input.appendChild(defaultOpt);
-                
-                if (q.options && q.options !== 'NULL' && q.options !== '') {
-                    const optionsArray = String(q.options).split('/');
-                    optionsArray.forEach(opt => {
-                        const option = document.createElement('option');
-                        option.value = opt.trim();
-                        option.textContent = opt.trim();
-                        input.appendChild(option);
-                    });
-                }
-                
-                wrapper.appendChild(input);
-                
-                if (q.type === 'multiselect') {
-                    const help = document.createElement('div');
-                    help.className = 'question-help';
-                    help.textContent = 'Hold Ctrl/Cmd (or tap on mobile) to select multiple';
-                    wrapper.appendChild(help);
-                }
-                
-            } else if (q.type === 'number') {
-                input = document.createElement('input');
-                input.type = 'number';
-                input.step = '0.01';
-                input.required = true;
-                input.id = q.id;
-                input.name = q.id;
-                input.placeholder = 'Enter number';
-                wrapper.appendChild(input);
-                
-            } else {
-                input = document.createElement('textarea');
-                input.required = true;
-                input.id = q.id;
-                input.name = q.id;
-                input.placeholder = 'Describe...';
-                input.rows = 3;
-                wrapper.appendChild(input);
-            }
-
-            return wrapper;
-        }
-
-        async function submitSystemsDiagnostic(e) {
-            e.preventDefault();
-            
-            const btn = document.getElementById('submitBtn');
-            const originalText = btn.textContent;
-            btn.textContent = 'Analyzing Data...';
-            btn.disabled = true;
-
-            try {
-                const formData = new FormData(e.target);
-                const answers = {};
-                
-                SYSTEMS_QUESTIONS.forEach(q => {
-                    // Handle multiselect values
-                    if (q.type === 'multiselect') {
-                        const selectElement = e.target.elements[q.id];
-                        const values = Array.from(selectElement.selectedOptions).map(opt => opt.value);
-                        answers[q.id] = values.join(', ');
-                    } else {
-                        const value = formData.get(q.id);
-                        if (value !== null && value !== '') {
-                            answers[q.id] = value;
-                        }
-                    }
-                });
-
-                const payload = {
-                    action: 'submit_systems_diagnostic',
-                    apiKey: API_CONFIG.PUBLIC_KEY, // Security verification
-                    name: formData.get('clientName'),
-                    email: formData.get('clientEmail'),
-                    business: formData.get('businessType'),
-                    location: formData.get('location'),
-                    answers: answers
-                };
-
-                const res = await fetch(API_CONFIG.URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-
-                const result = await res.json();
-
-                if (result.error) throw new Error(result.error);
-
-                if (result.status === 'success') { const sysStatus = document.getElementById('sysStatusMessage'); sysStatus.style.display = 'block'; sysStatus.style.backgroundColor = '#d1fae5'; sysStatus.style.color = '#065f46'; sysStatus.innerHTML = '<strong>✅ Systems Diagnostic Complete!</strong><br>Your detailed report has been emailed to <strong>' + formData.get('clientEmail') + '</strong>. We will contact you within 24 hours to schedule a strategy call.'; e.target.reset(); sysStatus.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                } else {
-                    throw new Error(result.message || 'Unknown error');
-                }
-
-            } catch(error) { console.error('Error:', error); const sysStatus = document.getElementById('sysStatusMessage'); sysStatus.style.display = 'block'; sysStatus.style.backgroundColor = '#fee2e2'; sysStatus.style.color = '#991b1b'; sysStatus.textContent = '❌ Submission failed: ' + error.message + '. Please try again or contact us directly.';
-            } finally {
-                btn.textContent = originalText;
-                btn.disabled = false;
-            }
-        }
-
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) target.scrollIntoView({ behavior: 'smooth' });
-            });
-        });
-    </script>
-        <footer>
+    <footer>
         <div class="container footer-wrapper">
             <div>
                 <div class="footer-logo">KERNORIGIN</div>
@@ -554,6 +834,985 @@
             &copy; 2026 Kernorigin. All rights reserved.
         </div>
     </footer>
+
+    <!-- Razorpay -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script src="config.js"></script>
     <script src="mobile-menu.js"></script>
+
+    <script>
+    // ============================================================
+    // QUESTION DATA (matches backend exactly)
+    // ============================================================
+    const DOMAINS = [
+        {
+            id: 'process',
+            label: 'Process & Workflow',
+            icon: '⚙️',
+            description: 'How consistently your core operations run',
+            questions: [
+                {
+                    id: 'PR-01',
+                    text: 'How well are your core business processes documented and followed consistently?',
+                    helpText: 'Onboarding, order fulfilment, delivery, invoicing — written down and actually used?',
+                    options: [
+                        { score: 0, label: 'No documentation — everything runs on individual memory' },
+                        { score: 1, label: 'Partial docs exist but are outdated or rarely used' },
+                        { score: 2, label: 'Key processes documented; followed inconsistently' },
+                        { score: 3, label: 'Most processes documented and followed by most people' },
+                        { score: 4, label: 'All processes documented, version-controlled, and regularly audited' }
+                    ]
+                },
+                {
+                    id: 'PR-02',
+                    text: 'When something goes wrong operationally, how quickly and reliably is the root cause identified and fixed?',
+                    helpText: 'Not just the immediate patch — the underlying reason it failed.',
+                    options: [
+                        { score: 0, label: 'We firefight repeatedly — same issues recur every week' },
+                        { score: 1, label: 'We fix symptoms but rarely dig into root causes' },
+                        { score: 2, label: 'Root cause analysis happens sometimes, inconsistently' },
+                        { score: 3, label: 'We usually identify root causes; fixes mostly stick' },
+                        { score: 4, label: 'Formal RCA process exists; recurring issues are rare' }
+                    ]
+                },
+                {
+                    id: 'PR-03',
+                    text: 'How much of your team\'s time is spent on manual, repetitive tasks that could be automated?',
+                    helpText: null,
+                    options: [
+                        { score: 0, label: 'Over 60% — almost everything is manual' },
+                        { score: 1, label: '40–60% manual work; automation is discussed but not done' },
+                        { score: 2, label: '25–40% manual; some automation in place' },
+                        { score: 3, label: '10–25% manual; key workflows are automated' },
+                        { score: 4, label: 'Under 10% manual; automation is a core operating principle' }
+                    ]
+                },
+                {
+                    id: 'PR-04',
+                    text: 'How effectively do teams hand off work between departments (sales → ops → finance → delivery)?',
+                    helpText: 'Look for dropped balls, rework, and miscommunication at handover points.',
+                    options: [
+                        { score: 0, label: 'Handoffs constantly fail — rework and blame are normal' },
+                        { score: 1, label: 'Handoffs are messy; some information always gets lost' },
+                        { score: 2, label: 'Handoffs work most of the time with occasional gaps' },
+                        { score: 3, label: 'Clean handoffs with a defined checklist or system' },
+                        { score: 4, label: 'Seamless handoffs; system-enforced with full traceability' }
+                    ]
+                },
+                {
+                    id: 'PR-05',
+                    text: 'Do you know which single step is slowing your entire operation — your primary bottleneck?',
+                    helpText: null,
+                    options: [
+                        { score: 0, label: 'No idea — everything feels broken simultaneously' },
+                        { score: 1, label: 'We suspect something but have never confirmed it with data' },
+                        { score: 2, label: 'We know the bottleneck intuitively but haven\'t measured it' },
+                        { score: 3, label: 'Bottleneck identified and being actively worked on' },
+                        { score: 4, label: 'Bottleneck tracking is systematic; we find and fix them proactively' }
+                    ]
+                }
+            ]
+        },
+        {
+            id: 'technology',
+            label: 'Technology & Automation',
+            icon: '💻',
+            description: 'Whether your tech stack enables or creates friction',
+            questions: [
+                {
+                    id: 'TY-01',
+                    text: 'How well does your current technology stack actually serve your day-to-day operations?',
+                    helpText: 'Not what it was supposed to do — what it actually does for your team today.',
+                    options: [
+                        { score: 0, label: 'Tech is a liability — it causes more problems than it solves' },
+                        { score: 1, label: 'Basic tools only; significant manual workarounds required' },
+                        { score: 2, label: 'Functional but fragmented; multiple disconnected systems' },
+                        { score: 3, label: 'Solid stack; most teams are productive with current tools' },
+                        { score: 4, label: 'Integrated, efficient stack that gives us a competitive advantage' }
+                    ]
+                },
+                {
+                    id: 'TY-02',
+                    text: 'How much technology debt do you carry — legacy systems, outdated tools, or workarounds built on workarounds?',
+                    helpText: null,
+                    options: [
+                        { score: 0, label: 'Extreme debt — critical systems are dangerously outdated' },
+                        { score: 1, label: 'High debt; major upgrades needed but not funded or planned' },
+                        { score: 2, label: 'Moderate debt; a few legacy systems still in use' },
+                        { score: 3, label: 'Low debt; most systems are current and maintained' },
+                        { score: 4, label: 'Minimal debt; regular refresh cycles and proactive upgrades' }
+                    ]
+                },
+                {
+                    id: 'TY-03',
+                    text: 'How well do your systems talk to each other? (CRM ↔ ERP ↔ Finance ↔ Operations)',
+                    helpText: 'Manual data re-entry between systems is a classic integration failure signal.',
+                    options: [
+                        { score: 0, label: 'No integration — every system is an island, re-entry is constant' },
+                        { score: 1, label: 'Minimal integration; mostly manual bridges between systems' },
+                        { score: 2, label: 'Some integrations exist but with frequent sync failures' },
+                        { score: 3, label: 'Key systems integrated; minimal manual re-entry required' },
+                        { score: 4, label: 'Fully integrated ecosystem; data flows automatically end to end' }
+                    ]
+                },
+                {
+                    id: 'TY-04',
+                    text: 'How effective is your approach to cybersecurity and data protection?',
+                    helpText: null,
+                    options: [
+                        { score: 0, label: 'No formal security — never been taken seriously' },
+                        { score: 1, label: 'Basic antivirus only; no policies or backup procedures' },
+                        { score: 2, label: 'Basic measures in place; no formal policy or team training' },
+                        { score: 3, label: 'Reasonable security posture; policies exist and are followed' },
+                        { score: 4, label: 'Strong security culture; audited, tested, continuously improved' }
+                    ]
+                },
+                {
+                    id: 'TY-05',
+                    text: 'How successfully have your technology investments delivered measurable operational improvements?',
+                    helpText: null,
+                    options: [
+                        { score: 0, label: 'Tech investments have mostly failed or been abandoned' },
+                        { score: 1, label: 'Limited ROI; tools are used but without measurable impact' },
+                        { score: 2, label: 'Some improvements visible; results mixed across initiatives' },
+                        { score: 3, label: 'Clear ROI on most investments; team productivity has improved' },
+                        { score: 4, label: 'Strong, measured ROI; technology is a core growth driver' }
+                    ]
+                }
+            ]
+        },
+        {
+            id: 'data',
+            label: 'Data & Reporting',
+            icon: '📊',
+            description: 'How well your organisation runs on evidence',
+            questions: [
+                {
+                    id: 'DA-01',
+                    text: 'How accurately and promptly can you access key business metrics (revenue, costs, margins, pipeline)?',
+                    helpText: 'How old is your data when you look at it — hours, days, or weeks?',
+                    options: [
+                        { score: 0, label: 'We don\'t track metrics reliably — decisions are gut-driven' },
+                        { score: 1, label: 'Data available but takes days to compile; often inaccurate' },
+                        { score: 2, label: 'Weekly reports; acceptable accuracy but manual effort to produce' },
+                        { score: 3, label: 'Daily dashboards; reasonably accurate with minor lag' },
+                        { score: 4, label: 'Real-time dashboards; single source of truth across the organisation' }
+                    ]
+                },
+                {
+                    id: 'DA-02',
+                    text: 'How consistent and reliable is your data quality across systems?',
+                    helpText: 'Duplicates, missing fields, conflicting figures between departments — signs of poor data quality.',
+                    options: [
+                        { score: 0, label: 'Data is unreliable — teams don\'t trust the numbers' },
+                        { score: 1, label: 'Frequent errors and duplicates; no data governance in place' },
+                        { score: 2, label: 'Moderate quality; cleanup is an ongoing manual effort' },
+                        { score: 3, label: 'Good quality; defined ownership and regular validation' },
+                        { score: 4, label: 'Excellent quality; automated validation with clear data ownership' }
+                    ]
+                },
+                {
+                    id: 'DA-03',
+                    text: 'How effectively does your leadership team use data to make strategic and operational decisions?',
+                    helpText: null,
+                    options: [
+                        { score: 0, label: 'Decisions are mostly opinion-based; data is rarely consulted' },
+                        { score: 1, label: 'Data is referenced occasionally but not systematically' },
+                        { score: 2, label: 'Key decisions use data, but inconsistently across leaders' },
+                        { score: 3, label: 'Most decisions are data-informed; clear metrics guide reviews' },
+                        { score: 4, label: 'Data-driven culture; every major decision backed by evidence' }
+                    ]
+                },
+                {
+                    id: 'DA-04',
+                    text: 'Do you have leading indicators (predictive metrics) vs. only lagging indicators (what already happened)?',
+                    helpText: '"Pipeline coverage" predicts next quarter; "last month\'s revenue" does not.',
+                    options: [
+                        { score: 0, label: 'We only look at what happened — no predictive view at all' },
+                        { score: 1, label: 'Mostly lagging; one or two leading metrics tracked informally' },
+                        { score: 2, label: 'Mix of leading and lagging but not systematically reviewed' },
+                        { score: 3, label: 'Clear set of leading indicators tracked and acted upon regularly' },
+                        { score: 4, label: 'Sophisticated predictive dashboards; we see problems 30–90 days early' }
+                    ]
+                },
+                {
+                    id: 'DA-05',
+                    text: 'How well is institutional knowledge captured — if a key person left tomorrow, how much would walk out with them?',
+                    helpText: null,
+                    options: [
+                        { score: 0, label: 'Catastrophic exposure — most knowledge lives in people\'s heads' },
+                        { score: 1, label: 'High risk; a few departures would be operationally crippling' },
+                        { score: 2, label: 'Moderate risk; some documentation but significant gaps remain' },
+                        { score: 3, label: 'Low risk; most knowledge is captured in systems or wikis' },
+                        { score: 4, label: 'Minimal risk; knowledge is systematically documented and shared' }
+                    ]
+                }
+            ]
+        },
+        {
+            id: 'people',
+            label: 'People & Accountability',
+            icon: '👥',
+            description: 'Whether roles, ownership, and performance are clear',
+            questions: [
+                {
+                    id: 'PE-01',
+                    text: 'How clearly are roles, responsibilities, and decision rights defined in your organisation?',
+                    helpText: 'Look for confusion about who owns what, or decisions requiring too many approvals.',
+                    options: [
+                        { score: 0, label: 'Chaos — unclear ownership leads to constant conflict or paralysis' },
+                        { score: 1, label: 'Roles loosely defined; overlaps and gaps cause frequent issues' },
+                        { score: 2, label: 'Roles defined on paper but not always clear in practice' },
+                        { score: 3, label: 'Clear roles and RACI; most ownership decisions are fast' },
+                        { score: 4, label: 'Crystal-clear ownership; decisions happen at the right level, fast' }
+                    ]
+                },
+                {
+                    id: 'PE-02',
+                    text: 'How effectively does your performance management system drive the right behaviours?',
+                    helpText: 'Are people rewarded for the right outcomes, or do perverse incentives exist?',
+                    options: [
+                        { score: 0, label: 'No real performance management — people self-manage with no feedback' },
+                        { score: 1, label: 'Annual reviews only; no connection between performance and outcomes' },
+                        { score: 2, label: 'Some structure but inconsistently applied; manager-dependent' },
+                        { score: 3, label: 'Regular reviews with clear KPIs; mostly drives the right behaviour' },
+                        { score: 4, label: 'Excellent system; tightly linked to outcomes, growth, and reward' }
+                    ]
+                },
+                {
+                    id: 'PE-03',
+                    text: 'How strong is your organisation\'s capacity to train, upskill, and develop team members?',
+                    helpText: null,
+                    options: [
+                        { score: 0, label: 'No training culture — sink or swim' },
+                        { score: 1, label: 'Ad-hoc training when crises force it; no proactive development' },
+                        { score: 2, label: 'Some structured training; coverage is uneven across teams' },
+                        { score: 3, label: 'Regular training programmes; skills gaps identified and addressed' },
+                        { score: 4, label: 'Learning is embedded; continuous development is a cultural norm' }
+                    ]
+                },
+                {
+                    id: 'PE-04',
+                    text: 'What is your staff retention like, and how damaging is turnover to your operations?',
+                    helpText: null,
+                    options: [
+                        { score: 0, label: 'Very high turnover (30%+/year); constant rehiring and retraining' },
+                        { score: 1, label: 'High turnover (20–30%); significant operational disruption' },
+                        { score: 2, label: 'Moderate turnover (10–20%); manageable but costly' },
+                        { score: 3, label: 'Low turnover (5–10%); most departures are planned or positive' },
+                        { score: 4, label: 'Minimal turnover (<5%); high engagement, people want to stay' }
+                    ]
+                },
+                {
+                    id: 'PE-05',
+                    text: 'How effectively does communication flow across your organisation — up, down, and sideways?',
+                    helpText: null,
+                    options: [
+                        { score: 0, label: 'Severely broken — silos, rumours, and surprises are the norm' },
+                        { score: 1, label: 'Mainly top-down; bottom-up feedback rarely reaches leadership' },
+                        { score: 2, label: 'Adequate communication but inconsistent across teams' },
+                        { score: 3, label: 'Good flow; regular all-hands, team meetings, and open channels' },
+                        { score: 4, label: 'Exceptional; transparent, two-way, and systematically reinforced' }
+                    ]
+                }
+            ]
+        },
+        {
+            id: 'customer',
+            label: 'Customer Delivery',
+            icon: '🎯',
+            description: 'How reliably you deliver what you promise',
+            questions: [
+                {
+                    id: 'CU-01',
+                    text: 'How consistently do you deliver what you promised to customers — on time, to spec, at the expected quality?',
+                    helpText: null,
+                    options: [
+                        { score: 0, label: 'Frequent failures; customer complaints and escalations are routine' },
+                        { score: 1, label: 'Inconsistent delivery; we miss SLAs more often than we should' },
+                        { score: 2, label: 'Mostly on-spec; occasional delays or quality issues' },
+                        { score: 3, label: 'Reliable delivery; exceptions are rare and handled well' },
+                        { score: 4, label: 'Consistently excellent; we routinely exceed customer expectations' }
+                    ]
+                },
+                {
+                    id: 'CU-02',
+                    text: 'How fast and effectively do you resolve customer complaints or service failures?',
+                    helpText: null,
+                    options: [
+                        { score: 0, label: 'Poorly — complaints linger, escalate, and damage relationships' },
+                        { score: 1, label: 'Slow resolution; no formal process, depends on who picks it up' },
+                        { score: 2, label: 'Adequate resolution but inconsistent speed and outcomes' },
+                        { score: 3, label: 'Good process; most issues resolved within agreed timelines' },
+                        { score: 4, label: 'Excellent — complaints resolved fast and used to improve systems' }
+                    ]
+                },
+                {
+                    id: 'CU-03',
+                    text: 'Do you systematically collect and act on customer feedback?',
+                    helpText: 'Not just whether you ask — do you close the loop and change things as a result?',
+                    options: [
+                        { score: 0, label: 'No — customer feedback is anecdotal and rarely actioned' },
+                        { score: 1, label: 'We collect feedback informally but rarely analyse or act on it' },
+                        { score: 2, label: 'Periodic surveys; insights discussed but not systematically actioned' },
+                        { score: 3, label: 'Regular feedback loops; key insights drive service changes' },
+                        { score: 4, label: 'Voice of Customer is embedded; feedback directly shapes our roadmap' }
+                    ]
+                },
+                {
+                    id: 'CU-04',
+                    text: 'How scalable is your current delivery model? If demand doubled tomorrow, could you handle it?',
+                    helpText: null,
+                    options: [
+                        { score: 0, label: 'We\'re already at capacity; growth would break us' },
+                        { score: 1, label: 'Limited headroom; 20–30% growth would cause serious strain' },
+                        { score: 2, label: 'Some buffer; manageable growth but manual scaling required' },
+                        { score: 3, label: 'Good scalability; systems can absorb significant growth' },
+                        { score: 4, label: 'Highly scalable; growth absorbed without proportional cost increase' }
+                    ]
+                },
+                {
+                    id: 'CU-05',
+                    text: 'How clearly defined and efficiently executed is your customer onboarding process?',
+                    helpText: null,
+                    options: [
+                        { score: 0, label: 'No formal onboarding — every new customer is a chaotic scramble' },
+                        { score: 1, label: 'Informal onboarding; highly dependent on individual team members' },
+                        { score: 2, label: 'Basic onboarding checklist; inconsistent execution' },
+                        { score: 3, label: 'Structured onboarding; most customers are set up smoothly' },
+                        { score: 4, label: 'Excellent onboarding; time-to-value is fast, consistent, and measured' }
+                    ]
+                }
+            ]
+        },
+        {
+            id: 'finance',
+            label: 'Financial Controls',
+            icon: '💰',
+            description: 'How tightly your financial operations are managed',
+            questions: [
+                {
+                    id: 'FI-01',
+                    text: 'How tight are your financial controls — purchase approvals, expense management, and fraud prevention?',
+                    helpText: null,
+                    options: [
+                        { score: 0, label: 'Minimal controls — approvals are informal or easily bypassed' },
+                        { score: 1, label: 'Basic controls only; significant gaps in oversight' },
+                        { score: 2, label: 'Reasonable controls; occasional exceptions or workarounds' },
+                        { score: 3, label: 'Strong controls; approval workflows enforced and audited' },
+                        { score: 4, label: 'Excellent controls; audited, automated, and near-zero leakage' }
+                    ]
+                },
+                {
+                    id: 'FI-02',
+                    text: 'How well does your invoicing, collections, and accounts receivable process perform?',
+                    helpText: 'Think about overdue invoices, DSO (days sales outstanding), and cash timing.',
+                    options: [
+                        { score: 0, label: 'Severely broken — significant overdue AR, cash flow always tight' },
+                        { score: 1, label: 'Slow collections; DSO is high and a constant management concern' },
+                        { score: 2, label: 'Adequate; occasional delays but generally managed' },
+                        { score: 3, label: 'Good discipline; timely invoicing and proactive collections' },
+                        { score: 4, label: 'Excellent — automated, near-zero bad debts, DSO well below industry' }
+                    ]
+                },
+                {
+                    id: 'FI-03',
+                    text: 'How accurately and frequently do you forecast cash flow and operating expenses?',
+                    helpText: null,
+                    options: [
+                        { score: 0, label: 'No forecasting — we react to cash positions as they appear' },
+                        { score: 1, label: 'Rough estimates; surprises are common and sometimes critical' },
+                        { score: 2, label: 'Monthly forecasts; reasonable accuracy but significant variance' },
+                        { score: 3, label: 'Rolling 13-week forecasts; accuracy within 10–15%' },
+                        { score: 4, label: 'Highly accurate rolling forecasts; cash surprises are extremely rare' }
+                    ]
+                },
+                {
+                    id: 'FI-04',
+                    text: 'How well do you understand your unit economics — cost to acquire, cost to serve, margin per customer/product?',
+                    helpText: null,
+                    options: [
+                        { score: 0, label: 'We don\'t track unit economics; pricing is largely intuitive' },
+                        { score: 1, label: 'We have a rough sense but no reliable data behind it' },
+                        { score: 2, label: 'Calculated at aggregate level; limited product/customer granularity' },
+                        { score: 3, label: 'Clear unit economics by product/segment; informs pricing decisions' },
+                        { score: 4, label: 'Granular unit economics by customer, product, channel, and geography' }
+                    ]
+                },
+                {
+                    id: 'FI-05',
+                    text: 'How effectively do you manage vendor relationships and procurement costs?',
+                    helpText: null,
+                    options: [
+                        { score: 0, label: 'No procurement discipline — vendor relationships are purely reactive' },
+                        { score: 1, label: 'Informal relationships; no systematic cost reviews or benchmarking' },
+                        { score: 2, label: 'Some negotiation; annual reviews but not data-driven' },
+                        { score: 3, label: 'Structured procurement; regular benchmarking and competitive bids' },
+                        { score: 4, label: 'Strategic procurement; vendor partnerships drive cost and quality advantage' }
+                    ]
+                }
+            ]
+        }
+    ];
+
+    // ============================================================
+    // STATE
+    // ============================================================
+    const state = {
+        currentStep: 0,  // 0=contact, 1-6=domains, 7=review
+        answers: {},     // { 'PR-01': { domain, question, answer, score }, ... }
+        contact: {},
+        paymentId: null
+    };
+    const TOTAL_STEPS = 8; // 0(contact) + 6(domains) + 1(review) = 8 (indices 0-7)
+
+    // ============================================================
+    // BUILD DOMAIN FORM STEPS
+    // ============================================================
+    function buildDomainSteps() {
+        const shell = document.getElementById('form-shell');
+        const nav   = document.getElementById('form-nav');
+
+        DOMAINS.forEach(function(domain, dIdx) {
+            const step = document.createElement('div');
+            step.className = 'form-step';
+            step.id = 'step-domain-' + domain.id;
+
+            let qHTML = '';
+            domain.questions.forEach(function(q, qIdx) {
+                let optHTML = '';
+                q.options.forEach(function(opt) {
+                    optHTML += `
+                        <div class="option-card" data-qid="${q.id}" data-score="${opt.score}" data-domain="${domain.id}" data-question="${escHtml(q.text)}" data-answer="${escHtml(opt.label)}" onclick="selectOption(this)">
+                            <div class="option-radio"></div>
+                            <div class="option-label">${escHtml(opt.label)}</div>
+                            <div class="option-score-badge">${opt.score}/4</div>
+                        </div>`;
+                });
+
+                qHTML += `
+                    <div class="question-block" id="qblock-${q.id}">
+                        <div class="question-text">${escHtml(q.text)}</div>
+                        ${q.helpText ? `<div class="question-help">${escHtml(q.helpText)}</div>` : ''}
+                        <div class="options-list">${optHTML}</div>
+                    </div>`;
+            });
+
+            // Build dot indicators
+            let dotsHTML = '';
+            domain.questions.forEach(function() { dotsHTML += '<div class="dot"></div>'; });
+
+            step.innerHTML = `
+                <div class="domain-header">
+                    <div class="domain-icon-badge">${domain.icon}</div>
+                    <div>
+                        <h3>${domain.label}</h3>
+                        <p>${domain.description}</p>
+                        <div class="domain-progress-dots" id="dots-${domain.id}">${dotsHTML}</div>
+                    </div>
+                </div>
+                ${qHTML}`;
+
+            // Insert before form-nav
+            shell.insertBefore(step, nav);
+        });
+    }
+
+    function escHtml(str) {
+        if (!str) return '';
+        return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+    }
+
+    // ============================================================
+    // OPTION SELECTION
+    // ============================================================
+    function selectOption(card) {
+        const qid    = card.dataset.qid;
+        const domain = card.dataset.domain;
+        // Deselect siblings
+        card.closest('.options-list').querySelectorAll('.option-card').forEach(function(c) {
+            c.classList.remove('selected');
+        });
+        card.classList.add('selected');
+
+        // Store answer
+        state.answers[qid] = {
+            domain:   domain,
+            question: card.dataset.question,
+            answer:   card.dataset.answer,
+            score:    parseInt(card.dataset.score)
+        };
+
+        // Update dots
+        updateDots(domain);
+        updateNextButton();
+    }
+
+    function updateDots(domainId) {
+        const domain = DOMAINS.find(function(d) { return d.id === domainId; });
+        if (!domain) return;
+        const dots = document.querySelectorAll('#dots-' + domainId + ' .dot');
+        domain.questions.forEach(function(q, i) {
+            if (dots[i]) {
+                dots[i].classList.toggle('answered', !!state.answers[q.id]);
+            }
+        });
+    }
+
+    // ============================================================
+    // NAVIGATION
+    // ============================================================
+    function getStepId(stepIndex) {
+        if (stepIndex === 0) return 'step-contact';
+        if (stepIndex >= 1 && stepIndex <= 6) return 'step-domain-' + DOMAINS[stepIndex - 1].id;
+        if (stepIndex === 7) return 'step-review';
+        return null;
+    }
+
+    function showStep(idx) {
+        document.querySelectorAll('.form-step').forEach(function(s) { s.classList.remove('active'); });
+        const stepId = getStepId(idx);
+        if (stepId) {
+            const el = document.getElementById(stepId);
+            if (el) el.classList.add('active');
+        }
+        updateProgressBar(idx);
+        updateNavButtons(idx);
+        hideError();
+
+        // Scroll to form
+        document.getElementById('form-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function updateProgressBar(idx) {
+        const pct = Math.round(((idx) / TOTAL_STEPS) * 100);
+        document.getElementById('progress-fill').style.width = Math.max(pct, 6) + '%';
+
+        const labels = [
+            'About You',
+            'Domain 1 of 6 — Process & Workflow',
+            'Domain 2 of 6 — Technology & Automation',
+            'Domain 3 of 6 — Data & Reporting',
+            'Domain 4 of 6 — People & Accountability',
+            'Domain 5 of 6 — Customer Delivery',
+            'Domain 6 of 6 — Financial Controls',
+            'Review & Payment'
+        ];
+        document.getElementById('progress-label').textContent = labels[idx] || '';
+        document.getElementById('progress-count').textContent = 'Step ' + (idx + 1) + ' of ' + TOTAL_STEPS;
+    }
+
+    function updateNavButtons(idx) {
+        const backBtn = document.getElementById('btn-back');
+        const nextBtn = document.getElementById('btn-next');
+        const note    = document.getElementById('answers-note');
+
+        // Back button
+        if (idx === 0) {
+            backBtn.classList.add('hidden');
+        } else {
+            backBtn.classList.remove('hidden');
+        }
+
+        // Next button label
+        if (idx === 7) {
+            nextBtn.textContent = 'Pay ₹49,997 & Get Report →';
+            nextBtn.classList.add('btn-pay');
+            note.textContent = '';
+        } else if (idx === 0) {
+            nextBtn.textContent = 'Start Diagnostic →';
+            nextBtn.classList.remove('btn-pay');
+        } else {
+            nextBtn.textContent = idx === 6 ? 'Review Answers →' : 'Next Domain →';
+            nextBtn.classList.remove('btn-pay');
+        }
+
+        updateNextButton();
+    }
+
+    function updateNextButton() {
+        const idx     = state.currentStep;
+        const nextBtn = document.getElementById('btn-next');
+        const note    = document.getElementById('answers-note');
+
+        if (idx === 0) {
+            nextBtn.disabled = false;
+            return;
+        }
+
+        if (idx >= 1 && idx <= 6) {
+            const domain    = DOMAINS[idx - 1];
+            const answered  = domain.questions.filter(function(q) { return !!state.answers[q.id]; }).length;
+            const remaining = domain.questions.length - answered;
+            if (remaining > 0) {
+                nextBtn.disabled = true;
+                note.textContent = remaining + ' question' + (remaining > 1 ? 's' : '') + ' remaining';
+            } else {
+                nextBtn.disabled = false;
+                note.textContent = '✓ All answered';
+                note.style.color = '#059669';
+            }
+        }
+
+        if (idx === 7) {
+            nextBtn.disabled = false;
+        }
+    }
+
+    function goNext() {
+        hideError();
+        const idx = state.currentStep;
+
+        if (idx === 0) {
+            // Validate contact
+            const name     = document.getElementById('f-name').value.trim();
+            const email    = document.getElementById('f-email').value.trim();
+            const business = document.getElementById('f-business').value.trim();
+            if (!name || !email || !business) {
+                showError('Please fill in your name, email, and business name to continue.');
+                return;
+            }
+            if (!isValidEmail(email)) {
+                showError('Please enter a valid email address.');
+                return;
+            }
+            state.contact = {
+                name:     name,
+                email:    email,
+                business: business,
+                location: document.getElementById('f-location').value.trim(),
+                context:  document.getElementById('f-context').value.trim()
+            };
+        }
+
+        if (idx === 7) {
+            // Payment
+            initiatePayment();
+            return;
+        }
+
+        state.currentStep = idx + 1;
+
+        if (state.currentStep === 7) {
+            buildReviewStep();
+        }
+
+        showStep(state.currentStep);
+    }
+
+    function goBack() {
+        if (state.currentStep > 0) {
+            state.currentStep--;
+            showStep(state.currentStep);
+        }
+    }
+
+    // ============================================================
+    // REVIEW STEP
+    // ============================================================
+    function calcDomainScore(domainId) {
+        const domain   = DOMAINS.find(function(d) { return d.id === domainId; });
+        let total = 0;
+        let max   = 0;
+        domain.questions.forEach(function(q) {
+            if (state.answers[q.id]) {
+                total += state.answers[q.id].score;
+                max   += 4;
+            }
+        });
+        return max > 0 ? Math.round((total / max) * 100) : 0;
+    }
+
+    function calcOverallScore() {
+        let total = 0, max = 0;
+        Object.values(state.answers).forEach(function(a) {
+            total += a.score;
+            max   += 4;
+        });
+        return max > 0 ? Math.round((total / max) * 100) : 0;
+    }
+
+    function scoreClass(pct) {
+        if (pct >= 65) return 'score-high';
+        if (pct >= 40) return 'score-mid';
+        return 'score-low';
+    }
+
+    function predictedOutcome(overallPct, weakestDomain) {
+        // Simple heuristic — mirrors backend logic
+        const techPct    = calcDomainScore('technology');
+        const processPct = calcDomainScore('process');
+
+        if (processPct >= 65 && techPct < 50) {
+            return {
+                type: 'build',
+                label: 'Likely: BUILD',
+                text: 'Your process foundation looks solid. The primary gap is technology to scale and automate what you already do well. The full report will confirm whether this is the right path.'
+            };
+        } else if (processPct < 50) {
+            return {
+                type: 'consult',
+                label: 'Likely: CONSULT FIRST',
+                text: 'Your process architecture has gaps that technology would amplify, not solve. The full report will identify exactly what needs redesigning before any technology investment is made.'
+            };
+        } else {
+            return {
+                type: 'hybrid',
+                label: 'Likely: HYBRID',
+                text: 'You have areas of strength and areas that need redesign. The full report will separate what to build on from what to fix first, and sequence them correctly.'
+            };
+        }
+    }
+
+    function buildReviewStep() {
+        const cardsContainer = document.getElementById('review-domain-cards');
+        cardsContainer.innerHTML = '';
+
+        DOMAINS.forEach(function(d) {
+            const pct  = calcDomainScore(d.id);
+            const cls  = scoreClass(pct);
+            const card = document.createElement('div');
+            card.className = 'review-domain-card';
+            card.innerHTML = `
+                <div class="review-score-circle ${cls}">${pct}%</div>
+                <div>
+                    <h4>${d.icon} ${d.label}</h4>
+                    <p>${pct >= 65 ? 'Strong foundation' : pct >= 40 ? 'Needs attention' : 'Critical gap'}</p>
+                </div>`;
+            cardsContainer.appendChild(card);
+        });
+
+        const overall = calcOverallScore();
+        document.getElementById('review-total-score').textContent = overall + '%';
+
+        const weakest = DOMAINS.reduce(function(min, d) {
+            const pct = calcDomainScore(d.id);
+            return pct < calcDomainScore(min.id) ? d : min;
+        }, DOMAINS[0]);
+
+        const outcome   = predictedOutcome(overall, weakest.id);
+        const predicted = document.getElementById('review-predicted');
+        predicted.className = 'review-predicted-outcome predicted-' + outcome.type;
+        predicted.innerHTML = `
+            <div class="predicted-label">${outcome.label}</div>
+            <p class="predicted-outcome-text">${outcome.text}</p>`;
+    }
+
+    // ============================================================
+    // PAYMENT (RAZORPAY)
+    // ============================================================
+    function initiatePayment() {
+        const cfg = window.KERNORIGIN_CONFIG || {};
+        const key = cfg.razorpayKeyId || '';
+
+        if (!key) {
+            // Fallback: skip payment if key not configured (dev mode)
+            console.warn('Razorpay key not found in config.js — skipping payment in dev mode.');
+            submitDiagnostic('DEV_MODE_' + Date.now());
+            return;
+        }
+
+        const options = {
+            key:      key,
+            amount:   4999700, // ₹49,997 in paise
+            currency: 'INR',
+            name:     'Kernorigin',
+            description: 'Systems & Process Diagnostic',
+            image:    'https://kernorigin.com/favicon.ico',
+            prefill: {
+                name:  state.contact.name,
+                email: state.contact.email
+            },
+            notes: {
+                business: state.contact.business,
+                product:  'systems_diagnostic'
+            },
+            theme: { color: '#002244' },
+            handler: function(response) {
+                state.paymentId = response.razorpay_payment_id;
+                submitDiagnostic(response.razorpay_payment_id, response.razorpay_order_id, response.razorpay_signature);
+            },
+            modal: {
+                ondismiss: function() {
+                    showError('Payment was not completed. Your answers are saved — click "Pay & Get Report" to try again.');
+                }
+            }
+        };
+
+        const rzp = new Razorpay(options);
+        rzp.on('payment.failed', function(response) {
+            showError('Payment failed: ' + (response.error.description || 'Unknown error. Please try again.'));
+        });
+        rzp.open();
+    }
+
+    // ============================================================
+    // API SUBMISSION
+    // ============================================================
+    function submitDiagnostic(paymentId, orderId, signature) {
+        // Hide form, show processing
+        document.getElementById('form-shell').classList.add('hidden');
+        document.getElementById('processing-state').classList.remove('hidden');
+
+        // Animate processing steps
+        animateProcessingSteps();
+
+        const cfg     = window.KERNORIGIN_CONFIG || {};
+        const apiUrl  = cfg.apiUrl  || '';
+        const apiKey  = cfg.publicKey || '';
+
+        // Format answers for backend
+        const answersPayload = {};
+        Object.keys(state.answers).forEach(function(qid) {
+            const a = state.answers[qid];
+            answersPayload[qid] = {
+                domain:   a.domain,
+                question: a.question,
+                answer:   a.answer,
+                score:    a.score
+            };
+        });
+
+        const formData = new FormData();
+        formData.append('action',      'submit_systems_diagnostic');
+        formData.append('apiKey',      apiKey);
+        formData.append('name',        state.contact.name);
+        formData.append('email',       state.contact.email);
+        formData.append('business',    state.contact.business);
+        formData.append('location',    state.contact.location);
+        formData.append('context',     state.contact.context);
+        formData.append('paymentId',   paymentId);
+        formData.append('answers',     JSON.stringify(answersPayload));
+
+        fetch(apiUrl, { method: 'POST', body: formData })
+            .then(function(r) { return r.json(); })
+            .then(function(data) {
+                if (data.status === 'success') {
+                    showResults(data);
+                } else {
+                    showResultsError(data.error || 'Analysis failed. Please contact us — your payment was captured and we will send your report manually within 24 hours.');
+                }
+            })
+            .catch(function(err) {
+                showResultsError('A network error occurred. Your payment was captured. Please email us at contact@kernorigin.com and we will send your report within 24 hours.');
+            });
+    }
+
+    function animateProcessingSteps() {
+        const steps = ['proc-2','proc-3','proc-4','proc-5'];
+        steps.forEach(function(id, i) {
+            setTimeout(function() {
+                const prev = document.getElementById(steps[i - 1] || 'proc-1');
+                if (prev) { prev.classList.remove('active'); prev.classList.add('done'); }
+                const curr = document.getElementById(id);
+                if (curr) curr.classList.add('active');
+            }, (i + 1) * 2200);
+        });
+    }
+
+    // ============================================================
+    // RESULTS
+    // ============================================================
+    function showResults(data) {
+        document.getElementById('processing-state').classList.add('hidden');
+        document.getElementById('results-section').classList.remove('hidden');
+
+        const overall  = data.overallScore || calcOverallScore();
+        const domain   = data.domainScores || {};
+
+        // Score colour
+        let scoreColor = overall >= 65 ? '#059669' : overall >= 40 ? '#f59e0b' : '#dc2626';
+        document.getElementById('results-score-display').textContent = overall + '%';
+        document.getElementById('results-score-display').style.color = scoreColor;
+
+        // Verdict text
+        let verdictTitle, verdictText;
+        if (overall >= 80) {
+            verdictTitle = 'Strong operational foundation.';
+            verdictText  = 'Your systems are generally healthy. Targeted improvements will unlock significant efficiency gains.';
+        } else if (overall >= 65) {
+            verdictTitle = 'Functional with specific gaps.';
+            verdictText  = 'You have a solid foundation with identifiable weaknesses. Addressing the primary bottleneck will have disproportionate impact.';
+        } else if (overall >= 45) {
+            verdictTitle = 'Operational stress is limiting growth.';
+            verdictText  = 'Multiple systems need attention. The full report prioritises the sequence of interventions for maximum impact.';
+        } else {
+            verdictTitle = 'Critical operational gaps identified.';
+            verdictText  = 'Significant structural work is needed before technology investment would be effective. The full report maps the root causes.';
+        }
+        document.getElementById('results-verdict-title').textContent = verdictTitle;
+        document.getElementById('results-verdict-text').textContent  = verdictText;
+
+        // Domain grid
+        const grid = document.getElementById('domain-results-grid');
+        grid.innerHTML = '';
+        DOMAINS.forEach(function(d) {
+            const pct     = domain[d.id] !== undefined ? domain[d.id] : calcDomainScore(d.id);
+            const fillCls = pct >= 65 ? 'fill-high' : pct >= 40 ? 'fill-mid' : 'fill-low';
+            const scoreClr = pct >= 65 ? '#059669' : pct >= 40 ? '#f59e0b' : '#dc2626';
+            const card = document.createElement('div');
+            card.className = 'domain-result-card';
+            card.innerHTML = `
+                <div class="domain-result-top">
+                    <div class="domain-result-name">${d.icon} ${d.label}</div>
+                    <div class="domain-result-score" style="color:${scoreClr}">${pct}%</div>
+                </div>
+                <div class="score-bar">
+                    <div class="score-bar-fill ${fillCls}" style="width:${pct}%"></div>
+                </div>`;
+            grid.appendChild(card);
+        });
+
+        // Outcome recommendation
+        const weakestId = data.weakestDomain ? 
+            DOMAINS.find(function(d) { return d.label.toLowerCase().includes(data.weakestDomain.toLowerCase()); })?.id || 'process'
+            : 'process';
+        const outcome   = predictedOutcome(overall, weakestId);
+        const outcomeEl = document.getElementById('results-outcome');
+        const colors    = {
+            build:   { border: '#059669', bg: '#f0fdf4', text: '#065f46' },
+            consult: { border: '#f59e0b', bg: '#fffbeb', text: '#92400e' },
+            hybrid:  { border: '#3b82f6', bg: '#eff6ff', text: '#1e40af' }
+        };
+        const c = colors[outcome.type];
+        outcomeEl.style.cssText = `border-color:${c.border}; background:${c.bg}; color:${c.text};`;
+        outcomeEl.innerHTML = `
+            <h3 style="color:${c.text}; margin-bottom:8px;">${outcome.label}</h3>
+            <p style="font-size:0.88rem; margin:0; color:${c.text}; line-height:1.6;">${outcome.text}</p>`;
+
+        document.getElementById('results-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function showResultsError(message) {
+        document.getElementById('processing-state').classList.add('hidden');
+        document.getElementById('form-shell').classList.remove('hidden');
+        showError(message);
+        state.currentStep = 7;
+        showStep(7);
+    }
+
+    // ============================================================
+    // UTILITIES
+    // ============================================================
+    function showError(msg) {
+        const banner = document.getElementById('error-banner');
+        banner.textContent = msg;
+        banner.style.display = 'block';
+    }
+    function hideError() {
+        document.getElementById('error-banner').style.display = 'none';
+    }
+    function isValidEmail(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    // ============================================================
+    // INIT
+    // ============================================================
+    buildDomainSteps();
+    showStep(0);
+
+    </script>
+
 </body>
 </html>
