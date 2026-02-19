@@ -189,15 +189,14 @@
                                 <button type="submit" class="btn" id="submitBtn" style="font-size: 1.1rem; padding: 15px 40px;">
                                     Get My Systems Diagnostic →
                                 </button>
-                                <p style="margin-top: 15px; font-size: 0.9rem; color: var(--text-muted);">
-                                    <strong>Investment:</strong> ₹2.5L - ₹4.5L for diagnostic with strategic recommendation
-                                </p>
                             </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </section>
+                        </form> 
+                    <div id="sysStatusMessage" style="margin-top:20px;padding:15px;border-radius:4px;display:none;">
+                </div> 
+            </div> 
+        </div> 
+    </div> 
+</section>
 
         <!-- HOW IT WORKS -->
         <section class="section-padding" style="background: var(--bg-offwhite);">
@@ -275,7 +274,7 @@
 
                 <div class="card" style="margin-top: 40px; background: var(--bg-offwhite); text-align: center;">
                     <h3 style="margin-bottom: 15px;">We Say No More Than Yes</h3>
-                    <p style="margin-bottom: 0;">We only build solutions that solve root problems. The diagnostic ensures you invest in the right solution — or tells you if you don't need software at all.</p>
+                    <p>Diagnostic investment: <strong>₹2.5L – ₹4.5L</strong> — credited in full against any implementation engagement.</p> <p style="margin-bottom: 0;">We only build solutions that solve root problems. The diagnostic ensures you invest in the right solution — or tells you if you don't need software at all.</p>
                 </div>
             </div>
         </section>
@@ -338,27 +337,6 @@
             </div>
         </section>
     </main>
-
-    <footer>
-        <div class="container footer-wrapper">
-            <div>
-                <div class="logo">KERNORIGIN</div>
-                <p style="margin-top: 15px; font-size: 0.9rem; color: var(--text-muted);">
-                    Since 2001 (formerly Value Drive Consulting)<br>
-                    25 years finding root causes globally.<br>
-                    50+ transformations that stick.
-                </p>
-            </div>
-            <div class="footer-links">
-                <a href="index.html">Home</a>
-                <a href="insights.html">Insights</a>
-                <a href="contact.html">Contact</a>
-            </div>
-        </div>
-        <div class="container" style="margin-top: 40px; font-size: 0.8rem; color: #999;">
-            &copy; 2026 Kernorigin. All rights reserved.
-        </div>
-    </footer>
 
     <script src="config.js"></script>
     <script>
@@ -533,23 +511,12 @@
 
                 if (result.error) throw new Error(result.error);
 
-                if (result.status === 'success') {
-                    alert(`✅ Systems Diagnostic Complete!\n\n` +
-                          `Confidence Score: ${result.confidence}%\n` +
-                          `Recommendation: ${result.recommendation_type}\n` +
-                          `Pattern: ${result.pattern}\n\n` +
-                          `Your detailed report has been emailed to:\n${formData.get('clientEmail')}\n\n` +
-                          `We'll contact you within 24 hours to schedule a strategy call.`);
-                    
-                    e.target.reset();
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                if (result.status === 'success') { const sysStatus = document.getElementById('sysStatusMessage'); sysStatus.style.display = 'block'; sysStatus.style.backgroundColor = '#d1fae5'; sysStatus.style.color = '#065f46'; sysStatus.innerHTML = '<strong>✅ Systems Diagnostic Complete!</strong><br>Your detailed report has been emailed to <strong>' + formData.get('clientEmail') + '</strong>. We will contact you within 24 hours to schedule a strategy call.'; e.target.reset(); sysStatus.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 } else {
                     throw new Error(result.message || 'Unknown error');
                 }
 
-            } catch(error) {
-                console.error('Error:', error);
-                alert(`❌ Submission Failed\n\n${error.message}\n\nPlease try again or contact us directly.`);
+            } catch(error) { console.error('Error:', error); const sysStatus = document.getElementById('sysStatusMessage'); sysStatus.style.display = 'block'; sysStatus.style.backgroundColor = '#fee2e2'; sysStatus.style.color = '#991b1b'; sysStatus.textContent = '❌ Submission failed: ' + error.message + '. Please try again or contact us directly.';
             } finally {
                 btn.textContent = originalText;
                 btn.disabled = false;
@@ -565,6 +532,28 @@
             });
         });
     </script>
+        <footer>
+        <div class="container footer-wrapper">
+            <div>
+                <div class="footer-logo">KERNORIGIN</div>
+                <p style="margin-top: 15px; font-size: 0.9rem;">
+                    Since 2001 (formerly Value Drive Consulting)<br>
+                    25 years finding root causes globally.<br>
+                    50+ transformations that stick.
+                </p>
+            </div>
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="diagnostics.html">Diagnostics</a>
+                <a href="partners.html">Partners</a>
+                <a href="insights.html">Insights</a>
+                <a href="contact.html">Contact</a>
+            </div>
+        </div>
+        <div class="container" style="padding-top: 20px; border-top: 1px solid var(--border-light); font-size: 0.8rem; color: #999;">
+            &copy; 2026 Kernorigin. All rights reserved.
+        </div>
+    </footer>
     <script src="mobile-menu.js"></script>
 </body>
 </html>

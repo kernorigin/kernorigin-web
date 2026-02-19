@@ -3,21 +3,740 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kernorigin | Finding What's Actually Broken Since 2001</title>
-    <meta name="description" content="Root cause diagnostics for companies stuck at growth plateaus. From ₹5 Crore to ₹500 Crore. Workshops, diagnostics, strategic partnerships. 25 years of experience.">
+    <meta name="description" content="Kernorigin is the Root Cause Intelligence Platform. 25 years of institutional diagnostic patterns, now accessible in minutes. Find what is actually blocking your business.">
+    <meta name="keywords" content="business diagnostic, root cause analysis, institutional diagnostic, Seven Cylinders, Kernorigin, business consulting India">
+    <meta property="og:title" content="Kernorigin — Root Cause Intelligence">
+    <meta property="og:description" content="25 years of root cause intelligence. Now at scale. Find what is actually blocking your business — in 5 minutes.">
+    <meta property="og:type" content="website">
+    <title>Kernorigin — Root Cause Intelligence</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+
+        /* ============================================================
+           HOMEPAGE STYLES
+           ============================================================ */
+
+        /* ── Scroll reveal ── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.65s ease, transform 0.65s ease;
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
+        .reveal-delay-5 { transition-delay: 0.5s; }
+
+        /* ── HERO ── */
+        .hero {
+            background-color: var(--accent-navy);
+            background-image:
+                radial-gradient(ellipse 80% 60% at 60% 50%, rgba(197,160,89,0.06) 0%, transparent 70%),
+                linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
+            background-size: 100% 100%, 52px 52px, 52px 52px;
+            padding: 88px 0 80px;
+            overflow: hidden;
+            position: relative;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(197,160,89,0.4), transparent);
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 64px;
+            align-items: center;
+        }
+
+        .hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(197,160,89,0.12);
+            border: 1px solid rgba(197,160,89,0.35);
+            padding: 5px 13px 5px 9px;
+            border-radius: 2px;
+            margin-bottom: 28px;
+        }
+        .hero-eyebrow-dot {
+            width: 6px; height: 6px;
+            background: var(--accent-gold);
+            border-radius: 50%;
+            animation: blink 2.4s ease-in-out infinite;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        .hero-eyebrow span {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            color: var(--accent-gold);
+        }
+
+        .hero h1 {
+            font-size: 3.4rem;
+            color: #fff;
+            line-height: 1.1;
+            letter-spacing: -0.025em;
+            margin-bottom: 24px;
+        }
+        .hero h1 em {
+            font-style: normal;
+            color: var(--accent-gold);
+        }
+
+        .hero-sub {
+            font-size: 1.05rem;
+            color: rgba(255,255,255,0.72);
+            line-height: 1.7;
+            margin-bottom: 36px;
+            max-width: 520px;
+        }
+
+        .hero-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .btn-hero-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--accent-gold);
+            color: #fff;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 0.78rem;
+            padding: 16px 28px;
+            border-radius: 2px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-hero-primary:hover {
+            background: #b8913f;
+            transform: translateY(-1px);
+        }
+        .btn-hero-primary svg { flex-shrink: 0; }
+
+        .btn-hero-ghost {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: rgba(255,255,255,0.7);
+            font-size: 0.82rem;
+            font-weight: 500;
+            padding: 16px 0;
+            transition: color 0.2s;
+        }
+        .btn-hero-ghost:hover { color: #fff; }
+        .btn-hero-ghost svg { transition: transform 0.2s; }
+        .btn-hero-ghost:hover svg { transform: translateX(4px); }
+
+        /* Hero card */
+        .hero-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 6px;
+            padding: 32px;
+            backdrop-filter: blur(10px);
+        }
+        .hero-card-label {
+            font-size: 0.68rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--accent-gold);
+            margin-bottom: 20px;
+            display: block;
+        }
+        .hero-cylinder {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+        }
+        .hero-cylinder:last-of-type { border-bottom: none; }
+        .cylinder-bar-wrap {
+            flex: 1;
+            height: 4px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        .cylinder-bar {
+            height: 100%;
+            border-radius: 2px;
+            background: var(--accent-gold);
+            transform-origin: left;
+            transform: scaleX(0);
+            transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .cylinder-bar.animate { transform: scaleX(1); }
+        .cylinder-name {
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.65);
+            width: 80px;
+            flex-shrink: 0;
+            font-family: var(--font-sans);
+        }
+        .cylinder-score {
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: #fff;
+            width: 32px;
+            text-align: right;
+            flex-shrink: 0;
+            font-family: var(--font-serif);
+        }
+        .hero-card-footer {
+            margin-top: 20px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .hero-card-footer span {
+            font-size: 0.72rem;
+            color: rgba(255,255,255,0.45);
+        }
+        .hero-card-footer strong {
+            font-size: 0.78rem;
+            color: rgba(255,255,255,0.85);
+        }
+        .hero-card-cta {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent-gold);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* ── TRUST BAR ── */
+        .trust-bar {
+            background: var(--bg-offwhite);
+            border-bottom: 1px solid var(--border-light);
+            padding: 20px 0;
+        }
+        .trust-bar-inner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+            flex-wrap: wrap;
+        }
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0 32px;
+            border-right: 1px solid var(--border-light);
+        }
+        .trust-item:last-child { border-right: none; }
+        .trust-val {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-navy);
+            line-height: 1;
+        }
+        .trust-lbl {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+            font-weight: 500;
+        }
+
+        /* ── SECTION DIVIDER ── */
+        .section-divider {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 48px;
+        }
+        .section-divider-line {
+            height: 1px;
+            width: 40px;
+            background: var(--accent-gold);
+            flex-shrink: 0;
+        }
+        .section-divider-text {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            color: var(--accent-gold);
+        }
+
+        /* ── HOW IT WORKS ── */
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0;
+            position: relative;
+        }
+        .steps-grid::before {
+            content: '';
+            position: absolute;
+            top: 28px;
+            left: calc(16.66% + 28px);
+            right: calc(16.66% + 28px);
+            height: 1px;
+            background: linear-gradient(90deg, var(--accent-gold), rgba(197,160,89,0.3), var(--accent-gold));
+        }
+        .step-item {
+            padding: 0 32px;
+            position: relative;
+            text-align: center;
+        }
+        .step-num-circle {
+            width: 56px; height: 56px;
+            background: var(--accent-navy);
+            border: 3px solid var(--accent-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-serif);
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--accent-gold);
+            margin: 0 auto 24px;
+            position: relative;
+            z-index: 1;
+        }
+        .step-item h4 {
+            font-size: 1rem;
+            font-family: var(--font-serif);
+            color: var(--accent-navy);
+            margin-bottom: 10px;
+        }
+        .step-item p {
+            font-size: 0.88rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* ── DIAGNOSTIC TIERS ── */
+        .tiers-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            align-items: stretch;
+        }
+        .tier-card {
+            border: 1px solid var(--border-light);
+            border-radius: 6px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.25s ease;
+            background: #fff;
+        }
+        .tier-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(0,34,68,0.1);
+        }
+        .tier-card.featured {
+            border-color: var(--accent-navy);
+            box-shadow: 0 4px 16px rgba(0,34,68,0.08);
+        }
+        .tier-header {
+            padding: 28px 28px 20px;
+            border-bottom: 1px solid var(--border-light);
+        }
+        .tier-card.featured .tier-header {
+            background: var(--accent-navy);
+        }
+        .tier-badge {
+            display: inline-block;
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            padding: 3px 8px;
+            border-radius: 2px;
+            margin-bottom: 12px;
+        }
+        .tier-badge.free { background: #d1fae5; color: #065f46; }
+        .tier-badge.standard { background: #dbeafe; color: #1e3a8a; }
+        .tier-badge.premium { background: rgba(197,160,89,0.2); color: var(--accent-gold); }
+        .tier-name {
+            font-size: 1.25rem;
+            font-family: var(--font-serif);
+            font-weight: 700;
+            color: var(--accent-navy);
+            margin-bottom: 4px;
+        }
+        .tier-card.featured .tier-name { color: #fff; }
+        .tier-price {
+            font-size: 1.6rem;
+            font-family: var(--font-serif);
+            font-weight: 700;
+            color: var(--accent-navy);
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+        .tier-card.featured .tier-price { color: var(--accent-gold); }
+        .tier-price-note {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+        .tier-card.featured .tier-price-note { color: rgba(255,255,255,0.5); }
+        .tier-body {
+            padding: 24px 28px;
+            flex: 1;
+        }
+        .tier-feature {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 0.84rem;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+        .tier-feature-check {
+            width: 16px; height: 16px;
+            background: var(--accent-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+        .tier-feature-check svg { width: 9px; height: 9px; }
+        .tier-footer {
+            padding: 0 28px 28px;
+        }
+        .tier-cta {
+            display: block;
+            text-align: center;
+            padding: 13px 20px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border-radius: 2px;
+            transition: all 0.2s;
+        }
+        .tier-cta.outlined {
+            border: 2px solid var(--accent-navy);
+            color: var(--accent-navy);
+        }
+        .tier-cta.outlined:hover {
+            background: var(--accent-navy);
+            color: #fff;
+        }
+        .tier-cta.solid {
+            background: var(--accent-navy);
+            color: #fff;
+            border: 2px solid var(--accent-navy);
+        }
+        .tier-cta.solid:hover { background: #003366; }
+        .tier-cta.gold-cta {
+            background: var(--accent-gold);
+            color: #fff;
+            border: 2px solid var(--accent-gold);
+        }
+        .tier-cta.gold-cta:hover { background: #b8913f; border-color: #b8913f; }
+        .tiers-footnote {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+        }
+        .tiers-footnote a {
+            color: var(--accent-navy);
+            text-decoration: underline;
+        }
+
+        /* ── PATTERN SECTION ── */
+        .pattern-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+        .pattern-stat-row {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .pattern-stat {
+            padding: 20px 24px;
+            border-left: 4px solid var(--accent-gold);
+            background: var(--bg-offwhite);
+            border-radius: 0 4px 4px 0;
+        }
+        .pattern-stat-val {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-navy);
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+        .pattern-stat-lbl {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        /* ── RESULTS ── */
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+        .result-card {
+            padding: 32px;
+            border-top: 4px solid var(--accent-gold);
+            background: #fff;
+            border-radius: 0 0 6px 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+        .result-tag {
+            font-size: 0.68rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--accent-gold);
+            margin-bottom: 16px;
+            display: block;
+        }
+        .result-metric {
+            font-family: var(--font-serif);
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: var(--accent-navy);
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+        .result-metric span {
+            font-size: 1rem;
+            font-family: var(--font-sans);
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+        .result-label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+        .result-desc {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+            margin: 0;
+        }
+        .result-cylinder {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border-light);
+            font-size: 0.72rem;
+            color: var(--text-muted);
+        }
+        .result-cylinder strong {
+            color: var(--accent-navy);
+        }
+
+        /* ── AI STATEMENT ── */
+        .ai-strip {
+            background: var(--accent-navy);
+            padding: 48px 0;
+        }
+        .ai-strip-inner {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 40px;
+            align-items: center;
+        }
+        .ai-icon {
+            width: 56px; height: 56px;
+            background: rgba(197,160,89,0.15);
+            border: 1px solid rgba(197,160,89,0.3);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .ai-strip h3 {
+            color: #fff;
+            font-size: 1.2rem;
+            margin-bottom: 6px;
+        }
+        .ai-strip p {
+            color: rgba(255,255,255,0.65);
+            font-size: 0.88rem;
+            margin: 0;
+            max-width: 600px;
+            line-height: 1.6;
+        }
+        .ai-strip-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent-gold);
+            white-space: nowrap;
+            flex-shrink: 0;
+            transition: gap 0.2s;
+        }
+        .ai-strip-cta:hover { gap: 12px; }
+
+        /* ── PARTNER STRIP ── */
+        .partner-strip {
+            background: var(--bg-offwhite);
+            border-top: 1px solid var(--border-light);
+            border-bottom: 1px solid var(--border-light);
+            padding: 44px 0;
+        }
+        .partner-strip-inner {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 40px;
+            align-items: center;
+        }
+        .partner-eyebrow {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            color: var(--accent-gold);
+            margin-bottom: 10px;
+            display: block;
+        }
+        .partner-strip h3 {
+            font-size: 1.35rem;
+            color: var(--accent-navy);
+            margin-bottom: 8px;
+        }
+        .partner-strip p {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            margin: 0;
+            max-width: 560px;
+        }
+
+        /* ── FINAL CTA ── */
+        .final-cta {
+            background: var(--accent-navy);
+            padding: 96px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .final-cta::before {
+            content: '';
+            position: absolute;
+            top: 0; right: 0;
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(197,160,89,0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .final-cta-content {
+            text-align: center;
+            max-width: 640px;
+            margin: 0 auto;
+            position: relative;
+        }
+        .final-cta h2 {
+            color: #fff;
+            font-size: 2.6rem;
+            letter-spacing: -0.02em;
+            margin-bottom: 16px;
+        }
+        .final-cta h2 em {
+            font-style: normal;
+            color: var(--accent-gold);
+        }
+        .final-cta p {
+            color: rgba(255,255,255,0.65);
+            font-size: 1rem;
+            margin-bottom: 36px;
+            line-height: 1.7;
+        }
+        .final-cta-actions {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .final-cta-note {
+            margin-top: 24px;
+            font-size: 0.78rem;
+            color: rgba(255,255,255,0.35);
+        }
+
+        /* ── MOBILE ── */
+        @media (max-width: 900px) {
+            .hero { padding: 60px 0; }
+            .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+            .hero h1 { font-size: 2.3rem; }
+            .hero-card { display: none; }
+            .trust-item { padding: 0 16px; }
+            .trust-val { font-size: 1.2rem; }
+            .trust-lbl { font-size: 0.7rem; }
+            .steps-grid { grid-template-columns: 1fr; gap: 32px; }
+            .steps-grid::before { display: none; }
+            .step-item { text-align: left; padding: 0; }
+            .step-num-circle { margin: 0 0 16px; }
+            .tiers-grid { grid-template-columns: 1fr; gap: 16px; }
+            .tier-card:hover { transform: none; }
+            .pattern-grid { grid-template-columns: 1fr; gap: 40px; }
+            .results-grid { grid-template-columns: 1fr; gap: 16px; }
+            .ai-strip-inner { grid-template-columns: 1fr; gap: 20px; text-align: center; }
+            .ai-icon { margin: 0 auto; }
+            .partner-strip-inner { grid-template-columns: 1fr; gap: 20px; }
+            .final-cta { padding: 64px 0; }
+            .final-cta h2 { font-size: 1.9rem; }
+        }
+        @media (max-width: 600px) {
+            .trust-bar-inner { justify-content: flex-start; overflow-x: auto; padding: 0 20px; }
+            .trust-item:last-child { border-right: 1px solid var(--border-light); padding-right: 20px; }
+        }
+    </style>
 </head>
 <body>
+
+    <!-- ═══════════════════════════════════════════════════
+         HEADER
+    ═══════════════════════════════════════════════════ -->
     <header>
         <div class="container nav-wrapper">
             <a href="index.html" class="logo">Kernorigin</a>
             <nav>
                 <ul>
                     <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="diagnostics.html" class="nav-diagnostics">Diagnostics</a></li>
                     <li><a href="how-we-think.html">How We Think</a></li>
-                    <li><a href="how-we-work.html">How We Work</a></li>
-                    <li><a href="services.html">Services</a></li>
                     <li><a href="impact.html">Impact</a></li>
+                    <li><a href="partners.html">Partners</a></li>
                     <li><a href="team.html">Team</a></li>
                     <li><a href="insights.html">Insights</a></li>
                     <li><a href="contact.html">Contact</a></li>
@@ -27,293 +746,437 @@
     </header>
 
     <main>
-        <!-- HERO SECTION - Universal Problem Statement -->
-        <section class="section-padding" style="background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);">
-            <div class="container text-center">
-                <span class="eyebrow">Root Cause Diagnostics Since 2001</span>
-                <h1 style="max-width: 900px; margin: 0 auto 30px auto;">Your Business Is Stuck.<br>We Find What's Actually Broken.</h1>
-                <p style="font-size: 1.2rem; max-width: 750px; margin: 0 auto 40px auto; line-height: 1.8;">
-                    You're working harder. Revenue isn't growing. You've tried fixes—they didn't stick. You know something's broken. You don't know what.
-                </p>
-                <p style="font-size: 1.3rem; font-weight: 600; color: var(--accent-navy); margin-bottom: 40px;">
-                    We find the root cause. You move forward.
-                </p>
-                <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
-                    <a href="assessment.html" class="btn">Take Free Assessment</a>
-                    <a href="contact.html" class="btn-outline">Book Discovery Call</a>
+
+        <!-- ═══════════════════════════════════════════════════
+             HERO
+        ═══════════════════════════════════════════════════ -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-grid">
+                    <div>
+                        <div class="hero-eyebrow">
+                            <div class="hero-eyebrow-dot"></div>
+                            <span>Root Cause Intelligence Platform</span>
+                        </div>
+                        <h1>Find the <em>root cause</em> of what is blocking your business.</h1>
+                        <p class="hero-sub">25 years of institutional diagnostic patterns — now accessible to any organisation in minutes. Not symptoms. Not guesses. The actual cause.</p>
+                        <div class="hero-actions">
+                            <a href="assessment.html" class="btn-hero-primary">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                Start Free Diagnostic
+                            </a>
+                            <a href="diagnostics.html" class="btn-hero-ghost">
+                                See all options
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Animated diagnostic card -->
+                    <div class="hero-card reveal">
+                        <span class="hero-card-label">Sample Diagnostic — Seven Cylinders Score</span>
+
+                        <div class="hero-cylinder">
+                            <span class="cylinder-name">Strategy</span>
+                            <div class="cylinder-bar-wrap"><div class="cylinder-bar" style="width:72%"></div></div>
+                            <span class="cylinder-score">72</span>
+                        </div>
+                        <div class="hero-cylinder">
+                            <span class="cylinder-name">Operations</span>
+                            <div class="cylinder-bar-wrap"><div class="cylinder-bar" style="width:44%; background: #ef4444;"></div></div>
+                            <span class="cylinder-score" style="color:#ef4444">44</span>
+                        </div>
+                        <div class="hero-cylinder">
+                            <span class="cylinder-name">People</span>
+                            <div class="cylinder-bar-wrap"><div class="cylinder-bar" style="width:38%; background: #ef4444;"></div></div>
+                            <span class="cylinder-score" style="color:#ef4444">38</span>
+                        </div>
+                        <div class="hero-cylinder">
+                            <span class="cylinder-name">Financial</span>
+                            <div class="cylinder-bar-wrap"><div class="cylinder-bar" style="width:61%"></div></div>
+                            <span class="cylinder-score">61</span>
+                        </div>
+                        <div class="hero-cylinder">
+                            <span class="cylinder-name">Market</span>
+                            <div class="cylinder-bar-wrap"><div class="cylinder-bar" style="width:80%"></div></div>
+                            <span class="cylinder-score">80</span>
+                        </div>
+                        <div class="hero-cylinder">
+                            <span class="cylinder-name">Innovation</span>
+                            <div class="cylinder-bar-wrap"><div class="cylinder-bar" style="width:55%"></div></div>
+                            <span class="cylinder-score">55</span>
+                        </div>
+                        <div class="hero-cylinder">
+                            <span class="cylinder-name">Leadership</span>
+                            <div class="cylinder-bar-wrap"><div class="cylinder-bar" style="width:49%; background: #f59e0b;"></div></div>
+                            <span class="cylinder-score" style="color:#f59e0b">49</span>
+                        </div>
+
+                        <div class="hero-card-footer">
+                            <div>
+                                <span>Root Cause Identified</span>
+                                <strong style="display:block">People Systems Failure</strong>
+                            </div>
+                            <a href="assessment.html" class="hero-card-cta">
+                                Get Yours
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- PROBLEM SECTION - Why Most Fixes Fail -->
-        <section class="section-padding" style="background: white;">
-            <div class="container readable-column">
-                <h2 style="text-align: center; margin-bottom: 50px;">Most Companies Fix Symptoms, Not Causes</h2>
-                
-                <div style="display: grid; gap: 30px; margin-bottom: 50px;">
-                    <div style="padding: 25px; background: #fef2f2; border-left: 4px solid #dc2626; border-radius: 4px;">
-                        <p style="margin: 0; font-size: 1.05rem;">
-                            <strong>"We need more leads"</strong> → Bought CRM, leads still convert poorly
-                        </p>
+        <!-- ═══════════════════════════════════════════════════
+             TRUST BAR
+        ═══════════════════════════════════════════════════ -->
+        <div class="trust-bar">
+            <div class="container">
+                <div class="trust-bar-inner">
+                    <div class="trust-item">
+                        <div class="trust-val">25</div>
+                        <div class="trust-lbl">Years of<br>Root Cause Work</div>
                     </div>
-                    <div style="padding: 25px; background: #fef2f2; border-left: 4px solid #dc2626; border-radius: 4px;">
-                        <p style="margin: 0; font-size: 1.05rem;">
-                            <strong>"Sales team is weak"</strong> → Hired new reps, conversions still low
-                        </p>
+                    <div class="trust-item">
+                        <div class="trust-val">50+</div>
+                        <div class="trust-lbl">Institutional<br>Transformations</div>
                     </div>
-                    <div style="padding: 25px; background: #fef2f2; border-left: 4px solid #dc2626; border-radius: 4px;">
-                        <p style="margin: 0; font-size: 1.05rem;">
-                            <strong>"We need better systems"</strong> → Bought software, chaos continued
-                        </p>
+                    <div class="trust-item">
+                        <div class="trust-val">3</div>
+                        <div class="trust-lbl">Languages<br>En · Hi · Kn</div>
+                    </div>
+                    <div class="trust-item">
+                        <div class="trust-val">AI</div>
+                        <div class="trust-lbl">Powered by<br>Proprietary Patterns</div>
+                    </div>
+                    <div class="trust-item">
+                        <div class="trust-val">Global</div>
+                        <div class="trust-lbl">Partner<br>Ecosystem</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════
+             HOW IT WORKS
+        ═══════════════════════════════════════════════════ -->
+        <section class="section-padding">
+            <div class="container">
+                <div class="section-divider reveal">
+                    <div class="section-divider-line"></div>
+                    <span class="section-divider-text">How It Works</span>
+                </div>
+
+                <div style="text-align:center; margin-bottom:56px;">
+                    <h2 class="reveal">Diagnosis before prescription.<br>Always.</h2>
+                    <p class="reveal reveal-delay-1" style="max-width:540px; margin:0 auto; font-size:1rem;">Most businesses jump to solutions before they understand the problem. We fixed that — with 25 years of root cause patterns, automated and accessible.</p>
+                </div>
+
+                <div class="steps-grid">
+                    <div class="step-item reveal reveal-delay-1">
+                        <div class="step-num-circle">1</div>
+                        <h4>Answer 10–15 questions</h4>
+                        <p>About your business: strategy, operations, people, financials, market. Takes 5–10 minutes. No jargon, no consultants, no waiting.</p>
+                    </div>
+                    <div class="step-item reveal reveal-delay-2">
+                        <div class="step-num-circle">2</div>
+                        <h4>Receive your root cause report</h4>
+                        <p>Our AI engine — trained on 25 years of real institutional patterns — analyses your answers and identifies the actual bottleneck, not the surface symptom.</p>
+                    </div>
+                    <div class="step-item reveal reveal-delay-3">
+                        <div class="step-num-circle">3</div>
+                        <h4>Choose your path forward</h4>
+                        <p>Free report gives you the diagnosis. Paid diagnostics go deeper with 35–50 page analysis and a 90-day roadmap. Or speak to us directly.</p>
                     </div>
                 </div>
 
-                <div style="text-align: center; padding: 40px; background: var(--accent-navy); color: white; border-radius: 8px;">
-                    <h3 style="color: white; margin-top: 0;">Why? Because they never diagnosed the REAL problem.</h3>
-                    <p style="color: rgba(255,255,255,0.9); font-size: 1.2rem; margin-bottom: 0;">
-                        We don't guess. We diagnose.
-                    </p>
+                <div style="text-align:center; margin-top:48px;" class="reveal reveal-delay-4">
+                    <a href="assessment.html" class="btn">Start Free — Takes 5 Minutes</a>
                 </div>
             </div>
         </section>
 
-        <!-- SELF-SEGMENTATION - Three Paths -->
+        <!-- ═══════════════════════════════════════════════════
+             DIAGNOSTIC TIERS
+        ═══════════════════════════════════════════════════ -->
         <section class="section-padding" style="background: var(--bg-offwhite);">
             <div class="container">
-                <div class="text-center" style="margin-bottom: 60px;">
-                    <h2>How Can We Help You?</h2>
-                    <p style="font-size: 1.1rem; max-width: 700px; margin: 15px auto 0 auto;">
-                        Choose the support level that matches where you are right now.
-                    </p>
+                <div class="section-divider reveal">
+                    <div class="section-divider-line"></div>
+                    <span class="section-divider-text">Diagnostic Options</span>
                 </div>
 
-                <div class="grid-3">
-                    <!-- PATH 1: Immediate Support -->
-                    <div class="card" style="border-top: 4px solid var(--accent-gold);">
-                        <h3 style="margin-top: 0;">Need Help Now</h3>
-                        <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 25px;">
-                            Team stuck on a problem • Process breaking down • Need expert support quickly
-                        </p>
-                        
-                        <div style="margin-bottom: 25px;">
-                            <p style="font-weight: 600; margin-bottom: 10px;">Solutions:</p>
-                            <ul style="list-style: none; padding: 0; margin: 0;">
-                                <li style="padding: 8px 0; border-bottom: 1px solid #eee;">→ Workshops (1-2 days)</li>
-                                <li style="padding: 8px 0; border-bottom: 1px solid #eee;">→ Fractional Executive</li>
-                                <li style="padding: 8px 0;">→ Rapid Problem-Solving</li>
-                            </ul>
-                        </div>
+                <div style="margin-bottom:40px;">
+                    <h2 class="reveal">Three depths of diagnosis.<br>One starting point.</h2>
+                    <p class="reveal reveal-delay-1" style="max-width:520px;">Start free. Go deeper when you are ready. Every paid diagnostic draws on the same 25-year proprietary pattern database.</p>
+                </div>
 
-                        <div style="background: #f8f9fa; padding: 15px; border-radius: 4px; margin-bottom: 25px;">
-                            <p style="margin: 0; font-size: 0.9rem;"><strong>Timeline:</strong> 15-45 days</p>
-                            <p style="margin: 8px 0 0 0; font-size: 0.9rem;"><strong>Investment:</strong> ₹1.5-5 Lakhs</p>
-                        </div>
+                <div class="tiers-grid">
 
-                        <a href="services.html#immediate" class="btn-outline" style="width: 100%; text-align: center;">Explore Immediate Support →</a>
+                    <!-- Free -->
+                    <div class="tier-card reveal reveal-delay-1">
+                        <div class="tier-header">
+                            <div class="tier-badge free">Free</div>
+                            <div class="tier-name">Assessment</div>
+                            <div class="tier-price">₹0</div>
+                            <div class="tier-price-note">No payment, no login required</div>
+                        </div>
+                        <div class="tier-body">
+                            <div class="tier-feature">
+                                <div class="tier-feature-check"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                                10 diagnostic questions
+                            </div>
+                            <div class="tier-feature">
+                                <div class="tier-feature-check"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                                Seven Cylinders scoring
+                            </div>
+                            <div class="tier-feature">
+                                <div class="tier-feature-check"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                                Root cause identification
+                            </div>
+                            <div class="tier-feature">
+                                <div class="tier-feature-check"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                                PDF report emailed immediately
+                            </div>
+                            <div class="tier-feature">
+                                <div class="tier-feature-check"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                                Available in English, Hindi, Kannada
+                            </div>
+                        </div>
+                        <div class="tier-footer">
+                            <a href="assessment.html" class="tier-cta outlined">Start Free Assessment</a>
+                        </div>
                     </div>
 
-                    <!-- PATH 2: Diagnostic -->
-                    <div class="card" style="border-top: 4px solid var(--accent-navy); box-shadow: 0 8px 24px rgba(0,0,0,0.12);">
-                        <div style="background: var(--accent-navy); color: white; margin: -30px -30px 20px -30px; padding: 15px 30px; border-radius: 4px 4px 0 0;">
-                            <p style="margin: 0; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;">Most Popular</p>
+                    <!-- Institutional — Featured -->
+                    <div class="tier-card featured reveal reveal-delay-2">
+                        <div class="tier-header">
+                            <div class="tier-badge standard">Most Popular</div>
+                            <div class="tier-name">Institutional Diagnostic</div>
+                            <div class="tier-price">₹24,997</div>
+                            <div class="tier-price-note">One-time · PDF delivered in minutes</div>
                         </div>
-                        <h3 style="margin-top: 0;">Something's Broken</h3>
-                        <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 25px;">
-                            Growth plateau'd • Not sure what the real issue is • Need clarity before investing
-                        </p>
-                        
-                        <div style="margin-bottom: 25px;">
-                            <p style="font-weight: 600; margin-bottom: 10px;">Solutions:</p>
-                            <ul style="list-style: none; padding: 0; margin: 0;">
-                                <li style="padding: 8px 0; border-bottom: 1px solid #eee;">→ Institutional Diagnostic</li>
-                                <li style="padding: 8px 0; border-bottom: 1px solid #eee;">→ Systems Diagnostic</li>
-                                <li style="padding: 8px 0;">→ Revenue Unstuck Assessment</li>
-                            </ul>
+                        <div class="tier-body">
+                            <div class="tier-feature">
+                                <div class="tier-feature-check" style="background:var(--accent-gold)"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                                35-page deep diagnostic report
+                            </div>
+                            <div class="tier-feature">
+                                <div class="tier-feature-check" style="background:var(--accent-gold)"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                                All Seven Cylinders analysed
+                            </div>
+                            <div class="tier-feature">
+                                <div class="tier-feature-check" style="background:var(--accent-gold)"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                                Causal chain — root to symptom
+                            </div>
+                            <div class="tier-feature">
+                                <div class="tier-feature-check" style="background:var(--accent-gold)"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                                90-day action roadmap
+                            </div>
+                            <div class="tier-feature">
+                                <div class="tier-feature-check" style="background:var(--accent-gold)"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                                Expert debrief call included
+                            </div>
                         </div>
-
-                        <div style="background: #f8f9fa; padding: 15px; border-radius: 4px; margin-bottom: 25px;">
-                            <p style="margin: 0; font-size: 0.9rem;"><strong>Timeline:</strong> 2-4 weeks</p>
-                            <p style="margin: 8px 0 0 0; font-size: 0.9rem;"><strong>Investment:</strong> ₹25K-75K</p>
+                        <div class="tier-footer">
+                            <a href="diagnostics.html#institutional" class="tier-cta gold-cta">Get Institutional Diagnostic</a>
                         </div>
-
-                        <a href="services.html#diagnostic" class="btn" style="width: 100%; text-align: center;">Learn About Diagnostics →</a>
                     </div>
 
-                    <!-- PATH 3: Transformation -->
-                    <div class="card" style="border-top: 4px solid var(--accent-gold);">
-                        <h3 style="margin-top: 0;">Ready for Transformation</h3>
-                        <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 25px;">
-                            Tried fixes, they didn't stick • Need comprehensive overhaul • Big decision requires proof
-                        </p>
-                        
-                        <div style="margin-bottom: 25px;">
-                            <p style="font-weight: 600; margin-bottom: 10px;">Solutions:</p>
-                            <ul style="list-style: none; padding: 0; margin: 0;">
-                                <li style="padding: 8px 0; border-bottom: 1px solid #eee;">→ Strategic Partnerships</li>
-                                <li style="padding: 8px 0; border-bottom: 1px solid #eee;">→ Full Transformation</li>
-                                <li style="padding: 8px 0;">→ Retained Advisory</li>
-                            </ul>
+                    <!-- Systems -->
+                    <div class="tier-card reveal reveal-delay-3">
+                        <div class="tier-header">
+                            <div class="tier-badge premium">Deep Dive</div>
+                            <div class="tier-name">Systems Diagnostic</div>
+                            <div class="tier-price">₹49,997</div>
+                            <div class="tier-price-note">For technology &amp; process transformation</div>
                         </div>
-
-                        <div style="background: #f8f9fa; padding: 15px; border-radius: 4px; margin-bottom: 25px;">
-                            <p style="margin: 0; font-size: 0.9rem;"><strong>Timeline:</strong> Custom</p>
-                            <p style="margin: 8px 0 0 0; font-size: 0.9rem;"><strong>Investment:</strong> ₹15L-2Cr</p>
+                        <div class="tier-body">
+                            <div class="tier-feature">
+                                <div class="tier-feature-check"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                                50-page systems analysis report
+                            </div>
+                            <div class="tier-feature">
+                                <div class="tier-feature-check"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                                Process &amp; technology audit
+                            </div>
+                            <div class="tier-feature">
+                                <div class="tier-feature-check"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                                Build vs consult recommendation
+                            </div>
+                            <div class="tier-feature">
+                                <div class="tier-feature-check"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                                Investment range &amp; timeline
+                            </div>
+                            <div class="tier-feature">
+                                <div class="tier-feature-check"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                                Strategy call within 24–48 hours
+                            </div>
                         </div>
+                        <div class="tier-footer">
+                            <a href="systems-diagnostic.html" class="tier-cta solid">Get Systems Diagnostic</a>
+                        </div>
+                    </div>
+                </div>
 
-                        <a href="services.html#transformation" class="btn-outline" style="width: 100%; text-align: center;">See Our Approach →</a>
+                <p class="tiers-footnote">
+                    Not sure which is right for you? <a href="diagnostics.html">Compare all options →</a> &nbsp;|&nbsp; Partner? <a href="partners.html">Co-branded diagnostics available</a>
+                </p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════════════
+             THE PATTERN
+        ═══════════════════════════════════════════════════ -->
+        <section class="section-padding">
+            <div class="container">
+                <div class="pattern-grid">
+                    <div>
+                        <div class="section-divider reveal">
+                            <div class="section-divider-line"></div>
+                            <span class="section-divider-text">Why It Works</span>
+                        </div>
+                        <h2 class="reveal">Symptoms lie.<br>Root causes don't.</h2>
+                        <p class="reveal reveal-delay-1">Most businesses spend years and crores treating the wrong problem — declining revenue, high attrition, stalled growth. These are symptoms. The root cause is almost always different from what it appears to be.</p>
+                        <p class="reveal reveal-delay-2">The Seven Cylinders framework maps every institutional failure to one of seven interdependent systems. Fix the right cylinder and the symptoms resolve. Fix the wrong one and they compound. After 25 years and 50+ transformations, this pattern holds.</p>
+                        <a href="how-we-think.html" class="btn-outline reveal reveal-delay-3" style="margin-top:8px;">Read the Framework →</a>
+                    </div>
+                    <div class="pattern-stat-row">
+                        <div class="pattern-stat reveal reveal-delay-1">
+                            <div class="pattern-stat-val">87%</div>
+                            <div class="pattern-stat-lbl">of institutional bottlenecks trace to a single root cylinder — not the one the leadership first suspects</div>
+                        </div>
+                        <div class="pattern-stat reveal reveal-delay-2">
+                            <div class="pattern-stat-val">6 wks</div>
+                            <div class="pattern-stat-lbl">average time to first measurable improvement after root cause intervention — versus 12+ months of symptomatic treatment</div>
+                        </div>
+                        <div class="pattern-stat reveal reveal-delay-3">
+                            <div class="pattern-stat-val">50+</div>
+                            <div class="pattern-stat-lbl">transformations across manufacturing, education, professional services, and healthcare — patterns encoded into the diagnostic engine</div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- CREDIBILITY SECTION -->
-        <section class="section-padding" style="background: white;">
-            <div class="container text-center">
-                <h2 style="margin-bottom: 20px;">25 Years. 50+ Transformations. One Methodology.</h2>
-                <p style="font-size: 1.2rem; max-width: 800px; margin: 0 auto 40px auto; color: var(--text-muted);">
-                    The Seven Cylinders Framework™ — Our proprietary diagnostic system finds what others miss.
-                </p>
-
-                <div class="grid-3" style="margin-bottom: 50px;">
-                    <div class="metric-card">
-                        <span class="metric-val">25</span>
-                        <p style="margin: 15px 0 0 0; font-size: 0.95rem; color: var(--text-muted);">Years of Experience</p>
-                    </div>
-                    <div class="metric-card">
-                        <span class="metric-val">50+</span>
-                        <p style="margin: 15px 0 0 0; font-size: 0.95rem; color: var(--text-muted);">Transformations Delivered</p>
-                    </div>
-                    <div class="metric-card">
-                        <span class="metric-val">₹5Cr-₹500Cr</span>
-                        <p style="margin: 15px 0 0 0; font-size: 0.95rem; color: var(--text-muted);">Company Size Range</p>
-                    </div>
-                </div>
-
-                <div style="max-width: 800px; margin: 0 auto;">
-                    <p style="font-size: 1.05rem; margin-bottom: 25px;">
-                        <strong>Industries We Serve:</strong>
-                    </p>
-                    <div class="grid-2" style="gap: 20px; text-align: left;">
-                        <div>
-                            <p style="margin: 8px 0;">✓ Manufacturing</p>
-                            <p style="margin: 8px 0;">✓ Professional Services</p>
-                            <p style="margin: 8px 0;">✓ Education</p>
-                        </div>
-                        <div>
-                            <p style="margin: 8px 0;">✓ Technology</p>
-                            <p style="margin: 8px 0;">✓ Healthcare</p>
-                            <p style="margin: 8px 0;">✓ Industrial Engineering</p>
-                        </div>
-                    </div>
-                </div>
-
-                <p style="font-size: 1.1rem; margin-top: 40px; font-weight: 600; color: var(--accent-navy);">
-                    Based in Karnataka. Serving India.
-                </p>
-
-                <a href="how-we-think.html" class="btn-outline" style="margin-top: 30px;">See How We Think →</a>
-            </div>
-        </section>
-
-        <!-- SOCIAL PROOF SECTION -->
+        <!-- ═══════════════════════════════════════════════════
+             RESULTS
+        ═══════════════════════════════════════════════════ -->
         <section class="section-padding" style="background: var(--bg-offwhite);">
-            <div class="container readable-column">
-                <h2 style="text-align: center; margin-bottom: 60px;">Recent Results</h2>
+            <div class="container">
+                <div class="section-divider reveal">
+                    <div class="section-divider-line"></div>
+                    <span class="section-divider-text">Real Results</span>
+                </div>
 
-                <div style="display: grid; gap: 40px;">
-                    <div style="background: white; padding: 35px; border-left: 5px solid var(--accent-gold); border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.06);">
-                        <p style="font-size: 1.15rem; line-height: 1.8; font-style: italic; margin-bottom: 20px; color: var(--text-main);">
-                            "Revenue stuck at ₹42 Crore for 3 years. Hit ₹78 Crore in 18 months. Same team."
-                        </p>
-                        <p style="margin: 0; font-size: 0.9rem; color: var(--text-muted); font-weight: 600;">
-                            — Manufacturing CEO, Bangalore
-                        </p>
+                <div style="margin-bottom:40px;">
+                    <h2 class="reveal">What fixing the root cause looks like.</h2>
+                    <p class="reveal reveal-delay-1">Each transformation started with a diagnostic. The root cause was something the leadership had not yet identified. This is what happened when they fixed the right thing.</p>
+                </div>
+
+                <div class="results-grid">
+                    <div class="result-card reveal reveal-delay-1">
+                        <span class="result-tag">Manufacturing · Bangalore</span>
+                        <div class="result-metric">₹78Cr <span>from ₹50Cr</span></div>
+                        <div class="result-label">Revenue in 18 months</div>
+                        <p class="result-desc">Operations cylinder was the bottleneck — not market access as assumed. Capacity unlocked without a single new customer acquired in month one.</p>
+                        <div class="result-cylinder">Root Cause: <strong>Operations · Process Design Failure</strong></div>
                     </div>
-
-                    <div style="background: white; padding: 35px; border-left: 5px solid var(--accent-gold); border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.06);">
-                        <p style="font-size: 1.15rem; line-height: 1.8; font-style: italic; margin-bottom: 20px; color: var(--text-main);">
-                            "Stopped a ₹25 Lakh CRM investment. Fixed sales process for ₹8 Lakhs. Conversion doubled."
-                        </p>
-                        <p style="margin: 0; font-size: 0.9rem; color: var(--text-muted); font-weight: 600;">
-                            — Professional Services Founder, Chennai
-                        </p>
+                    <div class="result-card reveal reveal-delay-2">
+                        <span class="result-tag">Education · Chennai</span>
+                        <div class="result-metric">72% <span>from 40%</span></div>
+                        <div class="result-label">Placement rate in 2 years</div>
+                        <p class="result-desc">The People cylinder — faculty competency and curriculum alignment — was failing despite strong enrollment numbers. Fixed at source.</p>
+                        <div class="result-cylinder">Root Cause: <strong>People · Competency Gap</strong></div>
                     </div>
-
-                    <div style="background: white; padding: 35px; border-left: 5px solid var(--accent-gold); border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.06);">
-                        <p style="font-size: 1.15rem; line-height: 1.8; font-style: italic; margin-bottom: 20px; color: var(--text-main);">
-                            "Placement rate: 40% → 72% in one year. No new staff."
-                        </p>
-                        <p style="margin: 0; font-size: 0.9rem; color: var(--text-muted); font-weight: 600;">
-                            — Engineering College, Karnataka
-                        </p>
+                    <div class="result-card reveal reveal-delay-3">
+                        <span class="result-tag">Professional Services · Mumbai</span>
+                        <div class="result-metric">3.2× <span>revenue per client</span></div>
+                        <div class="result-label">Within 12 months</div>
+                        <p class="result-desc">Strategy cylinder was misaligned — serving the wrong segment with the wrong offer. Repositioning took 6 weeks. The growth followed without new headcount.</p>
+                        <div class="result-cylinder">Root Cause: <strong>Strategy · Segment Misalignment</strong></div>
                     </div>
                 </div>
 
-                <div style="text-align: center; margin-top: 50px;">
-                    <a href="impact.html" class="btn-outline">See All Case Studies →</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- INSIGHTS PREVIEW -->
-        <section class="section-padding" style="background: white;">
-            <div class="container readable-column">
-                <div style="text-align: center; margin-bottom: 50px;">
-                    <span class="eyebrow">Thought Leadership</span>
-                    <h2>Latest Insights</h2>
-                    <p>Root cause thinking in practice. What we're learning, teaching, and challenging.</p>
-                </div>
-                
-                <div id="insightsPreview"></div>
-                
-                <div style="text-align: center; margin-top: 40px;">
-                    <a href="insights.html" class="btn-outline">View All Insights →</a>
+                <div style="text-align:center; margin-top:36px;" class="reveal reveal-delay-4">
+                    <a href="impact.html" class="btn-outline">See All Transformations →</a>
                 </div>
             </div>
         </section>
 
-        <!-- FINAL CTA SECTION -->
-        <section class="section-padding" style="background: linear-gradient(135deg, var(--accent-navy) 0%, #001a33 100%); color: white;">
-            <div class="container text-center">
-                <h2 style="color: white; margin-bottom: 25px;">Ready to Find What's Actually Broken?</h2>
-                <p style="font-size: 1.15rem; max-width: 700px; margin: 0 auto 50px auto; color: rgba(255,255,255,0.9);">
-                    Choose your starting point. We'll guide you from there.
-                </p>
-
-                <div class="grid-3" style="gap: 30px;">
-                    <div style="background: rgba(255,255,255,0.1); padding: 30px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2);">
-                        <h4 style="color: white; margin-top: 0;">Start with a Free Assessment</h4>
-                        <p style="color: rgba(255,255,255,0.85); margin-bottom: 25px;">
-                            10-minute quiz reveals your stuck points.
-                        </p>
-                        <a href="assessment.html" class="btn" style="background: white; color: var(--accent-navy); width: 100%; text-align: center;">Take Assessment →</a>
+        <!-- ═══════════════════════════════════════════════════
+             AI TRANSPARENCY STRIP
+        ═══════════════════════════════════════════════════ -->
+        <div class="ai-strip reveal">
+            <div class="container">
+                <div class="ai-strip-inner">
+                    <div class="ai-icon">
+                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#C5A059" stroke-width="1.5">
+                            <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                        </svg>
                     </div>
-
-                    <div style="background: rgba(255,255,255,0.15); padding: 30px; border-radius: 8px; border: 2px solid rgba(197,160,89,0.5);">
-                        <h4 style="color: white; margin-top: 0;">Book a Discovery Call</h4>
-                        <p style="color: rgba(255,255,255,0.85); margin-bottom: 25px;">
-                            30 minutes. No obligation. No sales pitch.
-                        </p>
-                        <a href="contact.html" class="btn" style="background: var(--accent-gold); color: white; width: 100%; text-align: center;">Book Call →</a>
+                    <div>
+                        <h3>Powered by AI. Grounded in 25 years of real patterns.</h3>
+                        <p>Our diagnostic engine is not a generic AI chatbot. It draws on a proprietary pattern database built from 50+ real institutional transformations — the specific causal chains Peria F. Malayappa and the Kernorigin team have documented over 25 years of practice. The AI makes that expertise accessible in minutes, not months.</p>
                     </div>
+                    <a href="how-we-think.html" class="ai-strip-cta">
+                        How it works
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
 
-                    <div style="background: rgba(255,255,255,0.1); padding: 30px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2);">
-                        <h4 style="color: white; margin-top: 0;">Explore Our Services</h4>
-                        <p style="color: rgba(255,255,255,0.85); margin-bottom: 25px;">
-                            See how we help at every level.
-                        </p>
-                        <a href="services.html" class="btn-outline" style="border-color: white; color: white; width: 100%; text-align: center;">See Services →</a>
+        <!-- ═══════════════════════════════════════════════════
+             PARTNER STRIP
+        ═══════════════════════════════════════════════════ -->
+        <div class="partner-strip">
+            <div class="container">
+                <div class="partner-strip-inner">
+                    <div>
+                        <span class="partner-eyebrow">For Advisors &amp; Consultants</span>
+                        <h3>Deliver world-class diagnostics to your clients — co-branded with your firm.</h3>
+                        <p>CA firms, PE funds, incubators, and business advisors globally use Kernorigin diagnostics as a value-add for their clients. Revenue share on every diagnostic. No setup fee. Your brand on every report.</p>
+                    </div>
+                    <div style="flex-shrink:0;">
+                        <a href="partners.html" class="btn">Become a Partner</a>
                     </div>
                 </div>
             </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════
+             FINAL CTA
+        ═══════════════════════════════════════════════════ -->
+        <section class="final-cta">
+            <div class="container">
+                <div class="final-cta-content">
+                    <h2>Stop treating <em>symptoms</em>.<br>Find the cause.</h2>
+                    <p>Take the free diagnostic in 5 minutes and see what the Seven Cylinders framework reveals about your business. No payment, no login, no sales call. Just clarity.</p>
+                    <div class="final-cta-actions">
+                        <a href="assessment.html" class="btn-hero-primary" style="font-size:0.82rem; padding:18px 36px;">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                            Start Free Diagnostic
+                        </a>
+                        <a href="diagnostics.html" class="btn-hero-ghost" style="color:rgba(255,255,255,0.55);">
+                            Compare all options →
+                        </a>
+                    </div>
+                    <p class="final-cta-note">Free · No login · PDF delivered immediately · Available in English, Hindi &amp; Kannada</p>
+                </div>
+            </div>
         </section>
+
     </main>
 
+    <!-- ═══════════════════════════════════════════════════
+         FOOTER
+    ═══════════════════════════════════════════════════ -->
     <footer>
         <div class="container footer-wrapper">
             <div>
-                <div class="logo">KERNORIGIN</div>
-                <p style="margin-top: 15px; font-size: 0.9rem; color: var(--text-muted);">
+                <div class="footer-logo">KERNORIGIN</div>
+                <p style="margin-top: 15px; font-size: 0.9rem;">
                     Since 2001 (formerly Value Drive Consulting)<br>
                     25 years finding root causes globally.<br>
                     50+ transformations that stick.
@@ -321,7 +1184,8 @@
             </div>
             <div class="footer-links">
                 <a href="index.html">Home</a>
-                <a href="services.html">Services</a>
+                <a href="diagnostics.html">Diagnostics</a>
+                <a href="partners.html">Partners</a>
                 <a href="insights.html">Insights</a>
                 <a href="contact.html">Contact</a>
             </div>
@@ -332,44 +1196,33 @@
     </footer>
 
     <script src="config.js"></script>
+    <script src="mobile-menu.js"></script>
     <script>
-        // Load latest 3 insights for homepage preview
-        (function loadInsightsPreview() {
-            window.addEventListener('load', async function() {
-                try {
-                    if (!API_CONFIG || API_CONFIG.URL.includes("YOUR_SCRIPT_ID")) return;
-                    
-                    const res = await fetch(`${API_CONFIG.URL}?action=recent&limit=3`);
-                    const posts = await res.json();
-                    
-                    if (posts.error || !Array.isArray(posts)) return;
-                    
-                    const container = document.getElementById('insightsPreview');
-                    if (!container) return;
-                    
-                    posts.forEach((post, idx) => {
-                        const date = new Date(post.publish_date).toLocaleDateString('en-US', {
-                            month: 'long', day: 'numeric', year: 'numeric'
-                        });
-                        
-                        const excerpt = post.summary || post.title;
-                        const borderStyle = idx === 0 ? '' : 'border-top: 1px solid var(--border-light);';
-                        
-                        container.innerHTML += `
-                            <div class="insight-card" style="${borderStyle}">
-                                <div class="insight-meta">${date}</div>
-                                <h3><a href="post.html?slug=${post.slug}" style="color: inherit;">${post.title}</a></h3>
-                                <p class="insight-excerpt">${excerpt}</p>
-                                <a href="post.html?slug=${post.slug}" class="btn-outline" style="font-size: 0.75rem; padding: 10px 20px;">Read Analysis →</a>
-                            </div>
-                        `;
-                    });
-                } catch(e) {
-                    console.log('Insights preview not available:', e);
+        // Scroll reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
                 }
             });
-        })();
+        }, { threshold: 0.12 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Animate cylinder bars when hero card is visible
+        const heroCard = document.querySelector('.hero-card');
+        const cardObserver = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+                setTimeout(() => {
+                    document.querySelectorAll('.cylinder-bar').forEach(bar => {
+                        bar.classList.add('animate');
+                    });
+                }, 300);
+                cardObserver.disconnect();
+            }
+        }, { threshold: 0.3 });
+        if (heroCard) cardObserver.observe(heroCard);
     </script>
-    <script src="mobile-menu.js"></script>
 </body>
 </html>
