@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Become a Kernorigin Partner. Deliver co-branded root cause diagnostics to your clients. Revenue share on every diagnostic. For CA firms, PE funds, incubators, and business advisors.">
+    <title>Partners | Kernorigin — Root Cause Intelligence</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+
+        /* ── HERO ── */
+        .hero-partners {
+            background: var(--accent-navy);
+            padding: 80px 0 72px;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-partners::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                radial-gradient(ellipse 60% 80% at 90% 50%, rgba(197,160,89,0.07) 0%, transparent 70%),
+                linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
+            background-size: 100% 100%, 52px 52px, 52px 52px;
+        }
+        .hero-partners-grid {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+        }
+        .hero-partners-eyebrow {
+            display: inline-block;
+            background: rgba(197,160,89,0.15);
+            border: 1px solid rgba(197,160,89,0.35);
+            color: var(--accent-gold);
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            padding: 5px 13px;
+            border-radius: 2px;
+            margin-bottom: 24px;
+        }
+        .hero-partners h1 {
+            color: #fff;
+            font-size: 3rem;
+            letter-spacing: -0.025em;
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+        .hero-partners h1 em {
+            font-style: normal;
+            color: var(--accent-gold);
+        }
+        .hero-partners-sub {
+            color: rgba(255,255,255,0.68);
+            font-size: 1rem;
+            line-height: 1.75;
+            margin-bottom: 32px;
+            max-width: 520px;
+        }
+        .hero-partners-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .btn-gold-solid {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--accent-gold);
+            color: #fff;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 0.78rem;
+            padding: 16px 28px;
+            border-radius: 2px;
+            transition: all 0.2s;
+        }
+        .btn-gold-solid:hover { background: #b8913f; transform: translateY(-1px); }
+        .btn-ghost-white {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: rgba(255,255,255,0.65);
+            font-size: 0.82rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .btn-ghost-white:hover { color: #fff; }
+
+        /* hero calculator card */
+        .hero-calc-card {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 6px;
+            padding: 28px;
+        }
+        .calc-label {
+            font-size: 0.68rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--accent-gold);
+            margin-bottom: 20px;
+            display: block;
+        }
+        .calc-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+            font-size: 0.84rem;
+        }
+        .calc-row:last-of-type { border-bottom: none; }
+        .calc-row-label { color: rgba(255,255,255,0.55); }
+        .calc-row-val { color: #fff; font-weight: 600; }
+        .calc-total {
+            margin-top: 16px;
+            padding: 14px 16px;
+            background: rgba(197,160,89,0.12);
+            border: 1px solid rgba(197,160,89,0.25);
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .calc-total-label {
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--accent-gold);
+        }
+        .calc-total-val {
+            font-family: var(--font-serif);
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--accent-gold);
+        }
+        .calc-note {
+            font-size: 0.72rem;
+            color: rgba(255,255,255,0.35);
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        /* ── SECTION DIVIDER ── */
+        .section-divider {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 44px;
+        }
+        .section-divider-line { width: 36px; height: 1px; background: var(--accent-gold); flex-shrink: 0; }
+        .section-divider span {
+            font-size: 0.7rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 0.18em;
+            color: var(--accent-gold);
+        }
+
+        /* ── WHO IS A PARTNER ── */
+        .partner-types-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+        .partner-type-card {
+            border: 1px solid var(--border-light);
+            border-radius: 6px;
+            padding: 28px;
+            background: #fff;
+            transition: all 0.2s;
+        }
+        .partner-type-card:hover {
+            border-color: var(--accent-navy);
+            box-shadow: 0 4px 16px rgba(0,34,68,0.07);
+            transform: translateY(-2px);
+        }
+        .partner-type-icon {
+            width: 44px; height: 44px;
+            background: var(--bg-offwhite);
+            border: 1px solid var(--border-light);
+            border-radius: 6px;
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 16px;
+        }
+        .partner-type-card h4 {
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+        }
+        .partner-type-card p {
+            font-size: 0.83rem;
+            line-height: 1.55;
+            margin: 0;
+        }
+
+        /* ── WHAT PARTNERS GET ── */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .benefit-card {
+            padding: 24px;
+            border: 1px solid var(--border-light);
+            border-radius: 6px;
+            background: #fff;
+        }
+        .benefit-num {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-gold);
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+        .benefit-card h4 {
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+        }
+        .benefit-card p {
+            font-size: 0.84rem;
+            line-height: 1.55;
+            margin: 0;
+        }
+
+        /* ── HOW IT WORKS ── */
+        .process-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+        .process-step {
+            display: grid;
+            grid-template-columns: 60px 1fr;
+            gap: 24px;
+            padding: 28px 0;
+            border-bottom: 1px solid var(--border-light);
+            align-items: start;
+        }
+        .process-step:last-child { border-bottom: none; }
+        .process-step-num {
+            width: 48px; height: 48px;
+            background: var(--accent-navy);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-family: var(--font-serif);
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--accent-gold);
+            flex-shrink: 0;
+        }
+        .process-step-body h4 {
+            font-size: 1rem;
+            margin-bottom: 8px;
+        }
+        .process-step-body p {
+            font-size: 0.88rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+        .process-step-timeline {
+            display: inline-block;
+            margin-top: 8px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent-gold);
+        }
+
+        /* ── REVENUE MODEL ── */
+        .revenue-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.88rem;
+        }
+        .revenue-table th {
+            background: var(--accent-navy);
+            color: #fff;
+            padding: 12px 16px;
+            text-align: left;
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            font-weight: 600;
+        }
+        .revenue-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border-light);
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+        .revenue-table tr:last-child td { border-bottom: none; }
+        .revenue-table tr:nth-child(even) td { background: var(--bg-offwhite); }
+        .revenue-table .highlight td {
+            background: #fefce8;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+        .revenue-table strong { color: var(--text-main); }
+
+        /* ── CALCULATOR ── */
+        .calc-section {
+            background: var(--bg-offwhite);
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            padding: 36px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .calc-section h3 { margin-bottom: 8px; }
+        .calc-section > p { font-size: 0.88rem; margin-bottom: 28px; }
+        .calc-input-group {
+            margin-bottom: 20px;
+        }
+        .calc-input-group label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            margin-top: 0;
+        }
+        .calc-input-group label span:first-child {
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+        .calc-input-group label .calc-val-display {
+            font-family: var(--font-serif);
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--accent-navy);
+        }
+        .calc-slider {
+            width: 100%;
+            -webkit-appearance: none;
+            height: 4px;
+            background: var(--border-light);
+            border-radius: 2px;
+            outline: none;
+        }
+        .calc-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px; height: 18px;
+            background: var(--accent-navy);
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .calc-result {
+            margin-top: 24px;
+            padding: 20px;
+            background: var(--accent-navy);
+            border-radius: 6px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        .calc-result-item {
+            text-align: center;
+        }
+        .calc-result-val {
+            font-family: var(--font-serif);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent-gold);
+            display: block;
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+        .calc-result-label {
+            font-size: 0.72rem;
+            color: rgba(255,255,255,0.5);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        /* ── APPLICATION FORM ── */
+        .form-card {
+            background: #fff;
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            padding: 44px;
+            box-shadow: 0 4px 20px rgba(0,34,68,0.06);
+        }
+        .form-grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .form-group { margin-bottom: 0; }
+        .status-msg {
+            padding: 14px 18px;
+            border-radius: 4px;
+            font-size: 0.88rem;
+            margin-top: 16px;
+            display: none;
+            line-height: 1.5;
+        }
+        .status-msg.success { background: #d1fae5; color: #065f46; }
+        .status-msg.error { background: #fee2e2; color: #991b1b; }
+
+        /* ── REVEAL ── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+
+        /* ── MOBILE ── */
+        @media (max-width: 900px) {
+            .hero-partners { padding: 56px 0 48px; }
+            .hero-partners-grid { grid-template-columns: 1fr; gap: 40px; }
+            .hero-partners h1 { font-size: 2.1rem; }
+            .hero-calc-card { display: none; }
+            .partner-types-grid { grid-template-columns: 1fr; gap: 16px; }
+            .benefits-grid { grid-template-columns: 1fr; }
+            .form-card { padding: 28px 20px; }
+            .form-grid-2 { grid-template-columns: 1fr; }
+            .calc-result { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-wrapper">
+            <a href="index.html" class="logo">Kernorigin</a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="diagnostics.html" class="nav-diagnostics">Diagnostics</a></li>
+                    <li><a href="how-we-think.html">How We Think</a></li>
+                    <li><a href="impact.html">Impact</a></li>
+                    <li><a href="partners.html" class="active">Partners</a></li>
+                    <li><a href="team.html">Team</a></li>
+                    <li><a href="insights.html">Insights</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- HERO -->
+        <section class="hero-partners">
+            <div class="container">
+                <div class="hero-partners-grid">
+                    <div>
+                        <div class="hero-partners-eyebrow">Partner Ecosystem</div>
+                        <h1>Deliver <em>world-class</em> diagnostics to your clients.</h1>
+                        <p class="hero-partners-sub">Co-branded with your firm. Revenue share on every diagnostic. Your clients get 25 years of root cause intelligence. You get a new revenue stream and a deeper advisory relationship.</p>
+                        <div class="hero-partners-actions">
+                            <a href="#apply" class="btn-gold-solid">
+                                Apply to Partner
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                            </a>
+                            <a href="#how-it-works" class="btn-ghost-white">
+                                See how it works
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Revenue calculator card -->
+                    <div class="hero-calc-card">
+                        <span class="calc-label">Partner Revenue — Illustrative</span>
+                        <div class="calc-row">
+                            <span class="calc-row-label">Clients served per month</span>
+                            <span class="calc-row-val">10</span>
+                        </div>
+                        <div class="calc-row">
+                            <span class="calc-row-label">Diagnostic conversion rate</span>
+                            <span class="calc-row-val">30%</span>
+                        </div>
+                        <div class="calc-row">
+                            <span class="calc-row-label">Paid diagnostics / month</span>
+                            <span class="calc-row-val">3</span>
+                        </div>
+                        <div class="calc-row">
+                            <span class="calc-row-label">Avg diagnostic value</span>
+                            <span class="calc-row-val">₹24,997</span>
+                        </div>
+                        <div class="calc-row">
+                            <span class="calc-row-label">Your revenue share (25%)</span>
+                            <span class="calc-row-val">₹6,249 / diagnostic</span>
+                        </div>
+                        <div class="calc-total">
+                            <span class="calc-total-label">Monthly partner income</span>
+                            <span class="calc-total-val">₹18,747</span>
+                        </div>
+                        <p class="calc-note">Model your own numbers below ↓</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- WHO IS A PARTNER -->
+        <section class="section-padding" id="who">
+            <div class="container">
+                <div class="section-divider reveal">
+                    <div class="section-divider-line"></div>
+                    <span>Who Partners With Us</span>
+                </div>
+
+                <div style="margin-bottom:44px;">
+                    <h2 class="reveal">The right partner already serves the clients we want to reach.</h2>
+                    <p class="reveal reveal-delay-1" style="max-width:560px;">You do not need to be a consulting firm to be a Kernorigin partner. You need to have a trust relationship with business owners and leaders — and want to deepen that relationship with a diagnostic product that actually works.</p>
+                </div>
+
+                <div class="partner-types-grid">
+                    <div class="partner-type-card reveal reveal-delay-1">
+                        <div class="partner-type-icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#002244" stroke-width="1.5"><path d="M9 7H6a2 2 0 00-2 2v9a2 2 0 002 2h9a2 2 0 002-2v-3M9 11l3 3L22 4"/></svg>
+                        </div>
+                        <h4>CA &amp; CS Firms</h4>
+                        <p>You see the financial symptoms. The diagnostic finds the root cause. Offer your business clients a 35-page root cause report co-branded with your firm — and become the advisor who found what the accounts couldn't show.</p>
+                    </div>
+                    <div class="partner-type-card reveal reveal-delay-2">
+                        <div class="partner-type-icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#002244" stroke-width="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                        </div>
+                        <h4>PE &amp; VC Firms</h4>
+                        <p>Run institutional diagnostics on portfolio companies before and after investment decisions. A co-branded Kernorigin diagnostic is a credibility-enhancing due diligence tool that gives you a structured view of organisational root causes.</p>
+                    </div>
+                    <div class="partner-type-card reveal reveal-delay-3">
+                        <div class="partner-type-icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#002244" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+                        </div>
+                        <h4>Incubators &amp; Accelerators</h4>
+                        <p>Your cohorts are exactly the right profile — growth-stage businesses with operational dysfunction they haven't yet diagnosed. Make root cause diagnostics a structured part of your programme curriculum.</p>
+                    </div>
+                    <div class="partner-type-card reveal reveal-delay-1">
+                        <div class="partner-type-icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#002244" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/><circle cx="9" cy="7" r="4"/></svg>
+                        </div>
+                        <h4>HR &amp; OD Firms</h4>
+                        <p>You see the People and Leadership cylinders clearly. Kernorigin completes the picture — you can offer clients a diagnostic that maps all seven cylinders, not just the human dimension. Stronger mandate, deeper engagement.</p>
+                    </div>
+                    <div class="partner-type-card reveal reveal-delay-2">
+                        <div class="partner-type-icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#002244" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 13h4"/></svg>
+                        </div>
+                        <h4>Bank MSME Desks</h4>
+                        <p>MSME and SME advisory programmes need structured diagnostic tools to offer clients alongside credit products. Kernorigin diagnostics integrate naturally — they identify the root cause of why a business is underperforming before a loan can help it.</p>
+                    </div>
+                    <div class="partner-type-card reveal reveal-delay-3">
+                        <div class="partner-type-icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#002244" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>
+                        </div>
+                        <h4>International Advisors</h4>
+                        <p>Business advisory firms in Dubai, Singapore, and the UK serving Indian diaspora businesses and South Asian markets. Diagnostics are available in English, Hindi, and Kannada — with USD, AED, and GBP pricing for international clients.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- WHAT PARTNERS GET -->
+        <section class="section-padding" style="background:var(--bg-offwhite);">
+            <div class="container">
+                <div class="section-divider reveal">
+                    <div class="section-divider-line"></div>
+                    <span>What You Get</span>
+                </div>
+                <h2 class="reveal" style="margin-bottom:40px;">Four things every partner receives.</h2>
+
+                <div class="benefits-grid">
+                    <div class="benefit-card reveal reveal-delay-1">
+                        <div class="benefit-num">01</div>
+                        <h4>A co-branded diagnostic product</h4>
+                        <p>Every diagnostic report sent to your clients carries your firm's name alongside Kernorigin's. Your brand in the header, your contact details in the footer. A 35-page or 50-page report your clients will read and reference — with your name on it.</p>
+                    </div>
+                    <div class="benefit-card reveal reveal-delay-2">
+                        <div class="benefit-num">02</div>
+                        <h4>Revenue share on every diagnostic</h4>
+                        <p>25% of every paid diagnostic your clients complete. That is ₹6,249 per Institutional Diagnostic and ₹12,499 per Systems Diagnostic. Paid monthly, automatically, with a full transaction report. No invoice required from your side.</p>
+                    </div>
+                    <div class="benefit-card reveal reveal-delay-3">
+                        <div class="benefit-num">03</div>
+                        <h4>Your own partner landing page</h4>
+                        <p>A unique URL branded to your firm — kernorigin.com/partners/[yourfirm] — where your clients can take the free assessment or purchase a paid diagnostic directly. Track completions and conversions from your partner dashboard.</p>
+                    </div>
+                    <div class="benefit-card reveal reveal-delay-1">
+                        <div class="benefit-num">04</div>
+                        <h4>Partner support &amp; enablement</h4>
+                        <p>A 30-minute orientation call with Peria F. Malayappa on how to position the diagnostic to your clients. A batch of 10 complimentary coupon codes for your first client introductions. A partner kit with talking points, FAQ, and pricing materials.</p>
+                    </div>
+                </div>
+
+                <div class="reveal" style="margin-top:32px; padding:24px 28px; background:#fff; border:1px solid var(--border-light); border-left:4px solid var(--accent-gold); border-radius:0 6px 6px 0; max-width:700px;">
+                    <p style="font-size:0.9rem; margin:0; line-height:1.65;"><strong style="color:var(--accent-navy);">Revenue share scales with volume.</strong> Partners completing 20+ diagnostics per month qualify for an enhanced share rate. Partners who co-sell the advisory program receive additional commission. Active partners who refer other partner firms to the ecosystem receive a referral bonus on the first 6 months of that partner's activity.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- HOW IT WORKS -->
+        <section class="section-padding" id="how-it-works">
+            <div class="container">
+                <div class="section-divider reveal">
+                    <div class="section-divider-line"></div>
+                    <span>Partner Process</span>
+                </div>
+
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:start;">
+                    <div>
+                        <h2 class="reveal" style="margin-bottom:8px;">From application to first diagnostic — in under a week.</h2>
+                        <p class="reveal reveal-delay-1" style="margin-bottom:36px;">We have made the partner onboarding as fast as possible. You apply today. By this time next week, your clients can be completing co-branded diagnostics.</p>
+
+                        <div class="process-steps">
+                            <div class="process-step reveal">
+                                <div class="process-step-num">1</div>
+                                <div class="process-step-body">
+                                    <h4>Apply below</h4>
+                                    <p>Tell us about your firm, the clients you serve, and how you plan to use the diagnostic. Takes 3 minutes.</p>
+                                    <span class="process-step-timeline">Today</span>
+                                </div>
+                            </div>
+                            <div class="process-step reveal">
+                                <div class="process-step-num">2</div>
+                                <div class="process-step-body">
+                                    <h4>Approval within 48 hours</h4>
+                                    <p>We review every application personally. If approved, you receive a welcome email with your partner portal access, unique landing page URL, and 10 coupon codes.</p>
+                                    <span class="process-step-timeline">Within 48 hours</span>
+                                </div>
+                            </div>
+                            <div class="process-step reveal">
+                                <div class="process-step-num">3</div>
+                                <div class="process-step-body">
+                                    <h4>30-minute orientation call</h4>
+                                    <p>Peria F. Malayappa walks you through the diagnostic framework, how to position it to your clients, and how to read a diagnostic report with them. You leave confident.</p>
+                                    <span class="process-step-timeline">Day 3–5</span>
+                                </div>
+                            </div>
+                            <div class="process-step reveal">
+                                <div class="process-step-num">4</div>
+                                <div class="process-step-body">
+                                    <h4>Go live — share your link</h4>
+                                    <p>Share your branded diagnostic link with clients. They complete the assessment. The report is co-branded. You receive notification of every completion.</p>
+                                    <span class="process-step-timeline">Day 5–7</span>
+                                </div>
+                            </div>
+                            <div class="process-step reveal">
+                                <div class="process-step-num">5</div>
+                                <div class="process-step-body">
+                                    <h4>Monthly: payment + report</h4>
+                                    <p>On the 1st of every month — revenue share payment for the previous month's diagnostics, a transaction summary, and a fresh batch of coupon codes.</p>
+                                    <span class="process-step-timeline">Every month</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="reveal" style="margin-bottom:20px;">Revenue model</h3>
+                        <table class="revenue-table reveal reveal-delay-1">
+                            <thead>
+                                <tr>
+                                    <th>Diagnostic Product</th>
+                                    <th>Client Price</th>
+                                    <th>Your Share (25%)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Free Assessment</td>
+                                    <td>₹0</td>
+                                    <td>—</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Institutional Diagnostic</strong></td>
+                                    <td><strong>₹24,997</strong></td>
+                                    <td><strong>₹6,249</strong></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Systems Diagnostic</strong></td>
+                                    <td><strong>₹49,997</strong></td>
+                                    <td><strong>₹12,499</strong></td>
+                                </tr>
+                                <tr class="highlight">
+                                    <td>10 paid diagnostics / month</td>
+                                    <td>—</td>
+                                    <td><strong>₹62,490 / mo</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div style="margin-top:24px; padding:16px 20px; background:var(--bg-offwhite); border-radius:6px; border:1px solid var(--border-light);" class="reveal">
+                            <p style="font-size:0.82rem; margin:0 0 8px; font-weight:600; color:var(--accent-navy);">International pricing (for global partners)</p>
+                            <p style="font-size:0.82rem; margin:0; color:var(--text-muted); line-height:1.6;">Institutional Diagnostic: USD $299 / AED 1,099 / GBP 249<br>Systems Diagnostic: USD $599 / AED 2,199 / GBP 499<br>Revenue share identical at 25% of transaction value.</p>
+                        </div>
+
+                        <!-- Interactive calculator -->
+                        <div class="calc-section reveal" style="margin-top:24px; padding:28px;">
+                            <h3 style="margin-bottom:6px;">Your revenue calculator</h3>
+                            <p style="margin-bottom:24px;">Adjust the sliders to model your own numbers.</p>
+
+                            <div class="calc-input-group">
+                                <label>
+                                    <span>Clients sent per month</span>
+                                    <span class="calc-val-display" id="clients-val">20</span>
+                                </label>
+                                <input type="range" class="calc-slider" id="clients-slider" min="5" max="100" value="20" oninput="updateCalc()">
+                            </div>
+
+                            <div class="calc-input-group">
+                                <label>
+                                    <span>Paid conversion rate</span>
+                                    <span class="calc-val-display" id="conv-val">20%</span>
+                                </label>
+                                <input type="range" class="calc-slider" id="conv-slider" min="5" max="50" value="20" oninput="updateCalc()">
+                            </div>
+
+                            <div class="calc-input-group">
+                                <label>
+                                    <span>Average diagnostic</span>
+                                    <span class="calc-val-display" id="avg-val">₹24,997</span>
+                                </label>
+                                <input type="range" class="calc-slider" id="avg-slider" min="24997" max="49997" step="25000" value="24997" oninput="updateCalc()">
+                            </div>
+
+                            <div class="calc-result">
+                                <div class="calc-result-item">
+                                    <span class="calc-result-val" id="monthly-val">₹24,997</span>
+                                    <span class="calc-result-label">Monthly income</span>
+                                </div>
+                                <div class="calc-result-item">
+                                    <span class="calc-result-val" id="annual-val">₹2.99L</span>
+                                    <span class="calc-result-label">Annual income</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- APPLICATION FORM -->
+        <section class="section-padding" id="apply" style="background:var(--bg-offwhite);">
+            <div class="container readable-column">
+                <div class="section-divider reveal" style="justify-content:center;">
+                    <div class="section-divider-line"></div>
+                    <span>Apply to Partner</span>
+                    <div class="section-divider-line"></div>
+                </div>
+
+                <div style="text-align:center; margin-bottom:44px;">
+                    <h2 class="reveal">Ready to become a partner?</h2>
+                    <p class="reveal reveal-delay-1">Fill in the form below. We review every application personally and respond within 48 hours. There is no fee to apply and no obligation until you confirm your partnership.</p>
+                </div>
+
+                <div class="form-card reveal">
+                    <form id="partnerForm" onsubmit="submitPartnerApplication(event)">
+
+                        <div class="form-grid-2">
+                            <div class="form-group">
+                                <label for="partnerName">Your Name *</label>
+                                <input type="text" id="partnerName" name="partnerName" required placeholder="Full name">
+                            </div>
+                            <div class="form-group">
+                                <label for="partnerEmail">Email Address *</label>
+                                <input type="email" id="partnerEmail" name="partnerEmail" required placeholder="your@firm.com">
+                            </div>
+                        </div>
+
+                        <div class="form-grid-2" style="margin-top:20px;">
+                            <div class="form-group">
+                                <label for="firmName">Firm / Organisation Name *</label>
+                                <input type="text" id="firmName" name="firmName" required placeholder="Your firm name">
+                            </div>
+                            <div class="form-group">
+                                <label for="firmType">Type of Organisation *</label>
+                                <select id="firmType" name="firmType" required>
+                                    <option value="" disabled selected>Select type...</option>
+                                    <option value="CA / CS Firm">CA / CS Firm</option>
+                                    <option value="PE / VC Fund">PE / VC Fund</option>
+                                    <option value="Incubator / Accelerator">Incubator / Accelerator</option>
+                                    <option value="HR / OD Firm">HR / OD Firm</option>
+                                    <option value="Bank / NBFC">Bank / NBFC MSME Desk</option>
+                                    <option value="Management Consulting">Management Consulting Firm</option>
+                                    <option value="International Advisor">International Advisor</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-grid-2" style="margin-top:20px;">
+                            <div class="form-group">
+                                <label for="location">Location *</label>
+                                <select id="location" name="location" required>
+                                    <option value="" disabled selected>Select location...</option>
+                                    <option value="Bangalore">Bangalore</option>
+                                    <option value="Mumbai">Mumbai</option>
+                                    <option value="Delhi / NCR">Delhi / NCR</option>
+                                    <option value="Chennai">Chennai</option>
+                                    <option value="Hyderabad">Hyderabad</option>
+                                    <option value="Pune">Pune</option>
+                                    <option value="UAE / Dubai">UAE / Dubai</option>
+                                    <option value="Singapore">Singapore</option>
+                                    <option value="United Kingdom">United Kingdom</option>
+                                    <option value="Other India">Other — India</option>
+                                    <option value="Other International">Other — International</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="clientsPerMonth">Approx. clients you serve per month</label>
+                                <select id="clientsPerMonth" name="clientsPerMonth">
+                                    <option value="" disabled selected>Select range...</option>
+                                    <option value="1-10">1–10</option>
+                                    <option value="11-30">11–30</option>
+                                    <option value="31-50">31–50</option>
+                                    <option value="51-100">51–100</option>
+                                    <option value="100+">100+</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div style="margin-top:20px;">
+                            <label for="whyPartner">How do you plan to use the diagnostic with your clients? *</label>
+                            <textarea id="whyPartner" name="whyPartner" required rows="4" placeholder="Tell us about your clients and how you see the diagnostic fitting into your work with them..."></textarea>
+                        </div>
+
+                        <div style="margin-top:20px;">
+                            <label for="additionalNotes">Anything else? (optional)</label>
+                            <textarea id="additionalNotes" name="additionalNotes" rows="2" placeholder="Questions, specific requirements, or context about your firm..."></textarea>
+                        </div>
+
+                        <div style="margin-top:28px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px;">
+                            <p style="font-size:0.8rem; color:var(--text-muted); margin:0; max-width:380px; line-height:1.5;">We review every application personally. You will hear from us within 48 hours. No obligation until you confirm.</p>
+                            <button type="submit" class="btn" id="partnerSubmitBtn" style="flex-shrink:0;">Submit Application →</button>
+                        </div>
+
+                        <div id="partnerStatus" class="status-msg"></div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- FINAL CTA / REASSURANCE -->
+        <section class="section-padding" style="text-align:center;">
+            <div class="container readable-column">
+                <h2 class="reveal" style="margin-bottom:16px;">Still have questions?</h2>
+                <p class="reveal reveal-delay-1">We are happy to have a conversation before you apply. If you want to understand how the co-branding works, what the diagnostic looks like for your client type, or what the revenue model looks like at your scale — just reach out.</p>
+                <div class="reveal reveal-delay-2" style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-top:8px;">
+                    <a href="contact.html?ref=partners" class="btn-outline">Talk to Us First</a>
+                    <a href="diagnostics.html" class="btn-outline">See the Diagnostics</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container footer-wrapper">
+            <div>
+                <div class="footer-logo">KERNORIGIN</div>
+                <p style="margin-top: 15px; font-size: 0.9rem;">
+                    Since 2001 (formerly Value Drive Consulting)<br>
+                    25 years finding root causes globally.<br>
+                    50+ transformations that stick.
+                </p>
+            </div>
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="diagnostics.html">Diagnostics</a>
+                <a href="partners.html">Partners</a>
+                <a href="insights.html">Insights</a>
+                <a href="contact.html">Contact</a>
+            </div>
+        </div>
+        <div class="container" style="padding-top: 20px; border-top: 1px solid var(--border-light); font-size: 0.8rem; color: #999;">
+            &copy; 2026 Kernorigin. All rights reserved.
+        </div>
+    </footer>
+
+    <script src="config.js"></script>
+    <script src="mobile-menu.js"></script>
+    <script>
+        // Revenue calculator
+        function updateCalc() {
+            const clients = parseInt(document.getElementById('clients-slider').value);
+            const conv = parseInt(document.getElementById('conv-slider').value);
+            const avg = parseInt(document.getElementById('avg-slider').value);
+
+            document.getElementById('clients-val').textContent = clients;
+            document.getElementById('conv-val').textContent = conv + '%';
+            document.getElementById('avg-val').textContent = avg === 24997 ? '₹24,997' : '₹49,997';
+
+            const diagnostics = Math.round(clients * conv / 100);
+            const monthly = diagnostics * avg * 0.25;
+            const annual = monthly * 12;
+
+            document.getElementById('monthly-val').textContent = formatRupees(monthly);
+            document.getElementById('annual-val').textContent = formatRupees(annual);
+        }
+
+        function formatRupees(n) {
+            if (n >= 100000) return '₹' + (n / 100000).toFixed(2) + 'L';
+            return '₹' + Math.round(n).toLocaleString('en-IN');
+        }
+
+        updateCalc();
+
+        // Partner application submission
+        async function submitPartnerApplication(e) {
+            e.preventDefault();
+            const btn = document.getElementById('partnerSubmitBtn');
+            const status = document.getElementById('partnerStatus');
+            btn.textContent = 'Submitting...';
+            btn.disabled = true;
+
+            try {
+                const payload = {
+                    action: 'submit_partner_application',
+                    apiKey: API_CONFIG.PUBLIC_KEY,
+                    name: document.getElementById('partnerName').value,
+                    email: document.getElementById('partnerEmail').value,
+                    firm: document.getElementById('firmName').value,
+                    firmType: document.getElementById('firmType').value,
+                    location: document.getElementById('location').value,
+                    clientsPerMonth: document.getElementById('clientsPerMonth').value,
+                    whyPartner: document.getElementById('whyPartner').value,
+                    notes: document.getElementById('additionalNotes').value
+                };
+
+                const res = await fetch(API_CONFIG.URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await res.json();
+
+                status.style.display = 'block';
+                if (result.status === 'success' || res.ok) {
+                    status.className = 'status-msg success';
+                    status.innerHTML = '<strong>✅ Application received.</strong> We will review your application and respond within 48 hours at ' + document.getElementById('partnerEmail').value + '. Thank you for your interest in partnering with Kernorigin.';
+                    e.target.reset();
+                } else {
+                    throw new Error(result.message || 'Submission failed');
+                }
+            } catch (err) {
+                status.style.display = 'block';
+                status.className = 'status-msg error';
+                status.textContent = '❌ Something went wrong: ' + err.message + '. Please try again or email us directly at contact@kernorigin.com.';
+            } finally {
+                btn.textContent = 'Submit Application →';
+                btn.disabled = false;
+                status.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        }
+
+        // Scroll reveal
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>

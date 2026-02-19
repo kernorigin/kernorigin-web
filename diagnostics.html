@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Kernorigin diagnostic products — Free Assessment, Institutional Diagnostic (₹24,997) and Systems Diagnostic (₹49,997). Find your root cause at the right depth.">
+    <title>Diagnostics | Kernorigin — Root Cause Intelligence</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+
+        /* ── HERO ── */
+        .hero-diag {
+            background: var(--accent-navy);
+            padding: 72px 0 64px;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-diag::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 52px 52px;
+        }
+        .hero-diag-inner {
+            position: relative;
+            max-width: 700px;
+        }
+        .hero-diag-eyebrow {
+            display: inline-block;
+            background: rgba(197,160,89,0.15);
+            border: 1px solid rgba(197,160,89,0.35);
+            color: var(--accent-gold);
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            padding: 5px 13px;
+            border-radius: 2px;
+            margin-bottom: 24px;
+        }
+        .hero-diag h1 {
+            color: #fff;
+            font-size: 3rem;
+            letter-spacing: -0.02em;
+            margin-bottom: 20px;
+        }
+        .hero-diag h1 em {
+            font-style: normal;
+            color: var(--accent-gold);
+        }
+        .hero-diag p {
+            color: rgba(255,255,255,0.68);
+            font-size: 1rem;
+            max-width: 560px;
+            margin: 0;
+            line-height: 1.7;
+        }
+
+        /* ── SECTION DIVIDER ── */
+        .section-divider {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 44px;
+        }
+        .section-divider-line {
+            width: 36px; height: 1px;
+            background: var(--accent-gold);
+            flex-shrink: 0;
+        }
+        .section-divider span {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            color: var(--accent-gold);
+        }
+
+        /* ── UPGRADE PATH BAR ── */
+        .upgrade-bar {
+            background: var(--bg-offwhite);
+            border-bottom: 1px solid var(--border-light);
+            padding: 20px 0;
+        }
+        .upgrade-flow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+            flex-wrap: wrap;
+        }
+        .upgrade-step {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 20px;
+        }
+        .upgrade-step-num {
+            width: 24px; height: 24px;
+            background: var(--accent-navy);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: var(--accent-gold);
+            flex-shrink: 0;
+        }
+        .upgrade-step-text {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+        .upgrade-step-text strong {
+            color: var(--text-main);
+            display: block;
+            font-size: 0.85rem;
+        }
+        .upgrade-arrow {
+            color: var(--border-light);
+            font-size: 1.2rem;
+            padding: 0 4px;
+        }
+
+        /* ── TIER SECTIONS ── */
+        .tier-section {
+            padding: 80px 0;
+            scroll-margin-top: 80px;
+        }
+        .tier-section:nth-child(even) {
+            background: var(--bg-offwhite);
+        }
+
+        .tier-layout {
+            display: grid;
+            grid-template-columns: 1fr 420px;
+            gap: 80px;
+            align-items: start;
+        }
+        .tier-layout.reverse {
+            grid-template-columns: 420px 1fr;
+        }
+        .tier-layout.reverse .tier-content { order: 2; }
+        .tier-layout.reverse .tier-panel { order: 1; }
+
+        /* tier label */
+        .tier-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            padding: 4px 12px;
+            border-radius: 2px;
+            margin-bottom: 20px;
+        }
+        .tier-label.free { background: #d1fae5; color: #065f46; }
+        .tier-label.standard { background: #dbeafe; color: #1e3a8a; }
+        .tier-label.premium { background: #fdf4ff; color: #7e22ce; }
+
+        .tier-content h2 {
+            font-size: 2.2rem;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+        .tier-content .tier-price-display {
+            font-family: var(--font-serif);
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: var(--accent-gold);
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+        .tier-content .tier-price-note {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            margin-bottom: 28px;
+        }
+        .tier-content p {
+            font-size: 0.95rem;
+            line-height: 1.75;
+            margin-bottom: 20px;
+        }
+
+        /* feature list */
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 32px;
+        }
+        .feature-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-light);
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+        .feature-list li:last-child { border-bottom: none; }
+        .feature-icon {
+            width: 20px; height: 20px;
+            background: var(--accent-gold);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+        .feature-icon svg { width: 10px; height: 10px; }
+        .feature-list li strong { color: var(--text-main); }
+
+        /* tier panel / card */
+        .tier-panel {
+            position: sticky;
+            top: 100px;
+        }
+        .tier-panel-card {
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            overflow: hidden;
+            background: #fff;
+            box-shadow: 0 4px 20px rgba(0,34,68,0.06);
+        }
+        .tier-panel-card.navy-card {
+            border-color: var(--accent-navy);
+        }
+        .tier-panel-header {
+            padding: 28px;
+            border-bottom: 1px solid var(--border-light);
+            background: var(--bg-offwhite);
+        }
+        .tier-panel-card.navy-card .tier-panel-header {
+            background: var(--accent-navy);
+        }
+        .tier-panel-header h3 {
+            font-size: 1.1rem;
+            margin-bottom: 4px;
+        }
+        .tier-panel-card.navy-card .tier-panel-header h3 { color: #fff; }
+        .tier-panel-header p {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            margin: 0;
+        }
+        .tier-panel-card.navy-card .tier-panel-header p { color: rgba(255,255,255,0.55); }
+        .tier-panel-body { padding: 28px; }
+        .tier-panel-price {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-navy);
+            margin-bottom: 4px;
+        }
+        .tier-panel-card.navy-card .tier-panel-price { color: var(--accent-gold); }
+        .tier-panel-note {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+        .panel-feature {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.84rem;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+        }
+        .panel-check {
+            width: 16px; height: 16px;
+            background: var(--accent-gold);
+            border-radius: 3px;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+        }
+        .panel-check svg { width: 9px; height: 9px; }
+        .tier-cta-btn {
+            display: block;
+            text-align: center;
+            padding: 15px 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border-radius: 2px;
+            margin-top: 20px;
+            transition: all 0.2s;
+        }
+        .tier-cta-btn.outlined {
+            border: 2px solid var(--accent-navy);
+            color: var(--accent-navy);
+        }
+        .tier-cta-btn.outlined:hover { background: var(--accent-navy); color: #fff; }
+        .tier-cta-btn.solid {
+            background: var(--accent-navy);
+            color: #fff;
+        }
+        .tier-cta-btn.solid:hover { background: #003366; }
+        .tier-cta-btn.gold {
+            background: var(--accent-gold);
+            color: #fff;
+        }
+        .tier-cta-btn.gold:hover { background: #b8913f; }
+
+        /* what's in the report */
+        .report-contents {
+            background: var(--bg-offwhite);
+            border-radius: 6px;
+            padding: 20px 24px;
+            margin-top: 16px;
+        }
+        .report-contents-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--accent-gold);
+            margin-bottom: 12px;
+            display: block;
+        }
+        .report-section-list {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .report-section-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+        }
+        .report-dot {
+            width: 5px; height: 5px;
+            background: var(--accent-gold);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        /* diagnostic walk highlight */
+        .diagnostic-walk {
+            background: var(--accent-navy);
+            border-radius: 6px;
+            padding: 24px;
+            margin: 24px 0;
+        }
+        .diagnostic-walk-label {
+            font-size: 0.68rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--accent-gold);
+            margin-bottom: 16px;
+            display: block;
+        }
+        .walk-step {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        .walk-step:last-child { margin-bottom: 0; }
+        .walk-level {
+            font-size: 0.68rem;
+            font-weight: 700;
+            color: var(--accent-gold);
+            width: 28px;
+            flex-shrink: 0;
+            padding-top: 2px;
+        }
+        .walk-text {
+            font-size: 0.82rem;
+            color: rgba(255,255,255,0.75);
+            line-height: 1.5;
+        }
+        .walk-text strong { color: #fff; }
+
+        /* ── AI TRANSPARENCY ── */
+        .ai-section {
+            background: var(--accent-navy);
+            padding: 60px 0;
+        }
+        .ai-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+        .ai-section h2 { color: #fff; margin-bottom: 16px; }
+        .ai-section p { color: rgba(255,255,255,0.65); line-height: 1.75; }
+        .ai-pillars {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .ai-pillar {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-left: 3px solid var(--accent-gold);
+            border-radius: 0 4px 4px 0;
+            padding: 16px 20px;
+        }
+        .ai-pillar h4 {
+            color: #fff;
+            font-size: 0.9rem;
+            margin-bottom: 6px;
+        }
+        .ai-pillar p {
+            font-size: 0.82rem;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        /* ── FAQ ── */
+        .faq-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+        .faq-item {
+            border-bottom: 1px solid var(--border-light);
+            padding: 24px 0;
+        }
+        .faq-item:first-child { border-top: 1px solid var(--border-light); }
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            gap: 20px;
+            cursor: pointer;
+            user-select: none;
+        }
+        .faq-question h4 {
+            font-size: 1rem;
+            color: var(--accent-navy);
+            margin: 0;
+            font-family: var(--font-serif);
+        }
+        .faq-toggle {
+            width: 24px; height: 24px;
+            background: var(--bg-offwhite);
+            border: 1px solid var(--border-light);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.2s;
+            color: var(--accent-navy);
+            font-size: 1.2rem;
+            line-height: 1;
+        }
+        .faq-item.open .faq-toggle {
+            background: var(--accent-navy);
+            color: #fff;
+            border-color: var(--accent-navy);
+            transform: rotate(45deg);
+        }
+        .faq-answer {
+            display: none;
+            padding-top: 16px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.75;
+        }
+        .faq-item.open .faq-answer { display: block; }
+
+        /* ── FINAL CTA ── */
+        .final-cta {
+            padding: 80px 0;
+            text-align: center;
+        }
+        .final-cta h2 {
+            font-size: 2.4rem;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+        .final-cta h2 em { font-style: normal; color: var(--accent-gold); }
+        .final-cta p {
+            max-width: 520px;
+            margin: 0 auto 36px;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+        .cta-group {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        /* ── REVEAL ── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* ── MOBILE ── */
+        @media (max-width: 900px) {
+            .hero-diag { padding: 52px 0 44px; }
+            .hero-diag h1 { font-size: 2.1rem; }
+            .tier-layout, .tier-layout.reverse { grid-template-columns: 1fr; gap: 40px; }
+            .tier-layout.reverse .tier-content { order: 1; }
+            .tier-layout.reverse .tier-panel { order: 2; }
+            .tier-panel { position: static; }
+            .ai-grid { grid-template-columns: 1fr; gap: 40px; }
+            .upgrade-flow { justify-content: flex-start; overflow-x: auto; padding: 0 20px; }
+            .final-cta h2 { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-wrapper">
+            <a href="index.html" class="logo">Kernorigin</a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="diagnostics.html" class="nav-diagnostics active">Diagnostics</a></li>
+                    <li><a href="how-we-think.html">How We Think</a></li>
+                    <li><a href="impact.html">Impact</a></li>
+                    <li><a href="partners.html">Partners</a></li>
+                    <li><a href="team.html">Team</a></li>
+                    <li><a href="insights.html">Insights</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- HERO -->
+        <section class="hero-diag">
+            <div class="container">
+                <div class="hero-diag-inner">
+                    <div class="hero-diag-eyebrow">Diagnostic Products</div>
+                    <h1>Find your root cause.<br>Choose your <em>depth</em>.</h1>
+                    <p>Three diagnostic products. One starting point that is always free. Every tier draws on the same 25-year proprietary pattern database — the difference is how deep you go and what you receive.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- UPGRADE PATH -->
+        <div class="upgrade-bar">
+            <div class="container">
+                <div class="upgrade-flow">
+                    <div class="upgrade-step">
+                        <div class="upgrade-step-num">1</div>
+                        <div class="upgrade-step-text">
+                            <strong>Free Assessment</strong>
+                            Root cause identified · ₹0
+                        </div>
+                    </div>
+                    <div class="upgrade-arrow">→</div>
+                    <div class="upgrade-step">
+                        <div class="upgrade-step-num">2</div>
+                        <div class="upgrade-step-text">
+                            <strong>Institutional Diagnostic</strong>
+                            35-page deep report · ₹24,997
+                        </div>
+                    </div>
+                    <div class="upgrade-arrow">→</div>
+                    <div class="upgrade-step">
+                        <div class="upgrade-step-num">3</div>
+                        <div class="upgrade-step-text">
+                            <strong>Advisory Program</strong>
+                            90-day implementation · ₹3L–₹8L
+                        </div>
+                    </div>
+                    <div class="upgrade-arrow">→</div>
+                    <div class="upgrade-step">
+                        <div class="upgrade-step-num">4</div>
+                        <div class="upgrade-step-text">
+                            <strong>Transformation Engagement</strong>
+                            Full consulting · ₹25L–₹60L
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════
+             TIER 1 — FREE ASSESSMENT
+        ═══════════════════════════ -->
+        <section class="tier-section" id="free">
+            <div class="container">
+                <div class="tier-layout">
+                    <div class="tier-content">
+                        <div class="tier-label free">Free · Start Here</div>
+                        <h2>The Free Assessment</h2>
+                        <div class="tier-price-display">₹0</div>
+                        <div class="tier-price-note">No payment. No login. No sales call.</div>
+
+                        <p>Answer 10 questions about your business across the Seven Cylinders framework. Takes 5–10 minutes. The diagnostic engine analyses your responses against 25 years of institutional patterns and identifies which cylinder is your primary bottleneck — and why.</p>
+                        <p>Your report arrives by email within minutes. It tells you what is actually blocking growth, not what you think is blocking it. That gap is usually significant.</p>
+
+                        <ul class="feature-list">
+                            <li>
+                                <div class="feature-icon"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                                <span><strong>Seven Cylinders scoring</strong> — each business system scored and ranked</span>
+                            </li>
+                            <li>
+                                <div class="feature-icon"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                                <span><strong>Root cause identification</strong> — the systemic issue driving your bottleneck</span>
+                            </li>
+                            <li>
+                                <div class="feature-icon"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                                <span><strong>Directional recommendation</strong> — what category of intervention is needed</span>
+                            </li>
+                            <li>
+                                <div class="feature-icon"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                                <span><strong>PDF report by email</strong> — immediate delivery, yours to keep</span>
+                            </li>
+                            <li>
+                                <div class="feature-icon"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                                <span><strong>English, Hindi, Kannada</strong> — report delivered in your preferred language</span>
+                            </li>
+                        </ul>
+
+                        <a href="assessment.html" class="btn">Start Free Assessment →</a>
+                    </div>
+
+                    <div class="tier-panel reveal">
+                        <div class="tier-panel-card">
+                            <div class="tier-panel-header">
+                                <h3>What the free report tells you</h3>
+                                <p>Immediate. No waiting. No follow-up required.</p>
+                            </div>
+                            <div class="tier-panel-body">
+                                <div class="report-contents">
+                                    <span class="report-contents-label">Report contains</span>
+                                    <div class="report-section-list">
+                                        <div class="report-section-item"><div class="report-dot"></div> Your Seven Cylinders score profile</div>
+                                        <div class="report-section-item"><div class="report-dot"></div> Primary bottleneck cylinder identified</div>
+                                        <div class="report-section-item"><div class="report-dot"></div> Root cause statement</div>
+                                        <div class="report-section-item"><div class="report-dot"></div> Why this root cause matters for your sector</div>
+                                        <div class="report-section-item"><div class="report-dot"></div> Direction of intervention required</div>
+                                        <div class="report-section-item"><div class="report-dot"></div> Suggested next step</div>
+                                    </div>
+                                </div>
+                                <div style="margin-top:20px; padding:16px; background:#f0fdf4; border-radius:4px; border-left:3px solid #059669;">
+                                    <p style="font-size:0.82rem; color:#065f46; margin:0; line-height:1.5;"><strong>Most clients say:</strong> "The free report identified something we had been unable to name for two years."</p>
+                                </div>
+                                <a href="assessment.html" class="tier-cta-btn outlined" style="margin-top:20px;">Start Free Assessment</a>
+                                <p style="font-size:0.75rem; color:var(--text-muted); text-align:center; margin-top:10px; margin-bottom:0;">Takes 5–10 minutes. Report arrives instantly.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════
+             TIER 2 — INSTITUTIONAL DIAGNOSTIC
+        ═══════════════════════════════════ -->
+        <section class="tier-section" id="institutional" style="background: var(--bg-offwhite);">
+            <div class="container">
+                <div class="tier-layout reverse">
+                    <div class="tier-content">
+                        <div class="tier-label standard">Most Chosen</div>
+                        <h2>Institutional Diagnostic</h2>
+                        <div class="tier-price-display">₹24,997</div>
+                        <div class="tier-price-note">One-time · 35-page PDF delivered within minutes · Debrief call included</div>
+
+                        <p>This is where the diagnostic goes from directional to definitive. Where the free assessment identifies your root cause, the Institutional Diagnostic walks the entire causal chain — from the symptom you observe, through the operational patterns and behavioural evidence, to the systemic root that is driving everything.</p>
+
+                        <p>The report reads the way a senior partner thinks: it shows you the reasoning, not just the conclusion. Your leadership team will be able to see exactly how your current situation came to be — and exactly what needs to change first.</p>
+
+                        <div class="diagnostic-walk">
+                            <span class="diagnostic-walk-label">Sample — The Diagnostic Walk</span>
+                            <div class="walk-step">
+                                <span class="walk-level">L1</span>
+                                <div class="walk-text"><strong>You said:</strong> "Revenue is stagnant despite strong sales activity."</div>
+                            </div>
+                            <div class="walk-step">
+                                <span class="walk-level">L2</span>
+                                <div class="walk-text"><strong>Operational issue:</strong> Sales converts but delivery fails to retain — repeat revenue is structurally absent.</div>
+                            </div>
+                            <div class="walk-step">
+                                <span class="walk-level">L3</span>
+                                <div class="walk-text"><strong>Evidence pattern:</strong> Acquisition cost rising 18% YoY while average client tenure holds at 14 months.</div>
+                            </div>
+                            <div class="walk-step">
+                                <span class="walk-level">L4</span>
+                                <div class="walk-text"><strong>Behaviour:</strong> Delivery team over-promises on timeline; client expectations set during sales are not met operationally.</div>
+                            </div>
+                            <div class="walk-step">
+                                <span class="walk-level">L5</span>
+                                <div class="walk-text"><strong>Root cause:</strong> Sales and Operations cylinders are misaligned — no handover protocol, no shared accountability metric.</div>
+                            </div>
+                        </div>
+
+                        <ul class="feature-list">
+                            <li>
+                                <div class="feature-icon"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                                <span><strong>35-page diagnostic report</strong> — the full causal chain from symptom to root cause</span>
+                            </li>
+                            <li>
+                                <div class="feature-icon"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                                <span><strong>All Seven Cylinders analysed</strong> — scored, weighted, and inter-dependencies mapped</span>
+                            </li>
+                            <li>
+                                <div class="feature-icon"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                                <span><strong>L0–L5 causal chain</strong> — the full diagnostic walk your leadership team can follow</span>
+                            </li>
+                            <li>
+                                <div class="feature-icon"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                                <span><strong>Three intervention options</strong> — Optimise, Redesign, or Reframe for each root cause</span>
+                            </li>
+                            <li>
+                                <div class="feature-icon"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                                <span><strong>90-day action roadmap</strong> — sequenced, prioritised, owner-assignable</span>
+                            </li>
+                            <li>
+                                <div class="feature-icon"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                                <span><strong>Expert debrief call</strong> — 45 minutes with a Kernorigin senior partner to walk through findings</span>
+                            </li>
+                            <li>
+                                <div class="feature-icon"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                                <span><strong>Sector-calibrated</strong> — patterns matched to your specific industry and scale</span>
+                            </li>
+                        </ul>
+
+                        <a href="contact.html?ref=institutional" class="btn">Get Institutional Diagnostic →</a>
+                        <p style="font-size:0.8rem; color:var(--text-muted); margin-top:12px;">Questions? <a href="contact.html" style="color:var(--accent-navy); text-decoration:underline;">Speak to us first</a> — no obligation.</p>
+                    </div>
+
+                    <div class="tier-panel reveal">
+                        <div class="tier-panel-card navy-card">
+                            <div class="tier-panel-header">
+                                <h3>Institutional Diagnostic</h3>
+                                <p>The most complete picture available without a full engagement</p>
+                            </div>
+                            <div class="tier-panel-body">
+                                <div class="tier-panel-price">₹24,997</div>
+                                <div class="tier-panel-note">One-time investment · Report in minutes</div>
+
+                                <div class="panel-feature">
+                                    <div class="panel-check"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                                    35-page PDF report
+                                </div>
+                                <div class="panel-feature">
+                                    <div class="panel-check"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                                    Full L0–L5 causal chain
+                                </div>
+                                <div class="panel-feature">
+                                    <div class="panel-check"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                                    90-day action roadmap
+                                </div>
+                                <div class="panel-feature">
+                                    <div class="panel-check"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                                    45-min expert debrief call
+                                </div>
+                                <div class="panel-feature">
+                                    <div class="panel-check"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                                    En · Hi · Kn language options
+                                </div>
+
+                                <div class="report-contents" style="margin-top:20px; background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.1);">
+                                    <span class="report-contents-label">35-page report contains</span>
+                                    <div class="report-section-list">
+                                        <div class="report-section-item" style="color:rgba(255,255,255,0.6)"><div class="report-dot"></div> Executive summary</div>
+                                        <div class="report-section-item" style="color:rgba(255,255,255,0.6)"><div class="report-dot"></div> Seven Cylinders deep score</div>
+                                        <div class="report-section-item" style="color:rgba(255,255,255,0.6)"><div class="report-dot"></div> Causal chain walk (L0–L5)</div>
+                                        <div class="report-section-item" style="color:rgba(255,255,255,0.6)"><div class="report-dot"></div> Three intervention options</div>
+                                        <div class="report-section-item" style="color:rgba(255,255,255,0.6)"><div class="report-dot"></div> 90-day sequenced roadmap</div>
+                                        <div class="report-section-item" style="color:rgba(255,255,255,0.6)"><div class="report-dot"></div> Risk factors if unaddressed</div>
+                                        <div class="report-section-item" style="color:rgba(255,255,255,0.6)"><div class="report-dot"></div> Comparable pattern evidence</div>
+                                    </div>
+                                </div>
+
+                                <a href="contact.html?ref=institutional" class="tier-cta-btn gold">Get Institutional Diagnostic</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ════════════════════════════════
+             TIER 3 — SYSTEMS DIAGNOSTIC
+        ════════════════════════════════ -->
+        <section class="tier-section" id="systems">
+            <div class="container">
+                <div class="tier-layout">
+                    <div class="tier-content">
+                        <div class="tier-label premium">Technology &amp; Process</div>
+                        <h2>Systems Diagnostic</h2>
+                        <div class="tier-price-display">₹49,997</div>
+                        <div class="tier-price-note">One-time · 50-page PDF · Strategy call within 24–48 hours</div>
+
+                        <p>For organisations considering a significant technology or process investment — custom software, ERP implementation, operations redesign. The Systems Diagnostic answers the question most businesses skip: <em>should we build, consult first, or do both?</em></p>
+
+                        <p>90% of technology projects fail not because of bad code — but because they automate a broken process. This diagnostic prevents that. It maps your current process architecture, identifies what is structurally sound versus what needs redesigning, and delivers a specific recommendation before a single rupee of implementation budget is committed.</p>
+
+                        <ul class="feature-list">
+                            <li>
+                                <div class="feature-icon"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                                <span><strong>50-page systems analysis report</strong> — process architecture mapped end to end</span>
+                            </li>
+                            <li>
+                                <div class="feature-icon"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                                <span><strong>Build / Consult / Hybrid recommendation</strong> — with specific rationale, not a generic answer</span>
+                            </li>
+                            <li>
+                                <div class="feature-icon"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                                <span><strong>Investment range &amp; timeline</strong> — what the right solution costs and how long it takes</span>
+                            </li>
+                            <li>
+                                <div class="feature-icon"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                                <span><strong>Technology audit</strong> — current stack assessed against what the process actually requires</span>
+                            </li>
+                            <li>
+                                <div class="feature-icon"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                                <span><strong>Process redesign requirements</strong> — what must change before technology is introduced</span>
+                            </li>
+                            <li>
+                                <div class="feature-icon"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                                <span><strong>Strategy call within 24–48 hours</strong> — to walk through findings and answer questions</span>
+                            </li>
+                        </ul>
+
+                        <div style="padding:20px 24px; background:var(--bg-offwhite); border-radius:4px; border-left:4px solid var(--accent-navy); margin-bottom:28px;">
+                            <p style="font-size:0.88rem; margin:0; line-height:1.6;"><strong style="color:var(--accent-navy);">We say no more than yes.</strong> We only recommend a build if the process underneath it is sound. The diagnostic may tell you that you do not need software at all — and we will say so. You own the report regardless of what you decide.</p>
+                        </div>
+
+                        <a href="systems-diagnostic.html" class="btn">Get Systems Diagnostic →</a>
+                    </div>
+
+                    <div class="tier-panel reveal">
+                        <div class="tier-panel-card">
+                            <div class="tier-panel-header">
+                                <h3>Three possible outcomes</h3>
+                                <p>The diagnostic recommends one of three paths</p>
+                            </div>
+                            <div class="tier-panel-body">
+                                <div style="display:flex; flex-direction:column; gap:12px; margin-bottom:20px;">
+                                    <div style="padding:14px 16px; border-radius:4px; border-top:3px solid #059669; background:#f0fdf4;">
+                                        <div style="font-size:0.78rem; font-weight:700; color:#065f46; margin-bottom:4px;">BUILD</div>
+                                        <div style="font-size:0.82rem; color:#065f46;">Your process is sound. You need technology to scale it. Investment: ₹7.5L–₹20L · 3–6 weeks.</div>
+                                    </div>
+                                    <div style="padding:14px 16px; border-radius:4px; border-top:3px solid #f59e0b; background:#fffbeb;">
+                                        <div style="font-size:0.78rem; font-weight:700; color:#92400e; margin-bottom:4px;">CONSULT FIRST</div>
+                                        <div style="font-size:0.82rem; color:#92400e;">Your process needs redesign before any technology investment. ₹25L–₹45L · 6–10 weeks.</div>
+                                    </div>
+                                    <div style="padding:14px 16px; border-radius:4px; border-top:3px solid #3b82f6; background:#eff6ff;">
+                                        <div style="font-size:0.78rem; font-weight:700; color:#1e40af; margin-bottom:4px;">HYBRID</div>
+                                        <div style="font-size:0.82rem; color:#1e40af;">Strategy to redesign the process, then technology to implement it. ₹35L–₹60L · 8–12 weeks.</div>
+                                    </div>
+                                </div>
+                                <div class="tier-panel-price">₹49,997</div>
+                                <div class="tier-panel-note">One-time · 50-page report · Strategy call</div>
+                                <a href="systems-diagnostic.html" class="tier-cta-btn solid">Get Systems Diagnostic</a>
+                                <p style="font-size:0.75rem; color:var(--text-muted); text-align:center; margin-top:10px; margin-bottom:0;">Credited in full against any implementation engagement.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI TRANSPARENCY -->
+        <section class="ai-section">
+            <div class="container">
+                <div class="ai-grid">
+                    <div>
+                        <div class="section-divider">
+                            <div class="section-divider-line"></div>
+                            <span style="color:rgba(255,255,255,0.5); font-size:0.7rem; font-weight:700; text-transform:uppercase; letter-spacing:0.18em;">The Intelligence Engine</span>
+                        </div>
+                        <h2>Powered by AI.<br>Grounded in 25 years.</h2>
+                        <p>Our diagnostic reports are not written by a generic AI. They are generated by an intelligence engine trained on a proprietary pattern database — the specific causal chains and intervention outcomes Peria F. Malayappa and the Kernorigin team have documented across 50+ institutional transformations since 2001.</p>
+                        <p>The database encodes the full causal chain for each pattern: the symptom, the operational issue, the quantifiable evidence, the behavioural driver, and the systemic root cause. The AI does not guess. It walks the chain.</p>
+                        <a href="how-we-think.html" class="btn-outline" style="margin-top:8px; border-color:rgba(255,255,255,0.3); color:rgba(255,255,255,0.7);">Read the Seven Cylinders Framework →</a>
+                    </div>
+                    <div class="ai-pillars reveal">
+                        <div class="ai-pillar">
+                            <h4>Not generic — pattern-specific</h4>
+                            <p>Every diagnosis is matched to your sector, scale, and symptom profile. The same symptom in retail and professional services traces to different root causes. The engine knows the difference.</p>
+                        </div>
+                        <div class="ai-pillar">
+                            <h4>The Diagnostic Walk</h4>
+                            <p>The report shows reasoning, not just conclusions. Clients see the full chain from L1 symptom to L5 root cause — they can validate the logic, not just accept the answer.</p>
+                        </div>
+                        <div class="ai-pillar">
+                            <h4>Three intervention options always</h4>
+                            <p>Every root cause has three possible responses: Optimise the current system, Redesign it, or Reframe the assumption entirely. The report presents all three — you choose the right level of intervention.</p>
+                        </div>
+                        <div class="ai-pillar">
+                            <h4>Scale-calibrated advice</h4>
+                            <p>The patterns that apply to a ₹1Cr business are structurally different from those that apply to a ₹50Cr one. The engine filters for your scale before generating recommendations.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="section-padding">
+            <div class="container readable-column">
+                <div class="section-divider reveal">
+                    <div class="section-divider-line"></div>
+                    <span class="section-divider-text">Common Questions</span>
+                </div>
+                <h2 class="reveal" style="margin-bottom:36px;">Questions before you start</h2>
+
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFaq(this)">
+                            <h4>How is this different from a generic AI business tool?</h4>
+                            <div class="faq-toggle">+</div>
+                        </div>
+                        <div class="faq-answer">The diagnostic engine runs on a proprietary pattern database built from 25 years of real institutional case data — not publicly available training data. Generic AI tools can describe business problems. This engine diagnoses them: it walks the causal chain from your specific symptom, through observable operational patterns, to the systemic root cause. The reasoning is visible in the report. You can challenge it. That is the difference between a tool and a diagnostic.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFaq(this)">
+                            <h4>When should I start with the free assessment vs paying for a diagnostic?</h4>
+                            <div class="faq-toggle">+</div>
+                        </div>
+                        <div class="faq-answer">Start free if you want to understand whether Kernorigin's framework applies to your situation — or if you want clarity on which cylinder is your primary bottleneck before committing to anything. Move to a paid diagnostic when you need the full causal chain and a 90-day roadmap your leadership team can act on immediately, or when you are preparing for a significant strategic or investment decision. The free report will often tell you which path makes sense.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFaq(this)">
+                            <h4>How long do the forms take to complete?</h4>
+                            <div class="faq-toggle">+</div>
+                        </div>
+                        <div class="faq-answer">The free assessment takes 5–10 minutes — 10 questions about your business. The Institutional Diagnostic questionnaire takes 20–25 minutes and goes deeper across all seven cylinders. The Systems Diagnostic is 15 questions focused on process and technology — also 15–20 minutes. All forms can be paused and resumed. The report arrives by email within minutes of completion.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFaq(this)">
+                            <h4>Who in my organisation should complete the diagnostic?</h4>
+                            <div class="faq-toggle">+</div>
+                        </div>
+                        <div class="faq-answer">The founder, CEO, or Managing Director typically gets the most accurate results — they have the widest view across all seven cylinders. For the Systems Diagnostic specifically, the Head of Operations or CTO alongside the CEO produces the best output. Avoid having the diagnostic completed by a single functional head, as it creates blind spots in the cylinders outside their domain.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFaq(this)">
+                            <h4>What if I disagree with the diagnostic findings?</h4>
+                            <div class="faq-toggle">+</div>
+                        </div>
+                        <div class="faq-answer">That disagreement is often itself diagnostic. The report shows the causal reasoning behind every finding — you are not asked to accept a conclusion, you are shown the chain of evidence. Clients who initially disagree typically find, on examination, that the report has named something they knew was true but had not been willing to address. If after review you believe the report is wrong, contact us. We will schedule a call and work through the reasoning together. You own the report either way.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFaq(this)">
+                            <h4>Is there a refund policy?</h4>
+                            <div class="faq-toggle">+</div>
+                        </div>
+                        <div class="faq-answer">If you complete a paid diagnostic and believe the report does not reflect your actual business situation — not just that the findings are uncomfortable — contact us within 7 days. We will review the case and either supplement the report or discuss a refund. In five years of paid diagnostics, we have not received a refund request. We are confident enough in that record to offer it.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFaq(this)">
+                            <h4>Can I get a diagnostic in Hindi or Kannada?</h4>
+                            <div class="faq-toggle">+</div>
+                        </div>
+                        <div class="faq-answer">Yes. All three diagnostic products are available in English, Hindi, and Kannada. Select your preferred language at the start of the assessment form. The full report — including the causal chain analysis, the roadmap, and the intervention recommendations — is delivered in your chosen language.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFaq(this)">
+                            <h4>What happens after the diagnostic?</h4>
+                            <div class="faq-toggle">+</div>
+                        </div>
+                        <div class="faq-answer">The free assessment email includes a clear next step based on your findings. Paid diagnostics include a debrief call with a senior partner. After the debrief, you may be invited to the Root Cause Resolution advisory program — a 90-day structured cohort for organisations ready to implement their roadmap with expert support. Some clients proceed directly to a transformation engagement. Some take the report and implement it independently. All of these are valid outcomes. We will only recommend what your situation actually requires.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FINAL CTA -->
+        <section class="final-cta" style="background:var(--bg-offwhite); border-top:1px solid var(--border-light);">
+            <div class="container">
+                <div class="section-divider reveal" style="justify-content:center;">
+                    <div class="section-divider-line"></div>
+                    <span class="section-divider-text">Start Today</span>
+                    <div class="section-divider-line"></div>
+                </div>
+                <h2 class="reveal">The diagnosis is always<br><em>the right first step.</em></h2>
+                <p class="reveal">Start free and see what 25 years of root cause intelligence reveals about your business. No login, no payment, no sales call. You will know within minutes whether you are treating the right problem.</p>
+                <div class="cta-group reveal">
+                    <a href="assessment.html" class="btn">Start Free Assessment</a>
+                    <a href="contact.html" class="btn-outline">Talk to Us First</a>
+                </div>
+                <p style="margin-top:20px; font-size:0.8rem; color:var(--text-muted);">Free assessment takes 5–10 minutes · Report arrives instantly · Available in English, Hindi &amp; Kannada</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container footer-wrapper">
+            <div>
+                <div class="footer-logo">KERNORIGIN</div>
+                <p style="margin-top: 15px; font-size: 0.9rem;">
+                    Since 2001 (formerly Value Drive Consulting)<br>
+                    25 years finding root causes globally.<br>
+                    50+ transformations that stick.
+                </p>
+            </div>
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="diagnostics.html">Diagnostics</a>
+                <a href="partners.html">Partners</a>
+                <a href="insights.html">Insights</a>
+                <a href="contact.html">Contact</a>
+            </div>
+        </div>
+        <div class="container" style="padding-top: 20px; border-top: 1px solid var(--border-light); font-size: 0.8rem; color: #999;">
+            &copy; 2026 Kernorigin. All rights reserved.
+        </div>
+    </footer>
+
+    <script src="config.js"></script>
+    <script src="mobile-menu.js"></script>
+    <script>
+        function toggleFaq(el) {
+            const item = el.closest('.faq-item');
+            const isOpen = item.classList.contains('open');
+            document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+            if (!isOpen) item.classList.add('open');
+        }
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
