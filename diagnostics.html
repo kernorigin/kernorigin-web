@@ -157,12 +157,22 @@
         }
         @media (max-width: 640px) {
             .product-selector {
+                flex-direction: column;
+                align-items: stretch;
                 gap: 6px;
             }
             .product-selector-item {
-                min-width: 120px;
-                padding: 8px 12px;
+                flex-direction: row;
+                text-align: left;
+                justify-content: flex-start;
+                gap: 12px;
+                padding: 10px 14px;
+                min-width: 0;
             }
+            .ps-name { font-size: 0.88rem; }
+            .ps-desc { display: none; }
+            .ps-divider { justify-content: flex-start; padding: 2px 0 0; }
+            .ps-or { align-self: flex-start; padding-left: 2px; }
         }
 
         /* ── TIER SECTIONS ── */
@@ -269,6 +279,7 @@
         }
         .tier-panel-card.navy-card {
             border-color: var(--accent-navy);
+            background: var(--accent-navy);
         }
         .tier-panel-header {
             padding: 28px;
@@ -276,7 +287,8 @@
             background: var(--bg-offwhite);
         }
         .tier-panel-card.navy-card .tier-panel-header {
-            background: var(--accent-navy);
+            background: rgba(0,0,0,0.2);
+            border-bottom-color: rgba(255,255,255,0.1);
         }
         .tier-panel-header h3 {
             font-size: 1.1rem;
@@ -290,6 +302,7 @@
         }
         .tier-panel-card.navy-card .tier-panel-header p { color: rgba(255,255,255,0.55); }
         .tier-panel-body { padding: 28px; }
+        .tier-panel-card.navy-card .tier-panel-body { background: transparent; }
         .tier-panel-price {
             font-family: var(--font-serif);
             font-size: 2rem;
@@ -298,6 +311,11 @@
             margin-bottom: 4px;
         }
         .tier-panel-card.navy-card .tier-panel-price { color: var(--accent-gold); }
+        .tier-panel-card.navy-card .tier-panel-note { color: rgba(255,255,255,0.55); }
+        .tier-panel-card.navy-card .panel-feature { color: rgba(255,255,255,0.85); }
+        .tier-panel-card.navy-card .report-contents-label { color: var(--accent-gold); }
+        .tier-panel-card.navy-card .report-section-item { color: rgba(255,255,255,0.75); }
+        .tier-panel-card.navy-card .report-dot { background: var(--accent-gold); }
         .tier-panel-note {
             font-size: 0.78rem;
             color: var(--text-muted);
@@ -336,6 +354,13 @@
             color: var(--accent-navy);
         }
         .tier-cta-btn.outlined:hover { background: var(--accent-navy); color: #fff; }
+        .tier-panel-card.navy-card .tier-cta-btn.outlined {
+            border-color: rgba(255,255,255,0.4);
+            color: #fff;
+        }
+        .tier-panel-card.navy-card .tier-cta-btn.outlined:hover {
+            background: rgba(255,255,255,0.1);
+        }
         .tier-cta-btn.solid {
             background: var(--accent-navy);
             color: #fff;
@@ -346,6 +371,11 @@
             color: #fff;
         }
         .tier-cta-btn.gold:hover { background: #b8913f; }
+
+        .tier-panel-card.navy-card .report-contents {
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
 
         /* what's in the report */
         .report-contents {
@@ -551,6 +581,10 @@
             .ai-grid { grid-template-columns: 1fr; gap: 40px; }
             .upgrade-flow { justify-content: flex-start; overflow-x: auto; padding: 0 20px; }
             .final-cta h2 { font-size: 1.8rem; }
+            .tier-content h2 { font-size: 1.7rem; }
+            .tier-content .tier-price-display { font-size: 2rem; }
+            .tier-section { padding: 52px 0; }
+            .diagnostic-walk { padding: 18px; }
         }
     </style>
 </head>
@@ -794,16 +828,16 @@
                                     En · Hi · Kn language options
                                 </div>
 
-                                <div class="report-contents" style="margin-top:20px; background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.1);">
+                                <div class="report-contents" style="margin-top:20px;">
                                     <span class="report-contents-label">35-page report contains</span>
                                     <div class="report-section-list">
-                                        <div class="report-section-item" style="color:rgba(255,255,255,0.6)"><div class="report-dot"></div> Executive summary</div>
-                                        <div class="report-section-item" style="color:rgba(255,255,255,0.6)"><div class="report-dot"></div> Seven Cylinders deep score</div>
-                                        <div class="report-section-item" style="color:rgba(255,255,255,0.6)"><div class="report-dot"></div> Causal chain walk (L0–L5)</div>
-                                        <div class="report-section-item" style="color:rgba(255,255,255,0.6)"><div class="report-dot"></div> Three intervention options</div>
-                                        <div class="report-section-item" style="color:rgba(255,255,255,0.6)"><div class="report-dot"></div> 90-day sequenced roadmap</div>
-                                        <div class="report-section-item" style="color:rgba(255,255,255,0.6)"><div class="report-dot"></div> Risk factors if unaddressed</div>
-                                        <div class="report-section-item" style="color:rgba(255,255,255,0.6)"><div class="report-dot"></div> Comparable pattern evidence</div>
+                                        <div class="report-section-item"><div class="report-dot"></div> Executive summary</div>
+                                        <div class="report-section-item"><div class="report-dot"></div> Seven Cylinders deep score</div>
+                                        <div class="report-section-item"><div class="report-dot"></div> Causal chain walk (L0–L5)</div>
+                                        <div class="report-section-item"><div class="report-dot"></div> Three intervention options</div>
+                                        <div class="report-section-item"><div class="report-dot"></div> 90-day sequenced roadmap</div>
+                                        <div class="report-section-item"><div class="report-dot"></div> Risk factors if unaddressed</div>
+                                        <div class="report-section-item"><div class="report-dot"></div> Comparable pattern evidence</div>
                                     </div>
                                 </div>
 

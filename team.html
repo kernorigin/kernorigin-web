@@ -17,14 +17,30 @@
             align-items: stretch;
         }
         .founder-photo {
-            background: #e8eaed;
+            background: linear-gradient(135deg, #e8eaed 0%, #d0d3d8 100%);
             min-height: 280px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
         }
         .founder-photo img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             display: block;
+            position: absolute;
+            top: 0; left: 0;
+        }
+        .founder-photo-initials {
+            font-family: var(--font-serif);
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--accent-navy);
+            opacity: 0.25;
+            user-select: none;
+            pointer-events: none;
         }
         .founder-bio {
             padding: 40px;
@@ -84,8 +100,8 @@
                 grid-template-columns: 1fr;
             }
             .founder-photo {
-                min-height: 240px;
-                max-height: 300px;
+                min-height: 200px;
+                max-height: 260px;
             }
             .founder-bio {
                 padding: 24px 20px;
@@ -140,7 +156,8 @@
             <!-- FOUNDER: Peria -->
             <div class="founder-card">
                 <div class="founder-photo">
-                    <img src="images/peria-photo.jpg" alt="Peria F. Malayappa">
+                    <div class="founder-photo-initials">PFM</div>
+                    <img src="images/peria-photo.jpg" alt="Peria F. Malayappa" onerror="this.style.display='none'">
                 </div>
                 <div class="founder-bio">
                     <h2>Peria F. Malayappa</h2>

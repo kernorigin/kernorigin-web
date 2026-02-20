@@ -562,6 +562,57 @@
             color: var(--accent-navy);
         }
 
+        /* ── TESTIMONIALS ── */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+        .testimonial-card {
+            background: var(--bg-offwhite);
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            padding: 32px 28px;
+            position: relative;
+        }
+        .testimonial-card::before {
+            content: '\201C';
+            position: absolute;
+            top: 16px;
+            left: 22px;
+            font-family: var(--font-serif);
+            font-size: 3.5rem;
+            line-height: 1;
+            color: var(--accent-gold);
+            opacity: 0.3;
+        }
+        .testimonial-quote {
+            font-size: 0.92rem;
+            line-height: 1.75;
+            color: var(--text-main);
+            font-style: italic;
+            margin-bottom: 20px;
+            padding-top: 12px;
+        }
+        .testimonial-attr {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .testimonial-dot {
+            width: 6px; height: 6px;
+            background: var(--accent-gold);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        .testimonial-attr span {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
         /* ── AI STATEMENT ── */
         .ai-strip {
             background: var(--accent-navy);
@@ -723,6 +774,7 @@
             .ai-strip-inner { grid-template-columns: 1fr; gap: 20px; text-align: center; }
             .ai-icon { margin: 0 auto; }
             .partner-strip-inner { grid-template-columns: 1fr; gap: 20px; }
+            .testimonials-grid { grid-template-columns: 1fr; gap: 16px; }
             .final-cta { padding: 64px 0; }
             .final-cta h2 { font-size: 1.9rem; }
         }
@@ -1112,6 +1164,41 @@
 
                 <div style="text-align:center; margin-top:36px;" class="reveal reveal-delay-4">
                     <a href="impact.html" class="btn-outline">See All Transformations →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════════════
+             TESTIMONIALS / SOCIAL PROOF
+        ═══════════════════════════════════════════════════ -->
+        <section class="section-padding">
+            <div class="container">
+                <div class="section-divider reveal">
+                    <div class="section-divider-line"></div>
+                    <span class="section-divider-text">What Clients Say</span>
+                </div>
+                <div class="testimonials-grid">
+                    <div class="testimonial-card reveal reveal-delay-1">
+                        <div class="testimonial-quote">"The free report identified something we had been unable to name for two years. In 5 minutes it articulated the root cause more clearly than 6 months of internal reviews."</div>
+                        <div class="testimonial-attr">
+                            <div class="testimonial-dot"></div>
+                            <span>MD, Education Institution · Chennai</span>
+                        </div>
+                    </div>
+                    <div class="testimonial-card reveal reveal-delay-2">
+                        <div class="testimonial-quote">"We went in thinking it was a sales problem. The diagnostic showed it was an operations misalignment. Fixing the right thing changed everything within the quarter."</div>
+                        <div class="testimonial-attr">
+                            <div class="testimonial-dot"></div>
+                            <span>CEO, B2B Services Firm · Bangalore</span>
+                        </div>
+                    </div>
+                    <div class="testimonial-card reveal reveal-delay-3">
+                        <div class="testimonial-quote">"The debrief call alone was worth 10× the investment. Peria walked us through the causal chain in a way our entire leadership team could follow and act on immediately."</div>
+                        <div class="testimonial-attr">
+                            <div class="testimonial-dot"></div>
+                            <span>Director, Manufacturing Firm · Pune</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
