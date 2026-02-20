@@ -236,21 +236,18 @@
             background: var(--bg-offwhite);
             border-bottom: 1px solid var(--border-light);
             padding: 0;
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
         }
         .trust-bar-inner {
             display: flex;
             align-items: stretch;
             justify-content: center;
-            min-width: max-content;
-            padding: 0 24px;
+            flex-wrap: wrap;
         }
         .trust-item {
             display: flex;
             align-items: center;
             gap: 10px;
-            padding: 18px 28px;
+            padding: 16px 24px;
             border-right: 1px solid var(--border-light);
             flex-shrink: 0;
         }
@@ -703,7 +700,16 @@
             .hero-grid { grid-template-columns: 1fr; gap: 40px; }
             .hero h1 { font-size: 2.3rem; }
             .hero-card { display: none; }
-            .trust-item { padding: 0 16px; }
+            .trust-bar-inner { justify-content: flex-start; }
+            .trust-item {
+                padding: 14px 18px;
+                border-right: 1px solid var(--border-light);
+                border-bottom: 1px solid var(--border-light);
+                flex: 1 1 calc(50% - 1px);
+                min-width: 140px;
+            }
+            .trust-item:nth-child(2n) { border-right: none; }
+            .trust-item:nth-last-child(-n+1):nth-child(odd) { border-right: none; }
             .trust-val { font-size: 1.2rem; }
             .trust-lbl { font-size: 0.7rem; }
             .steps-grid { grid-template-columns: 1fr; gap: 32px; }
@@ -720,8 +726,11 @@
             .final-cta { padding: 64px 0; }
             .final-cta h2 { font-size: 1.9rem; }
         }
-        @media (max-width: 600px) {
-            .trust-bar-inner { justify-content: flex-start; }
+        @media (max-width: 480px) {
+            .trust-item {
+                flex: 1 1 100%;
+                border-right: none;
+            }
         }
     </style>
 </head>
@@ -989,10 +998,10 @@
                     <!-- Systems -->
                     <div class="tier-card reveal reveal-delay-3">
                         <div class="tier-header">
-                            <div class="tier-badge premium">Deep Dive</div>
+                            <div class="tier-badge premium">Different Question</div>
                             <div class="tier-name">Systems Diagnostic</div>
                             <div class="tier-price">₹49,997</div>
-                            <div class="tier-price-note">For technology &amp; process transformation</div>
+                            <div class="tier-price-note">Should we invest in tech or process? Answered.</div>
                         </div>
                         <div class="tier-body">
                             <div class="tier-feature">

@@ -79,49 +79,90 @@
             color: var(--accent-gold);
         }
 
-        /* ── UPGRADE PATH BAR ── */
+        /* ── PRODUCT SELECTOR BAR ── */
         .upgrade-bar {
             background: var(--bg-offwhite);
             border-bottom: 1px solid var(--border-light);
             padding: 20px 0;
         }
-        .upgrade-flow {
+        .product-selector {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 0;
+            gap: 8px;
             flex-wrap: wrap;
         }
-        .upgrade-step {
+        .product-selector-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 10px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            border: 1px solid var(--border-light);
+            background: #fff;
+            transition: box-shadow 0.15s;
+            min-width: 140px;
+        }
+        .product-selector-item:hover {
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .ps-badge {
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            padding: 2px 8px;
+            border-radius: 3px;
+            margin-bottom: 4px;
+        }
+        .ps-free { background: var(--accent-navy); color: var(--accent-gold); }
+        .ps-inst { background: var(--accent-gold); color: var(--accent-navy); }
+        .ps-sys  { background: #7e22ce; color: #fff; }
+        .ps-name {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+        .ps-desc {
+            font-size: 0.74rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+        .ps-divider {
             display: flex;
             align-items: center;
-            gap: 10px;
-            padding: 8px 20px;
-        }
-        .upgrade-step-num {
-            width: 24px; height: 24px;
-            background: var(--accent-navy);
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 0.72rem;
-            font-weight: 700;
-            color: var(--accent-gold);
-            flex-shrink: 0;
-        }
-        .upgrade-step-text {
-            font-size: 0.82rem;
-            color: var(--text-muted);
-            font-weight: 500;
-        }
-        .upgrade-step-text strong {
-            color: var(--text-main);
-            display: block;
-            font-size: 0.85rem;
-        }
-        .upgrade-arrow {
-            color: var(--border-light);
-            font-size: 1.2rem;
             padding: 0 4px;
+        }
+        .ps-then {
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .ps-or {
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            padding: 0 4px;
+        }
+        .ps-note {
+            text-align: center;
+            margin-top: 12px;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-bottom: 0;
+        }
+        @media (max-width: 640px) {
+            .product-selector {
+                gap: 6px;
+            }
+            .product-selector-item {
+                min-width: 120px;
+                padding: 8px 12px;
+            }
         }
 
         /* ── TIER SECTIONS ── */
@@ -549,49 +590,29 @@
         <!-- PRODUCT SELECTOR BAR -->
         <div class="upgrade-bar">
             <div class="container">
-                <div class="upgrade-flow">
-                    <div class="upgrade-step">
-                        <div class="upgrade-step-num">①</div>
-                        <div class="upgrade-step-text">
-                            <strong>Free Assessment</strong>
-                            Root cause identified · ₹0
-                        </div>
+                <div class="product-selector">
+                    <a href="#free" class="product-selector-item">
+                        <div class="ps-badge ps-free">Free</div>
+                        <div class="ps-name">Assessment</div>
+                        <div class="ps-desc">Root cause · 5 min</div>
+                    </a>
+                    <div class="ps-divider">
+                        <span class="ps-then">then choose</span>
                     </div>
-                    <div class="upgrade-arrow">↓</div>
-                    <div class="upgrade-step" style="border: 1px solid var(--border-light); border-radius:4px; padding: 8px 16px; background:#fff;">
-                        <div class="upgrade-step-num" style="background:var(--accent-gold);">A</div>
-                        <div class="upgrade-step-text">
-                            <strong>Institutional Diagnostic</strong>
-                            Business dysfunction · ₹24,997
-                        </div>
-                    </div>
-                    <div style="display:flex; align-items:center; padding: 0 8px; color:var(--text-muted); font-size:0.8rem; font-weight:600;">OR</div>
-                    <div class="upgrade-step" style="border: 1px solid var(--border-light); border-radius:4px; padding: 8px 16px; background:#fff;">
-                        <div class="upgrade-step-num" style="background:#7e22ce; color:#fff;">B</div>
-                        <div class="upgrade-step-text">
-                            <strong>Systems Diagnostic</strong>
-                            Technology decisions · ₹49,997
-                        </div>
-                    </div>
-                    <div class="upgrade-arrow">↓</div>
-                    <div class="upgrade-step">
-                        <div class="upgrade-step-num">②</div>
-                        <div class="upgrade-step-text">
-                            <strong>Advisory Program</strong>
-                            90-day implementation · ₹3L–₹8L
-                        </div>
-                    </div>
-                    <div class="upgrade-arrow">→</div>
-                    <div class="upgrade-step">
-                        <div class="upgrade-step-num">③</div>
-                        <div class="upgrade-step-text">
-                            <strong>Transformation</strong>
-                            Full consulting · ₹25L–₹60L
-                        </div>
-                    </div>
+                    <a href="#institutional" class="product-selector-item ps-highlight-a">
+                        <div class="ps-badge ps-inst">Option A</div>
+                        <div class="ps-name">Institutional Diagnostic</div>
+                        <div class="ps-desc">Business dysfunction analysis</div>
+                    </a>
+                    <div class="ps-or">or</div>
+                    <a href="#systems" class="product-selector-item ps-highlight-b">
+                        <div class="ps-badge ps-sys">Option B</div>
+                        <div class="ps-name">Systems Diagnostic</div>
+                        <div class="ps-desc">Technology &amp; process decisions</div>
+                    </a>
                 </div>
-                <p style="text-align:center; margin-top:14px; font-size:0.78rem; color:var(--text-muted); margin-bottom:0;">
-                    A and B are <strong>different products for different questions</strong> — not tiers of the same product. Start with Free, then choose the diagnostic that matches your situation.
+                <p class="ps-note">
+                    A and B answer <strong>different questions</strong> — they are not tiers of the same product. The right choice depends on what you need to know.
                 </p>
             </div>
         </div>

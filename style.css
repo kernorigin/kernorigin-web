@@ -52,9 +52,10 @@ nav ul { list-style: none; display: flex; align-items: center; gap: 16px; margin
 nav a { font-size: 0.72rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-muted); padding: 6px 0; white-space: nowrap; }
 nav a:hover, nav a.active { color: var(--accent-navy); border-bottom: 2px solid var(--accent-gold); }
 
-/* Diagnostics link — subtle weight */
-nav a.nav-diagnostics { color: var(--accent-navy); font-weight: 600; }
-nav a.nav-diagnostics:hover, nav a.nav-diagnostics.active { border-bottom: 2px solid var(--accent-gold); }
+/* Diagnostics link — same as other nav links, only styled when active */
+nav a.nav-diagnostics { color: var(--text-muted); font-weight: 500; }
+nav a.nav-diagnostics:hover { color: var(--accent-navy); border-bottom: 2px solid var(--accent-gold); }
+nav a.nav-diagnostics.active { color: var(--accent-navy); font-weight: 600; border-bottom: 2px solid var(--accent-gold); }
 
 /* ── HAMBURGER ──────────────────────────────── */
 .mobile-menu-toggle { display: none; flex-direction: column; justify-content: space-around; width: 30px; height: 24px; background: transparent; border: none; z-index: 1002; cursor: pointer; }
@@ -182,7 +183,8 @@ footer p { color: var(--text-muted); }
         letter-spacing: 0.05em;
     }
     nav a.active, nav a:hover { color: var(--accent-navy); border-bottom: none; }
-    nav a.nav-diagnostics { color: var(--accent-navy); font-weight: 700; }
+    nav a.nav-diagnostics { color: var(--text-muted); font-weight: 500; }
+    nav a.nav-diagnostics.active { color: var(--accent-navy); font-weight: 700; }
 
     /* Team cards */
     .team-member-card { padding: 24px 20px; }

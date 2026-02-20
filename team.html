@@ -88,7 +88,7 @@
                 max-height: 300px;
             }
             .founder-bio {
-                padding: 28px 20px;
+                padding: 24px 20px;
             }
             .approach-block {
                 padding: 28px 20px;
@@ -100,6 +100,10 @@
             .team-cta {
                 padding: 40px 20px;
             }
+        }
+        @media (max-width: 480px) {
+            .founder-bio h2 { font-size: 1.5rem; }
+            .team-member-card h3 { font-size: 1.1rem; }
         }
     </style>
 </head>
@@ -185,7 +189,7 @@
             </div>
 
             <!-- AI ENGINE NOTE — from implementation manual -->
-            <div style="background: var(--bg-offwhite); border-left: 4px solid var(--accent-gold); border-radius: 0 4px 4px 0; padding: 24px 28px; margin: 8px 0 40px;">
+            <div style="background: var(--bg-offwhite); border-left: 4px solid var(--accent-gold); border-radius: 0 4px 4px 0; padding: 24px 28px; margin: 40px 0 40px;">
                 <h4 style="margin-top:0; margin-bottom:8px; font-size:0.95rem;">Our Diagnostic Engine</h4>
                 <p style="font-size:0.9rem; margin-bottom:12px;">Our diagnostic engine is powered by AI — trained on 25 years of real case patterns from these practitioners. It is not generic AI. It is the accumulated pattern recognition of 50+ institutional transformations, made accessible at scale. Every paid diagnostic report draws on this proprietary database.</p>
                 <a href="diagnostics.html" style="font-size:0.85rem; color:var(--accent-navy); font-weight:600;">See how the diagnostics work →</a>

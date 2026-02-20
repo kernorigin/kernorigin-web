@@ -450,6 +450,10 @@
             .revenue-table th, .revenue-table td { padding: 10px 10px; }
             /* Process steps */
             .process-step { grid-template-columns: 48px 1fr; gap: 16px; }
+            /* Partner process — stack on mobile */
+            .partner-process-grid { grid-template-columns: 1fr !important; gap: 48px !important; }
+            /* Revenue table scroll on small screens */
+            .revenue-table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
             /* Two-col layout in how-it-works */
             .section-padding > .container > div[style*="grid-template-columns: 1fr 1fr"] {
                 grid-template-columns: 1fr !important;
@@ -639,7 +643,7 @@
                     <span>Partner Process</span>
                 </div>
 
-                <div style="display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:start;">
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:start;" class="partner-process-grid">
                     <div>
                         <h2 class="reveal" style="margin-bottom:8px;">From application to first diagnostic — in under a week.</h2>
                         <p class="reveal reveal-delay-1" style="margin-bottom:36px;">We have made the partner onboarding as fast as possible. You apply today. By this time next week, your clients can be completing co-branded diagnostics.</p>
