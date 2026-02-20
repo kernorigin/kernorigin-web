@@ -6,36 +6,114 @@
     <title id="pageTitle">Loading... | Kernorigin</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        .post-content { 
-            max-width: 700px; 
-            margin: 40px auto; 
+        .post-hero {
+            background: var(--accent-navy);
+            padding: 60px 0 52px;
         }
-        .post-content h2 { 
-            margin-top: 2.5rem; 
-            margin-bottom: 1rem; 
+        .post-hero .eyebrow {
+            color: var(--accent-gold);
+            margin-bottom: 20px;
         }
-        .post-content p { 
-            margin-bottom: 1.5rem; 
+        .post-hero h1 {
+            color: #fff;
+            font-size: 2.4rem;
+            letter-spacing: -0.02em;
+            margin-bottom: 20px;
+            max-width: 760px;
         }
-        .post-meta { 
-            color: var(--text-muted); 
-            font-size: 0.9rem; 
-            margin-bottom: 40px; 
-            padding-bottom: 20px; 
-            border-bottom: 1px solid var(--border-light); 
+        .post-meta {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.88rem;
         }
-        .post-summary { 
-            font-size: 1.2rem; 
-            color: var(--text-main); 
-            font-weight: 500; 
-            margin-bottom: 2rem; 
-            padding: 20px; 
-            background: var(--bg-offwhite); 
-            border-left: 4px solid var(--accent-gold); 
+        .post-content {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 60px 0 80px;
+        }
+        .post-content h2 {
+            font-size: 1.6rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .post-content h3 {
+            font-size: 1.25rem;
+            margin-top: 2rem;
+            margin-bottom: 0.75rem;
+        }
+        .post-content p {
+            font-size: 1rem;
+            line-height: 1.85;
+            margin-bottom: 1.5rem;
+            color: var(--text-muted);
+        }
+        .post-content ul, .post-content ol {
+            margin-bottom: 1.5rem;
+            line-height: 1.85;
+        }
+        .post-content li {
+            margin-bottom: 0.5rem;
+            color: var(--text-muted);
+        }
+        .post-summary {
+            font-size: 1.1rem;
+            color: var(--text-main);
+            font-weight: 500;
+            margin-bottom: 2.5rem;
+            padding: 24px;
+            background: var(--bg-offwhite);
+            border-left: 4px solid var(--accent-gold);
+            line-height: 1.7;
+        }
+
+        /* Loading / error states */
+        .post-loading {
+            text-align: center;
+            padding: 100px 0;
+        }
+        .loading-spinner {
+            width: 36px;
+            height: 36px;
+            border: 3px solid var(--border-light);
+            border-top-color: var(--accent-navy);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 20px;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .post-loading p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        .post-error {
+            text-align: center;
+            padding: 80px 0;
+        }
+        .post-error h2 {
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+
+        /* Bottom CTA */
+        .post-cta {
+            text-align: center;
+            padding: 60px 0;
+            border-top: 1px solid var(--border-light);
+            margin-top: 40px;
+        }
+        .post-cta h3 { margin-bottom: 12px; }
+        .post-cta p { max-width: 480px; margin: 0 auto 28px; }
+
+        @media (max-width: 768px) {
+            .post-hero { padding: 44px 0 36px; }
+            .post-hero h1 { font-size: 1.75rem; }
+            .post-content { padding: 40px 0 60px; }
         }
     </style>
 </head>
 <body>
+
     <header>
         <div class="container nav-wrapper">
             <a href="index.html" class="logo">Kernorigin</a>
@@ -47,43 +125,65 @@
                     <li><a href="impact.html">Impact</a></li>
                     <li><a href="partners.html">Partners</a></li>
                     <li><a href="team.html">Team</a></li>
-                    <li><a href="insights.html">Insights</a></li>
+                    <li><a href="insights.html" class="active">Insights</a></li>
                     <li><a href="contact.html">Contact</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <main class="container section-padding">
-        <div id="loadingIndicator" style="text-align: center; padding: 100px 0; color: #999;">
-            Loading post...
+    <main>
+
+        <!-- STATE: Loading -->
+        <div id="stateLoading" class="container">
+            <div class="post-loading">
+                <div class="loading-spinner"></div>
+                <p>Loading post…</p>
+            </div>
         </div>
-        
-        <article id="postContent" style="display: none;">
-            <div class="readable-column text-center">
-                <span class="eyebrow" id="postCategory">Insight</span>
-                <h1 id="postTitle"></h1>
-                <div class="post-meta">
-                    <span id="postDate"></span> • <span id="postAuthor"></span>
+
+        <!-- STATE: Error -->
+        <div id="stateError" style="display:none;">
+            <div class="container">
+                <div class="post-error">
+                    <h2>Post not found</h2>
+                    <p>The post you're looking for doesn't exist or may have been moved.</p>
+                    <a href="insights.html" class="btn" style="margin-top:20px;">← Back to Insights</a>
                 </div>
             </div>
-            
-            <div class="post-content">
-                <div class="post-summary" id="postSummary"></div>
-                <div id="postBody"></div>
-            </div>
-
-            <div class="readable-column" style="text-align: center; margin-top: 80px; padding-top: 60px; border-top: 1px solid var(--border-light);">
-                <h3>Ready to fix your root cause?</h3>
-                <p style="margin-bottom: 30px;">Every transformation starts with understanding what's actually broken.</p>
-                <a href="contact.html" class="btn">Start a Conversation</a>
-            </div>
-        </article>
-
-        <div id="errorMessage" style="display: none; text-align: center; padding: 100px 0;">
-            <h2 style="color: var(--text-muted);">Post not found</h2>
-            <p><a href="insights.html" class="btn" style="margin-top: 20px;">← Back to Insights</a></p>
         </div>
+
+        <!-- STATE: Loaded -->
+        <div id="stateLoaded" style="display:none;">
+
+            <!-- Hero -->
+            <div class="post-hero">
+                <div class="container">
+                    <span class="eyebrow" id="postCategory">Insight</span>
+                    <h1 id="postTitle"></h1>
+                    <div class="post-meta">
+                        <span id="postDate"></span> &nbsp;·&nbsp; <span id="postAuthor"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="container">
+                <div class="post-content">
+                    <div class="post-summary" id="postSummary"></div>
+                    <div id="postBody"></div>
+
+                    <div class="post-cta">
+                        <h3>Ready to find your root cause?</h3>
+                        <p>Every transformation starts with understanding what is actually broken. Take the free diagnostic — it takes 5 minutes.</p>
+                        <a href="assessment.html" class="btn">Start Free Diagnostic</a>
+                        <a href="insights.html" style="display:block; margin-top:20px; font-size:0.85rem; color:var(--text-muted);">← Back to all insights</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
     </main>
 
     <footer>
@@ -108,7 +208,106 @@
             &copy; 2026 Kernorigin. All rights reserved.
         </div>
     </footer>
-    
+
+    <script src="config.js"></script>
     <script src="mobile-menu.js"></script>
+    <script>
+    (function loadPost() {
+
+        // ── 1. Get slug from URL ──────────────────────────────
+        const params = new URLSearchParams(window.location.search);
+        const slug = params.get('slug') || params.get('id') || '';
+
+        if (!slug) {
+            showError();
+            return;
+        }
+
+        // ── 2. Fetch from API ─────────────────────────────────
+        const url = API_CONFIG.URL + '?action=getPost&slug=' + encodeURIComponent(slug)
+                                   + '&apiKey=' + encodeURIComponent(API_CONFIG.PUBLIC_KEY);
+
+        fetch(url)
+            .then(function(res) {
+                if (!res.ok) throw new Error('Network error ' + res.status);
+                return res.json();
+            })
+            .then(function(post) {
+                if (!post || post.error || !post.title) {
+                    showError();
+                    return;
+                }
+                renderPost(post);
+            })
+            .catch(function(err) {
+                console.error('Post load error:', err);
+                showError();
+            });
+
+        // ── 3. Render ─────────────────────────────────────────
+        function renderPost(post) {
+
+            // Title & meta
+            document.title = post.title + ' | Kernorigin';
+            document.getElementById('pageTitle').textContent = post.title + ' | Kernorigin';
+            document.getElementById('postTitle').textContent = post.title;
+            document.getElementById('postCategory').textContent = post.category || 'Insight';
+
+            if (post.publish_date) {
+                const d = new Date(post.publish_date);
+                const formatted = d.toLocaleDateString('en-GB', {
+                    day: 'numeric', month: 'long', year: 'numeric'
+                });
+                document.getElementById('postDate').textContent = formatted;
+            }
+
+            document.getElementById('postAuthor').textContent =
+                post.author || 'Peria F. Malayappa, Kernorigin';
+
+            // Summary / lede
+            const summaryEl = document.getElementById('postSummary');
+            if (post.summary) {
+                summaryEl.textContent = post.summary;
+            } else {
+                summaryEl.style.display = 'none';
+            }
+
+            // Body — accept HTML or plain text
+            const bodyEl = document.getElementById('postBody');
+            if (post.body_html) {
+                bodyEl.innerHTML = post.body_html;
+            } else if (post.body) {
+                // Plain text: wrap paragraphs
+                const paras = post.body.split(/\n\n+/);
+                bodyEl.innerHTML = paras
+                    .map(function(p) { return '<p>' + p.replace(/\n/g, '<br>') + '</p>'; })
+                    .join('');
+            } else {
+                bodyEl.innerHTML = '<p>This post has no content.</p>';
+            }
+
+            // Show loaded state
+            document.getElementById('stateLoading').style.display = 'none';
+            document.getElementById('stateLoaded').style.display = 'block';
+
+            // Update og meta if available
+            if (post.summary) {
+                var metaDesc = document.querySelector('meta[name="description"]');
+                if (!metaDesc) {
+                    metaDesc = document.createElement('meta');
+                    metaDesc.name = 'description';
+                    document.head.appendChild(metaDesc);
+                }
+                metaDesc.content = post.summary;
+            }
+        }
+
+        function showError() {
+            document.getElementById('stateLoading').style.display = 'none';
+            document.getElementById('stateError').style.display = 'block';
+        }
+
+    })();
+    </script>
 </body>
 </html>

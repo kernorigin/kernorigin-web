@@ -19,6 +19,7 @@
             content: '';
             position: absolute;
             inset: 0;
+            pointer-events: none;
             background-image:
                 radial-gradient(ellipse 60% 80% at 90% 50%, rgba(197,160,89,0.07) 0%, transparent 70%),
                 linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
@@ -179,10 +180,12 @@
             background: #fff;
             transition: all 0.2s;
         }
-        .partner-type-card:hover {
-            border-color: var(--accent-navy);
-            box-shadow: 0 4px 16px rgba(0,34,68,0.07);
-            transform: translateY(-2px);
+        @media (hover: hover) {
+            .partner-type-card:hover {
+                border-color: var(--accent-navy);
+                box-shadow: 0 4px 16px rgba(0,34,68,0.07);
+                transform: translateY(-2px);
+            }
         }
         .partner-type-icon {
             width: 44px; height: 44px;
@@ -435,13 +438,23 @@
         @media (max-width: 900px) {
             .hero-partners { padding: 56px 0 48px; }
             .hero-partners-grid { grid-template-columns: 1fr; gap: 40px; }
-            .hero-partners h1 { font-size: 2.1rem; }
+            .hero-partners h1 { font-size: 2rem; }
             .hero-calc-card { display: none; }
             .partner-types-grid { grid-template-columns: 1fr; gap: 16px; }
             .benefits-grid { grid-template-columns: 1fr; }
             .form-card { padding: 28px 20px; }
             .form-grid-2 { grid-template-columns: 1fr; }
             .calc-result { grid-template-columns: 1fr; }
+            /* Revenue table — allow horizontal scroll */
+            .revenue-table { font-size: 0.8rem; }
+            .revenue-table th, .revenue-table td { padding: 10px 10px; }
+            /* Process steps */
+            .process-step { grid-template-columns: 48px 1fr; gap: 16px; }
+            /* Two-col layout in how-it-works */
+            .section-padding > .container > div[style*="grid-template-columns: 1fr 1fr"] {
+                grid-template-columns: 1fr !important;
+                gap: 40px !important;
+            }
         }
     </style>
 </head>

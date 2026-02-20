@@ -7,10 +7,10 @@
     <meta name="description" content="10-minute AI-powered assessment reveals where your business is stuck. Get personalized recommendations based on 25 years of diagnostic experience.">
     <link rel="stylesheet" href="style.css">
     <script src="translations.js"></script>
-
+    
     <!-- Razorpay Integration -->
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-
+    
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZDL25WXPVP"></script>
     <script>
@@ -19,16 +19,22 @@
         gtag('js', new Date());
         gtag('config', 'G-ZDL25WXPVP');
     </script>
-
+    
     <style>
         /* ============================================
-           SCREEN VISIBILITY
+           SCREEN VISIBILITY — overrides any .card
+           display from external style.css
            ============================================ */
         .assessment-hidden {
             display: none !important;
         }
 
-        /* Progress Section */
+        /* ============================================
+           ENHANCED QUESTION UI/UX STYLES
+           Clean, spacious, professional design
+           ============================================ */
+        
+        /* Progress Section - Cleaner Design */
         .progress-wrapper {
             background: white;
             padding: 30px;
@@ -36,41 +42,41 @@
             margin-bottom: 40px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
-
+        
         .progress-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 18px;
         }
-
+        
         .progress-label {
             font-size: 0.95rem;
             color: var(--text-muted);
             font-weight: 500;
         }
-
+        
         .progress-count {
             font-size: 1.15rem;
             font-weight: 700;
             color: var(--accent-navy);
         }
-
+        
         .progress-bar-container {
             background: #e5e7eb;
             height: 8px;
             border-radius: 4px;
             overflow: hidden;
         }
-
+        
         .progress-bar-fill {
             background: linear-gradient(90deg, var(--accent-navy), var(--accent-gold));
             height: 100%;
             transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             border-radius: 4px;
         }
-
-        /* Question Card */
+        
+        /* Question Card - More Breathing Room */
         .question-card {
             background: white;
             padding: 60px 50px;
@@ -81,30 +87,32 @@
             display: flex;
             flex-direction: column;
         }
-
+        
         .question-title {
             font-size: 1.6rem;
             font-weight: 600;
             color: var(--text-primary);
             line-height: 1.5;
-            margin: 0 0 50px 0;
+            margin: 0 auto 50px;
             text-align: center;
             max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
         }
-
-        /* Answer Options */
+        
+        /* Answer Options - Card-Based Design */
         .options-container {
             display: flex;
             flex-direction: column;
             gap: 16px;
             margin-bottom: auto;
         }
-
+        
         .option-card {
             background: white;
-            border: 2px solid #e5e7eb;
+            border-width: 2px;
+            border-style: solid;
+            border-color: #e5e7eb;
+            border-radius: 10px;
+            /* FIX: right padding increased so text never overlaps the checkmark badge */
             padding: 24px 28px;
             border-radius: 10px;
             text-align: left;
@@ -117,22 +125,25 @@
             width: 100%;
             display: block;
         }
-
+        
         .option-card:hover {
             border-color: var(--accent-navy);
             background: #f8fafc;
             transform: translateY(-3px);
             box-shadow: 0 6px 16px rgba(0,0,0,0.12);
         }
-
+        
         .option-card.selected {
             border-color: var(--accent-navy);
             background: linear-gradient(135deg, rgba(30, 58, 138, 0.06) 0%, rgba(59, 130, 246, 0.06) 100%);
             font-weight: 500;
             box-shadow: 0 4px 12px rgba(30, 58, 138, 0.15);
+            /* FIX: extra right padding so text doesn't run under the checkmark */
             padding-right: 68px;
         }
-
+        
+        /* FIX: replaced display:flex (doesn't work on ::after in all browsers)
+           with block + text-align + line-height approach */
         .option-card.selected::after {
             content: '✓';
             position: absolute;
@@ -150,12 +161,12 @@
             font-weight: bold;
             font-size: 1rem;
         }
-
+        
         .option-card:active {
             transform: scale(0.98);
         }
-
-        /* Navigation Buttons */
+        
+        /* Navigation Buttons - Enhanced Spacing */
         .nav-buttons {
             display: flex;
             gap: 16px;
@@ -163,7 +174,8 @@
             padding-top: 30px;
             border-top: 1px solid #f1f5f9;
         }
-
+        
+        /* FIX: when prev button is hidden, next button fills full width */
         .nav-buttons .btn-primary:only-child {
             flex: 1;
         }
@@ -180,14 +192,14 @@
             transition: all 0.2s ease;
             flex: 1;
         }
-
+        
         .btn-secondary:hover {
             background: var(--accent-navy);
             color: white;
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(30, 58, 138, 0.25);
         }
-
+        
         .btn-primary {
             background: var(--accent-navy);
             color: white;
@@ -200,13 +212,13 @@
             transition: all 0.2s ease;
             flex: 2;
         }
-
+        
         .btn-primary:hover:not(:disabled) {
             background: #1e3a8a;
             transform: translateY(-2px);
             box-shadow: 0 6px 16px rgba(30, 58, 138, 0.3);
         }
-
+        
         .btn-primary:disabled {
             background: #e5e7eb;
             border-color: #e5e7eb;
@@ -215,7 +227,7 @@
             transform: none;
         }
 
-        /* Language Selector */
+        /* Language Selector in Nav */
         .lang-select {
             padding: 6px 12px;
             font-size: 0.9rem;
@@ -227,21 +239,21 @@
             cursor: pointer;
         }
 
-        /* Upgrade card */
+        /* Upgrade card in results — ensure border closes fully */
         .upgrade-card {
             border: 2px solid var(--accent-navy);
             border-radius: 8px;
             padding: 30px;
             background: white;
-            overflow: hidden;
+            overflow: hidden; /* ensures border never looks "open" */
         }
 
         /* Loading spinner */
         @keyframes spin {
-            0%   { transform: rotate(0deg); }
+            0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-
+        
         .loading-spinner {
             width: 60px;
             height: 60px;
@@ -251,30 +263,27 @@
             animation: spin 1s linear infinite;
             margin: 0 auto;
         }
-
-        /* Error message */
-        .submit-error {
-            background: #fee2e2;
-            border: 1px solid #ef4444;
-            color: #dc2626;
-            padding: 16px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            font-weight: 500;
-        }
-
+        
         /* Mobile Responsiveness */
         @media (max-width: 768px) {
+            /* Cylinders grid — stack to 1 col on small screens */
+            #intro-screen div[style*="grid-template-columns: repeat(3"] {
+                grid-template-columns: 1fr 1fr !important;
+            }
+            #intro-screen div[style*="grid-template-columns: repeat(3"] > div:last-child {
+                grid-column: 1 / -1;
+            }
+
             .question-card {
                 padding: 40px 24px;
                 min-height: auto;
             }
-
+            
             .question-title {
                 font-size: 1.35rem;
                 margin-bottom: 35px;
             }
-
+            
             .option-card {
                 padding: 20px 24px;
                 font-size: 1rem;
@@ -283,7 +292,7 @@
             .option-card.selected {
                 padding-right: 60px;
             }
-
+            
             .option-card.selected::after {
                 width: 28px;
                 height: 28px;
@@ -291,17 +300,17 @@
                 font-size: 0.9rem;
                 right: 16px;
             }
-
+            
             .nav-buttons {
                 flex-direction: column;
                 gap: 12px;
             }
-
+            
             .btn-primary, .btn-secondary {
                 width: 100%;
                 padding: 14px 24px;
             }
-
+            
             .progress-wrapper {
                 padding: 20px;
             }
@@ -349,39 +358,39 @@
                     <div id="assessment-container">
 
                         <!-- ============================================
-                             INTRO SCREEN
+                             INTRO SCREEN (visible by default)
                              ============================================ -->
                         <div id="intro-screen" class="card" style="background: white;">
                             <h3 style="margin-top: 0;">How This AI Assessment Works</h3>
                             <p>This assessment uses AI to evaluate your organization across seven critical dimensions:</p>
-                            <div class="grid-2" style="gap: 15px; margin: 25px 0;">
-                                <div style="padding: 15px; background: var(--bg-offwhite); border-radius: 4px;">
-                                    <p style="margin: 0; font-weight: 600;">1. Strategic Clarity</p>
+                            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 25px 0 30px;">
+                                <div style="padding: 14px 15px; background: var(--bg-offwhite); border-radius: 4px; border-left: 3px solid var(--accent-gold);">
+                                    <p style="margin: 0; font-weight: 600; font-size: 0.88rem;">1. Strategic Clarity</p>
                                 </div>
-                                <div style="padding: 15px; background: var(--bg-offwhite); border-radius: 4px;">
-                                    <p style="margin: 0; font-weight: 600;">2. Operational Excellence</p>
+                                <div style="padding: 14px 15px; background: var(--bg-offwhite); border-radius: 4px; border-left: 3px solid var(--accent-gold);">
+                                    <p style="margin: 0; font-weight: 600; font-size: 0.88rem;">2. Operational Excellence</p>
                                 </div>
-                                <div style="padding: 15px; background: var(--bg-offwhite); border-radius: 4px;">
-                                    <p style="margin: 0; font-weight: 600;">3. People &amp; Culture</p>
+                                <div style="padding: 14px 15px; background: var(--bg-offwhite); border-radius: 4px; border-left: 3px solid var(--accent-gold);">
+                                    <p style="margin: 0; font-weight: 600; font-size: 0.88rem;">3. People &amp; Culture</p>
                                 </div>
-                                <div style="padding: 15px; background: var(--bg-offwhite); border-radius: 4px;">
-                                    <p style="margin: 0; font-weight: 600;">4. Systems &amp; Process</p>
+                                <div style="padding: 14px 15px; background: var(--bg-offwhite); border-radius: 4px; border-left: 3px solid var(--accent-gold);">
+                                    <p style="margin: 0; font-weight: 600; font-size: 0.88rem;">4. Systems &amp; Process</p>
                                 </div>
-                                <div style="padding: 15px; background: var(--bg-offwhite); border-radius: 4px;">
-                                    <p style="margin: 0; font-weight: 600;">5. Financial Health</p>
+                                <div style="padding: 14px 15px; background: var(--bg-offwhite); border-radius: 4px; border-left: 3px solid var(--accent-gold);">
+                                    <p style="margin: 0; font-weight: 600; font-size: 0.88rem;">5. Financial Health</p>
                                 </div>
-                                <div style="padding: 15px; background: var(--bg-offwhite); border-radius: 4px;">
-                                    <p style="margin: 0; font-weight: 600;">6. Market Position</p>
+                                <div style="padding: 14px 15px; background: var(--bg-offwhite); border-radius: 4px; border-left: 3px solid var(--accent-gold);">
+                                    <p style="margin: 0; font-weight: 600; font-size: 0.88rem;">6. Market Position</p>
+                                </div>
+                                <div style="padding: 14px 15px; background: var(--accent-navy); border-radius: 4px; grid-column: 1 / -1;">
+                                    <p style="margin: 0; font-weight: 600; font-size: 0.88rem; color: var(--accent-gold); text-align: center; letter-spacing: 0.04em;">7. Leadership Capacity &nbsp;— The integrating cylinder</p>
                                 </div>
                             </div>
-                            <div style="padding: 15px; background: var(--bg-offwhite); border-radius: 4px; margin-bottom: 30px;">
-                                <p style="margin: 0; font-weight: 600; text-align: center;">7. Leadership Capacity</p>
-                            </div>
-
+                            
                             <div id="partner-banner" class="assessment-hidden" style="background: #f0f9ff; border-left: 4px solid var(--accent-navy); padding: 20px; margin-bottom: 30px;">
                                 <p style="margin: 0; font-weight: 600; color: var(--accent-navy);" id="partner-message"></p>
                             </div>
-
+                            
                             <div style="background: #fef9e7; border-left: 4px solid var(--accent-gold); padding: 20px; margin-bottom: 30px;">
                                 <p style="margin: 0;"><strong>Your AI-powered analysis will reveal:</strong></p>
                                 <ul style="margin: 10px 0 0 0; padding-left: 20px;">
@@ -393,7 +402,7 @@
                             </div>
 
                             <button onclick="startAssessment()" class="btn" id="start-btn" style="width: 100%; padding: 18px;">Begin AI Assessment →</button>
-
+                            
                             <p style="text-align: center; margin-top: 20px; font-size: 0.9rem; color: var(--text-muted);">
                                 No signup required. Results delivered instantly + via email.
                             </p>
@@ -401,8 +410,12 @@
 
                         <!-- ============================================
                              QUESTION SCREEN
+                             FIX: uses .assessment-hidden class instead of
+                             inline display:none so it can't be overridden
+                             by external .card styles
                              ============================================ -->
                         <div id="question-screen" class="assessment-hidden">
+                            <!-- Progress Indicator -->
                             <div class="progress-wrapper">
                                 <div class="progress-header">
                                     <span class="progress-label">Question Progress</span>
@@ -413,9 +426,12 @@
                                 </div>
                             </div>
 
+                            <!-- Question Card -->
                             <div class="question-card">
                                 <h3 id="question-text" class="question-title">Question text here</h3>
+                                
                                 <div id="answer-options" class="options-container"></div>
+
                                 <div class="nav-buttons">
                                     <button onclick="previousQuestion()" id="prev-btn" class="btn-secondary assessment-hidden">← Previous</button>
                                     <button onclick="nextQuestion()" id="next-btn" class="btn-primary" disabled>Next Question →</button>
@@ -425,39 +441,35 @@
 
                         <!-- ============================================
                              EMAIL CAPTURE SCREEN
-                             NOTE: NO <script> tags inside this form.
-                             All JS is in the main script block below.
+                             FIX: uses .assessment-hidden class.
+                             All form controls are correctly nested inside
+                             this single div — nothing leaks out.
                              ============================================ -->
                         <div id="email-capture-screen" class="card assessment-hidden" style="background: white;">
                             <h3>Get Your Personalized Diagnostic Report</h3>
                             <p style="color: var(--text-muted); margin-bottom: 30px;">
                                 Enter your details to receive a comprehensive AI-powered analysis based on your responses.
                             </p>
-
+                            
                             <form id="email-form" onsubmit="submitAssessment(event)">
-
-                                <!-- Error message (shown on submission failure) -->
-                                <div id="submit-error-msg" class="submit-error assessment-hidden"></div>
-
                                 <div style="margin-bottom: 20px;">
                                     <label style="display: block; font-weight: 600; margin-bottom: 8px;">Your Name *</label>
-                                    <input type="text" id="user-name" required placeholder="Full name"
+                                    <input type="text" id="user-name" required placeholder="Full name" 
                                            style="width: 100%; padding: 12px; border: 1px solid #e5e7eb; border-radius: 6px; font-size: 1rem;">
                                 </div>
-
+                                
                                 <div style="margin-bottom: 20px;">
                                     <label style="display: block; font-weight: 600; margin-bottom: 8px;">Email Address *</label>
                                     <input type="email" id="user-email" required placeholder="name@company.com"
                                            style="width: 100%; padding: 12px; border: 1px solid #e5e7eb; border-radius: 6px; font-size: 1rem;">
                                 </div>
-
+                                
                                 <div style="margin-bottom: 30px;">
                                     <label style="display: block; font-weight: 600; margin-bottom: 8px;">Company Name (Optional)</label>
                                     <input type="text" id="user-company" placeholder="Your company"
                                            style="width: 100%; padding: 12px; border: 1px solid #e5e7eb; border-radius: 6px; font-size: 1rem;">
                                 </div>
 
-                                <!-- Coupon section (visible only in partner/coupon mode) -->
                                 <div id="coupon-section" class="assessment-hidden" style="background: #f0fdf4; border: 2px solid #10b981; padding: 20px; border-radius: 8px; margin-bottom: 25px;">
                                     <p style="margin: 0 0 10px 0; font-weight: 600; color: #059669;">✓ Partner Coupon Applied</p>
                                     <input type="text" id="coupon-code" readonly
@@ -465,9 +477,10 @@
                                     <p style="margin: 10px 0 0 0; font-size: 0.9rem; color: #059669;">Full diagnostic included (₹24,997 value)</p>
                                 </div>
 
-                                <!-- Smart Industry Selector -->
+                                <!-- SMART INDUSTRY SELECTOR + CONTEXT FIELD -->
                                 <div style="background: #f9fafb; padding: 18px; border-radius: 8px; border: 1px solid #e5e7eb; margin-bottom: 20px;">
-
+                                    
+                                    <!-- STEP 1: Select Broad Sector -->
                                     <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #1f2937;">
                                         1. Select Your Business Sector *
                                     </label>
@@ -484,43 +497,42 @@
                                         <option value="General">Other / General Business</option>
                                     </select>
 
-                                    <!-- Sub-industry: hidden by default, shown via JS -->
-                                    <!-- FIX: uses assessment-hidden class (NOT style="display:none")
-                                         so JS classList methods work consistently -->
-                                    <div id="sub-industry-container" class="assessment-hidden" style="margin-bottom: 16px;">
+                                    <!-- STEP 2: Select Specific Niche (appears after sector selected) -->
+                                    <div id="sub-industry-container" style="display: none; margin-bottom: 16px;">
                                         <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #1f2937;">
                                             2. Select Your Specific Niche *
                                         </label>
-                                        <!-- FIX: NO required attribute here in HTML.
-                                             It is added/removed dynamically by updateSubIndustries()
-                                             only when the dropdown is visible. -->
                                         <select id="industry-level-2"
                                                 style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 1rem; background: white;">
-                                            <option value="" disabled selected>Choose your niche...</option>
+                                            <!-- Options populated dynamically by JavaScript below -->
                                         </select>
                                     </div>
 
+                                    <!-- STEP 3: Describe Business Context -->
                                     <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #1f2937;">
                                         3. What's Your Main Business Challenge? (Optional)
                                     </label>
-                                    <textarea id="user-context" rows="3"
-                                              placeholder="Example: We're struggling with high employee turnover and can't retain skilled staff..."
-                                              style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 1rem; font-family: inherit; resize: vertical;"></textarea>
-
+                                    <textarea id="user-context" rows="3" 
+                                            placeholder="Example: We're struggling with high employee turnover and can't retain skilled staff..."
+                                            style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 1rem; font-family: inherit; resize: vertical;"></textarea>
+                                    
                                     <p style="margin: 8px 0 0 0; font-size: 0.85rem; color: #6b7280;">
                                         💡 This helps our AI understand your specific situation and give more relevant insights
                                     </p>
                                 </div>
 
+                                <!-- END SMART SELECTOR -->
+
                                 <button type="submit" class="btn" style="width: 100%; padding: 16px;">
                                     Get My Free Report →
                                 </button>
                             </form>
-
+                            
                             <p style="text-align: center; margin-top: 20px; font-size: 0.85rem; color: var(--text-muted);">
                                 🔒 Your data is private and secure. We'll never spam you.
                             </p>
                         </div>
+                        <!-- end #email-capture-screen -->
 
                         <!-- ============================================
                              LOADING SCREEN
@@ -544,10 +556,12 @@
                                 <h2 id="results-title" style="margin: 0; color: var(--accent-navy);">Your Diagnostic Report</h2>
                                 <p id="results-subtitle" style="color: var(--text-muted); margin-top: 10px;">A personalized analysis has been sent to your email</p>
                             </div>
+                            
                             <div id="results-content"></div>
                         </div>
 
-                    </div><!-- end #assessment-container -->
+                    </div>
+                    <!-- end #assessment-container -->
                 </div>
             </div>
         </section>
@@ -561,17 +575,13 @@
         </div>
     </footer>
 
-    <!-- Load config before main script -->
     <script src="config.js"></script>
     <script src="mobile-menu.js"></script>
-
+    
     <script>
         // ============================================
         // SUB-INDUSTRY SELECTOR
-        // FIX: defined ONCE here — the duplicate <script>
-        // block that was inside the <form> has been removed.
-        // That block used HTML entities (&amp;&amp;) as JS
-        // operators, causing the SyntaxError at line 538.
+        // Moved out of form to avoid any nesting issues
         // ============================================
         const subIndustries = {
             "Retail":                ["Fashion & Apparel", "Grocery & FMCG", "Electronics & Tech", "Furniture & Home", "General Retail"],
@@ -590,18 +600,11 @@
             const container = document.getElementById('sub-industry-container');
             const sector    = level1.value;
 
-            // Reset niche dropdown
             level2.innerHTML = '<option value="" disabled selected>Choose your niche...</option>';
 
             if (sector && subIndustries[sector]) {
-                // Show niche container
                 container.classList.remove('assessment-hidden');
-
-                // FIX: Do NOT add required="true" here.
-                // A hidden-then-shown select with required causes
-                // "invalid form control not focusable" in Chrome/Firefox.
-                // Validation is handled manually in submitAssessment().
-
+                level2.setAttribute('required', 'true');
                 subIndustries[sector].forEach(function(niche) {
                     const opt = document.createElement('option');
                     opt.value = niche;
@@ -617,17 +620,17 @@
         // ============================================
         // MULTILINGUAL SYSTEM
         // ============================================
-
+        
         let currentLanguage = 'en';
         let t = (typeof TRANSLATIONS !== 'undefined') ? TRANSLATIONS.en : {};
-
-        const urlParams  = new URLSearchParams(window.location.search);
-        const langParam  = urlParams.get('lang');
+        
+        const urlParams = new URLSearchParams(window.location.search);
+        const langParam = urlParams.get('lang');
         if (langParam && typeof TRANSLATIONS !== 'undefined' && TRANSLATIONS[langParam]) {
             currentLanguage = langParam;
             t = TRANSLATIONS[langParam];
         }
-
+        
         function switchLanguage(lang) {
             currentLanguage = lang;
             if (typeof TRANSLATIONS !== 'undefined' && TRANSLATIONS[lang]) {
@@ -647,7 +650,7 @@
                 showQuestion(currentQuestion);
             }
         }
-
+        
         function updatePageLanguage() {
             const titleMap = {
                 en: "Where Is Your Business Stuck?",
@@ -659,12 +662,12 @@
                 hi: "AI मूल्यांकन शुरू करें →",
                 kn: "AI ಮೌಲ್ಯಮಾಪನವನ್ನು ಪ್ರಾರಂಭಿಸಿ →"
             };
-            const el  = document.getElementById('main-title');
+            const el = document.getElementById('main-title');
+            if (el) el.textContent = titleMap[currentLanguage] || titleMap.en;
             const btn = document.getElementById('start-btn');
-            if (el)  el.textContent  = titleMap[currentLanguage] || titleMap.en;
-            if (btn) btn.textContent = btnMap[currentLanguage]   || btnMap.en;
+            if (btn) btn.textContent = btnMap[currentLanguage] || btnMap.en;
         }
-
+        
         window.addEventListener('DOMContentLoaded', function() {
             const sel = document.getElementById('language-selector');
             if (sel) sel.value = currentLanguage;
@@ -674,10 +677,10 @@
         // ============================================
         // PARTNER SYSTEM
         // ============================================
-
-        const partnerId     = urlParams.get('partner') || '';
+        
+        const partnerId    = urlParams.get('partner') || '';
         const prefillCoupon = urlParams.get('coupon')  || '';
-
+        
         let partnerBranding = null;
         let assessmentState = {
             mode:       'free',
@@ -692,45 +695,43 @@
 
         async function loadPartnerBranding(pid) {
             try {
-                const res  = await fetch(API_CONFIG.URL + '?action=get_partner_branding&partnerId=' + pid);
+                const res  = await fetch(`${API_CONFIG.URL}?action=get_partner_branding&partnerId=${pid}`);
                 const data = await res.json();
                 if (data.status === 'success' && data.partner) {
                     partnerBranding = data.partner;
                     assessmentState.mode = 'coupon';
                     applyPartnerBranding(data.partner);
                 }
-            } catch (err) {
-                console.error('Partner branding load failed:', err);
-            }
+            } catch (err) { console.error('Partner branding load failed:', err); }
         }
-
+        
         function applyPartnerBranding(partner) {
-            document.title = 'Free Business Assessment | ' + partner.branding.displayName;
-            document.getElementById('header-logo').textContent  = partner.branding.displayName;
-            document.getElementById('footer-logo').textContent  = partner.branding.displayName + ' × KERNORIGIN';
-            document.documentElement.style.setProperty('--accent-navy', partner.branding.primaryColor);
+            document.title = `Free Business Assessment | ${partner.branding.displayName}`;
+            document.getElementById('header-logo').textContent = partner.branding.displayName;
+            document.getElementById('footer-logo').textContent = `${partner.branding.displayName} × KERNORIGIN`;
+            document.documentElement.style.setProperty('--accent-navy',  partner.branding.primaryColor);
             document.documentElement.style.setProperty('--accent-gold', partner.branding.secondaryColor);
-            document.getElementById('header-eyebrow').textContent = 'Complimentary Diagnostic via ' + partner.name;
+            document.getElementById('header-eyebrow').textContent = `Complimentary Diagnostic via ${partner.name}`;
             document.getElementById('partner-banner').classList.remove('assessment-hidden');
             document.getElementById('partner-message').textContent =
-                '✓ You\'re receiving a complimentary full diagnostic courtesy of ' + partner.name + ' (₹24,997 value)';
+                `✓ You're receiving a complimentary full diagnostic courtesy of ${partner.name} (₹24,997 value)`;
             document.getElementById('intro-benefit').innerHTML =
-                '<strong>FREE 35-page comprehensive report</strong> (normally ₹24,997)';
+                `<strong>FREE 35-page comprehensive report</strong> (normally ₹24,997)`;
         }
-
+        
         // ============================================
         // ASSESSMENT QUESTIONS
         // ============================================
-
+        
         const questions = [
             {
                 text: "How clear is your strategic direction?",
                 cylinder: "strategy",
                 options: [
-                    { text: "Crystal clear - everyone aligned on goals",        score: 4 },
-                    { text: "Mostly clear - some confusion on priorities",       score: 3 },
-                    { text: "Unclear - different people, different visions",     score: 2 },
-                    { text: "No clarity - just reacting to problems",            score: 1 }
+                    { text: "Crystal clear - everyone aligned on goals",       score: 4 },
+                    { text: "Mostly clear - some confusion on priorities",      score: 3 },
+                    { text: "Unclear - different people, different visions",    score: 2 },
+                    { text: "No clarity - just reacting to problems",           score: 1 }
                 ]
             },
             {
@@ -834,15 +835,15 @@
         function scrollToAssessment() {
             const container = document.getElementById('assessment-container');
             if (!container) return;
-            const header  = document.querySelector('header');
+            const header = document.querySelector('header');
             const headerH = header ? header.offsetHeight : 0;
-            const top     = container.getBoundingClientRect().top + window.scrollY - headerH - 20;
-            window.scrollTo({ top: top, behavior: 'smooth' });
+            const top = container.getBoundingClientRect().top + window.scrollY - headerH - 20;
+            window.scrollTo({ top, behavior: 'smooth' });
         }
 
         // ============================================
-        // SCREEN HELPERS — always use these, never
-        // set element.style.display directly
+        // SCREEN SHOW / HIDE HELPERS
+        // Always use these — never set .style.display directly
         // ============================================
         function showScreen(id) {
             document.getElementById(id).classList.remove('assessment-hidden');
@@ -854,6 +855,7 @@
         // ============================================
         // ASSESSMENT FLOW
         // ============================================
+
         function startAssessment() {
             hideScreen('intro-screen');
             showScreen('question-screen');
@@ -866,26 +868,27 @@
             currentQuestion = index;
             const q = questions[index];
 
-            document.getElementById('current-q').textContent    = index + 1;
+            document.getElementById('current-q').textContent  = index + 1;
             document.getElementById('progress-bar').style.width = ((index + 1) / questions.length * 100) + '%';
 
-            const qKey         = 'q' + (index + 1);
+            const qKey        = 'q' + (index + 1);
             const questionText = (t && t[qKey]) ? t[qKey] : q.text;
             document.getElementById('question-text').textContent = questionText;
-
+            
             const optionsDiv = document.getElementById('answer-options');
             optionsDiv.innerHTML = '';
-
-            q.options.forEach(function(option, i) {
-                const btn       = document.createElement('button');
-                btn.className   = 'option-card';
+            
+            q.options.forEach((option, i) => {
+                const btn = document.createElement('button');
+                btn.className = 'option-card';
                 const optKey    = 'q' + (index + 1) + '_opt' + (i + 1);
                 btn.textContent = (t && t[optKey]) ? t[optKey] : option.text;
-                btn.onclick     = function() { selectAnswer(i); };
+                btn.onclick     = () => selectAnswer(i);
                 if (answers[index] === i) btn.classList.add('selected');
                 optionsDiv.appendChild(btn);
             });
 
+            // Prev button
             const prevBtn = document.getElementById('prev-btn');
             if (index > 0) {
                 prevBtn.classList.remove('assessment-hidden');
@@ -895,13 +898,13 @@
 
             document.getElementById('next-btn').disabled    = (answers[index] === undefined);
             document.getElementById('next-btn').textContent = (index === questions.length - 1) ? 'See Results →' : 'Next Question →';
-
+            
             setTimeout(scrollToAssessment, 50);
         }
 
         function selectAnswer(optionIndex) {
             answers[currentQuestion] = optionIndex;
-            document.querySelectorAll('.option-card').forEach(function(btn, idx) {
+            document.querySelectorAll('.option-card').forEach((btn, idx) => {
                 btn.classList.toggle('selected', idx === optionIndex);
             });
             document.getElementById('next-btn').disabled = false;
@@ -923,6 +926,7 @@
             hideScreen('question-screen');
             showScreen('email-capture-screen');
 
+            // Show coupon section only for coupon / partner mode
             if (assessmentState.mode === 'coupon' && assessmentState.couponCode) {
                 document.getElementById('coupon-section').classList.remove('assessment-hidden');
                 document.getElementById('coupon-code').value = assessmentState.couponCode;
@@ -935,155 +939,147 @@
         // ============================================
         // SUBMIT ASSESSMENT
         // ============================================
+
+        // ============================================
+        // 5. SUBMIT ASSESSMENT (v15 Platinum)
+        // ============================================
+
         async function submitAssessment(e) {
             e.preventDefault();
-
-            // --- Guard: API config must be loaded ---
-            if (typeof API_CONFIG === 'undefined' || !API_CONFIG.URL || !API_CONFIG.PUBLIC_KEY) {
-                showFormError('Configuration error: API settings not loaded. Please refresh and try again.');
-                return;
-            }
-
-            // --- Guard: sector must be selected ---
-            const level1 = document.getElementById('industry-level-1').value;
-            if (!level1) {
-                showFormError('Please select your business sector before submitting.');
-                document.getElementById('industry-level-1').focus();
-                return;
-            }
-
-            // --- Guard: niche must be selected if visible ---
-            const subContainer = document.getElementById('sub-industry-container');
-            const level2El     = document.getElementById('industry-level-2');
-            const subVisible   = !subContainer.classList.contains('assessment-hidden');
-            if (subVisible && (!level2El.value || level2El.value === '')) {
-                showFormError('Please select your specific niche before submitting.');
-                level2El.focus();
-                return;
-            }
-
-            // Hide any previous error
-            hideFormError();
-
+            
             // Switch to loading screen
             hideScreen('email-capture-screen');
             showScreen('loading-screen');
             scrollToAssessment();
-
+            
             // Collect user data
-            assessmentState.name    = document.getElementById('user-name').value;
-            assessmentState.email   = document.getElementById('user-email').value;
+            assessmentState.name = document.getElementById('user-name').value;
+            assessmentState.email = document.getElementById('user-email').value;
             assessmentState.company = document.getElementById('user-company').value || 'Not specified';
-
-            // Build scores and formatted answers
+            
+            // Format answers by cylinder
             const scores = {
-                strategy: 0, operations: 0, systems: 0,
-                people: 0, financial: 0, market: 0, leadership: 0
+                strategy: 0,
+                operations: 0,
+                systems: 0,
+                people: 0,
+                financial: 0,
+                market: 0,
+                leadership: 0
             };
             const formattedAnswers = {};
-
-            answers.forEach(function(answerIndex, questionIndex) {
-                const q              = questions[questionIndex];
+            
+            // Process all answers with multilingual support
+            answers.forEach((answerIndex, questionIndex) => {
+                const q = questions[questionIndex];
                 const selectedOption = q.options[answerIndex];
-
+                
                 if (!formattedAnswers[q.cylinder]) {
                     formattedAnswers[q.cylinder] = [];
                 }
-
-                const qKey   = 'q' + (questionIndex + 1);
+                
+                // Use translated text if available
+                const qKey = 'q' + (questionIndex + 1);
                 const optKey = 'q' + (questionIndex + 1) + '_opt' + (answerIndex + 1);
-
+                
                 formattedAnswers[q.cylinder].push({
-                    question: (t && t[qKey])   ? t[qKey]   : q.text,
-                    answer:   (t && t[optKey]) ? t[optKey] : selectedOption.text,
-                    score:    selectedOption.score
+                    question: (t && t[qKey]) ? t[qKey] : q.text,
+                    answer: (t && t[optKey]) ? t[optKey] : selectedOption.text,
+                    score: selectedOption.score
                 });
-
+                
                 if (q.cylinder !== 'general') {
                     scores[q.cylinder] += selectedOption.score;
                 }
             });
 
             try {
-                const action = (assessmentState.mode === 'coupon')
-                    ? 'analyze_assessment_partner'
+                // Determine endpoint based on mode
+                const action = (assessmentState.mode === 'coupon') 
+                    ? 'analyze_assessment_partner' 
                     : 'analyze_assessment';
 
-                const level2        = (level2El && level2El.value) ? level2El.value : '';
-                const context       = document.getElementById('user-context').value.trim();
+                // === PLATINUM: INDUSTRY + CONTEXT CAPTURE ===
+                const level1 = document.getElementById('industry-level-1').value;
+                const level2El = document.getElementById('industry-level-2');
+                const level2 = (level2El && level2El.value) ? level2El.value : '';
+                const context = document.getElementById('user-context').value.trim();
+                
+                // Construct final industry string
+                // Format: "Sector - Niche" or just "Sector" if no niche selected
                 const finalIndustry = level2 ? (level1 + ' - ' + level2) : level1;
+                // === END PLATINUM LOGIC ===
 
+                // Get language selection
                 const langSelector = document.getElementById('language-selector');
-                const submitLang   = (langSelector && langSelector.value) || currentLanguage || 'en';
+                const submitLang = (langSelector && langSelector.value) || currentLanguage || 'en';
 
+                // Build form data
                 const formData = new FormData();
-                formData.append('action',   action);
-                formData.append('apiKey',   API_CONFIG.PUBLIC_KEY);
-                formData.append('name',     assessmentState.name);
-                formData.append('email',    assessmentState.email);
-                formData.append('company',  assessmentState.company);
+                formData.append('action', action);
+                formData.append('apiKey', API_CONFIG.PUBLIC_KEY);
+                formData.append('name', assessmentState.name);
+                formData.append('email', assessmentState.email);
+                formData.append('company', assessmentState.company);
                 formData.append('industry', finalIndustry);
-                formData.append('context',  context);
+                formData.append('context', context);
                 formData.append('language', submitLang);
-                formData.append('answers',  JSON.stringify(formattedAnswers));
-                formData.append('scores',   JSON.stringify(scores));
-
+                formData.append('answers', JSON.stringify(formattedAnswers));
+                formData.append('scores', JSON.stringify(scores));
+                
+                // Add coupon code if in coupon mode
                 if (assessmentState.mode === 'coupon') {
                     formData.append('couponCode', assessmentState.couponCode);
                 }
 
-                const response = await fetch(API_CONFIG.URL, { method: 'POST', body: formData });
-                const result   = await response.json();
+                // Submit to backend
+                const response = await fetch(API_CONFIG.URL, {
+                    method: 'POST',
+                    body: formData
+                });
 
+                const result = await response.json();
+                
                 if (result.status === 'error') {
                     throw new Error(result.error || result.message);
                 }
-
+                
+                // Display results
                 displayResults(result);
-
+                
+                // Track conversion
                 gtag('event', 'assessment_submitted', {
                     event_category: 'conversion',
-                    event_label:    assessmentState.mode,
-                    value:          assessmentState.mode === 'coupon' ? 24997 : 0
+                    event_label: assessmentState.mode,
+                    value: assessmentState.mode === 'coupon' ? 24997 : 0
                 });
-
+                
             } catch (error) {
                 console.error('Assessment submission error:', error);
                 hideScreen('loading-screen');
                 showScreen('email-capture-screen');
-                showFormError('Submission failed: ' + (error.message || 'Unknown error') + '. Please try again or contact support.');
-                scrollToAssessment();
+                alert('Failed to generate analysis. Please try again or contact support.');
             }
-        }
-
-        // Show inline form error (better UX than alert())
-        function showFormError(msg) {
-            const el = document.getElementById('submit-error-msg');
-            if (!el) return;
-            el.innerHTML = '⚠️ ' + msg;
-            el.classList.remove('assessment-hidden');
-            el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-
-        function hideFormError() {
-            const el = document.getElementById('submit-error-msg');
-            if (el) el.classList.add('assessment-hidden');
         }
 
         // ============================================
         // DISPLAY RESULTS
+        // FIX: all div pairs are explicitly balanced,
+        //      upgrade card uses .upgrade-card class
+        //      (overflow:hidden ensures border closes visually)
         // ============================================
         function displayResults(result) {
             hideScreen('loading-screen');
             showScreen('results-screen');
             scrollToAssessment();
 
-            const badges = { en: '✓ Analysis Complete',    hi: '✓ विश्लेषण पूर्ण',          kn: '✓ ವಿಶ್ಲೇಷಣೆ ಪೂರ್ಣಗೊಂಡಿದೆ' };
-            const titles = { en: 'Your Diagnostic Report', hi: 'आपकी निदान रिपोर्ट',         kn: 'ನಿಮ್ಮ ರೋಗನಿರ್ಣಯ ವರದಿ' };
+            // Translated badge / title / subtitle
+            const badges = { en:'✓ Analysis Complete', hi:'✓ विश्लेषण पूर्ण', kn:'✓ ವಿಶ್ಲೇಷಣೆ ಪೂರ್ಣಗೊಂಡಿದೆ' };
+            const titles = { en:'Your Diagnostic Report', hi:'आपकी निदान रिपोर्ट', kn:'ನಿಮ್ಮ ರೋಗನಿರ್ಣಯ ವರದಿ' };
             const subs   = {
-                en: 'A personalized analysis has been sent to your email',
-                hi: 'एक व्यक्तिगत विश्लेषण आपके ईमेल पर भेज दिया गया है',
-                kn: 'ವೈಯಕ್ತೀಕರಿಸಿದ ವಿಶ್ಲೇಷಣೆಯನ್ನು ನಿಮ್ಮ ಇಮೇಲ್‌ಗೆ ಕಳುಹಿಸಲಾಗಿದೆ'
+                en:'A personalized analysis has been sent to your email',
+                hi:'एक व्यक्तिगत विश्लेषण आपके ईमेल पर भेज दिया गया है',
+                kn:'ವೈಯಕ್ತೀಕರಿಸಿದ ವಿಶ್ಲೇಷಣೆಯನ್ನು ನಿಮ್ಮ ಇಮೇಲ್‌ಗೆ ಕಳುಹಿಸಲಾಗಿದೆ'
             };
 
             const badgeEl = document.getElementById('analysis-complete-badge');
@@ -1096,127 +1092,137 @@
             const container = document.getElementById('results-content');
 
             if (assessmentState.mode === 'coupon') {
+                // Partner / coupon mode — full report sent
                 const emailConfirm = {
-                    en: 'Full Diagnostic Report Sent to ' + assessmentState.email,
-                    hi: 'संपूर्ण निदान रिपोर्ट ' + assessmentState.email + ' को भेजी गई',
-                    kn: 'ಸಂಪೂರ್ಣ ರೋಗನಿರ್ಣಯ ವರದಿ ' + assessmentState.email + ' ಗೆ ಕಳುಹಿಸಲಾಗಿದೆ'
+                    en: `Full Diagnostic Report Sent to ${assessmentState.email}`,
+                    hi: `संपूर्ण निदान रिपोर्ट ${assessmentState.email} को भेजी गई`,
+                    kn: `ಸಂಪೂರ್ಣ ರೋಗನಿರ್ಣಯ ವರದಿ ${assessmentState.email} ಗೆ ಕಳುಹಿಸಲಾಗಿದೆ`
                 };
                 const partnerName = partnerBranding ? partnerBranding.name : 'our partner';
                 const checkEmail  = {
-                    en: 'Check your email for the complete 35-page analysis (courtesy of ' + partnerName + ')',
-                    hi: 'संपूर्ण 35-पृष्ठ विश्लेषण के लिए अपना ईमेल जांचें (' + partnerName + ' के सौजन्य से)',
-                    kn: 'ಸಂಪೂರ್ಣ 35-ಪುಟದ ವಿಶ್ಲೇಷಣೆಗಾಗಿ ನಿಮ್ಮ ಇಮೇಲ್ ಪರಿಶೀಲಿಸಿ (' + partnerName + 'ರ ಸೌಜನ್ಯದಿಂದ)'
+                    en: `Check your email for the complete 35-page analysis (courtesy of ${partnerName})`,
+                    hi: `संपूर्ण 35-पृष्ठ विश्लेषण के लिए अपना ईमेल जांचें (${partnerName} के सौजन्य से)`,
+                    kn: `ಸಂಪೂರ್ಣ 35-ಪುಟದ ವಿಶ್ಲೇಷಣೆಗಾಗಿ ನಿಮ್ಮ ಇಮೇಲ್ ಪರಿಶೀಲಿಸಿ (${partnerName}ರ ಸೌಜನ್ಯದಿಂದ)`
                 };
 
                 container.innerHTML =
-                    '<div style="background:#f0fdf4;border:2px solid #10b981;padding:25px;border-radius:8px;margin-bottom:30px;">' +
-                        '<p style="margin:0;font-weight:600;font-size:1.1rem;color:#059669;">' +
-                            '✓ ' + (emailConfirm[currentLanguage] || emailConfirm.en) +
-                        '</p>' +
-                        '<p style="margin:10px 0 0 0;color:#059669;">' +
-                            (checkEmail[currentLanguage] || checkEmail.en) +
-                        '</p>' +
-                    '</div>' +
+                    `<div style="background:#f0fdf4;border:2px solid #10b981;padding:25px;border-radius:8px;margin-bottom:30px;">` +
+                        `<p style="margin:0;font-weight:600;font-size:1.1rem;color:#059669;">` +
+                            `✓ ${emailConfirm[currentLanguage] || emailConfirm.en}` +
+                        `</p>` +
+                        `<p style="margin:10px 0 0 0;color:#059669;">` +
+                            `${checkEmail[currentLanguage] || checkEmail.en}` +
+                        `</p>` +
+                    `</div>` +
                     result.analysis;
 
             } else {
+                // Free mode — show summary + upgrade card
                 const summaryLabel = {
-                    en: 'Summary Report Sent to ' + assessmentState.email,
-                    hi: 'सारांश रिपोर्ट ' + assessmentState.email + ' को भेजी गई',
-                    kn: 'ಸಾರಾಂಶ ವರದಿ ' + assessmentState.email + ' ಗೆ ಕಳುಹಿಸಲಾಗಿದೆ'
+                    en: `Summary Report Sent to ${assessmentState.email}`,
+                    hi: `सारांश रिपोर्ट ${assessmentState.email} को भेजी गई`,
+                    kn: `ಸಾರಾಂಶ ವರದಿ ${assessmentState.email} ಗೆ ಕಳುಹಿಸಲಾಗಿದೆ`
                 };
-                const upgradeTitle = { en: 'Unlock Deeper Insights',         hi: 'गहरी जानकारी प्राप्त करें',       kn: 'ಆಳವಾದ ಒಳನೋಟಗಳನ್ನು ಅನ್‌ಲಾಕ್ ಮಾಡಿ' };
-                const reportTitle  = { en: 'Full 35-Page Diagnostic Report',  hi: 'संपूर्ण 35-पृष्ठ निदान रिपोर्ट',  kn: 'ಸಂಪೂರ್ಣ 35-ಪುಟದ ರೋಗನಿರ್ಣಯ ವರದಿ' };
-                const upgradeBtn   = { en: 'Upgrade to Full Report →',         hi: 'पूर्ण रिपोर्ट में अपग्रेड करें →', kn: 'ಸಂಪೂರ್ಣ ವರದಿಗೆ ಅಪ್‌ಗ್ರೇಡ್ ಮಾಡಿ →' };
+                const upgradeTitle = {
+                    en: 'Unlock Deeper Insights',
+                    hi: 'गहरी जानकारी प्राप्त करें',
+                    kn: 'ಆಳವಾದ ಒಳನೋಟಗಳನ್ನು ಅನ್‌ಲಾಕ್ ಮಾಡಿ'
+                };
+                const reportTitle = {
+                    en: 'Full 35-Page Diagnostic Report',
+                    hi: 'संपूर्ण 35-पृष्ठ निदान रिपोर्ट',
+                    kn: 'ಸಂಪೂರ್ಣ 35-ಪುಟದ ರೋಗನಿರ್ಣಯ ವರದಿ'
+                };
+                const upgradeBtn = {
+                    en: 'Upgrade to Full Report →',
+                    hi: 'पूर्ण रिपोर्ट में अपग्रेड करें →',
+                    kn: 'ಸಂಪೂರ್ಣ ವರದಿಗೆ ಅಪ್‌ಗ್ರೇಡ್ ಮಾಡಿ →'
+                };
 
+                // NOTE: every open <div> below has a matching </div>
+                // The .upgrade-card class adds overflow:hidden so the border
+                // always renders as a fully closed box
                 container.innerHTML =
-                    '<div style="background:#eff6ff;border-left:4px solid var(--accent-navy);padding:20px;margin-bottom:30px;">' +
-                        '<p style="margin:0;font-weight:600;color:var(--accent-navy);">' +
-                            '✓ ' + (summaryLabel[currentLanguage] || summaryLabel.en) +
-                        '</p>' +
-                    '</div>' +
+                    // Summary sent banner
+                    `<div style="background:#eff6ff;border-left:4px solid var(--accent-navy);padding:20px;margin-bottom:30px;">` +
+                        `<p style="margin:0;font-weight:600;color:var(--accent-navy);">` +
+                            `✓ ${summaryLabel[currentLanguage] || summaryLabel.en}` +
+                        `</p>` +
+                    `</div>` +
 
+                    // AI-generated analysis HTML
                     result.analysis +
 
-                    '<div style="margin-top:50px;">' +
-                        '<h3 style="text-align:center;margin-bottom:30px;color:var(--accent-navy);">' +
-                            (upgradeTitle[currentLanguage] || upgradeTitle.en) +
-                        '</h3>' +
+                    // Upgrade section
+                    `<div style="margin-top:50px;">` +
+                        `<h3 style="text-align:center;margin-bottom:30px;color:var(--accent-navy);">` +
+                            `${upgradeTitle[currentLanguage] || upgradeTitle.en}` +
+                        `</h3>` +
 
-                        '<div class="upgrade-card">' +
-                            '<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px;">' +
-                                '<div>' +
-                                    '<h4 style="margin:0 0 10px 0;color:var(--accent-navy);">' +
-                                        (reportTitle[currentLanguage] || reportTitle.en) +
-                                    '</h4>' +
-                                    '<p style="margin:0;color:var(--text-muted);font-size:0.95rem;">' +
-                                        'Complete 7-cylinder breakdown with 90-day roadmap' +
-                                    '</p>' +
-                                '</div>' +
-                                '<div style="text-align:right;white-space:nowrap;margin-left:20px;">' +
-                                    '<div style="text-decoration:line-through;color:#999;font-size:0.9rem;">₹29,997</div>' +
-                                    '<div style="font-weight:700;color:var(--accent-navy);font-size:1.4rem;">₹24,997</div>' +
-                                '</div>' +
-                            '</div>' +
-                            '<ul style="margin:20px 0 30px 0;padding-left:20px;color:var(--text-primary);">' +
-                                '<li style="margin-bottom:8px;">Root cause analysis (not just symptoms)</li>' +
-                                '<li style="margin-bottom:8px;">Industry benchmarking &amp; comparison</li>' +
-                                '<li style="margin-bottom:8px;">90-day action roadmap</li>' +
-                                '<li style="margin-bottom:8px;">Matched case studies</li>' +
-                                '<li>Build / buy / partner recommendations</li>' +
-                            '</ul>' +
-                            '<button onclick="showPayment(\'institutional\')" class="btn" style="width:100%;padding:16px;font-size:1.05rem;">' +
-                                (upgradeBtn[currentLanguage] || upgradeBtn.en) +
-                            '</button>' +
-                        '</div>' +
-                    '</div>';
+                        // FIX: .upgrade-card has overflow:hidden — border always closes visually
+                        `<div class="upgrade-card">` +
+
+                            // Header row: title + price
+                            `<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px;">` +
+
+                                `<div>` +
+                                    `<h4 style="margin:0 0 10px 0;color:var(--accent-navy);">` +
+                                        `${reportTitle[currentLanguage] || reportTitle.en}` +
+                                    `</h4>` +
+                                    `<p style="margin:0;color:var(--text-muted);font-size:0.95rem;">` +
+                                        `Complete 7-cylinder breakdown with 90-day roadmap` +
+                                    `</p>` +
+                                `</div>` +
+
+                                `<div style="text-align:right;white-space:nowrap;margin-left:20px;">` +
+                                    `<div style="text-decoration:line-through;color:#999;font-size:0.9rem;">₹29,997</div>` +
+                                    `<div style="font-weight:700;color:var(--accent-navy);font-size:1.4rem;">₹24,997</div>` +
+                                `</div>` +
+
+                            `</div>` +
+                            // end header row
+
+                            `<ul style="margin:20px 0 30px 0;padding-left:20px;color:var(--text-primary);">` +
+                                `<li style="margin-bottom:8px;">Root cause analysis (not just symptoms)</li>` +
+                                `<li style="margin-bottom:8px;">Industry benchmarking &amp; comparison</li>` +
+                                `<li style="margin-bottom:8px;">90-day action roadmap</li>` +
+                                `<li style="margin-bottom:8px;">Matched case studies</li>` +
+                                `<li>Build / buy / partner recommendations</li>` +
+                            `</ul>` +
+
+                            `<button onclick="showPayment('institutional')" class="btn" style="width:100%;padding:16px;font-size:1.05rem;">` +
+                                `${upgradeBtn[currentLanguage] || upgradeBtn.en}` +
+                            `</button>` +
+
+                        `</div>` +
+                        // end .upgrade-card
+
+                    `</div>`;
+                    // end upgrade section
             }
         }
 
         // ============================================
         // RAZORPAY PAYMENT
-        // TODO: Replace 'rzp_live_YOUR_ACTUAL_KEY' with your
-        //       real Razorpay key before going live.
+        // TODO: Replace 'rzp_live_YOUR_ACTUAL_KEY' with
+        //       your real Razorpay key before going live.
         // ============================================
         function showPayment(type) {
             const rzp = new Razorpay({
-                key:         'rzp_live_YOUR_ACTUAL_KEY',
+                key:         'rzp_live_YOUR_ACTUAL_KEY', // ← replace before launch
                 amount:      2499700,
                 currency:    'INR',
                 name:        'Kernorigin',
                 description: 'Full Institutional Diagnostic',
-                prefill:     { name: assessmentState.name, email: assessmentState.email },
-                theme:       { color: '#002244' },
+                prefill: { name: assessmentState.name, email: assessmentState.email },
+                theme: { color: '#002244' },
                 handler: function(response) {
                     alert('Payment successful! Generating your full report...');
-                    // TODO: POST response.razorpay_payment_id to backend
+                    // TODO: POST payment ID to backend to trigger full report generation
                 }
             });
             rzp.open();
         }
-
     </script>
-        <footer>
-        <div class="container footer-wrapper">
-            <div>
-                <div class="footer-logo">KERNORIGIN</div>
-                <p style="margin-top: 15px; font-size: 0.9rem;">
-                    Since 2001 (formerly Value Drive Consulting)<br>
-                    25 years finding root causes globally.<br>
-                    50+ transformations that stick.
-                </p>
-            </div>
-            <div class="footer-links">
-                <a href="index.html">Home</a>
-                <a href="diagnostics.html">Diagnostics</a>
-                <a href="partners.html">Partners</a>
-                <a href="insights.html">Insights</a>
-                <a href="contact.html">Contact</a>
-            </div>
-        </div>
-        <div class="container" style="padding-top: 20px; border-top: 1px solid var(--border-light); font-size: 0.8rem; color: #999;">
-            &copy; 2026 Kernorigin. All rights reserved.
-        </div>
-    </footer>
 </body>
 </html>

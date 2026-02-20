@@ -5,6 +5,103 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Team | Kernorigin</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* ── Founder card: image+text side by side, stacks on mobile ── */
+        .founder-card {
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 40px;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            align-items: stretch;
+        }
+        .founder-photo {
+            background: #e8eaed;
+            min-height: 280px;
+        }
+        .founder-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .founder-bio {
+            padding: 40px;
+        }
+        .founder-bio h2 {
+            margin-top: 0;
+            font-size: 1.8rem;
+        }
+
+        /* ── Section headers inside readable-column ── */
+        .section-header {
+            margin-bottom: 8px;
+        }
+
+        /* ── Bottom CTA ── */
+        .team-cta {
+            text-align: center;
+            margin-top: 80px;
+            padding: 60px 40px;
+            border-top: 1px solid var(--border-light);
+            border-radius: 8px;
+        }
+        .team-cta h3 { margin-bottom: 12px; }
+        .team-cta p {
+            max-width: 520px;
+            margin: 0 auto 28px;
+        }
+
+        /* ── Approach block ── */
+        .approach-block {
+            background: var(--bg-offwhite);
+            padding: 40px;
+            border-radius: 4px;
+            margin: 60px 0 40px;
+        }
+        .approach-block h3 { margin-top: 0; }
+        .approach-block ul { line-height: 2; }
+
+        /* ── Global reach card ── */
+        .global-card {
+            background: var(--accent-navy);
+            color: white;
+            border-radius: 8px;
+            padding: 36px 40px;
+            margin-bottom: 40px;
+        }
+        .global-card h3 { color: white; margin-top: 0; }
+        .global-card p { color: rgba(255,255,255,0.85); }
+        .global-card p:last-child { margin-bottom: 0; }
+
+        /* ── History / Why / Academic sections ── */
+        .prose-section { margin-bottom: 48px; }
+        .prose-section h3 { margin-bottom: 12px; }
+
+        @media (max-width: 900px) {
+            .founder-card {
+                grid-template-columns: 1fr;
+            }
+            .founder-photo {
+                min-height: 240px;
+                max-height: 300px;
+            }
+            .founder-bio {
+                padding: 28px 20px;
+            }
+            .approach-block {
+                padding: 28px 20px;
+                margin: 40px 0 28px;
+            }
+            .global-card {
+                padding: 28px 20px;
+            }
+            .team-cta {
+                padding: 40px 20px;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -17,7 +114,7 @@
                     <li><a href="how-we-think.html">How We Think</a></li>
                     <li><a href="impact.html">Impact</a></li>
                     <li><a href="partners.html">Partners</a></li>
-                    <li><a href="team.html">Team</a></li>
+                    <li><a href="team.html" class="active">Team</a></li>
                     <li><a href="insights.html">Insights</a></li>
                     <li><a href="contact.html">Contact</a></li>
                 </ul>
@@ -26,117 +123,124 @@
     </header>
 
     <main class="container section-padding">
+
+        <!-- Page Header -->
         <div class="readable-column text-center">
             <span class="eyebrow">Global Expertise</span>
             <h1>Built on decades of<br>finding what others miss.</h1>
-            <p>We're not consultants who theorize. We're practitioners who've spent decades diagnosing and fixing what's actually broken—across continents, industries, and complexity levels.</p>
+            <p>We're not consultants who theorize. We're practitioners who've spent decades diagnosing and fixing what's actually broken — across continents, industries, and complexity levels.</p>
         </div>
 
-        <div class="readable-column" style="margin-top: 80px;">
-            
-            <!-- FOUNDER 1: Peria F Malayappa - RESPONSIVE GRID FIX -->
-            <div class="card" style="margin-bottom: 40px; padding: 0; overflow: hidden;">
-                <div class="grid-2" style="gap: 0; align-items: stretch;">
-                    <div style="background: #f0f0f0; min-height: 300px;">
-                        <img src="images/peria-photo.jpg" style="width: 100%; height: 100%; object-fit: cover; display: block;" alt="Peria F. Malayappa">
-                    </div>
-                    <div style="padding: 40px;">
-                        <h2 style="margin-top: 0; font-size: 1.8rem;">Peria F. Malayappa</h2>
-                        <span class="eyebrow" style="margin-bottom: 20px; display: block;">Founder & Senior Partner</span>
-                        <p>Founder of Kernorigin (formerly Value Drive Consulting, est. 2001). Over 25 years diagnosing institutional dysfunction across education, technology, and professional services. IIM Bangalore alumnus. Led 50+ transformations spanning strategy, systems, and operational redesign.</p>
-                        <p>Before Kernorigin, built operational frameworks for high-growth startups and multinational enterprises. Specializes in root cause diagnosis—finding the dysfunction beneath the symptom. Known for surgical precision in identifying misalignment between strategy, operations, and execution.</p>
-                        <p>Global perspective shaped by work across India, Southeast Asia, Middle East, and North America. Pioneered the Seven Cylinders Framework for institutional diagnostics.</p>
-                        <p style="margin-bottom: 0; font-style: italic;">"Most problems aren't what they appear to be. Leadership sees the symptom. We find the cause. That's the difference between motion and progress."</p>
-                    </div>
+        <div class="readable-column" style="margin-top: 64px;">
+
+            <!-- FOUNDER: Peria -->
+            <div class="founder-card">
+                <div class="founder-photo">
+                    <img src="images/peria-photo.jpg" alt="Peria F. Malayappa">
+                </div>
+                <div class="founder-bio">
+                    <h2>Peria F. Malayappa</h2>
+                    <span class="eyebrow">Founder &amp; Senior Partner</span>
+                    <p>Founder of Kernorigin (formerly Value Drive Consulting, est. 2001). Over 25 years diagnosing institutional dysfunction across education, technology, and professional services. IIM Bangalore alumnus. Led 50+ transformations spanning strategy, systems, and operational redesign.</p>
+                    <p>Before Kernorigin, built operational frameworks for high-growth startups and multinational enterprises. Specializes in root cause diagnosis — finding the dysfunction beneath the symptom. Known for surgical precision in identifying misalignment between strategy, operations, and execution.</p>
+                    <p>Global perspective shaped by work across India, Southeast Asia, Middle East, and North America. Pioneered the Seven Cylinders Framework for institutional diagnostics.</p>
+                    <p style="margin-bottom: 0; font-style: italic;">"Most problems aren't what they appear to be. Leadership sees the symptom. We find the cause. That's the difference between motion and progress."</p>
                 </div>
             </div>
 
-            <!-- FOUNDER 2: George Koshy -->
+            <!-- PARTNER: George Koshy -->
             <div class="team-member-card">
                 <h3>George Koshy</h3>
-                <span class="eyebrow">Co-Founder & Partner (Industrial Systems)</span>
+                <span class="eyebrow">Co-Founder &amp; Partner (Industrial Systems)</span>
                 <p style="font-size: 0.95rem; line-height: 1.8;">28 years in manufacturing strategy, industrial markets, and macro-economic risk assessment. Specializes in translating macro trends into micro-level operational strategy. Deep expertise in manufacturing systems, supply chain optimization, and working capital management.</p>
                 <p style="font-size: 0.95rem; line-height: 1.8;">Previously led operations for mid-market industrial firms navigating currency volatility, commodity price shocks, and geopolitical disruption. Built predictive models linking macro indicators to plant-level decision-making.</p>
-                <p style="font-size: 0.95rem; line-height: 1.8;">Brings industrial realism to strategy work—understands that elegant frameworks collapse without execution discipline. Known for identifying cash leakage in inventory, procurement, and working capital that leadership teams overlook.</p>
                 <p style="font-size: 0.95rem; line-height: 1.8; margin-bottom: 0; font-style: italic;">"Strategy that ignores macro risk is just wishful thinking. We build frameworks that survive external shocks."</p>
             </div>
 
-            <!-- PARTNER 3: Dr. Anjali Reddy -->
+            <!-- PARTNER: Dr. Anjali Reddy -->
             <div class="team-member-card">
                 <h3>Dr. Anjali Reddy</h3>
-                <span class="eyebrow">Partner (Financial Systems & Analytics)</span>
+                <span class="eyebrow">Partner (Financial Systems &amp; Analytics)</span>
                 <p style="font-size: 0.95rem; line-height: 1.8;">PhD in Financial Economics. 18 years in institutional finance, performance analytics, and capital allocation. Translates complex financial data into actionable strategy. Specializes in uncovering hidden inefficiencies in cost structures, pricing models, and capital deployment.</p>
                 <p style="font-size: 0.95rem; line-height: 1.8;">Previously built financial intelligence systems for PE-backed growth companies. Expert in margin analysis, customer profitability segmentation, and cash conversion cycle optimization. Designs diagnostic frameworks that make invisible dysfunction visible.</p>
-                <p style="font-size: 0.95rem; line-height: 1.8; margin-bottom: 0; font-style: italic;">"Numbers don't lie. But most organizations don't ask the right questions. We do."</p>
+                <p style="font-size: 0.95rem; line-height: 1.8; margin-bottom: 0; font-style: italic;">"Numbers don't lie. But most organisations don't ask the right questions. We do."</p>
             </div>
 
-            <!-- PARTNER 4: Vikram Malhotra -->
+            <!-- PARTNER: Vikram Malhotra -->
             <div class="team-member-card">
                 <h3>Vikram Malhotra</h3>
-                <span class="eyebrow">Partner (Operations & Process Design)</span>
+                <span class="eyebrow">Partner (Operations &amp; Process Design)</span>
                 <p style="font-size: 0.95rem; line-height: 1.8;">22 years in operational excellence, process engineering, and systems thinking. Built scalable operations for companies growing from ₹10Cr to ₹100Cr+. Specializes in diagnosing why processes that worked at smaller scale break under growth pressure.</p>
                 <p style="font-size: 0.95rem; line-height: 1.8;">Previously led operations transformation for B2B services firms, education institutions, and professional services. Expert in workflow automation, delivery systems, and building operational capacity without adding headcount.</p>
                 <p style="font-size: 0.95rem; line-height: 1.8; margin-bottom: 0; font-style: italic;">"Growth doesn't break businesses. Broken processes that can't scale break businesses. We fix the process, then growth becomes possible."</p>
             </div>
 
-            <!-- PARTNER 5: Priya Chakraborty -->
+            <!-- PARTNER: Priya Chakraborty -->
             <div class="team-member-card">
                 <h3>Priya Chakraborty</h3>
-                <span class="eyebrow">Partner (Technology & Systems Architecture)</span>
-                <p style="font-size: 0.95rem; line-height: 1.8;">15 years in enterprise technology, systems architecture, and digital transformation. Builds technology that solves root problems, not symptoms. Specializes in diagnosing when organizations need software versus when they need strategy.</p>
+                <span class="eyebrow">Partner (Technology &amp; Systems Architecture)</span>
+                <p style="font-size: 0.95rem; line-height: 1.8;">15 years in enterprise technology, systems architecture, and digital transformation. Builds technology that solves root problems, not symptoms. Specializes in diagnosing when organisations need software versus when they need strategy.</p>
                 <p style="font-size: 0.95rem; line-height: 1.8;">Previously architected systems for fintech, edtech, and B2B SaaS companies. Expert in CRM systems, workflow automation, and AI-powered analytics. Known for ruthlessly eliminating "nice-to-have" features to focus on solving the actual problem.</p>
                 <p style="font-size: 0.95rem; line-height: 1.8; margin-bottom: 0; font-style: italic;">"Most technology projects fail because they automate broken processes. We diagnose the dysfunction first, then build technology that fixes it."</p>
             </div>
 
+            <!-- AI ENGINE NOTE — from implementation manual -->
+            <div style="background: var(--bg-offwhite); border-left: 4px solid var(--accent-gold); border-radius: 0 4px 4px 0; padding: 24px 28px; margin: 8px 0 40px;">
+                <h4 style="margin-top:0; margin-bottom:8px; font-size:0.95rem;">Our Diagnostic Engine</h4>
+                <p style="font-size:0.9rem; margin-bottom:12px;">Our diagnostic engine is powered by AI — trained on 25 years of real case patterns from these practitioners. It is not generic AI. It is the accumulated pattern recognition of 50+ institutional transformations, made accessible at scale. Every paid diagnostic report draws on this proprietary database.</p>
+                <a href="diagnostics.html" style="font-size:0.85rem; color:var(--accent-navy); font-weight:600;">See how the diagnostics work →</a>
+            </div>
 
-            <!-- FIRM APPROACH -->
-            <div style="background: var(--bg-offwhite); padding: 40px; border-radius: 4px; margin: 60px 0;">
-                <h3 style="margin-top: 0;">Our Approach</h3>
-                <p>We're a boutique firm. No junior analysts. No PowerPoint factories. Just experienced partners who've seen enough dysfunction to recognize patterns instantly.</p>
+            <!-- OUR APPROACH -->
+            <div class="approach-block">
+                <h3>Our Approach</h3>
+                <p>We're a boutique firm. No junior analysts. No PowerPoint factories. Just experienced partners who've seen enough dysfunction to recognise patterns instantly.</p>
                 <p>When you work with Kernorigin, you get:</p>
                 <ul style="line-height: 2;">
-                    <li><strong>Direct partner access</strong> – No delegation to juniors. Partners do the work.</li>
-                    <li><strong>25+ years of pattern recognition</strong> – Not textbook theory. Real experience across industries.</li>
-                    <li><strong>Honest diagnosis</strong> – We tell you what's broken, not what you want to hear.</li>
-                    <li><strong>Targeted interventions</strong> – No generic best practices. Custom solutions for your root cause.</li>
-                    <li><strong>Implementation support</strong> — We don't just recommend. We stay until it sticks.</li> </ul> <p style="margin-top: 20px; margin-bottom: 0; padding-top: 20px; border-top: 1px solid var(--border-light);"> <strong>Our diagnostic engine is powered by AI — trained on 25 years of real case patterns from these practitioners.</strong> It is not generic AI. It is the accumulated pattern recognition of 50+ institutional transformations, made accessible at scale. Every paid diagnostic report draws on this proprietary database. <a href="diagnostics.html" style="color: var(--accent-navy); text-decoration: underline;">See how the diagnostics work &rarr;</a> </p> </div>>
+                    <li><strong>Direct partner access</strong> — No delegation to juniors. Partners do the work.</li>
+                    <li><strong>25 years of pattern recognition</strong> — Not textbook theory. Real experience across industries.</li>
+                    <li><strong>Honest diagnosis</strong> — We tell you what's broken, not what you want to hear.</li>
+                    <li><strong>Targeted interventions</strong> — No generic best practices. Custom solutions for your root cause.</li>
+                    <li><strong>Implementation support</strong> — We don't just recommend. We stay until it sticks.</li>
+                </ul>
+            </div>
 
-            <!-- HISTORY -->
-            <div style="margin-bottom: 60px;">
+            <!-- OUR STORY -->
+            <div class="prose-section">
                 <h3>Our Story</h3>
-                <p><strong>Value Drive Consulting (2001-2019):</strong> Founded with international clients from day one. Built a reputation for surgical root cause diagnosis across education, manufacturing, and professional services. Worked quietly, produced results, earned trust.</p>
-                <p><strong>Kernorigin (2019-Present):</strong> Rebranded to reflect our core methodology—finding the origin of institutional dysfunction. Same partners. Same diagnostic rigor. Expanded into technology systems and AI-powered analytics while maintaining focus on root cause problem-solving.</p>
+                <p><strong>Value Drive Consulting (2001–2019):</strong> Founded with international clients from day one. Built a reputation for surgical root cause diagnosis across education, manufacturing, and professional services. Worked quietly, produced results, earned trust.</p>
+                <p><strong>Kernorigin (2019–Present):</strong> Rebranded to reflect our core methodology — finding the origin of institutional dysfunction. Same partners. Same diagnostic rigor. Expanded into technology systems and AI-powered analytics while maintaining focus on root cause problem-solving.</p>
                 <p style="margin-bottom: 0;">We've been finding what's actually broken for 25 years. The name changed. The approach never did.</p>
             </div>
 
             <!-- WHY WE DO THIS -->
-            <div style="margin-bottom: 60px;">
+            <div class="prose-section">
                 <h3>Why We Do This</h3>
-                <p>Most consultants sell solutions. We find root causes. Why?</p>
-                <p>Because we've watched too many organizations waste money on band-aid solutions that don't stick. We've seen leadership teams exhaust themselves working harder when they should be working differently. We've seen potential squandered because the real problem was never diagnosed.</p>
+                <p>Most consultants sell solutions. We find root causes. Because we've watched too many organisations waste money on band-aid solutions that don't stick. We've seen leadership teams exhaust themselves working harder when they should be working differently. We've seen potential squandered because the real problem was never diagnosed.</p>
                 <p style="margin-bottom: 0;">That's wasteful. And we don't do wasteful work.</p>
             </div>
 
             <!-- GLOBAL REACH -->
-            <div class="card" style="background: var(--accent-navy); color: white; margin-bottom: 60px;">
-                <h3 style="color: white; margin-top: 0;">Global Reach, Strategic Focus</h3>
-                <p style="color: rgba(255,255,255,0.9);">Since 2001, we've worked with clients across India, Southeast Asia, Middle East, North America, and Europe. Not because we chase geography, but because root cause problems are universal.</p>
-                <p style="color: rgba(255,255,255,0.9); margin-bottom: 0;">We take on a limited number of engagements per year. We're strategic partners, not vendors. We work with leadership teams who value diagnostic rigor over quick fixes.</p>
+            <div class="global-card">
+                <h3>Global Reach, Strategic Focus</h3>
+                <p>Since 2001, we've worked with clients across India, Southeast Asia, Middle East, North America, and Europe. Not because we chase geography, but because root cause problems are universal.</p>
+                <p>We take on a limited number of engagements per year. We're strategic partners, not vendors. We work with leadership teams who value diagnostic rigor over quick fixes.</p>
             </div>
 
             <!-- ACADEMIC FOUNDATION -->
-            <div style="margin-bottom: 60px;">
+            <div class="prose-section">
                 <h3>Academic Foundation</h3>
-                <p>Our team brings credentials from IIM Bangalore, ISB, and leading global institutions. We leverage research-backed frameworks for organizational diagnosis.</p>
+                <p>Our team brings credentials from IIM Bangalore, ISB, and leading global institutions. We leverage research-backed frameworks for organisational diagnosis.</p>
                 <p style="margin-bottom: 0;">But we're not academics. We're practitioners who use frameworks to diagnose, not impress. Theory informs our work. Experience drives our recommendations.</p>
             </div>
 
-            <!-- CTA -->
-            <div style="text-align: center; margin-top: 80px; padding-top: 60px; border-top: 1px solid var(--border-light);">
+            <!-- BOTTOM CTA -->
+            <div class="team-cta">
                 <h3>Ready to work with us?</h3>
-                <p style="max-width: 600px; margin: 20px auto 30px auto;">We take on a limited number of engagements per year. If you're ready for honest diagnosis and sustainable transformation, let's talk.</p>
+                <p>We take on a limited number of engagements per year. If you're ready for honest diagnosis and sustainable transformation, let's talk.</p>
                 <a href="contact.html" class="btn">Start a Conversation</a>
             </div>
+
         </div>
     </main>
 
@@ -162,7 +266,8 @@
             &copy; 2026 Kernorigin. All rights reserved.
         </div>
     </footer>
-    
+
+    <script src="config.js"></script>
     <script src="mobile-menu.js"></script>
 </body>
 </html>
