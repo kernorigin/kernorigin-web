@@ -599,7 +599,7 @@
         <section class="sys-hero">
             <div class="container">
                 <div class="sys-hero-inner">
-                    <div class="sys-eyebrow">Systems &amp; Process Diagnostic</div>
+                    <div class="sys-eyebrow">Technology Investment Readiness Tool</div>
                     <h1>Before you build,<br>diagnose what you <em>actually need</em>.</h1>
                     <p>90% of technology projects fail because they automate a broken process. This tool tells you whether your process is actually ready — before you commit to implementation. Independent. Vendor-neutral. We will tell you if you do not need software.</p>
                 </div>
@@ -612,16 +612,16 @@
                 <p class="outcomes-label">This diagnostic delivers one of three specific recommendations</p>
                 <div class="outcomes-row">
                     <div class="outcome-card build">
-                        <div class="outcome-badge">Build</div>
-                        <p>Your process is sound. You need technology to scale it.<br>Investment range: ₹7.5L–₹20L · Timeline: 3–6 weeks.</p>
+                        <div class="outcome-badge">Ready to Scale</div>
+                        <p>Your process is structurally sound. You are cleared to proceed to technology vendor selection.</p>
                     </div>
                     <div class="outcome-card consult">
-                        <div class="outcome-badge">Consult First</div>
-                        <p>Your process needs redesign before any technology commitment.<br>Investment range: ₹25L–₹45L · Timeline: 6–10 weeks.</p>
+                        <div class="outcome-badge">Process Redesign Required</div>
+                        <p>Your process requires manual redesign before any technology commitment. Buying software now will accelerate chaos.</p>
                     </div>
                     <div class="outcome-card hybrid">
-                        <div class="outcome-badge">Hybrid</div>
-                        <p>Redesign the process, then build on the new foundation.<br>Investment range: ₹35L–₹60L · Timeline: 8–12 weeks.</p>
+                        <div class="outcome-badge">Structural Mismatch</div>
+                        <p>The proposed technology solves a symptom. The root cause lies in your People or Strategy cylinders. A pivot is required before any implementation spend.</p>
                     </div>
                 </div>
             </div>
@@ -642,16 +642,16 @@
                     <div class="how-step">
                         <div class="how-step-num">2</div>
                         <div class="how-step-text">
-                            <strong>Free — no payment required</strong>
-                            <span>Free. No payment required. Full PDF report emailed to you.</span>
+                            <strong>Intelligence, not sales</strong>
+                            <span>Pattern-matched against 50+ verified enterprise failures. Free — no payment required.</span>
                         </div>
                     </div>
                     <div class="how-divider">→</div>
                     <div class="how-step">
                         <div class="how-step-num">3</div>
                         <div class="how-step-text">
-                            <strong>50-page report + strategy call</strong>
-                            <span>PDF delivered within minutes. Strategy call within 24–48 hours.</span>
+                            <strong>Executive Summary PDF + eligibility assessment</strong>
+                            <span>PDF delivered within minutes. Eligible submissions receive an invitation for a 1:1 triage call with our root-cause specialists.</span>
                         </div>
                     </div>
                 </div>
@@ -713,7 +713,7 @@
                     <!-- ── STEP 7: Review ── -->
                     <div class="form-step" id="step-review">
                         <h2>Review your responses.</h2>
-                        <p class="step-sub">Here is your score across the six operational domains. Complete the diagnostic to receive your full 50-page report and Build / Consult / Hybrid recommendation.</p>
+                        <p class="step-sub">Here is your score across the six operational domains. Complete the diagnostic to receive your Executive Summary PDF and operational readiness determination.</p>
                         <div class="review-grid" id="review-domain-cards"><!-- populated by JS --></div>
                         <div class="review-total">
                             <div>
@@ -725,14 +725,14 @@
                         <div class="review-predicted-outcome" id="review-predicted"><!-- populated by JS --></div>
                         <div class="review-price-note">
                             <div class="price" style="color:#059669; font-size:1.4rem;">Free</div>
-                            <p>No payment required · PDF report emailed · Strategy call within 24–48 hours</p>
+                            <p>No payment required · Executive Summary PDF emailed immediately · Eligible for priority debrief call based on diagnostic severity</p>
                             <div style="margin-top: 14px; display: flex; flex-direction: column; gap: 4px;">
                                 <div class="review-includes">Process architecture mapped end to end</div>
                                 <div class="review-includes">Specific Build / Consult / Hybrid recommendation with rationale</div>
                                 <div class="review-includes">Investment range &amp; timeline for the recommended path</div>
                                 <div class="review-includes">Technology audit — current stack vs. what the process requires</div>
                                 <div class="review-includes">90-day systems overhaul roadmap</div>
-                                <div class="review-includes">Credited in full against any implementation engagement</div>
+                                <div class="review-includes">Eligible for priority debrief call based on diagnostic severity</div>
                             </div>
                         </div>
                     </div>
@@ -771,7 +771,7 @@
                             </div>
                             <div class="proc-step" id="proc-5">
                                 <div class="proc-dot"></div>
-                                Preparing 50-page report PDF
+                                Preparing Executive Summary PDF
                             </div>
                         </div>
                     </div>
@@ -782,7 +782,7 @@
                     <div class="results-header">
                         <span class="eyebrow">Diagnostic Complete</span>
                         <h2 id="results-title">Your Systems Diagnostic Results</h2>
-                        <p id="results-subtitle">Full 50-page report and strategy call details sent to your email.</p>
+                        <p id="results-subtitle">Your Executive Summary PDF has been sent to your email.</p>
                     </div>
                     <div class="results-body">
                         <div class="results-overall">
@@ -795,7 +795,7 @@
                         <div class="domain-results-grid" id="domain-results-grid"><!-- populated by JS --></div>
                         <div class="results-outcome" id="results-outcome"><!-- populated by JS --></div>
                         <div class="email-note">
-                            <p>✓ <strong>Your 50-page report has been sent to your email.</strong> It contains your full process architecture map, the Build / Consult / Hybrid recommendation with specific rationale, investment ranges, a 90-day roadmap, and your strategy call booking link.</p>
+                            <p>✓ <strong>Your Executive Summary PDF has been sent to your email.</strong> It contains your operational readiness determination, the specific structural issues identified, and your recommended next step. If your diagnostic indicates significant misalignment, our team will reach out with an invitation for a 1:1 triage call.</p>
                         </div>
                         <div class="results-next">
                             <a href="contact.html" class="btn">Speak to the team</a>
@@ -1542,19 +1542,19 @@
         if (processPct >= 65 && techPct < 50) {
             return {
                 type: 'build',
-                label: 'Likely: BUILD',
+                label: 'Likely: READY TO SCALE',
                 text: 'Your process foundation looks solid. The primary gap is technology to scale and automate what you already do well. The full report will confirm whether this is the right path.'
             };
         } else if (processPct < 50) {
             return {
                 type: 'consult',
-                label: 'Likely: CONSULT FIRST',
+                label: 'Likely: PROCESS REDESIGN REQUIRED',
                 text: 'Your process architecture has gaps that technology would amplify, not solve. The full report will identify exactly what needs redesigning before any technology investment is made.'
             };
         } else {
             return {
                 type: 'hybrid',
-                label: 'Likely: HYBRID',
+                label: 'Likely: STRUCTURAL MISMATCH',
                 text: 'You have areas of strength and areas that need redesign. The full report will separate what to build on from what to fix first, and sequence them correctly.'
             };
         }
