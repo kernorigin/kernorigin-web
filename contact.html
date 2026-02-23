@@ -20,43 +20,126 @@
                     <li><a href="partners.html">Partners</a></li>
                     <li><a href="team.html">Team</a></li>
                     <li><a href="insights.html">Insights</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="contact.html" class="active">Contact</a></li>
                 </ul>
             </nav>
         </div>
     </header>
-    <main class="container section-padding">
-        <div class="readable-column text-center">
-            <span class="eyebrow">Start a Conversation</span>
-            <h1>What's Stuck?</h1>
-            <p>No pitch. No pressure. Every conversation starts with one question: What's stuck?</p>
-        </div>
-        
-        <div class="readable-column" style="margin-top: 60px;">
-            <div class="card" style="box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
-                <form id="contactForm" onsubmit="sendContact(event)">
-                    <label>Name</label>
-                    <input type="text" name="name" required>
-                    
-                    <label>Email</label>
-                    <input type="email" name="email" required>
-                    
-                    <label>Organization / Phone</label>
-                    <input type="text" name="phone" placeholder="Optional">
-                    
-                    <label>What's stuck? (The Symptom)</label>
-                    <textarea name="message" rows="5" required placeholder="Tell us what's not working..."></textarea>
-                    
-                    <button type="submit" id="sendBtn" class="btn" style="width:100%;">Start Conversation</button>
-                </form>
-                
-                <div id="statusMessage" style="margin-top: 20px; padding: 15px; border-radius: 4px; display: none;"></div>
+    <main>
+        <!-- HERO -->
+        <section style="background: var(--accent-navy); padding: 72px 0 64px; position: relative; overflow: hidden;">
+            <div style="position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px); background-size: 52px 52px;"></div>
+            <div class="container" style="position: relative; max-width: 700px;">
+                <span class="eyebrow" style="color: var(--accent-gold);">Start a Conversation</span>
+                <h1 style="color: white; font-size: 2.8rem; margin-bottom: 20px;">What's Stuck?</h1>
+                <p style="color: rgba(255,255,255,0.75); font-size: 1.05rem; max-width: 540px; line-height: 1.8;">No pitch. No pressure. Every conversation starts with one question: what's not working? We listen first. We diagnose. We tell you what we find — including whether we're the right firm to fix it.</p>
             </div>
-            
-            <div style="text-align: center; margin-top: 40px; font-size: 0.9rem; color: #666;">
-                <p>Confidentiality Guaranteed.<br>We usually reply within 24 hours.</p>
+        </section>
+
+        <!-- THREE SIGNALS -->
+        <section style="background: var(--bg-offwhite); border-bottom: 1px solid var(--border-light); padding: 40px 0;">
+            <div class="container">
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; max-width: 860px; margin: 0 auto; text-align: center;">
+                    <div>
+                        <div style="font-family: var(--font-serif); font-size: 1.6rem; font-weight: 700; color: var(--accent-navy); margin-bottom: 8px;">24h</div>
+                        <div style="font-size: 0.82rem; color: var(--text-muted);">Peria reviews every submission personally within 24 hours</div>
+                    </div>
+                    <div>
+                        <div style="font-family: var(--font-serif); font-size: 1.6rem; font-weight: 700; color: var(--accent-navy); margin-bottom: 8px;">0</div>
+                        <div style="font-size: 0.82rem; color: var(--text-muted);">Sales calls. We don't pitch. We diagnose.</div>
+                    </div>
+                    <div>
+                        <div style="font-family: var(--font-serif); font-size: 1.6rem; font-weight: 700; color: var(--accent-navy); margin-bottom: 8px;">100%</div>
+                        <div style="font-size: 0.82rem; color: var(--text-muted);">Confidential. We have never disclosed a client conversation.</div>
+                    </div>
+                </div>
             </div>
-        </div>
+        </section>
+
+        <!-- FORM + SIDEBAR -->
+        <section class="section-padding">
+            <div class="container">
+                <div style="display: grid; grid-template-columns: 1fr 380px; gap: 60px; align-items: start; max-width: 1000px; margin: 0 auto;">
+
+                    <!-- FORM -->
+                    <div>
+                        <h2 style="margin-bottom: 8px;">Tell us what's stuck.</h2>
+                        <p style="margin-bottom: 32px;">Describe the symptom as you see it. We'll find the cause.</p>
+                        <div class="card" style="box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
+                            <form id="contactForm" onsubmit="sendContact(event)">
+                                <label>Your Name</label>
+                                <input type="text" name="name" required placeholder="First name is fine">
+
+                                <label>Email Address</label>
+                                <input type="email" name="email" required placeholder="Replies go here">
+
+                                <label>Organisation &amp; Role</label>
+                                <input type="text" name="phone" placeholder="e.g. CEO, Acme Manufacturing">
+
+                                <label>What's stuck? (Describe the symptom)</label>
+                                <textarea name="message" rows="6" required placeholder="Revenue is flat despite good sales activity... / We keep losing clients we shouldn't... / The team is busy but nothing seems to move..."></textarea>
+
+                                <div style="margin: 20px 0 24px; padding: 14px 16px; background: var(--bg-offwhite); border-radius: 4px; font-size: 0.82rem; color: var(--text-muted); line-height: 1.6;">
+                                    Peria reads every submission personally. If your situation warrants a conversation, you'll hear from us directly — not from a sales team.
+                                </div>
+
+                                <button type="submit" id="sendBtn" class="btn" style="width:100%; padding: 18px;">Start the Conversation</button>
+                            </form>
+                            <div id="statusMessage" style="margin-top: 20px; padding: 15px; border-radius: 4px; display: none;"></div>
+                        </div>
+                    </div>
+
+                    <!-- SIDEBAR -->
+                    <div>
+                        <!-- Not sure which is right? -->
+                        <div style="background: var(--bg-offwhite); border: 1px solid var(--border-light); border-radius: 8px; padding: 28px; margin-bottom: 24px;">
+                            <h4 style="margin-top: 0; margin-bottom: 12px; font-size: 1rem;">Not sure which path to take?</h4>
+                            <p style="font-size: 0.85rem; margin-bottom: 16px;">If you're not sure whether you need a conversation or a diagnostic, start with the free assessment. It takes 5 minutes and often makes the right path obvious.</p>
+                            <a href="assessment.html" style="display: block; text-align: center; padding: 12px 20px; background: var(--accent-navy); color: white; border-radius: 2px; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px;">Start Free Assessment →</a>
+                            <a href="diagnostics.html" style="display: block; text-align: center; padding: 10px 20px; border: 1px solid var(--border-light); border-radius: 2px; font-size: 0.78rem; color: var(--text-muted);">See all diagnostic options →</a>
+                        </div>
+
+                        <!-- What happens next -->
+                        <div style="border: 1px solid var(--border-light); border-radius: 8px; padding: 28px; margin-bottom: 24px;">
+                            <h4 style="margin-top: 0; margin-bottom: 16px; font-size: 1rem;">What happens next</h4>
+                            <div style="display: flex; flex-direction: column; gap: 14px;">
+                                <div style="display: flex; gap: 12px; align-items: flex-start;">
+                                    <div style="min-width: 24px; height: 24px; border-radius: 50%; background: var(--accent-navy); color: white; font-size: 0.7rem; font-weight: 700; display: flex; align-items: center; justify-content: center;">1</div>
+                                    <div style="font-size: 0.83rem; color: var(--text-muted); line-height: 1.6;">Peria reads your submission within 24 hours</div>
+                                </div>
+                                <div style="display: flex; gap: 12px; align-items: flex-start;">
+                                    <div style="min-width: 24px; height: 24px; border-radius: 50%; background: var(--accent-navy); color: white; font-size: 0.7rem; font-weight: 700; display: flex; align-items: center; justify-content: center;">2</div>
+                                    <div style="font-size: 0.83rem; color: var(--text-muted); line-height: 1.6;">If your situation warrants a direct conversation, you receive a personal reply — not a template</div>
+                                </div>
+                                <div style="display: flex; gap: 12px; align-items: flex-start;">
+                                    <div style="min-width: 24px; height: 24px; border-radius: 50%; background: var(--accent-navy); color: white; font-size: 0.7rem; font-weight: 700; display: flex; align-items: center; justify-content: center;">3</div>
+                                    <div style="font-size: 0.83rem; color: var(--text-muted); line-height: 1.6;">First conversation is a diagnosis, not a pitch. We ask questions. We listen.</div>
+                                </div>
+                                <div style="display: flex; gap: 12px; align-items: flex-start;">
+                                    <div style="min-width: 24px; height: 24px; border-radius: 50%; background: var(--accent-gold); color: white; font-size: 0.7rem; font-weight: 700; display: flex; align-items: center; justify-content: center;">4</div>
+                                    <div style="font-size: 0.83rem; color: var(--text-muted); line-height: 1.6;">We tell you what we find — including if someone else is better placed to help you</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Peria quote -->
+                        <div style="background: var(--accent-navy); border-radius: 8px; padding: 28px;">
+                            <p style="color: rgba(255,255,255,0.85); font-style: italic; font-size: 0.88rem; line-height: 1.7; margin-bottom: 16px;">"The most valuable thing we do in a first conversation is listen without an agenda. Most people have never had a consultant tell them: you don't need us for this."</p>
+                            <div style="font-size: 0.75rem; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.12em;">Peria F. Malayappa · Founder</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- MOBILE: stack sidebar below form -->
+        <style>
+        @media (max-width: 900px) {
+            #contact-layout { grid-template-columns: 1fr !important; }
+            .contact-stats { grid-template-columns: 1fr !important; gap: 20px !important; }
+        }
+        </style>
     </main>
     
     <script src="config.js"></script>
