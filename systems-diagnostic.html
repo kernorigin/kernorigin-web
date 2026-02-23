@@ -589,11 +589,7 @@
                     <li><a href="contact.html">Contact</a></li>
                 </ul>
             </nav>
-            <button class="mobile-menu-toggle" aria-label="Toggle menu">
-                <span class="hamburger-line"></span>
-                <span class="hamburger-line"></span>
-                <span class="hamburger-line"></span>
-            </button>
+
         </div>
     </header>
 
@@ -646,8 +642,8 @@
                     <div class="how-step">
                         <div class="how-step-num">2</div>
                         <div class="how-step-text">
-                            <strong>One-time investment</strong>
-                            <span>₹49,997. Credited in full against any implementation engagement.</span>
+                            <strong>Free — no payment required</strong>
+                            <span>Free. No payment required. Full PDF report emailed to you.</span>
                         </div>
                     </div>
                     <div class="how-divider">→</div>
@@ -728,8 +724,8 @@
                         </div>
                         <div class="review-predicted-outcome" id="review-predicted"><!-- populated by JS --></div>
                         <div class="review-price-note">
-                            <div class="price">₹49,997</div>
-                            <p>One-time · 50-page PDF report · Strategy call within 24–48 hours</p>
+                            <div class="price" style="color:#059669; font-size:1.4rem;">Free</div>
+                            <p>No payment required · PDF report emailed · Strategy call within 24–48 hours</p>
                             <div style="margin-top: 14px; display: flex; flex-direction: column; gap: 4px;">
                                 <div class="review-includes">Process architecture mapped end to end</div>
                                 <div class="review-includes">Specific Build / Consult / Hybrid recommendation with rationale</div>
@@ -837,7 +833,6 @@
     </footer>
 
     <!-- Razorpay -->
-    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <script src="config.js"></script>
     <script src="mobile-menu.js"></script>
 
@@ -1417,8 +1412,8 @@
 
         // Next button label
         if (idx === 7) {
-            nextBtn.textContent = 'Pay ₹49,997 & Get Report →';
-            nextBtn.classList.add('btn-pay');
+            nextBtn.textContent = 'Get My Free Report →';
+            nextBtn.classList.remove('btn-pay');
             note.textContent = '';
         } else if (idx === 0) {
             nextBtn.textContent = 'Start Diagnostic →';
@@ -1603,48 +1598,8 @@
     // PAYMENT (RAZORPAY)
     // ============================================================
     function initiatePayment() {
-        const cfg = window.KERNORIGIN_CONFIG || {};
-        const key = cfg.razorpayKeyId || '';
-
-        if (!key) {
-            // Fallback: skip payment if key not configured (dev mode)
-            console.warn('Razorpay key not found in config.js — skipping payment in dev mode.');
-            submitDiagnostic('DEV_MODE_' + Date.now());
-            return;
-        }
-
-        const options = {
-            key:      key,
-            amount:   4999700, // ₹49,997 in paise
-            currency: 'INR',
-            name:     'Kernorigin',
-            description: 'Technology Investment Readiness Tool',
-            image:    'https://kernorigin.com/favicon.ico',
-            prefill: {
-                name:  state.contact.name,
-                email: state.contact.email
-            },
-            notes: {
-                business: state.contact.business,
-                product:  'systems_diagnostic'
-            },
-            theme: { color: '#002244' },
-            handler: function(response) {
-                state.paymentId = response.razorpay_payment_id;
-                submitDiagnostic(response.razorpay_payment_id, response.razorpay_order_id, response.razorpay_signature);
-            },
-            modal: {
-                ondismiss: function() {
-                    showError('Payment was not completed. Your answers are saved — click "Pay & Get Report" to try again.');
-                }
-            }
-        };
-
-        const rzp = new Razorpay(options);
-        rzp.on('payment.failed', function(response) {
-            showError('Payment failed: ' + (response.error.description || 'Unknown error. Please try again.'));
-        });
-        rzp.open();
+        // Systems Diagnostic is FREE — submit directly without payment
+        submitDiagnostic('FREE_' + Date.now());
     }
 
     // ============================================================
