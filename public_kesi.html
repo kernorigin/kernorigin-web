@@ -1,0 +1,1365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Executive Stability Scan — Kernorigin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* ============================================================
+     KERNORIGIN KESI — DESIGN SYSTEM
+     Aesthetic: Institutional precision. Dark calibration tool.
+     ============================================================ */
+
+  :root {
+    --ink:        #0a0a0f;
+    --ink-mid:    #1a1a24;
+    --ink-soft:   #2a2a38;
+    --border:     #2e2e40;
+    --border-dim: #1e1e2c;
+    --text:       #e8e8f0;
+    --text-mid:   #9898b0;
+    --text-dim:   #5a5a70;
+    --signal:     #c8a96e;
+    --signal-dim: #6e5a30;
+    --signal-soft:#3a2e18;
+    --green:      #4aaa7a;
+    --green-dim:  #1e4433;
+    --red:        #cc5555;
+    --red-dim:    #4a1f1f;
+    --blue:       #5588cc;
+    --radius:     6px;
+    --transition: 220ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Instrument Sans', sans-serif;
+    background: var(--ink);
+    color: var(--text);
+    min-height: 100vh;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ---- GRID BACKGROUND ---- */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--border-dim) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border-dim) 1px, transparent 1px);
+    background-size: 48px 48px;
+    opacity: 0.35;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ---- LAYOUT ---- */
+  .kesi-shell {
+    position: relative;
+    z-index: 1;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  /* ---- HEADER ---- */
+  .kesi-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 52px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .kesi-wordmark {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+
+  .kesi-wordmark span {
+    color: var(--signal);
+  }
+
+  .kesi-version {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+  }
+
+  /* ---- HERO ---- */
+  .kesi-hero {
+    margin-bottom: 44px;
+  }
+
+  .kesi-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--signal);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .kesi-eyebrow::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--signal-dim);
+    max-width: 120px;
+  }
+
+  .kesi-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(30px, 5vw, 42px);
+    line-height: 1.18;
+    color: var(--text);
+    margin-bottom: 18px;
+  }
+
+  .kesi-title em {
+    font-style: italic;
+    color: var(--signal);
+  }
+
+  .kesi-subtitle {
+    font-size: 15px;
+    color: var(--text-mid);
+    max-width: 560px;
+    line-height: 1.65;
+  }
+
+  .kesi-meta {
+    display: flex;
+    gap: 24px;
+    margin-top: 24px;
+    flex-wrap: wrap;
+  }
+
+  .kesi-meta-item {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+
+  .kesi-meta-item::before {
+    content: '';
+    width: 4px;
+    height: 4px;
+    background: var(--signal);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ---- SCREENS ---- */
+  .screen { display: none; }
+  .screen.active { display: block; }
+
+  /* ---- INTAKE FORM ---- */
+  .intake-card {
+    background: var(--ink-mid);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 32px;
+    margin-bottom: 12px;
+  }
+
+  .intake-card h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+
+  .intake-card p {
+    font-size: 13px;
+    color: var(--text-mid);
+    margin-bottom: 24px;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+
+  .form-row.full { grid-template-columns: 1fr; }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .form-group label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+
+  .form-group input,
+  .form-group select {
+    background: var(--ink-soft);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text);
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 14px;
+    padding: 10px 14px;
+    outline: none;
+    transition: border-color var(--transition);
+    -webkit-appearance: none;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus {
+    border-color: var(--signal);
+  }
+
+  .form-group input::placeholder {
+    color: var(--text-dim);
+  }
+
+  /* ---- PROGRESS INDICATOR ---- */
+  .progress-bar-shell {
+    background: var(--ink-soft);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    height: 3px;
+    margin-bottom: 32px;
+  }
+
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--signal-dim), var(--signal));
+    border-radius: var(--radius);
+    transition: width 400ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .progress-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .progress-domain {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--signal);
+  }
+
+  .progress-count {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--text-dim);
+  }
+
+  /* ---- QUESTION CARD ---- */
+  .question-card {
+    background: var(--ink-mid);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 32px;
+    margin-bottom: 20px;
+    animation: cardIn 280ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  @keyframes cardIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .question-number {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 14px;
+  }
+
+  .question-text {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    line-height: 1.38;
+    color: var(--text);
+    margin-bottom: 28px;
+  }
+
+  /* ---- LIKERT SCALE ---- */
+  .likert-container {
+    user-select: none;
+  }
+
+  .likert-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+
+  .likert-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+
+  .likert-track {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+    margin-bottom: 8px;
+  }
+
+  .likert-btn {
+    background: var(--ink-soft);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--text-dim);
+    cursor: pointer;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    height: 44px;
+    transition: all var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .likert-btn:hover {
+    border-color: var(--signal-dim);
+    color: var(--signal);
+    background: var(--signal-soft);
+  }
+
+  .likert-btn.selected {
+    background: var(--signal-soft);
+    border-color: var(--signal);
+    color: var(--signal);
+    box-shadow: 0 0 12px rgba(200, 169, 110, 0.15);
+  }
+
+  .likert-numerals {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+  }
+
+  .likert-num {
+    text-align: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    color: var(--text-dim);
+  }
+
+  /* ---- NAVIGATION ---- */
+  .nav-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 8px;
+  }
+
+  .btn {
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: var(--radius);
+    cursor: pointer;
+    padding: 11px 24px;
+    transition: all var(--transition);
+    border: 1px solid transparent;
+    letter-spacing: 0.01em;
+  }
+
+  .btn-primary {
+    background: var(--signal);
+    color: var(--ink);
+    border-color: var(--signal);
+  }
+
+  .btn-primary:hover {
+    background: #dbbf80;
+    border-color: #dbbf80;
+  }
+
+  .btn-primary:disabled {
+    background: var(--signal-dim);
+    color: var(--text-dim);
+    border-color: var(--signal-dim);
+    cursor: not-allowed;
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--text-mid);
+    border-color: var(--border);
+  }
+
+  .btn-ghost:hover {
+    border-color: var(--text-mid);
+    color: var(--text);
+  }
+
+  .btn-large {
+    width: 100%;
+    padding: 14px 24px;
+    font-size: 15px;
+  }
+
+  /* ---- EMAIL CAPTURE ---- */
+  .capture-card {
+    background: var(--ink-mid);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 36px;
+  }
+
+  .capture-card h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 24px;
+    color: var(--text);
+    margin-bottom: 10px;
+  }
+
+  .capture-card p {
+    font-size: 14px;
+    color: var(--text-mid);
+    margin-bottom: 28px;
+    line-height: 1.65;
+  }
+
+  .capture-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+
+  /* ---- LOADING ---- */
+  .loading-card {
+    background: var(--ink-mid);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 60px 40px;
+    text-align: center;
+  }
+
+  .spinner {
+    width: 36px;
+    height: 36px;
+    border: 2px solid var(--border);
+    border-top-color: var(--signal);
+    border-radius: 50%;
+    animation: spin 700ms linear infinite;
+    margin: 0 auto 24px;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .loading-card h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+
+  .loading-card p {
+    font-size: 13px;
+    color: var(--text-mid);
+  }
+
+  /* ---- RESULTS ---- */
+  .results-header {
+    background: var(--ink-mid);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 32px;
+    margin-bottom: 16px;
+  }
+
+  .regime-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--signal-soft);
+    border: 1px solid var(--signal-dim);
+    border-radius: 4px;
+    padding: 6px 14px;
+    margin-bottom: 18px;
+  }
+
+  .regime-badge-code {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--signal);
+    letter-spacing: 0.12em;
+  }
+
+  .regime-badge-dot {
+    width: 3px;
+    height: 3px;
+    background: var(--signal-dim);
+    border-radius: 50%;
+  }
+
+  .regime-badge-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--signal);
+    letter-spacing: 0.06em;
+  }
+
+  .results-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 26px;
+    color: var(--text);
+    margin-bottom: 12px;
+    line-height: 1.3;
+  }
+
+  .results-disclaimer {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--text-dim);
+    border-left: 2px solid var(--signal-dim);
+    padding-left: 12px;
+    line-height: 1.7;
+    margin-top: 16px;
+  }
+
+  /* ---- DOMAIN HEATMAP ---- */
+  .domain-grid {
+    background: var(--ink-mid);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-bottom: 16px;
+  }
+
+  .domain-grid-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 20px;
+  }
+
+  .domain-row {
+    display: grid;
+    grid-template-columns: 140px 1fr 44px;
+    gap: 14px;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+
+  .domain-name {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-mid);
+  }
+
+  .domain-bar-shell {
+    background: var(--ink-soft);
+    border-radius: 2px;
+    height: 6px;
+    overflow: hidden;
+  }
+
+  .domain-bar-fill {
+    height: 100%;
+    border-radius: 2px;
+    transition: width 600ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .domain-score {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    text-align: right;
+  }
+
+  /* ---- NARRATIVE ---- */
+  .narrative-card {
+    background: var(--ink-mid);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px;
+    margin-bottom: 16px;
+  }
+
+  .narrative-card h4 {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 14px;
+  }
+
+  .narrative-text {
+    font-size: 15px;
+    color: var(--text-mid);
+    line-height: 1.7;
+  }
+
+  /* ---- CTA ---- */
+  .cta-card {
+    background: linear-gradient(135deg, var(--ink-mid), var(--ink-soft));
+    border: 1px solid var(--signal-dim);
+    border-radius: var(--radius);
+    padding: 32px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-card::before {
+    content: '';
+    position: absolute;
+    top: -40px;
+    right: -40px;
+    width: 160px;
+    height: 160px;
+    background: radial-gradient(circle, rgba(200,169,110,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .cta-card h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    color: var(--text);
+    margin-bottom: 10px;
+  }
+
+  .cta-card p {
+    font-size: 13px;
+    color: var(--text-mid);
+    margin-bottom: 24px;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.65;
+  }
+
+  .cta-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* ---- SCORE RING ---- */
+  .score-ring-container {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+  }
+
+  .score-ring {
+    position: relative;
+    width: 90px;
+    height: 90px;
+    flex-shrink: 0;
+  }
+
+  .score-ring svg {
+    transform: rotate(-90deg);
+    width: 90px;
+    height: 90px;
+  }
+
+  .score-ring-bg {
+    fill: none;
+    stroke: var(--ink-soft);
+    stroke-width: 5;
+  }
+
+  .score-ring-fill {
+    fill: none;
+    stroke: var(--signal);
+    stroke-width: 5;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 1000ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .score-ring-label {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .score-ring-value {
+    font-family: 'DM Mono', monospace;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--signal);
+    line-height: 1;
+  }
+
+  .score-ring-unit {
+    font-family: 'DM Mono', monospace;
+    font-size: 8px;
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+    margin-top: 2px;
+  }
+
+  .score-ring-stats {
+    flex: 1;
+    min-width: 200px;
+  }
+
+  .stat-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 7px 0;
+    border-bottom: 1px solid var(--border-dim);
+  }
+
+  .stat-row:last-child { border-bottom: none; }
+
+  .stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+
+  .stat-value {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  .stat-value.risk-critical { color: var(--red); }
+  .stat-value.risk-high     { color: #cc8844; }
+  .stat-value.risk-moderate { color: #aaa840; }
+  .stat-value.risk-low      { color: var(--green); }
+  .stat-value.risk-minimal  { color: var(--text-dim); }
+
+  /* ---- MOBILE ---- */
+  @media (max-width: 540px) {
+    .kesi-shell { padding: 24px 16px 60px; }
+    .intake-card, .capture-card, .question-card { padding: 22px 18px; }
+    .form-row { grid-template-columns: 1fr; }
+    .domain-row { grid-template-columns: 100px 1fr 38px; }
+    .cta-actions { flex-direction: column; }
+    .score-ring-container { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<div class="kesi-shell">
+
+  <!-- HEADER -->
+  <header class="kesi-header">
+    <div class="kesi-wordmark"><span>Kernorigin</span> — KESI</div>
+    <div class="kesi-version">Mode C · KDI v1.0</div>
+  </header>
+
+  <!-- HERO -->
+  <div class="kesi-hero">
+    <div class="kesi-eyebrow">Executive Stability Instrument</div>
+    <h1 class="kesi-title">How does authority <em>actually</em><br>move in your organization?</h1>
+    <p class="kesi-subtitle">18 behaviorally-anchored questions. 7 minutes. An executive stability scan based on Kernorigin's institutional diagnostic framework — used in PE-backed and founder-led firms across India.</p>
+    <div class="kesi-meta">
+      <div class="kesi-meta-item">18 questions</div>
+      <div class="kesi-meta-item">5 behavioral domains</div>
+      <div class="kesi-meta-item">7-minute completion</div>
+      <div class="kesi-meta-item">Behavioral scan only</div>
+    </div>
+  </div>
+
+  <!-- ==================== SCREEN: INTAKE ==================== -->
+  <div id="screen-intake" class="screen active">
+    <div class="intake-card">
+      <h3>Before we begin</h3>
+      <p>Answer from your current operational reality — not how things should work, or used to work. There are no right answers.</p>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Your name</label>
+          <input type="text" id="in-name" placeholder="Name">
+        </div>
+        <div class="form-group">
+          <label>Your role</label>
+          <select id="in-role">
+            <option value="">Select role</option>
+            <option value="founder">Founder / Owner</option>
+            <option value="ceo">CEO / MD</option>
+            <option value="c_suite">C-Suite / Director</option>
+            <option value="vp_head">VP / Head of Function</option>
+            <option value="senior_mgr">Senior Manager</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Company name</label>
+          <input type="text" id="in-company" placeholder="Company">
+        </div>
+        <div class="form-group">
+          <label>Industry</label>
+          <select id="in-industry">
+            <option value="">Select industry</option>
+            <option value="Manufacturing">Manufacturing</option>
+            <option value="Technology">Technology / SaaS</option>
+            <option value="Healthcare">Healthcare / Pharma</option>
+            <option value="FMCG / Retail">FMCG / Retail</option>
+            <option value="Financial Services">Financial Services</option>
+            <option value="Logistics / Supply Chain">Logistics / Supply Chain</option>
+            <option value="Construction / Real Estate">Construction / Real Estate</option>
+            <option value="Professional Services">Professional Services</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row full">
+        <div class="form-group">
+          <label>Revenue band</label>
+          <select id="in-revenue">
+            <option value="">Select range</option>
+            <option value="<10Cr">Under ₹10 Cr</option>
+            <option value="10-50Cr">₹10 Cr – ₹50 Cr</option>
+            <option value="50-200Cr">₹50 Cr – ₹200 Cr</option>
+            <option value="200-500Cr">₹200 Cr – ₹500 Cr</option>
+            <option value=">500Cr">Above ₹500 Cr</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn btn-primary btn-large" onclick="startScan()">Begin Behavioral Scan →</button>
+  </div>
+
+  <!-- ==================== SCREEN: QUESTIONS ==================== -->
+  <div id="screen-questions" class="screen">
+    <div class="progress-meta">
+      <span class="progress-domain" id="q-domain-label">B1 — Founder Override</span>
+      <span class="progress-count" id="q-count-label">1 / 18</span>
+    </div>
+    <div class="progress-bar-shell">
+      <div class="progress-bar-fill" id="progress-fill" style="width: 5%"></div>
+    </div>
+
+    <div class="question-card" id="q-card">
+      <div class="question-number" id="q-number">Question 01</div>
+      <div class="question-text" id="q-text"></div>
+
+      <div class="likert-container">
+        <div class="likert-labels">
+          <span class="likert-label">Never true</span>
+          <span class="likert-label">Always true</span>
+        </div>
+        <div class="likert-track" id="likert-track"></div>
+        <div class="likert-numerals">
+          <span class="likert-num">1</span><span class="likert-num">2</span>
+          <span class="likert-num">3</span><span class="likert-num">4</span>
+          <span class="likert-num">5</span><span class="likert-num">6</span>
+          <span class="likert-num">7</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-row">
+      <button class="btn btn-ghost" id="btn-prev" onclick="prevQuestion()">← Back</button>
+      <button class="btn btn-primary" id="btn-next" onclick="nextQuestion()" disabled>Continue →</button>
+    </div>
+  </div>
+
+  <!-- ==================== SCREEN: EMAIL CAPTURE ==================== -->
+  <div id="screen-capture" class="screen">
+    <div class="capture-card">
+      <h3>Scan complete.</h3>
+      <p>Enter your email to generate your behavioral risk signature. You'll receive the full report with domain heatmap, provisional regime classification, and interpretation.</p>
+
+      <div class="capture-fields">
+        <div class="form-group">
+          <label>Work email</label>
+          <input type="email" id="cap-email" placeholder="you@company.com">
+        </div>
+      </div>
+
+      <button class="btn btn-primary btn-large" onclick="submitScan()">Generate My Report →</button>
+    </div>
+  </div>
+
+  <!-- ==================== SCREEN: LOADING ==================== -->
+  <div id="screen-loading" class="screen">
+    <div class="loading-card">
+      <div class="spinner"></div>
+      <h3>Computing behavioral signature</h3>
+      <p>Analysing 5 domains across 18 indicators. Running regime pattern matching.</p>
+    </div>
+  </div>
+
+  <!-- ==================== SCREEN: RESULTS ==================== -->
+  <div id="screen-results" class="screen">
+
+    <!-- Regime classification -->
+    <div class="results-header">
+      <div class="regime-badge" id="regime-badge">
+        <span class="regime-badge-code" id="regime-code">R3</span>
+        <span class="regime-badge-dot"></span>
+        <span class="regime-badge-label" id="regime-label">Founder Override Regime</span>
+      </div>
+      <div class="results-title" id="results-title">Behavioral scan complete.</div>
+
+      <!-- Score ring + stats -->
+      <div class="score-ring-container">
+        <div class="score-ring">
+          <svg viewBox="0 0 90 90">
+            <circle class="score-ring-bg" cx="45" cy="45" r="38"/>
+            <circle class="score-ring-fill" id="ring-fill" cx="45" cy="45" r="38"
+              stroke-dasharray="238.76"
+              stroke-dashoffset="238.76"/>
+          </svg>
+          <div class="score-ring-label">
+            <span class="score-ring-value" id="ring-value">0.0</span>
+            <span class="score-ring-unit">B-TOTAL</span>
+          </div>
+        </div>
+        <div class="score-ring-stats" id="score-stats"></div>
+      </div>
+
+      <div class="results-disclaimer" id="results-disclaimer">
+        PROVISIONAL — Behavioral scan only. Structural capacity (S) and cross-respondent coherence (PCI) not measured.<br>
+        R7 and R9 classifications require Full Institutional Diagnostic.
+      </div>
+    </div>
+
+    <!-- Domain heatmap -->
+    <div class="domain-grid">
+      <div class="domain-grid-title">Behavioral Domain Heatmap</div>
+      <div id="domain-heatmap"></div>
+    </div>
+
+    <!-- Narrative -->
+    <div class="narrative-card" id="narrative-card">
+      <h4>Diagnostic Interpretation</h4>
+      <p class="narrative-text" id="narrative-text"></p>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-card">
+      <h3>This is your behavioral layer only.</h3>
+      <p>The Full Institutional Diagnostic adds structural capacity scoring (S1–S5), cross-respondent coherence analysis (PCI), Delta computation, and confirmed regime classification with a 90-day intervention framework.</p>
+      <div class="cta-actions">
+        <a href="mailto:contact@kernorigin.com?subject=Full Institutional Diagnostic — Request" class="btn btn-primary">Request Full Diagnostic</a>
+        <a href="/" class="btn btn-ghost">Return to Homepage</a>
+      </div>
+    </div>
+
+  </div>
+
+</div><!-- /kesi-shell -->
+
+<script src="config.js"></script>
+<script>
+// ============================================================
+// KERNORIGIN KESI — CLIENT LOGIC
+// Mode C: B1–B5 behavioral scan, 18 questions, 7-point Likert
+// ============================================================
+
+const DOMAIN_META = {
+  B1: { label: 'B1 — Founder Override Frequency',  short: 'Founder Override',  color: '#cc5555' },
+  B2: { label: 'B2 — Informal Command Routing',    short: 'Informal Routing',   color: '#cc8844' },
+  B3: { label: 'B3 — Escalation Bypass',           short: 'Escalation Bypass',  color: '#aaaa44' },
+  B4: { label: 'B4 — Budget Circumvention',        short: 'Budget Circumvention',color: '#5588cc' },
+  B5: { label: 'B5 — Strategic Volatility',        short: 'Strategic Volatility',color: '#aa55cc' },
+};
+
+const QUESTIONS = [
+  // B1 — Founder Override Frequency (Q1–Q4)
+  { domain: 'B1', text: 'Major decisions are reversed after being formally approved by the responsible person.' },
+  { domain: 'B1', text: 'Senior managers seek informal sign-off from the founder or CEO even when they have formal authority to decide.' },
+  { domain: 'B1', text: 'Operational matters that have been delegated routinely get pulled back to the center.' },
+  { domain: 'B1', text: 'Strategic calls change direction after informal conversations outside formal meeting structures.' },
+
+  // B2 — Informal Command Routing (Q5–Q7)
+  { domain: 'B2', text: 'Instructions arrive through informal channels — messages, calls, hallway conversations — rather than through official forums.' },
+  { domain: 'B2', text: 'Team members receive conflicting directions from different authority figures simultaneously.' },
+  { domain: 'B2', text: 'Decisions are effectively made in private before they are presented in formal settings.' },
+
+  // B3 — Escalation Bypass (Q8–Q10)
+  { domain: 'B3', text: 'Issues skip defined reporting levels and land directly at the top of the organization.' },
+  { domain: 'B3', text: 'Managers escalate directly to the most senior person rather than working through the defined chain.' },
+  { domain: 'B3', text: 'The chain of command is routinely bypassed without consequence.' },
+
+  // B4 — Budget Circumvention (Q11–Q13)
+  { domain: 'B4', text: 'Budget rules are applied unevenly — with different standards for different individuals or projects.' },
+  { domain: 'B4', text: 'Unplanned or unbudgeted spending occurs and is either approved retroactively or not tracked.' },
+  { domain: 'B4', text: 'Resource allocation shifts as a result of informal conversations rather than structured review processes.' },
+
+  // B5 — Strategic Volatility (Q14–Q18)
+  { domain: 'B5', text: 'Company priorities change frequently enough that teams lose track of the current direction.' },
+  { domain: 'B5', text: 'Projects or initiatives are abandoned before completion without a formal review process.' },
+  { domain: 'B5', text: 'Strategy shifts without corresponding changes to structure, staffing, or systems.' },
+  { domain: 'B5', text: 'Teams struggle to align their work with organizational direction because that direction keeps changing.' },
+  { domain: 'B5', text: 'Mid-cycle pivots are common — the course changes before the previous course has been fully executed.' },
+];
+
+// ============================================================
+// STATE
+// ============================================================
+
+let currentQ    = 0;
+let answers     = new Array(QUESTIONS.length).fill(null);
+let intakeData  = {};
+
+// ============================================================
+// INTAKE → START
+// ============================================================
+
+function startScan() {
+  const name    = document.getElementById('in-name').value.trim();
+  const role    = document.getElementById('in-role').value;
+  const company = document.getElementById('in-company').value.trim();
+  const industry= document.getElementById('in-industry').value;
+  const revenue = document.getElementById('in-revenue').value;
+
+  if (!name || !company) {
+    alert('Please enter your name and company name to continue.');
+    return;
+  }
+
+  intakeData = { name, role, company, industry, revenue };
+  showScreen('screen-questions');
+  renderQuestion(0);
+}
+
+// ============================================================
+// QUESTION RENDERING
+// ============================================================
+
+function renderQuestion(idx) {
+  const q = QUESTIONS[idx];
+  currentQ = idx;
+
+  document.getElementById('q-domain-label').textContent = DOMAIN_META[q.domain].label;
+  document.getElementById('q-count-label').textContent  = `${idx + 1} / ${QUESTIONS.length}`;
+  document.getElementById('q-number').textContent       = `Question ${String(idx + 1).padStart(2, '0')}`;
+  document.getElementById('q-text').textContent         = q.text;
+
+  // Progress bar
+  document.getElementById('progress-fill').style.width =
+    `${Math.round(((idx + 1) / QUESTIONS.length) * 100)}%`;
+
+  // Rebuild Likert buttons
+  const track = document.getElementById('likert-track');
+  track.innerHTML = '';
+  for (let v = 1; v <= 7; v++) {
+    const btn = document.createElement('button');
+    btn.className = 'likert-btn' + (answers[idx] === v ? ' selected' : '');
+    btn.textContent = v;
+    btn.onclick = () => selectAnswer(v);
+    track.appendChild(btn);
+  }
+
+  // Prev/Next state
+  document.getElementById('btn-prev').style.visibility = idx === 0 ? 'hidden' : 'visible';
+  document.getElementById('btn-next').disabled = answers[idx] === null;
+
+  // Animate card
+  const card = document.getElementById('q-card');
+  card.style.animation = 'none';
+  card.offsetHeight; // reflow
+  card.style.animation = 'cardIn 280ms cubic-bezier(0.4, 0, 0.2, 1)';
+}
+
+function selectAnswer(value) {
+  answers[currentQ] = value;
+
+  // Update button states
+  document.querySelectorAll('.likert-btn').forEach((btn, i) => {
+    btn.classList.toggle('selected', i + 1 === value);
+  });
+
+  document.getElementById('btn-next').disabled = false;
+}
+
+function prevQuestion() {
+  if (currentQ > 0) renderQuestion(currentQ - 1);
+}
+
+function nextQuestion() {
+  if (answers[currentQ] === null) return;
+
+  if (currentQ < QUESTIONS.length - 1) {
+    renderQuestion(currentQ + 1);
+  } else {
+    // All answered — go to email capture
+    showScreen('screen-capture');
+  }
+}
+
+// ============================================================
+// SUBMIT
+// ============================================================
+
+async function submitScan() {
+  const email = document.getElementById('cap-email').value.trim();
+  if (!email || !email.includes('@')) {
+    alert('Please enter a valid email address.');
+    return;
+  }
+
+  showScreen('screen-loading');
+
+  // Build domain responses object
+  const domainResponses = { B1:[], B2:[], B3:[], B4:[], B5:[] };
+  QUESTIONS.forEach((q, i) => {
+    domainResponses[q.domain].push(answers[i]);
+  });
+
+  const payload = {
+    action:       'submit_public_b',
+    apiKey:       API_CONFIG.PUBLIC_KEY,
+    name:         intakeData.name,
+    email:        email,
+    company:      intakeData.company,
+    industry:     intakeData.industry,
+    role:         intakeData.role,
+    revenue_band: intakeData.revenue,
+    responses:    JSON.stringify(domainResponses),
+  };
+
+  try {
+    const form = new FormData();
+    Object.entries(payload).forEach(([k, v]) => form.append(k, v));
+
+    const res    = await fetch(API_CONFIG.URL, { method: 'POST', body: form });
+    const result = await res.json();
+
+    if (result.status !== 'success') throw new Error(result.error || 'Analysis failed');
+
+    displayResults(result);
+  } catch (err) {
+    console.error('Submission error:', err);
+    // Compute locally as fallback
+    const localResult = computeLocally(domainResponses, email);
+    displayResults(localResult);
+  }
+}
+
+// ============================================================
+// LOCAL FALLBACK COMPUTATION
+// ============================================================
+
+function computeLocally(domainResponses, email) {
+  const means = {};
+  ['B1','B2','B3','B4','B5'].forEach(d => {
+    const scores = domainResponses[d].filter(v => v !== null);
+    means[d] = scores.reduce((a, b) => a + b, 0) / (scores.length || 1);
+  });
+
+  const vals   = Object.values(means);
+  const B_total = vals.reduce((a, b) => a + b, 0) / vals.length;
+  const F       = stdDev(vals);
+
+  const riskBand = getBand(B_total);
+  const regime   = getModeC_Regime(means, B_total, F);
+
+  return {
+    status:        'success',
+    B_total:       parseFloat(B_total.toFixed(3)),
+    domain_means:  means,
+    risk_band:     riskBand,
+    F:             parseFloat(F.toFixed(3)),
+    regime,
+    narrative:     buildNarrative(means, B_total, riskBand, regime),
+    mode:          'C',
+    disclaimer:    'Behavioral scan only. Full diagnostic required for structural confirmation.',
+    local_computed: true
+  };
+}
+
+function getModeC_Regime(means, B_total, F) {
+  if (means.B1 > 5 && B_total > 5)
+    return { code: 'R3', label: 'Founder Override Regime', confidence: 'provisional' };
+  if (means.B4 > 5 && F > 0.8)
+    return { code: 'R4', label: 'Shadow Capital Regime', confidence: 'provisional' };
+  if (means.B5 > 5 && F > 0.8)
+    return { code: 'R6', label: 'Volatile Strategy Engine', confidence: 'provisional' };
+  if (means.B2 > 5 && means.B3 > 5)
+    return { code: 'R5', label: 'Informal Command Network', confidence: 'provisional' };
+  if (B_total >= 5.5)
+    return { code: 'R8', label: 'Institutionalized Founder Control', confidence: 'provisional' };
+  return { code: 'INDETERMINATE', label: 'Behavioral Risk Detected', confidence: 'provisional' };
+}
+
+function getBand(b) {
+  if (b >= 6.0) return 'CRITICAL';
+  if (b >= 5.0) return 'HIGH';
+  if (b >= 4.0) return 'MODERATE';
+  if (b >= 3.0) return 'LOW';
+  return 'MINIMAL';
+}
+
+function buildNarrative(means, B_total, band, regime) {
+  const top = Object.entries(means).sort((a, b) => b[1] - a[1])[0];
+  const domainName = DOMAIN_META[top[0]].short;
+  return `Your behavioral scan registers a ${band} risk profile with an aggregate B-score of ${B_total.toFixed(1)} on a 7-point scale. The dominant signal is ${domainName} (${top[1].toFixed(1)}), consistent with behavioral patterns observed in ${regime.label} organizations. This scan measures behavioral activation only — structural capacity and cross-respondent coherence require the Full Institutional Diagnostic. The complete assessment will compute your Delta (Δ), Fragmentation Index (F), and Pattern Coherence Index (PCI) to produce a confirmed regime classification and 90-day intervention framework.`;
+}
+
+// ============================================================
+// DISPLAY RESULTS
+// ============================================================
+
+function displayResults(result) {
+  showScreen('screen-results');
+
+  const { B_total, domain_means, risk_band, F, regime, narrative } = result;
+
+  // Regime badge
+  document.getElementById('regime-code').textContent  = regime.code;
+  document.getElementById('regime-label').textContent = regime.label;
+  document.getElementById('results-title').textContent =
+    `${intakeData.name || 'Your'} behavioral signature: ${risk_band} risk profile detected.`;
+
+  // Score ring
+  const pct    = (B_total - 1) / 6; // normalize 1–7 to 0–1
+  const circ   = 238.76;
+  const offset = circ * (1 - pct);
+  setTimeout(() => {
+    document.getElementById('ring-fill').style.strokeDashoffset = offset;
+    document.getElementById('ring-value').textContent = B_total.toFixed(1);
+  }, 200);
+
+  // Stats panel
+  const riskClass = `risk-${risk_band.toLowerCase()}`;
+  document.getElementById('score-stats').innerHTML = `
+    <div class="stat-row">
+      <span class="stat-label">B-Total</span>
+      <span class="stat-value">${B_total.toFixed(2)} / 7.0</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Risk Band</span>
+      <span class="stat-value ${riskClass}">${risk_band}</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Fragmentation (F)</span>
+      <span class="stat-value">${F.toFixed(2)} ${getFLabel(F)}</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Provisional Regime</span>
+      <span class="stat-value">${regime.code}</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Confidence</span>
+      <span class="stat-value risk-moderate">PROVISIONAL</span>
+    </div>
+  `;
+
+  // Domain heatmap
+  const heatmap = document.getElementById('domain-heatmap');
+  heatmap.innerHTML = '';
+  ['B1','B2','B3','B4','B5'].forEach(d => {
+    const score  = domain_means[d] || 0;
+    const pctBar = ((score - 1) / 6) * 100;
+    const color  = DOMAIN_META[d].color;
+    const row    = document.createElement('div');
+    row.className = 'domain-row';
+    row.innerHTML = `
+      <span class="domain-name">${DOMAIN_META[d].short}</span>
+      <div class="domain-bar-shell">
+        <div class="domain-bar-fill" style="width: 0%; background: ${color}" data-target="${pctBar}"></div>
+      </div>
+      <span class="domain-score" style="color: ${color}">${score.toFixed(1)}</span>
+    `;
+    heatmap.appendChild(row);
+  });
+
+  // Animate bars
+  setTimeout(() => {
+    document.querySelectorAll('.domain-bar-fill[data-target]').forEach(bar => {
+      bar.style.width = bar.dataset.target + '%';
+    });
+  }, 300);
+
+  // Narrative
+  document.getElementById('narrative-text').textContent = narrative;
+}
+
+function getFLabel(f) {
+  if (f < 0.5) return '(Coherent)';
+  if (f < 1.0) return '(Moderate)';
+  return '(Fragmented)';
+}
+
+// ============================================================
+// SCREEN MANAGEMENT
+// ============================================================
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ============================================================
+// MATH UTILITIES
+// ============================================================
+
+function mean(arr) {
+  const v = arr.filter(x => x !== null && !isNaN(x));
+  return v.length ? v.reduce((a, b) => a + b, 0) / v.length : 0;
+}
+
+function variance(arr) {
+  const m = mean(arr);
+  const v = arr.filter(x => x !== null && !isNaN(x));
+  return v.length < 2 ? 0 : v.reduce((s, x) => s + Math.pow(x - m, 2), 0) / v.length;
+}
+
+function stdDev(arr) { return Math.sqrt(variance(arr)); }
+</script>
+</body>
+</html>
